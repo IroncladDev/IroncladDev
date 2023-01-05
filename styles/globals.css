@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
+
+:root {
+  --space-0: 0px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-128: 128px;
+  --space-256: 256px;
+  --border-radius-0: 0px;
+  --border-radius-1: 1px;
+  --border-radius-2: 2px;
+  --border-radius-4: 4px;
+  --border-radius-8: 8px;
+  --border-radius-12: 12px;
+  --border-radius-16: 16px;
+  --border-radius-full: 50%;
+  --font-family-default: "Open Sans", sans-serif;
+  --font-family-ui: "Nunito Sans", sans-serif;
+  --font-family-code: Monaco, sans-serif;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  --font-size-small: 12px;
+  --font-size-default: 14px;
+  --font-size-subhead-default: 20px;
+  --font-size-subhead-big: 24px;
+  --font-size-header-default: 48px;
+  --font-size-header-big: 56px;
+
+  --line-height-small: 1.5;
+  --line-height-default: 1.6;
+  --line-height-subhead-default: 1.375;
+  --line-height-subhead-big: 1.2;
+  --line-height-header-default: 1;
+  --line-height-header-big: 1;
+
+  --background-root: #121f33;
+  --background-default: #152c42;
+  --background-higher: #1f3e5e;
+  --background-highest: #225382;
+
+  --subground-root: #2c3945;
+  --subground-default: #334252;
+  --subground-higher: #3d4d5d;
+  --subground-highest: #485968;
+
+  --linear-root: #b4c6db;
+  --linear-default: rgb(191, 210, 231);
+  --linear-higher: #c7daed;
+  --linear-highest: #d2e1f2;
+
+  --foreground-dimmest: #8090a0;
+  --foreground-dimmer: #b8c5d1;
+  --foreground-default: #f4faff;
+
+  --accent-primary-dimmest: #2d7b74;
+  --accent-primary-dimmer: #459884;
+  --accent-primary-default: #61b88e;
+  --accent-primary-stronger: #8dc8aa;
+  --accent-primary-strongest: #a7d2ac;
+
+  --max-body-width: 1000px;
+}
+
+@media (max-width: 512px) {
+  :root {
+    --font-size-small: 12px;
+    --font-size-default: 14px;
+    --font-size-subhead-default: 20px;
+    --font-size-subhead-big: 24px;
+    --font-size-header-default: 40px;
+    --font-size-header-big: 48px;
+  }
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-family-default);
+  background: var(--background-root);
+  color: var(--foreground-default);
+}
+
+a {
+  color: var(--foreground-default);
+  text-decoration: underline;
+}
+a span:hover {
+  text-decoration: underline;
+}
+
+strong {
+  color: var(--foreground-default);
+}
+
+img.emoji {
+  height: 1em;
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 100%;
+  }
+  80% {
+    filter: drop-shadow(0px 0px 3px rgba(255, 255, 255));
+  }
+  90% {
+    filter: drop-shadow(0px 0px 25px rgba(255, 255, 255));
+  }
+  100% {
+    stroke-dashoffset: 0%;
+    filter: drop-shadow(0px 0px 3px rgba(255, 255, 255));
+  }
+}
+@keyframes float {
+  50% {
+    transform: translatey(15px);
+  }
+}

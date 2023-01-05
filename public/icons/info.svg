@@ -1,0 +1,6 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs></defs>
+  <ellipse style="stroke-width: 5px; fill: none; stroke: rgb(244, 250, 255);" cx="50" cy="50" rx="32.5" ry="32.5"></ellipse>
+  <polygon style="fill: rgb(244, 250, 255);" points="45 45 45 65 50 70 55 65 55 45"></polygon>
+  <rect x="45" y="30" width="10" height="10" style="fill: rgb(244, 250, 255);"></rect>
+</svg>
