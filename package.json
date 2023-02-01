@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next build && NODE_ENV=production node server.js",
+    "start": "next start",
     "lint": "next lint",
     "format": "prettier --ignore-path .gitignore --write \"**/*.{js,ts,tsx}\""
   },
@@ -15,6 +15,9 @@
     "@emotion/react": "^11.10.5",
     "app": "^0.1.0",
     "express": "^4.18.1",
+    "express-rate-limit": "^6.7.0",
+    "jotai": "^1.13.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.2",
     "next": "12.2.3",
     "next-connect": "^0.13.0",
@@ -22,7 +25,11 @@
     "react": "18.2.0",
     "react-animated-cursor": "^2.5.2",
     "react-dom": "18.2.0",
-    "react-twemoji": "^0.5.0"
+    "react-feather": "^2.0.10",
+    "react-twemoji": "^0.5.0",
+    "server": "^1.0.38",
+    "styled-components": "^5.3.6",
+    "sweetalert2": "^11.7.1"
   },
   "devDependencies": {
     "@types/node": "^18.11.17",

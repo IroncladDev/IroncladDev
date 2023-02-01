@@ -1,5 +1,0 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <defs></defs>
-  <polygon style="fill: rgb(244, 250, 255);" points="15 15 15 20 80 85 85 85 85 80 20 15"></polygon>
-  <polygon style="fill: rgb(244, 250, 255);" points="15 15 15 20 80 85 85 85 85 80 20 15" transform="matrix(0, 1, -1, 0, 100, 0)"></polygon>
-</svg>

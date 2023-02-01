@@ -8,7 +8,7 @@ import { css } from "@emotion/react";
 import useScrollTransition from "app/hooks/useScrollTransition";
 import { age } from "lib";
 import Link from "next/link";
-import Tw from 'react-twemoji';
+import Tw from "react-twemoji";
 import Footer from "app/components/Footer";
 
 const Styles = {
@@ -333,7 +333,14 @@ export default function Home() {
               </p>
             </View>
 
-            <View css={[rcss.p(16), rcss.flex.growAndShrink(2), rcss.colWithGap(16), rcss.align.center]}>
+            <View
+              css={[
+                rcss.p(16),
+                rcss.flex.growAndShrink(2),
+                rcss.colWithGap(16),
+                rcss.align.center,
+              ]}
+            >
               <div css={Styles.FaceReveal(frPos)}>
                 <img
                   src="https://cms.replit.com/assets/about/connerow.jpeg"
@@ -373,7 +380,7 @@ export default function Home() {
           </p>
         </Section>
 
-        <Footer/>
+        <Footer />
       </View>
     </View>
   );

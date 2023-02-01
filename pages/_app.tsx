@@ -2,7 +2,7 @@ import "styles/globals.css";
 import Head from "next/head";
 import NextNProgress from "nextjs-progressbar";
 import type { AppProps } from "next/app";
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
 interface AnimatedCursorOptions {
   innerSize: number;
@@ -12,10 +12,12 @@ interface AnimatedCursorOptions {
   outerScale: number;
 }
 
-const AnimatedCursor = dynamic<AnimatedCursorOptions>(() => import('react-animated-cursor'), {
-  ssr: false
-});
-
+const AnimatedCursor = dynamic<AnimatedCursorOptions>(
+  () => import("react-animated-cursor"),
+  {
+    ssr: false,
+  }
+);
 
 function AppContainer({ Component, pageProps }: AppProps) {
   return (
@@ -31,10 +33,10 @@ function AppContainer({ Component, pageProps }: AppProps) {
       />
       <div className="root">
         <Component {...pageProps} />
-        <AnimatedCursor 
+        <AnimatedCursor
           innerSize={8}
           outerSize={16}
-          color='191, 210, 231'
+          color="191, 210, 231"
           innerScale={0.75}
           outerScale={2}
         />

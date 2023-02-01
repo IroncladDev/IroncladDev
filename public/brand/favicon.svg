@@ -1,9 +1,17 @@
 <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
-  <defs></defs>
-  <rect width="150" height="150" style="fill: rgb(21, 44, 66);"></rect>
-  <polygon style="fill: rgb(244, 250, 255);" points="85 60 135 125 135 140 85 75"></polygon>
+  <defs>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="102.5" y1="10" x2="102.5" y2="140" id="gradient-0" gradientTransform="matrix(1, -0.000504, 0.000504, 0.999996, -0.005025, 0.05168)">
+      <stop offset="0" style="stop-color: rgb(244, 250, 255);"></stop>
+      <stop offset="1" style="stop-color: rgb(128, 144, 160);"></stop>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="110" y1="60" x2="110" y2="140" id="gradient-1" gradientTransform="matrix(0.999999, 0.001526, -0.002481, 1.625588, 0.347509, -87.750191)">
+      <stop offset="0" style="stop-color: rgb(244, 250, 255);"></stop>
+      <stop offset="1" style="stop-color: rgb(128, 144, 160);"></stop>
+    </linearGradient>
+  </defs>
+  <polygon style="fill: url(#gradient-1);" points="85 60 135 125 135 140 85 75"></polygon>
   <polygon style="fill: rgb(244, 250, 255);" points="20 20 30 10 30 20 20 29.299999237060547"></polygon>
-  <polygon style="fill: rgb(244, 250, 255);" points="20 36 30 26.700000762939453 30 43.5 20 51.099998474121094"></polygon>
-  <polygon style="fill: rgb(244, 250, 255);" points="20 57.79999923706055 30.034000396728516 50.24300003051758 30 140 20 140"></polygon>
-  <path style="fill: rgb(244, 250, 255);" d="M 70 140 L 70 80 L 80 85 L 80 70 L 70 65 L 70 55 L 80 60 L 80 50 L 70 45 L 70 10 L 110 10 L 135 45 L 110 86 L 103.2 77 L 123 45 L 105 20 L 80 20 L 80 35 L 70 30 L 70 35 L 80.3 40 L 80 130 L 70 140 Z"></path>
+  <polygon style="fill: rgb(184, 197, 209);" points="20 36 30 26.700000762939453 30 43.5 20 51.099998474121094"></polygon>
+  <polygon style="fill: rgb(128, 144, 160);" points="20 57.79999923706055 30.034000396728516 50.24300003051758 30 140 20 140"></polygon>
+  <path style="fill: url(#gradient-0);" d="M 70 140 L 70 80 L 80 85 L 80 70 L 70 65 L 70 55 L 80 60 L 80 50 L 70 45 L 70 10 L 110 10 L 135 45 L 110 86 L 103.2 77 L 123 45 L 105 20 L 80 20 L 80 35 L 70 30 L 70 35 L 80 40 L 80 130 L 70 140 Z"></path>
 </svg>

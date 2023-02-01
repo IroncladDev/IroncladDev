@@ -4,7 +4,7 @@
 run = "npm run dev"
 onBoot="sh boot.sh"
 
-hidden=['.git', '.config', '.next', 'boot.sh', '.eslintrc.json', '.gitignore', 'next-env.d.ts', 'next.config.mjs', 'server.js', 'tsconfig.json']
+hidden=['.git', '.config', '.next', 'boot.sh', '.eslintrc.json', '.gitignore', 'next-env.d.ts', 'next.config.mjs', 'tsconfig.json']
 
 [nix]
 channel = "stable-21_11"

@@ -3,37 +3,20 @@ import { View, rcss, tokens, FlexSpacer, FlexRow } from "app/ui";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactNode } from "react";
-import { css } from "@emotion/react"
+import { css } from "@emotion/react";
 
 const Styles = {
-  NavContainer: (percentage, scrollTop, initialHeight) => css([
+  NavContainer: css([
     rcss.p(16),
     rcss.pr(24),
     rcss.handleMaxWidth(512, {
       padding: 8,
     }),
     {
-      background: `linear-gradient(
-      135deg,
-      ${tokens.backgroundDefault} 0%,
-      ${tokens.backgroundRoot} ${percentage * 100}%,
-      ${tokens.backgroundDefault} ${percentage * 100}%,
-      ${tokens.backgroundHigher} 100%
-    )`,
       width: "100vw",
       transition: "0.25s",
       position: "relative",
       zIndex: 20,
-      "&::after": {
-        content: '""',
-        position: "absolute",
-        top: "100%",
-        right: 0,
-        width: scrollTop >= initialHeight ? "100%" : "0%",
-        height: 2,
-        background: tokens.linearDefault,
-        transition: "0.25s",
-      },
     },
   ]),
   NavInner: css([
@@ -46,8 +29,8 @@ const Styles = {
       maxWidth: tokens.maxBodyWidth,
       margin: "0 auto",
     },
-  ])
-}
+  ]),
+};
 
 const NavLink = ({ text, href }: { text: ReactNode; href: string }) => {
   return (
@@ -71,11 +54,18 @@ export const Navbar = ({ scrollRef }) => {
   return (
     <>
       <View
-        css={Styles.NavContainer(percentage, scrollTop, initialHeight)}
+        css={Styles.NavContainer}
+        style={{
+          background: `linear-gradient(
+          135deg,
+          ${tokens.backgroundRoot} 0%,
+          ${tokens.backgroundDefault} ${percentage * 100}%,
+          ${tokens.backgroundRoot} ${percentage * 100}%,
+          ${tokens.backgroundDefault} 100%
+        )`,
+        }}
       >
-        <View
-          css={Styles.NavInner}
-        >
+        <View css={Styles.NavInner}>
           <Link href="/" passHref>
             <a>
               <FlexRow gap={8} center>
@@ -103,6 +93,18 @@ export const Navbar = ({ scrollRef }) => {
             <NavLink href="/contact" text="Contact" />
           </FlexRow>
         </View>
+        <div
+          style={{
+            content: '""',
+            position: "absolute",
+            top: "100%",
+            right: 0,
+            width: scrollTop >= initialHeight ? "100%" : "0%",
+            height: 2,
+            background: tokens.linearDefault,
+            transition: "0.25s",
+          }}
+        />
       </View>
     </>
   );

@@ -46,9 +46,9 @@
   --line-height-header-big: 1;
 
   --background-root: #121f33;
-  --background-default: #152c42;
-  --background-higher: #1f3e5e;
-  --background-highest: #225382;
+  --background-default: #14243c;
+  --background-higher: #162f4b;
+  --background-highest: #213f61;
 
   --subground-root: #2c3945;
   --subground-default: #334252;
@@ -64,11 +64,11 @@
   --foreground-dimmer: #b8c5d1;
   --foreground-default: #f4faff;
 
-  --accent-primary-dimmest: #2d7b74;
-  --accent-primary-dimmer: #459884;
-  --accent-primary-default: #61b88e;
-  --accent-primary-stronger: #8dc8aa;
-  --accent-primary-strongest: #a7d2ac;
+  --accent-primary-dimmest: #2d7b7455;
+  --accent-primary-dimmer: #45988477;
+  --accent-primary-default: #61b88e99;
+  --accent-primary-stronger: #8dc8baaa;
+  --accent-primary-strongest: #a7d4bccc;
 
   --max-body-width: 1000px;
 }
