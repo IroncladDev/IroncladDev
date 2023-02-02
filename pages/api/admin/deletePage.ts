@@ -7,23 +7,21 @@ const app = nc();
 
 app.use(authenticate);
 app.post(async (req: Request, res: Response) => {
-  const { keyname, page } = req.body;
+  const { page } = req.body;
   const item = await PageData.findOne({
     _id: page,
   });
 
-  if (item?.content?.[keyname]) {
-    delete item.content[keyname];
-    item.markModified("content");
-    item.save();
+  if(item) {
+    item.remove();
     res.json({
       success: true,
       data: item,
     });
-  } else {
+  }else {
     res.json({
       success: false,
-      message: "Key does not exist",
+      message: "Page does not exist",
     });
   }
 });

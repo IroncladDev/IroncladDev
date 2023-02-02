@@ -35,7 +35,7 @@ export const authenticate = async (
   if (token) {
     const result = await authenticateToken(token);
 
-    if (result?.authenticated) {
+    if (result && result.authenticated) {
       req.isAuthenticated = true;
       next();
     } else {

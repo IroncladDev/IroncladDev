@@ -3,6 +3,7 @@ import Head from "next/head";
 import NextNProgress from "nextjs-progressbar";
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 
 interface AnimatedCursorOptions {
   innerSize: number;
@@ -20,6 +21,8 @@ const AnimatedCursor = dynamic<AnimatedCursorOptions>(
 );
 
 function AppContainer({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -33,13 +36,13 @@ function AppContainer({ Component, pageProps }: AppProps) {
       />
       <div className="root">
         <Component {...pageProps} />
-        <AnimatedCursor
+        {router.pathname === "/admin" ? null : <AnimatedCursor
           innerSize={8}
           outerSize={16}
           color="191, 210, 231"
           innerScale={0.75}
           outerScale={2}
-        />
+        />}
       </div>
     </>
   );

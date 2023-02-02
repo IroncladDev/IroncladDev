@@ -5,9 +5,12 @@ import { PageId, CurrentKey, CreatingKey } from "../state";
 import useLazyQuery from "../hooks/useLazyQuery";
 import Image from "next/image";
 import { useEffect } from "react";
-import { Layout, Plus } from "react-feather";
+import { Layout, Plus, Trash } from "react-feather";
+import { ObjectAny } from "app/types";
+import { PostJSON } from "../lib";
+import { Toast } from "app/lib/modal";
 
-const NestedKey = ({ keyname }) => {
+const NestedKey = ({ keyname }: { keyname: string }) => {
   const [currentKey, setCurrentKey] = useAtom(CurrentKey);
   const selected = keyname === currentKey;
 
@@ -39,10 +42,14 @@ const InlineKey = ({
   _id,
   selected,
   name,
+  links,
+  refresh,
 }: {
   _id: string;
   selected: boolean;
   name: string;
+  links: Array<ObjectAny>;
+  refresh: () => void;
 }) => {
   const [page, setPage] = useAtom(PageId);
   const [currentKey, setCurrentKey] = useAtom(CurrentKey);
@@ -54,11 +61,31 @@ const InlineKey = ({
   const content = data?.content || {};
   const keys = Object.keys(content);
 
+  const deletePage = () => {
+    const shouldDelete = prompt(
+      "Are you sure you want to delete this page? Type 'deletepage' to confirm."
+    );
+    if (shouldDelete === "deletepage") {
+      PostJSON("/api/admin/deletePage", { page: _id }).then(({ success }) => {
+        if (success) {
+          Toast.fire("Page deleted");
+          refresh();
+        } else {
+          Toast.fire("Internal Server Error");
+        }
+      });
+    }
+  };
+
   useEffect(() => {
     if (selected) {
       fire();
     }
   }, [selected]);
+
+  useEffect(() => {
+    fire();
+  }, [links]);
 
   useEffect(() => {
     if (!currentKey) {
@@ -84,12 +111,14 @@ const InlineKey = ({
       <View
         css={[
           rcss.p(8),
-          rcss.borderRadius(4, 4, 0, 0),
+          selected ? rcss.borderRadius(4, 4, 0, 0) : rcss.borderRadius(8),
           rcss.flex.row,
           rcss.rowWithGap(8),
           rcss.align.center,
           {
-            borderBottom: `solid ${tokens.backgroundHighest} 1px`,
+            borderBottom: selected
+              ? `solid ${tokens.backgroundHighest} 1px`
+              : "none",
             transition: "0.25s",
             "&:hover": {
               background: selected
@@ -114,26 +143,52 @@ const InlineKey = ({
               ))}
             </View>
           )}
+          <View
+            css={[rcss.px(8), rcss.pb(8), rcss.flex.row, rcss.rowWithGap(8)]}
+          >
+            <Button
+              onClick={() => setCreating(true)}
+              text="New Key"
+              iconLeft={<Plus size={12} />}
+              small
+            />
+
+            <Button
+              onClick={deletePage}
+              text="Delete"
+              iconLeft={<Trash size={12} />}
+              small
+            />
+          </View>
         </>
       ) : null}
-      <View css={[rcss.px(8), rcss.pb(8)]}>
-        <Button
-          onClick={() => setCreating(true)}
-          text="New Key"
-          iconLeft={<Plus size={12} />}
-          small
-        />
-      </View>
     </View>
   );
 };
 
-export default function Sidebar({ links, loading }) {
+export default function Sidebar({
+  links,
+  loading,
+  refresh,
+}: {
+  links: Array<ObjectAny>;
+  loading: boolean;
+  refresh: () => void;
+}) {
   const [page, setPage] = useAtom(PageId);
 
   const addPage = () => {
     const pageName = prompt("Enter page name");
-    if (pageName) {
+    if (pageName && typeof pageName === "string") {
+      PostJSON("/api/admin/createPage", { name: pageName }).then(
+        ({ success }) => {
+          if (success) {
+            refresh();
+          } else {
+            Toast.fire("Internal server error");
+          }
+        }
+      );
     }
   };
 
@@ -188,6 +243,8 @@ export default function Sidebar({ links, loading }) {
                 _id={_id}
                 selected={_id === page}
                 name={name}
+                links={links}
+                refresh={refresh}
               />
             ))}
 

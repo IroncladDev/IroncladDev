@@ -7,6 +7,7 @@ import { CreatingKey, CurrentKey, PageId } from "./state";
 import CreateKey from "./components/create-key";
 import { useEffect } from "react";
 import useQuery from "./hooks/useQuery";
+import { ObjectAny } from "app/types";
 
 interface Props {
   authenticated: boolean;
@@ -16,7 +17,7 @@ export default function Admin({ authenticated }: Props) {
   const [creating, setCreating] = useAtom(CreatingKey);
   const [currentKey] = useAtom(CurrentKey);
   const [page] = useAtom(PageId);
-  const { data: links, loading, refetch } = useQuery("/api/admin/sidebar");
+  const { data: links, loading, refetch } = useQuery<Array<ObjectAny>>("/api/admin/sidebar");
 
   useEffect(() => {
     if (creating) {
@@ -26,8 +27,10 @@ export default function Admin({ authenticated }: Props) {
 
   return authenticated ? (
     <View css={[rcss.flex.row, rcss.flex.grow(1)]}>
-      <Sidebar links={links} loading={loading} />
-      {creating ? <CreateKey /> : <Manage refreshSidebar={refetch} />}
+      <Sidebar links={links} loading={loading} refresh={refetch} />
+      {creating ? <CreateKey refresh={() => {
+        refetch();
+      }} /> : <Manage refreshSidebar={refetch} />}
     </View>
   ) : (
     <Login />

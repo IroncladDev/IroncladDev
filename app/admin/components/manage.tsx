@@ -1,15 +1,14 @@
 import { View, rcss, tokens, Text, Input, TextArea, Button } from "app/ui";
 import { useAtom } from "jotai";
 import { PageId, CurrentKey } from "../state";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ObjectAny } from "app/types";
 import { generateId } from "../lib";
 import useLazyQuery from "../hooks/useLazyQuery";
-import useMutation from "../hooks/useMutation";
 import { PostJSON } from "../lib";
 import { Toast } from "app/lib/modal";
 
-const KeyValueEditor = ({ data, refresh }) => {
+const KeyValueEditor = ({ data }: { data: ObjectAny }) => {
   const [value, setValue] = useState(data.value);
   const [key] = useAtom(CurrentKey);
   const [id] = useAtom(PageId);
@@ -171,7 +170,13 @@ const EditableListItem = ({
   );
 };
 
-const ArrayEditor = ({ data, refresh }) => {
+const ArrayEditor = ({
+  data,
+  refresh,
+}: {
+  data: ObjectAny;
+  refresh: () => void;
+}) => {
   const pairs = Object.entries(data.keySchema);
   const [key] = useAtom(CurrentKey);
   const [id] = useAtom(PageId);
@@ -183,7 +188,9 @@ const ArrayEditor = ({ data, refresh }) => {
         }
         if (type === "number") {
           return [key, 0];
-        } else {
+        } else if(type === "date") {
+           return [key, String(new Date().toISOString().split("T")[0])];
+        }else {
           return [key, ""];
         }
       })
@@ -236,8 +243,8 @@ const ArrayEditor = ({ data, refresh }) => {
                   }
                   placeholder={type}
                   rows={
-                    input[name].match(/\n/g)?.length
-                      ? input[name].match(/\n/g).length + 1
+                    input[name]?.match(/\n/g)?.length
+                      ? input[name]?.match(/\n/g).length + 1
                       : 1
                   }
                 />
@@ -250,6 +257,19 @@ const ArrayEditor = ({ data, refresh }) => {
                     setInput((inp) => ({
                       ...inp,
                       [name]: Number(e.target.value),
+                    }))
+                  }
+                  placeholder={type}
+                />
+              ) : null}
+              {type === "date" ? (
+                <Input
+                  type="date"
+                  value={input[name]}
+                  onChange={(e) =>
+                    setInput((inp) => ({
+                      ...inp,
+                      [name]: String(e.target.value),
                     }))
                   }
                   placeholder={type}
@@ -377,11 +397,42 @@ const Manage = ({ refreshSidebar }) => {
     }
   };
 
+  const editRaw = () => {
+    PostJSON("/api/admin/editRaw", {
+      key: currentKey,
+      value: JSON.parse(rawValue),
+      id: page
+    }).then(({success}) => {
+      if (success) {
+        fire();
+      } else {
+        Toast.fire("Internal server error");
+      }
+    })
+  }
+
+  const [rawValue, setRawValue] = useState<string>(
+    JSON.stringify(content[currentKey], null, 2)
+  );
+
+  useEffect(() => {
+    setRawValue(JSON.stringify(content[currentKey], null, 2));
+  }, [content, currentKey])
+
   useEffect(() => {
     if (page) {
       fire();
     }
   }, [page]);
+
+  const valid = () => {
+    try {
+      JSON.parse(rawValue);
+      return rawValue !== JSON.stringify(content[currentKey], null, 2);
+    } catch (e) {
+      return false;
+    }
+  }
 
   return (
     <View css={[rcss.flex.row, rcss.flex.grow(1)]}>
@@ -407,9 +458,7 @@ const Manage = ({ refreshSidebar }) => {
               <Text variant="subheadDefault">{currentKey}</Text>
               <Button text="Delete key" onClick={deleteKey} small />
             </View>
-            {current.type === "kv" ? (
-              <KeyValueEditor refresh={fire} data={current} />
-            ) : null}
+            {current.type === "kv" ? <KeyValueEditor data={current} /> : null}
             {current.type === "object" ? (
               <ObjectEditor refresh={fire} data={current} />
             ) : null}
@@ -424,6 +473,7 @@ const Manage = ({ refreshSidebar }) => {
         css={[
           rcss.p(16),
           rcss.flex.column,
+          rcss.colWithGap(8),
           {
             background: tokens.backgroundDefault,
             maxHeight: "100vh",
@@ -432,20 +482,14 @@ const Manage = ({ refreshSidebar }) => {
           },
         ]}
       >
-        <pre
-          css={[
-            rcss.borderRadius(8),
-            rcss.p(8),
-            rcss.flex.grow(1),
-            {
-              background: tokens.backgroundRoot,
-              border: `solid 1px ${tokens.backgroundHighest}`,
-              margin: 0,
-            },
-          ]}
-        >
-          {JSON.stringify(content[currentKey], null, 2)}
-        </pre>
+        <TextArea
+          css={[rcss.flex.grow(1), {
+            minWidth: 250
+          }]}
+          value={rawValue}
+          onChange={e => setRawValue(e.target.value)}
+        />
+        <Button text="Save" disabled={!valid()} onClick={editRaw}/>
       </View>
     </View>
   );

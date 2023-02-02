@@ -1,4 +1,4 @@
-import { rcss, tokens } from ".";
+import { tokens } from ".";
 import { css } from "@emotion/react";
 
 const styles = css({
@@ -32,6 +32,6 @@ const styles = css({
   },
 });
 
-export const Select = ({ ...props }: React.HTMLSelectElement) => {
+export const Select = ({ ...props }: React.SelectHTMLAttributes<HTMLSelectElement>) => {
   return <select {...props} css={styles} />;
 };

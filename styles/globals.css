@@ -134,3 +134,21 @@ img.emoji {
     transform: translatey(15px);
   }
 }
+
+.swal2-popup.swal2-toast {
+  padding: 8px 16px !important;
+  border-radius: 8px;
+  background: linear-gradient(75deg, var(--subground-default), var(--subground-highest)) !important;
+  border: 1px solid var(--subground-highest) !important;
+  color: var(--foreground-default) !important;
+  max-width: 200px;
+}
+
+.swal2-title {
+  margin: 0 !important;
+  font-size: var(--font-size-default) !important;
+}
+
+.swal2-timer-progress-bar {
+  background: var(--accent-primary-stronger) !important;
+}
