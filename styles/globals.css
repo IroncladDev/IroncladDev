@@ -107,6 +107,7 @@ strong {
 
 img.emoji {
   height: 1em;
+  vertical-align: middle;
 }
 
 * {
@@ -151,4 +152,9 @@ img.emoji {
 
 .swal2-timer-progress-bar {
   background: var(--accent-primary-stronger) !important;
+}
+
+.markdown p {
+  display: inline;
+  margin: 0;
 }

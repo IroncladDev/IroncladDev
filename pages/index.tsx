@@ -1,6 +1,6 @@
 import { View, Text, tokens, rcss, FlexSpacer, Button } from "app/ui";
 import { Navbar, Section } from "app/components";
-import { RefObject, useEffect, useRef, useCallback } from "react";
+import { useRef } from "react";
 import LogoHeader from "app/components/LogoHeader";
 import useScroll from "app/hooks/useScroll";
 import { Slant } from "app/components/Slant";
@@ -10,6 +10,8 @@ import { age } from "lib";
 import Link from "next/link";
 import Tw from "react-twemoji";
 import Footer from "app/components/Footer";
+import loadPageData from "server/lib/loadPageData";
+import Markdown from "app/components/Markdown";
 
 const Styles = {
   Container: css([
@@ -200,7 +202,10 @@ const Styles = {
   }),
 };
 
-export default function Home() {
+export default function Home({ data: {
+  Header: { value: Header },
+  AboutIntro: { value: AboutIntro }
+} }) {
   const scrollRef = useRef(null);
   const { initialHeight, scrollTop } = useScroll(scrollRef);
 
@@ -235,18 +240,13 @@ export default function Home() {
           <View css={Styles.HeaderContentContainer}>
             <View css={Styles.HeaderContentText}>
               <View css={Styles.HeaderContents}>
-                <h1 css={Styles.HeaderTitleMain}>Redneck</h1>
-                <h1 css={Styles.HeaderTitleSecondary}>Fullstack</h1>
-                <h2 css={Styles.HeaderTitleLast}>Web Developer</h2>
+                <h1 css={Styles.HeaderTitleMain}>{Header.headlineHighlight}</h1>
+                <h1 css={Styles.HeaderTitleSecondary}>{Header.headlineTitle}</h1>
+                <h2 css={Styles.HeaderTitleLast}>{Header.subHeadline}</h2>
               </View>
               <FlexSpacer />
               <Text color="dimmer" multiline>
-                I'm a Fullstack website developer who lives out in the country.
-                I do support engineering at{" "}
-                <a href="https://replit.com" target="_blank">
-                  Replit
-                </a>{" "}
-                and enjoy building tools for empowering Trust & Safety.
+                <Markdown markdown={Header.description}/>
               </Text>
             </View>
             <View>
@@ -304,7 +304,7 @@ export default function Home() {
             >
               <div>
                 <h1 css={Styles.ScrollHeader(introRatio)} ref={introHeaderRef}>
-                  <Tw>Hi there 👋</Tw>
+                  <Markdown markdown={AboutIntro}/>
                 </h1>
               </div>
               <p css={Styles.ScrollParagraph(pr1)} ref={para1}>
@@ -321,8 +321,8 @@ export default function Home() {
                     Replit
                   </a>{" "}
                   and enjoy helping others out, building new features, and
-                  creating tools to improve Replit's Security and Trust & Safety
-                  systems.
+                  creating tools to improve Replit&apos;s Security and Trust &
+                  Safety systems.
                 </Text>
               </p>
               <p css={Styles.ScrollParagraph(pr3)} ref={para3}>
@@ -384,4 +384,14 @@ export default function Home() {
       </View>
     </View>
   );
+}
+
+export async function getServerSideProps() {
+  const data = await loadPageData("Homepage");
+
+  return {
+    props: {
+      data
+    }
+  }
 }

@@ -130,7 +130,7 @@ const InlineKey = ({
         ]}
       >
         <Layout size={16} />
-        <Text>{name[0].toUpperCase() + name.slice(1)}</Text>
+        <Text>{name}</Text>
       </View>
       {selected ? (
         <>
@@ -237,7 +237,7 @@ export default function Sidebar({
       <View css={[rcss.px(8), rcss.colWithGap(8)]}>
         {loading
           ? "Loading..."
-          : links.map(({ _id, name }: { _id: string; name: string }) => (
+          : links?.map(({ _id, name }: { _id: string; name: string }) => (
               <InlineKey
                 key={_id}
                 _id={_id}

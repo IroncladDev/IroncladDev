@@ -316,6 +316,10 @@ const ObjectEditor = ({ data, refresh }) => {
   const [key] = useAtom(CurrentKey);
   const [id] = useAtom(PageId);
 
+  useEffect(() => {
+    setInitialValue(initialData);
+  }, [data]);
+
   const save = () => {
     PostJSON("/api/admin/edit", {
       id,
