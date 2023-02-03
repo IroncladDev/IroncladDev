@@ -26,7 +26,9 @@ export default function Admin({ authenticated }: Props) {
   }, [currentKey, page]);
 
   return authenticated ? (
-    <View css={[rcss.flex.row, rcss.flex.grow(1)]}>
+    <View css={[rcss.flex.row, rcss.flex.grow(1), {
+      maxWidth: '100vw'
+    }]}>
       <Sidebar links={links} loading={loading} refresh={refetch} />
       {creating ? <CreateKey refresh={() => {
         refetch();

@@ -6,7 +6,6 @@ import Tw from "react-twemoji";
 const clean = (dirty) =>
   sanitizeHtml(dirty, {
     allowedTags: [
-      "p",
       "i",
       "em",
       "strong",
@@ -24,7 +23,7 @@ const clean = (dirty) =>
     allowedIframeHostnames: [],
   });
 
-export default function Markdown({ markdown }) {
+export const Markdown = ({ markdown }) => {
   const renderedMarkdown = clean(DOMPurify.sanitize(parse(markdown)))
 
   return (

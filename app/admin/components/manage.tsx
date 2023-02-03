@@ -153,11 +153,19 @@ const EditableListItem = ({
           </View>
         ) : (
           Object.entries(obj).map(([key, val], j) => (
-            <Text color="dimmer" key={j}>
-              <>
-                <strong>{key}</strong>: {val}
-              </>
-            </Text>
+            <View css={{position: 'relative'}}>
+              <View css={[rcss.flex.row, rcss.rowWithGap(8), rcss.align.center, {
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                left: 0,
+                top: j * 20
+              }]} key={j}>
+                <Text color="dimmer">
+                  <strong>{key}</strong>: {val}
+                </Text>
+              </View>
+            </View>
           ))
         )}
       </View>
@@ -227,7 +235,11 @@ const ArrayEditor = ({
   };
 
   return (
-    <View css={[rcss.colWithGap(16)]}>
+    <View
+      css={[
+        rcss.colWithGap(16),
+      ]}
+    >
       <View css={[rcss.colWithGap(8)]}>
         {pairs.map(([name, type]) =>
           name === "id" ? null : (
@@ -292,6 +304,7 @@ const ArrayEditor = ({
         css={[
           rcss.colWithGap(8),
           rcss.pt(16),
+          rcss.flex.grow(1),
           {
             borderTop: `solid 1px ${tokens.backgroundHighest}`,
           },
@@ -439,61 +452,74 @@ const Manage = ({ refreshSidebar }) => {
   }
 
   return (
-    <View css={[rcss.flex.row, rcss.flex.grow(1)]}>
-      <View
-        css={[
-          rcss.flex.grow(1),
-          rcss.p(16),
-          rcss.flex.column,
-          rcss.colWithGap(16),
-        ]}
-      >
-        {loading || !current ? (
-          <Text>{loading ? "Loading" : "No key selected"}</Text>
-        ) : (
-          <>
-            <View
-              css={[
-                rcss.flex.row,
-                rcss.align.center,
-                rcss.justify.spaceBetween,
-              ]}
-            >
-              <Text variant="subheadDefault">{currentKey}</Text>
-              <Button text="Delete key" onClick={deleteKey} small />
-            </View>
-            {current.type === "kv" ? <KeyValueEditor data={current} /> : null}
-            {current.type === "object" ? (
-              <ObjectEditor refresh={fire} data={current} />
-            ) : null}
-            {current.type === "array" ? (
-              <ArrayEditor refresh={fire} data={current} />
-            ) : null}
-          </>
-        )}
-      </View>
+    <View
+      css={[
+        rcss.flex.grow(1),
+        rcss.flex.row,
+        {
+          position: "relative",
+        },
+      ]}
+      style={{ flexGrow: '1 !important' }}
+    >
+      <View css={[rcss.flex.row, rcss.flex.grow(1), {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%'
+      }]}>
+        <View css={[rcss.p(16), rcss.flex.column, rcss.colWithGap(16), rcss.flex.grow(1)]}>
+          {loading || !current ? (
+            <Text>{loading ? "Loading" : "No key selected"}</Text>
+          ) : (
+            <>
+              <View
+                css={[
+                  rcss.flex.row,
+                  rcss.align.center,
+                  rcss.justify.spaceBetween,
+                ]}
+              >
+                <Text variant="subheadDefault">{currentKey}</Text>
+                <Button text="Delete key" onClick={deleteKey} small />
+              </View>
+              {current.type === "kv" ? <KeyValueEditor data={current} /> : null}
+              {current.type === "object" ? (
+                <ObjectEditor refresh={fire} data={current} />
+              ) : null}
+              {current.type === "array" ? (
+                <ArrayEditor refresh={fire} data={current} />
+              ) : null}
+            </>
+          )}
+        </View>
 
-      <View
-        css={[
-          rcss.p(16),
-          rcss.flex.column,
-          rcss.colWithGap(8),
-          {
-            background: tokens.backgroundDefault,
-            maxHeight: "100vh",
-            overflowY: "auto",
-            borderLeft: `solid 1px ${tokens.backgroundHighest}`,
-          },
-        ]}
-      >
-        <TextArea
-          css={[rcss.flex.grow(1), {
-            minWidth: 250
-          }]}
-          value={rawValue}
-          onChange={e => setRawValue(e.target.value)}
-        />
-        <Button text="Save" disabled={!valid()} onClick={editRaw}/>
+        <View
+          css={[
+            rcss.p(16),
+            rcss.flex.column,
+            rcss.colWithGap(8),
+            {
+              background: tokens.backgroundDefault,
+              maxHeight: "100vh",
+              overflowY: "auto",
+              borderLeft: `solid 1px ${tokens.backgroundHighest}`,
+            },
+          ]}
+        >
+          <TextArea
+            css={[
+              rcss.flex.grow(1),
+              {
+                minWidth: 250,
+              },
+            ]}
+            value={rawValue}
+            onChange={(e) => setRawValue(e.target.value)}
+          />
+          <Button text="Save" disabled={!valid()} onClick={editRaw} />
+        </View>
       </View>
     </View>
   );

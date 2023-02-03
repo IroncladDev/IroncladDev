@@ -1,17 +1,19 @@
 import { View, Text, tokens, rcss, FlexSpacer, Button } from "app/ui";
-import { Navbar, Section } from "app/components";
+import {
+  Navbar,
+  Section,
+  Scroll,
+  Markdown,
+  Footer,
+  Slant,
+  LogoHeader,
+  Paragraph,
+} from "app/components";
 import { useRef } from "react";
-import LogoHeader from "app/components/LogoHeader";
 import useScroll from "app/hooks/useScroll";
-import { Slant } from "app/components/Slant";
 import { css } from "@emotion/react";
-import useScrollTransition from "app/hooks/useScrollTransition";
-import { age } from "lib";
 import Link from "next/link";
-import Tw from "react-twemoji";
-import Footer from "app/components/Footer";
 import loadPageData from "server/lib/loadPageData";
-import Markdown from "app/components/Markdown";
 
 const Styles = {
   Container: css([
@@ -30,20 +32,7 @@ const Styles = {
     overflowY: "auto",
     overflowX: "hidden",
   }),
-  HeaderSection: (rotation, initialHeight) =>
-    css([
-      rcss.center,
-      rcss.flex.column,
-      {
-        minHeight: initialHeight,
-        background: `linear-gradient(${135 + rotation}deg, 
-        ${tokens.backgroundRoot} 0%,
-        ${tokens.subgroundDefault} 50%,  
-        ${tokens.subgroundRoot} 50%,
-        ${tokens.backgroundDefault} 100%
-      )`,
-      },
-    ]),
+
   HeaderContentContainer: css([
     rcss.flex.row,
     rcss.align.center,
@@ -74,12 +63,12 @@ const Styles = {
 
   ScrollHeader: (percentage: number) =>
     css({
-      opacity: percentage,
+      opacity: percentage <= 1 ? percentage : 0,
       transform: `translatex(${(1 - percentage) * 25}vw)`,
       position: "relative",
       display: "inline-block",
       margin: 0,
-      transition: "0.25s",
+      transition: "ease-out 0.5s",
       "&::after": {
         content: '""',
         position: "absolute",
@@ -89,37 +78,9 @@ const Styles = {
         background: tokens.linearDefault,
         width: "100vw",
         height: 4,
-        opacity: 1 - percentage,
+        opacity: percentage <= 1 ? percentage : 0,
       },
     }),
-
-  ScrollParagraph: (percentage: number) =>
-    css({
-      opacity: percentage,
-      transform: `translatey(${(1 - percentage) * 25}vh)`,
-      margin: "16px 0",
-      transition: "0.25s",
-    }),
-
-  FaceReveal: (percentage: number) =>
-    css([
-      {
-        "@media(max-width: 675px)": {
-          "& > img": {
-            maxWidth: 300,
-            maxHeight: 300,
-          },
-        },
-        "& > img": {
-          border: `solid 2px ${tokens.linearDefault}`,
-          borderRadius: "50%",
-          zIndex: 1,
-          width: "100%",
-          opacity: percentage,
-        },
-        position: "relative",
-      },
-    ]),
 
   DownButton: css([
     rcss.p(16),
@@ -132,7 +93,7 @@ const Styles = {
       position: "relative",
       "&:hover": {
         background: `rgba(0, 0, 0, 0.15)`,
-        boxShadow: `0 0 0 8px ${tokens.backgroundHighest}`,
+        boxShadow: `0 0 0 8px ${tokens.subgroundHigher}`,
       },
       "&::before": {
         content: '""',
@@ -202,29 +163,14 @@ const Styles = {
   }),
 };
 
-export default function Home({ data: {
+export default function Home({
   Header: { value: Header },
-  AboutIntro: { value: AboutIntro }
-} }) {
+  AboutIntro: { value: AboutIntro },
+  AboutParagraphs: { value: AboutParagraphs },
+}) {
   const scrollRef = useRef(null);
   const { initialHeight, scrollTop } = useScroll(scrollRef);
-
-  const [introHeaderRef, para1, para2, para3, faceReveal, pHeadRef, pDescRef] =
-    [
-      useRef(null),
-      useRef(null),
-      useRef(null),
-      useRef(null),
-      useRef(null),
-      useRef(null),
-      useRef(null),
-    ];
-
-  const [introRatio, pr1, pr2, pr3, frPos, pHead, pDesc] = useScrollTransition({
-    refs: [introHeaderRef, para1, para2, para3, faceReveal, pHeadRef, pDescRef],
-    trigger: scrollTop,
-    pointTo: initialHeight / 2,
-  });
+  const scrollEnd = initialHeight / 2;
 
   return (
     <View css={Styles.Container}>
@@ -232,21 +178,31 @@ export default function Home({ data: {
       <View css={Styles.BodyContainer} innerRef={scrollRef}>
         {/* Header Section */}
         <View
-          css={Styles.HeaderSection(
-            (scrollTop / initialHeight) * (180 - 135),
-            initialHeight
-          )}
+          css={[rcss.center, rcss.flex.column]}
+          style={{
+            minHeight: initialHeight,
+            background: `linear-gradient(${
+              135 + (scrollTop / initialHeight) * (180 - 135)
+            }deg, 
+              ${tokens.backgroundRoot} 0%,
+              ${tokens.subgroundDefault} 50%,  
+              ${tokens.subgroundRoot} 50%,
+              ${tokens.backgroundDefault} 100%
+            )`,
+          }}
         >
           <View css={Styles.HeaderContentContainer}>
             <View css={Styles.HeaderContentText}>
               <View css={Styles.HeaderContents}>
                 <h1 css={Styles.HeaderTitleMain}>{Header.headlineHighlight}</h1>
-                <h1 css={Styles.HeaderTitleSecondary}>{Header.headlineTitle}</h1>
+                <h1 css={Styles.HeaderTitleSecondary}>
+                  {Header.headlineTitle}
+                </h1>
                 <h2 css={Styles.HeaderTitleLast}>{Header.subHeadline}</h2>
               </View>
               <FlexSpacer />
               <Text color="dimmer" multiline>
-                <Markdown markdown={Header.description}/>
+                <Markdown markdown={Header.description} />
               </Text>
             </View>
             <View>
@@ -303,34 +259,21 @@ export default function Home({ data: {
               ]}
             >
               <div>
-                <h1 css={Styles.ScrollHeader(introRatio)} ref={introHeaderRef}>
-                  <Markdown markdown={AboutIntro}/>
-                </h1>
+                <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
+                  {(_, p) => (
+                    <h1 css={Styles.ScrollHeader(p)}>
+                      <Markdown markdown={AboutIntro} />
+                    </h1>
+                  )}
+                </Scroll>
               </div>
-              <p css={Styles.ScrollParagraph(pr1)} ref={para1}>
-                <Text color="dimmer" multiline>
-                  I'm Conner Ow, a {age()}-year-old web developer who enjoys
-                  programming, competing, solving puzzles, and living out in the
-                  country.
-                </Text>
-              </p>
-              <p css={Styles.ScrollParagraph(pr2)} ref={para2}>
-                <Text color="dimmer" multiline>
-                  I work as a full-time Support Engineer at{" "}
-                  <a href="https://replit.com" target="_blank">
-                    Replit
-                  </a>{" "}
-                  and enjoy helping others out, building new features, and
-                  creating tools to improve Replit&apos;s Security and Trust &
-                  Safety systems.
-                </Text>
-              </p>
-              <p css={Styles.ScrollParagraph(pr3)} ref={para3}>
-                <Text color="dimmer" multiline>
-                  You can find me on the internet by the handle{" "}
-                  <strong>@IroncladDev</strong> on most platforms.
-                </Text>
-              </p>
+              {AboutParagraphs.sort((a, b) => a.position - b.position).map(
+                ({ text }) => (
+                  <Scroll scrollRef={scrollRef} end={scrollEnd}>
+                    {(_, p) => <Paragraph percentage={p}>{text}</Paragraph>}
+                  </Scroll>
+                )
+              )}
             </View>
 
             <View
@@ -341,13 +284,37 @@ export default function Home({ data: {
                 rcss.align.center,
               ]}
             >
-              <div css={Styles.FaceReveal(frPos)}>
-                <img
-                  src="https://cms.replit.com/assets/about/connerow.jpeg"
-                  alt="oh look its a face reveal"
-                  ref={faceReveal}
-                />
-              </div>
+              <Scroll scrollRef={scrollRef} end={scrollEnd}>
+                {(p) => (
+                  <div
+                    css={[
+                      rcss.handleMaxWidth(675, {
+                        "& > img": {
+                          maxWidth: 300,
+                          maxHeight: 300,
+                        },
+                      }),
+                      {
+                        "& > img": {
+                          border: `solid 2px ${tokens.linearDefault}`,
+                          borderRadius: "50%",
+                          zIndex: 1,
+                          width: "100%",
+                        },
+                        position: "relative",
+                      },
+                    ]}
+                  >
+                    <img
+                      src="https://cms.replit.com/assets/about/connerow.jpeg"
+                      alt="oh look its a face reveal"
+                      style={{
+                        opacity: p,
+                      }}
+                    />
+                  </div>
+                )}
+              </Scroll>
               <Link href="/about" passHref>
                 <a>
                   <Button text="Read More >>" />
@@ -367,17 +334,22 @@ export default function Home({ data: {
             />
           }
         >
-          <div>
-            <h1 css={Styles.ScrollHeader(pHead)} ref={pHeadRef}>
-              <Tw>Portfolio 💻</Tw>
-            </h1>
-          </div>
-          <p css={Styles.ScrollParagraph(pDesc)} ref={pDescRef}>
-            <Text color="dimmer" multiline>
-              Many of my side projects include games, websites, and tools that
-              others can use. Here are some of my personal favorites! (WIP btw)
-            </Text>
-          </p>
+          <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
+            {(_, p) => (
+              <h1 css={Styles.ScrollHeader(p)}>
+                <Markdown markdown={"Portfolio"} />
+              </h1>
+            )}
+          </Scroll>
+          <Scroll scrollRef={scrollRef} end={scrollEnd}>
+            {(_, p) => (
+              <Paragraph percentage={p}>
+                Many of my side projects include games, websites, and tools that
+                others can use. Here are some of my personal favorites! (WIP
+                btw)
+              </Paragraph>
+            )}
+          </Scroll>
         </Section>
 
         <Footer />
@@ -390,8 +362,6 @@ export async function getServerSideProps() {
   const data = await loadPageData("Homepage");
 
   return {
-    props: {
-      data
-    }
-  }
+    props: data,
+  };
 }

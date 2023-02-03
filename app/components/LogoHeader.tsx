@@ -8,7 +8,7 @@ const pathStyle = {
   stroke: tokens.foregroundDefault,
 };
 
-export default function LogoHeader() {
+export const LogoHeader = () => {
   return (
     <svg
       style={{

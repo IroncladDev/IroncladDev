@@ -52,7 +52,7 @@ const Styles = {
   ]),
 };
 
-export default function Footer() {
+export const Footer = () => {
   return (
     <View css={Styles.Container}>
       <View css={Styles.InnerFlex}>
