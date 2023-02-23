@@ -13,7 +13,9 @@ export default function Subnav() {
   const [page] = useAtom(PageId);
   const [currentKey, setCurrentKey] = useAtom(CurrentKey);
 
-  const { data, loading } = useQuery<ObjectAny>("/api/admin/contentById?id=" + page);
+  const { data, loading } = useQuery<ObjectAny>(
+    "/api/admin/contentById?id=" + page
+  );
   const content = data?.content || {};
   const keys = Object.keys(content);
 

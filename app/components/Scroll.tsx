@@ -25,17 +25,17 @@ export const Scroll = ({
     const totalHeight = window.innerHeight - end;
     const scrollValue = (totalHeight - (box.top - end)) / totalHeight;
 
-    setPercentage(
-      constrain(scrollValue, 0, 1)
-    );
+    setPercentage(constrain(scrollValue, 0, 1));
 
-    setAbsolutePercentage(
-      constrain(scrollValue, 0, scrollValue)
-    );
+    setAbsolutePercentage(constrain(scrollValue, 0, scrollValue));
   }, [scrollTop, end]);
 
   return (
-    <View {...props} innerRef={elementRef} css={inline ? { display: 'inline' } : undefined}>
+    <View
+      {...props}
+      innerRef={elementRef}
+      css={inline ? { display: "inline" } : undefined}
+    >
       {children(percentage, absolutePercentage)}
     </View>
   );

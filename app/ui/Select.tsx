@@ -32,6 +32,8 @@ const styles = css({
   },
 });
 
-export const Select = ({ ...props }: React.SelectHTMLAttributes<HTMLSelectElement>) => {
+export const Select = ({
+  ...props
+}: React.SelectHTMLAttributes<HTMLSelectElement>) => {
   return <select {...props} css={styles} />;
 };

@@ -17,7 +17,11 @@ export default function Admin({ authenticated }: Props) {
   const [creating, setCreating] = useAtom(CreatingKey);
   const [currentKey] = useAtom(CurrentKey);
   const [page] = useAtom(PageId);
-  const { data: links, loading, refetch } = useQuery<Array<ObjectAny>>("/api/admin/sidebar");
+  const {
+    data: links,
+    loading,
+    refetch,
+  } = useQuery<Array<ObjectAny>>("/api/admin/sidebar");
 
   useEffect(() => {
     if (creating) {
@@ -26,13 +30,25 @@ export default function Admin({ authenticated }: Props) {
   }, [currentKey, page]);
 
   return authenticated ? (
-    <View css={[rcss.flex.row, rcss.flex.grow(1), {
-      maxWidth: '100vw'
-    }]}>
+    <View
+      css={[
+        rcss.flex.row,
+        rcss.flex.grow(1),
+        {
+          maxWidth: "100vw",
+        },
+      ]}
+    >
       <Sidebar links={links} loading={loading} refresh={refetch} />
-      {creating ? <CreateKey refresh={() => {
-        refetch();
-      }} /> : <Manage refreshSidebar={refetch} />}
+      {creating ? (
+        <CreateKey
+          refresh={() => {
+            refetch();
+          }}
+        />
+      ) : (
+        <Manage refreshSidebar={refetch} />
+      )}
     </View>
   ) : (
     <Login />

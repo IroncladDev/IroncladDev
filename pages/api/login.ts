@@ -14,14 +14,13 @@ app.post(async (req: Request, res: Response) => {
       {
         authenticated: true,
       },
-      1000 * 60 * 60 * 24
+      1000 * 60 * 60 * 24 * 7
     );
-    console.log(token);
     res
       .status(200)
       .setHeader(
         "Set-Cookie",
-        `auth=${token}; Max-Age=${1000 * 60 * 60 * 24}; path=/;`
+        `auth=${token}; Max-Age=${1000 * 60 * 60 * 24 * 7}; path=/;`
       );
     res.status(200).json({
       success: true,

@@ -1,4 +1,12 @@
-import { View, Text, tokens, rcss, FlexSpacer, Button } from "app/ui";
+import {
+  View,
+  Text,
+  tokens,
+  rcss,
+  FlexSpacer,
+  Button,
+  OutlineButton,
+} from "app/ui";
 import {
   Navbar,
   Section,
@@ -14,6 +22,8 @@ import useScroll from "app/hooks/useScroll";
 import { css } from "@emotion/react";
 import Link from "next/link";
 import loadPageData from "server/lib/loadPageData";
+import { Project } from "app/components/Project";
+import { LazyBlogPost } from "app/components/BlogPost";
 
 const Styles = {
   Container: css([
@@ -164,9 +174,10 @@ const Styles = {
 };
 
 export default function Home({
-  Header: { value: Header },
-  AboutIntro: { value: AboutIntro },
+  Headings: { value: Header },
   AboutParagraphs: { value: AboutParagraphs },
+  IndexShowcase: { value: IndexShowcase },
+  BlogShowcase: { value: BlogShowcase }
 }) {
   const scrollRef = useRef(null);
   const { initialHeight, scrollTop } = useScroll(scrollRef);
@@ -219,7 +230,7 @@ export default function Home({
           </View>
           <Slant
             path="polygon(100% 0, 0% 100%, 100% 100%)"
-            background={tokens.backgroundRoot}
+            background={tokens.backgroundDefault}
             borderTop
           />
         </View>
@@ -231,7 +242,7 @@ export default function Home({
             rcss.flex.column,
             rcss.center,
             {
-              background: tokens.backgroundRoot,
+              background: tokens.backgroundDefault,
               width: "100vw",
             },
           ]}
@@ -262,14 +273,14 @@ export default function Home({
                 <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
                   {(_, p) => (
                     <h1 css={Styles.ScrollHeader(p)}>
-                      <Markdown markdown={AboutIntro} />
+                      <Markdown markdown={Header.AboutIntro} />
                     </h1>
                   )}
                 </Scroll>
               </div>
               {AboutParagraphs.sort((a, b) => a.position - b.position).map(
-                ({ text }) => (
-                  <Scroll scrollRef={scrollRef} end={scrollEnd}>
+                ({ text }, i) => (
+                  <Scroll scrollRef={scrollRef} end={scrollEnd} key={i}>
                     {(_, p) => <Paragraph percentage={p}>{text}</Paragraph>}
                   </Scroll>
                 )
@@ -285,51 +296,128 @@ export default function Home({
               ]}
             >
               <Scroll scrollRef={scrollRef} end={scrollEnd}>
-                {(p) => (
+                {(p, P) => (
                   <div
-                    css={[
-                      rcss.handleMaxWidth(675, {
-                        "& > img": {
-                          maxWidth: 300,
-                          maxHeight: 300,
-                        },
-                      }),
-                      {
-                        "& > img": {
-                          border: `solid 2px ${tokens.linearDefault}`,
-                          borderRadius: "50%",
-                          zIndex: 1,
-                          width: "100%",
-                        },
-                        position: "relative",
-                      },
-                    ]}
+                    css={{
+                      position: "relative",
+                      overflow: "hidden",
+                      borderRadius: "50%",
+                      border: `solid 1px rgb(191, 210, 231, ${1 - p})`,
+                    }}
                   >
                     <img
                       src="https://cms.replit.com/assets/about/connerow.jpeg"
                       alt="oh look its a face reveal"
+                      css={[
+                        rcss.handleMaxWidth(675, {
+                          maxWidth: 300,
+                          maxHeight: 300,
+                        }),
+                        {
+                          border: `solid 2px ${tokens.subgroundDefault}`,
+                          borderRadius: "50%",
+                          zIndex: 1,
+                          width: "100%",
+                          filter: "grayscale(100%)",
+                        },
+                      ]}
                       style={{
-                        opacity: p,
+                        opacity: P / 2,
+                        transform: `scale(${p * 75}%)`,
                       }}
                     />
                   </div>
                 )}
               </Scroll>
-              <Link href="/about" passHref>
-                <a>
-                  <Button text="Read More >>" />
-                </a>
-              </Link>
+              <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
+                {(p) => (
+                  <View
+                    css={[rcss.justify.center, rcss.flex.row]}
+                    style={{
+                      transform: `translatey(${(1 - p) * 10}vh)`,
+                      opacity: p,
+                      transition: "ease-out 0.5s",
+                    }}
+                  >
+                    <Link href="/about" passHref>
+                      <a>
+                        <OutlineButton text="Read More >>" />
+                      </a>
+                    </Link>
+                  </View>
+                )}
+              </Scroll>
             </View>
           </View>
         </View>
 
+        {/* Showcase projects */}
         <Section
-          css={[rcss.p(16)]}
-          background={tokens.backgroundDefault}
+          css={[rcss.p(16), rcss.colWithGap(64)]}
+          background={tokens.backgroundRoot}
           head={
             <Slant
               path="polygon(0 0, 0% 100%, 100% 0)"
+              background={tokens.backgroundDefault}
+            />
+          }
+        >
+          <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
+            {(_, p) => (
+              <h1 css={Styles.ScrollHeader(p)}>
+                <Markdown markdown={Header.PortfolioIntro} />
+              </h1>
+            )}
+          </Scroll>
+          <Scroll scrollRef={scrollRef} end={scrollEnd}>
+            {(_, p) => (
+              <Paragraph percentage={p}>{Header.ProjectsDescription}</Paragraph>
+            )}
+          </Scroll>
+
+          {IndexShowcase.sort((a, b) => a.position - b.position).map(
+            (project, i) => (
+              <Project
+                key={i}
+                index={i}
+                project={project}
+                scrollRef={scrollRef}
+                scrollEnd={scrollEnd}
+                initialHeight={initialHeight}
+              />
+            )
+          )}
+
+          <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
+            {(p) => (
+              <View
+                css={[rcss.justify.center, rcss.flex.row]}
+                style={{
+                  transform: `translatey(${(1 - p) * 10}vh)`,
+                  opacity: p,
+                  transition: "ease-out 0.5s",
+                }}
+              >
+                <Link href="/work" passHref>
+                  <a>
+                    <OutlineButton text="See all >>" />
+                  </a>
+                </Link>
+              </View>
+            )}
+          </Scroll>
+        </Section>
+
+        <Section
+          css={[]}
+          background={tokens.backgroundDefault}
+          head={
+            <Slant
+              path={
+                IndexShowcase.length % 2 === 0
+                  ? "polygon(0 0, 0% 100%, 100% 0)"
+                  : "polygon(0 0, 100% 100%, 100% 0)"
+              }
               background={tokens.backgroundRoot}
             />
           }
@@ -337,19 +425,18 @@ export default function Home({
           <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
             {(_, p) => (
               <h1 css={Styles.ScrollHeader(p)}>
-                <Markdown markdown={"Portfolio"} />
+                <Markdown markdown={Header.BlogIntro} />
               </h1>
             )}
           </Scroll>
           <Scroll scrollRef={scrollRef} end={scrollEnd}>
             {(_, p) => (
-              <Paragraph percentage={p}>
-                Many of my side projects include games, websites, and tools that
-                others can use. Here are some of my personal favorites! (WIP
-                btw)
-              </Paragraph>
+              <Paragraph percentage={p}>{Header.BlogDescription}</Paragraph>
             )}
           </Scroll>
+          {BlogShowcase.map(({ post, platform }, i) => <Scroll scrollRef={scrollRef} end={scrollEnd} key={i}>
+            {(p) => <LazyBlogPost post={post} platform={platform} percentage={p} key={i}/>}  
+          </Scroll>)}
         </Section>
 
         <Footer />

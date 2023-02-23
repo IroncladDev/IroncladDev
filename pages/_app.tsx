@@ -36,13 +36,15 @@ function AppContainer({ Component, pageProps }: AppProps) {
       />
       <div className="root">
         <Component {...pageProps} />
-        {router.pathname === "/admin" ? null : <AnimatedCursor
-          innerSize={8}
-          outerSize={16}
-          color="191, 210, 231"
-          innerScale={0.75}
-          outerScale={2}
-        />}
+        {router.pathname === "/admin" ? null : (
+          <AnimatedCursor
+            innerSize={8}
+            outerSize={16}
+            color="191, 210, 231"
+            innerScale={0.75}
+            outerScale={2}
+          />
+        )}
       </div>
     </>
   );

@@ -254,4 +254,4 @@ export const LogoHeader = () => {
       <path style={pathStyle} d="M 284.14 348.624 L 283.639 400.003"></path>
     </svg>
   );
-}
+};

@@ -16,7 +16,7 @@ export const Paragraph = ({
       style={{
         opacity: percentage,
         transform: `translatey(${(1 - percentage) * 15}vh)`,
-        transition: 'ease-out 0.5s',
+        transition: "ease-out 0.5s",
       }}
     >
       <Text color="dimmer" multiline>
@@ -24,4 +24,4 @@ export const Paragraph = ({
       </Text>
     </div>
   );
-}
+};

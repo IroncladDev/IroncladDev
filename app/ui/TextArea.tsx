@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 
 const styles = css({
   background: tokens.backgroundHigher,
-  border: `solid 1px ${tokens.subgroundHighest}`,
+  border: `solid 1px ${tokens.backgroundHighest}`,
   color: tokens.foregroundDefault,
   fontFamily: "var(--font-family-default)",
   transition: "0.25s",
@@ -34,6 +34,9 @@ export const TextArea = ({
   ...props
 }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) => {
   return (
-    <textarea css={[rcss.borderRadius(8), rcss.p(8), styles]} {...props} />
+    <textarea
+      css={[rcss.borderRadius(8), rcss.px(8), rcss.py(4), styles]}
+      {...props}
+    />
   );
 };

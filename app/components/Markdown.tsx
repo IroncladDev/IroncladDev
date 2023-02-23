@@ -1,9 +1,9 @@
 import DOMPurify from "isomorphic-dompurify";
-import { parse } from "marked";
+import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
 import Tw from "react-twemoji";
 
-const clean = (dirty) =>
+const clean = (dirty: string) =>
   sanitizeHtml(dirty, {
     allowedTags: [
       "i",
@@ -18,22 +18,22 @@ const clean = (dirty) =>
       "strike",
     ],
     allowedAttributes: {
-      a: ["href", "target", "rel"]
+      a: ["href", "target", "rel"],
     },
     allowedIframeHostnames: [],
   });
 
 export const Markdown = ({ markdown }) => {
-  const renderedMarkdown = clean(DOMPurify.sanitize(parse(markdown)))
+  const renderedMarkdown = clean(DOMPurify.sanitize(marked.parse(markdown||"")));
 
   return (
     <Tw>
       <span
         className="markdown"
         dangerouslySetInnerHTML={{
-          __html: renderedMarkdown
+          __html: renderedMarkdown,
         }}
       />
     </Tw>
   );
-}
+};

@@ -129,7 +129,16 @@ const EditableListItem = ({
         },
       ]}
     >
-      <View css={[rcss.flex.grow(1)]}>
+      <View
+        css={[
+          rcss.flex.grow(1),
+          rcss.colWithGap(16),
+          rcss.flex.column,
+          {
+            flex: "1 1 0",
+          },
+        ]}
+      >
         {editing ? (
           <View css={[rcss.colWithGap(8)]}>
             <TextArea
@@ -152,21 +161,13 @@ const EditableListItem = ({
             </View>
           </View>
         ) : (
-          Object.entries(obj).map(([key, val], j) => (
-            <View css={{position: 'relative'}}>
-              <View css={[rcss.flex.row, rcss.rowWithGap(8), rcss.align.center, {
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                left: 0,
-                top: j * 20
-              }]} key={j}>
-                <Text color="dimmer">
-                  <strong>{key}</strong>: {val}
-                </Text>
-              </View>
-            </View>
-          ))
+          <View>
+            {Object.entries(obj).map(([key, val], j) => (
+              <Text color="dimmer" key={j}>
+                <strong>{key}</strong>: {val}
+              </Text>
+            ))}
+          </View>
         )}
       </View>
 
@@ -196,9 +197,9 @@ const ArrayEditor = ({
         }
         if (type === "number") {
           return [key, 0];
-        } else if(type === "date") {
-           return [key, String(new Date().toISOString().split("T")[0])];
-        }else {
+        } else if (type === "date") {
+          return [key, String(new Date().toISOString().split("T")[0])];
+        } else {
           return [key, ""];
         }
       })
@@ -235,17 +236,13 @@ const ArrayEditor = ({
   };
 
   return (
-    <View
-      css={[
-        rcss.colWithGap(16),
-      ]}
-    >
+    <View css={[rcss.colWithGap(16)]}>
       <View css={[rcss.colWithGap(8)]}>
         {pairs.map(([name, type]) =>
           name === "id" ? null : (
-            <View css={[rcss.colWithGap(8)]}>
-              <Text color="dimmer">
-                {name[0].toUpperCase() + name.slice(1)}
+            <View css={[rcss.colWithGap(4)]}>
+              <Text color="dimmer" variant="small">
+                {name?.[0]?.toUpperCase() + name?.slice(1)}
               </Text>
               {type === "string" ? (
                 <TextArea
@@ -418,15 +415,15 @@ const Manage = ({ refreshSidebar }) => {
     PostJSON("/api/admin/editRaw", {
       key: currentKey,
       value: JSON.parse(rawValue),
-      id: page
-    }).then(({success}) => {
+      id: page,
+    }).then(({ success }) => {
       if (success) {
         fire();
       } else {
         Toast.fire("Internal server error");
       }
-    })
-  }
+    });
+  };
 
   const [rawValue, setRawValue] = useState<string>(
     JSON.stringify(content[currentKey], null, 2)
@@ -434,7 +431,7 @@ const Manage = ({ refreshSidebar }) => {
 
   useEffect(() => {
     setRawValue(JSON.stringify(content[currentKey], null, 2));
-  }, [content, currentKey])
+  }, [content, currentKey]);
 
   useEffect(() => {
     if (page) {
@@ -449,7 +446,7 @@ const Manage = ({ refreshSidebar }) => {
     } catch (e) {
       return false;
     }
-  }
+  };
 
   return (
     <View
@@ -460,16 +457,34 @@ const Manage = ({ refreshSidebar }) => {
           position: "relative",
         },
       ]}
-      style={{ flexGrow: '1 !important' }}
+      style={{ flexGrow: "1 !important" }}
     >
-      <View css={[rcss.flex.row, rcss.flex.grow(1), {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%'
-      }]}>
-        <View css={[rcss.p(16), rcss.flex.column, rcss.colWithGap(16), rcss.flex.grow(1)]}>
+      <View
+        css={[
+          rcss.flex.row,
+          rcss.flex.grow(1),
+          {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+          },
+        ]}
+      >
+        <View
+          css={[
+            rcss.p(16),
+            rcss.flex.column,
+            rcss.colWithGap(16),
+            {
+              maxHeight: "100vh",
+              overflowY: "auto",
+              flex: "1 1 0",
+              minWidth: 0,
+            },
+          ]}
+        >
           {loading || !current ? (
             <Text>{loading ? "Loading" : "No key selected"}</Text>
           ) : (

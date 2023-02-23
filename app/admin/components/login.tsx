@@ -11,7 +11,7 @@ export default function Login() {
       password,
     });
     if (res.success) {
-      router.push(window.location.pathname);
+      location.reload();
     } else {
       alert(res.message);
     }

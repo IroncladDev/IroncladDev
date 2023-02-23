@@ -1,4 +1,5 @@
 export const tokens = {
+  backgroundDepth: "var(--background-depth)",
   backgroundRoot: "var(--background-root)",
   backgroundDefault: "var(--background-default)",
   backgroundHigher: "var(--background-higher)",
@@ -43,4 +44,5 @@ export const tokens = {
   lineHeightHeaderBig: "var(--line-height-header-big)",
 
   maxBodyWidth: "var(--max-body-width)",
+  fontFamilyUI: "var(--font-family-ui)",
 };

@@ -16,8 +16,8 @@ XDG_CONFIG_HOME = "/home/runner/.config"
 language = "nodejs"
 
   [packager.features]
-  packageSearch = true
-  guessImports = true
+  packageSearch = false
+  guessImports = false
   enabledForHosting = false
 
 [unitTest]

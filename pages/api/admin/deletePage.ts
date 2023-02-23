@@ -12,13 +12,13 @@ app.post(async (req: Request, res: Response) => {
     _id: page,
   });
 
-  if(item) {
+  if (item) {
     item.remove();
     res.json({
       success: true,
       data: item,
     });
-  }else {
+  } else {
     res.json({
       success: false,
       message: "Page does not exist",

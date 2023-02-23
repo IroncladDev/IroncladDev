@@ -38,21 +38,25 @@ const variants: Record<Variant, SerializedStyles> = {
     fontSize: tokens.fontSizeHeaderBig,
     fontWeight: tokens.fontWeightMedium,
     lineHeight: tokens.lineHeightHeaderBig,
+    fontFamily: tokens.fontFamilyUI,
   }),
   headerDefault: css({
     fontSize: tokens.fontSizeHeaderDefault,
     fontWeight: tokens.fontWeightMedium,
     lineHeight: tokens.lineHeightHeaderDefault,
+    fontFamily: tokens.fontFamilyUI,
   }),
   subheadBig: css({
     fontSize: tokens.fontSizeSubheadBig,
     fontWeight: tokens.fontWeightMedium,
     lineHeight: tokens.lineHeightSubheadBig,
+    fontFamily: tokens.fontFamilyUI,
   }),
   subheadDefault: css({
     fontSize: tokens.fontSizeSubheadDefault,
     fontWeight: tokens.fontWeightMedium,
     lineHeight: tokens.lineHeightSubheadDefault,
+    fontFamily: tokens.fontFamilyUI,
   }),
 };
 

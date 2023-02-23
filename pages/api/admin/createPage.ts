@@ -9,10 +9,11 @@ app.use(authenticate);
 app.post(async (req: Request, res: Response) => {
   const { name } = req.body;
 
-  if(!name || typeof name !== "string") return res.json({
-    success: false,
-    message: "Please provide a name for the page",
-  });
+  if (!name || typeof name !== "string")
+    return res.json({
+      success: false,
+      message: "Please provide a name for the page",
+    });
 
   const item = new PageData({
     name,

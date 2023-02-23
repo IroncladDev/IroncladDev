@@ -10,8 +10,8 @@ export default function AdminPage({ authenticated }) {
         {
           height: "100vh",
           width: "100vw",
-          overflowY: 'auto',
-          overflowX: 'hidden'
+          overflowY: "auto",
+          overflowX: "hidden",
         },
       ]}
     >
