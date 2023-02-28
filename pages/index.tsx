@@ -1,12 +1,4 @@
-import {
-  View,
-  Text,
-  tokens,
-  rcss,
-  FlexSpacer,
-  Button,
-  OutlineButton,
-} from "app/ui";
+import { View, Text, tokens, rcss, FlexSpacer, OutlineButton } from "app/ui";
 import {
   Navbar,
   Section,
@@ -21,9 +13,11 @@ import { useRef } from "react";
 import useScroll from "app/hooks/useScroll";
 import { css } from "@emotion/react";
 import Link from "next/link";
-import loadPageData from "server/lib/loadPageData";
 import { Project } from "app/components/Project";
 import { LazyBlogPost } from "app/components/BlogPost";
+import Content from "public/content/index";
+
+const { headline, about, projects, blog } = Content;
 
 const Styles = {
   Container: css([
@@ -73,12 +67,12 @@ const Styles = {
 
   ScrollHeader: (percentage: number) =>
     css({
-      opacity: percentage <= 1 ? percentage : 0,
       transform: `translatex(${(1 - percentage) * 25}vw)`,
       position: "relative",
       display: "inline-block",
       margin: 0,
       transition: "ease-out 0.5s",
+      opacity: percentage,
       "&::after": {
         content: '""',
         position: "absolute",
@@ -88,7 +82,8 @@ const Styles = {
         background: tokens.linearDefault,
         width: "100vw",
         height: 4,
-        opacity: percentage <= 1 ? percentage : 0,
+        transition: "ease-out 0.5s",
+        opacity: percentage < 1 ? percentage : 0,
       },
     }),
 
@@ -173,12 +168,7 @@ const Styles = {
   }),
 };
 
-export default function Home({
-  Headings: { value: Header },
-  AboutParagraphs: { value: AboutParagraphs },
-  IndexShowcase: { value: IndexShowcase },
-  BlogShowcase: { value: BlogShowcase }
-}) {
+export default function Home() {
   const scrollRef = useRef(null);
   const { initialHeight, scrollTop } = useScroll(scrollRef);
   const scrollEnd = initialHeight / 2;
@@ -205,15 +195,13 @@ export default function Home({
           <View css={Styles.HeaderContentContainer}>
             <View css={Styles.HeaderContentText}>
               <View css={Styles.HeaderContents}>
-                <h1 css={Styles.HeaderTitleMain}>{Header.headlineHighlight}</h1>
-                <h1 css={Styles.HeaderTitleSecondary}>
-                  {Header.headlineTitle}
-                </h1>
-                <h2 css={Styles.HeaderTitleLast}>{Header.subHeadline}</h2>
+                <h1 css={Styles.HeaderTitleMain}>{headline.titleHighlight}</h1>
+                <h1 css={Styles.HeaderTitleSecondary}>{headline.title}</h1>
+                <h2 css={Styles.HeaderTitleLast}>{headline.subTitle}</h2>
               </View>
               <FlexSpacer />
               <Text color="dimmer" multiline>
-                <Markdown markdown={Header.description} />
+                <Markdown markdown={headline.description} />
               </Text>
             </View>
             <View>
@@ -271,20 +259,18 @@ export default function Home({
             >
               <div>
                 <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
-                  {(_, p) => (
+                  {(p) => (
                     <h1 css={Styles.ScrollHeader(p)}>
-                      <Markdown markdown={Header.AboutIntro} />
+                      <Markdown markdown={about.title} />
                     </h1>
                   )}
                 </Scroll>
               </div>
-              {AboutParagraphs.sort((a, b) => a.position - b.position).map(
-                ({ text }, i) => (
-                  <Scroll scrollRef={scrollRef} end={scrollEnd} key={i}>
-                    {(_, p) => <Paragraph percentage={p}>{text}</Paragraph>}
-                  </Scroll>
-                )
-              )}
+              {about.paragraphs.map((text, i: number) => (
+                <Scroll scrollRef={scrollRef} end={scrollEnd} key={i}>
+                  {(p) => <Paragraph percentage={p}>{text}</Paragraph>}
+                </Scroll>
+              ))}
             </View>
 
             <View
@@ -362,31 +348,31 @@ export default function Home({
             />
           }
         >
-          <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
-            {(_, p) => (
-              <h1 css={Styles.ScrollHeader(p)}>
-                <Markdown markdown={Header.PortfolioIntro} />
-              </h1>
-            )}
-          </Scroll>
-          <Scroll scrollRef={scrollRef} end={scrollEnd}>
-            {(_, p) => (
-              <Paragraph percentage={p}>{Header.ProjectsDescription}</Paragraph>
-            )}
-          </Scroll>
+          <View css={[rcss.colWithGap(16)]}>
+            <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
+              {(p) => (
+                <h1 css={Styles.ScrollHeader(p)}>
+                  <Markdown markdown={projects.title} />
+                </h1>
+              )}
+            </Scroll>
+            <Scroll scrollRef={scrollRef} end={scrollEnd}>
+              {(p) => (
+                <Paragraph percentage={p}>{projects.description}</Paragraph>
+              )}
+            </Scroll>
+          </View>
 
-          {IndexShowcase.sort((a, b) => a.position - b.position).map(
-            (project, i) => (
-              <Project
-                key={i}
-                index={i}
-                project={project}
-                scrollRef={scrollRef}
-                scrollEnd={scrollEnd}
-                initialHeight={initialHeight}
-              />
-            )
-          )}
+          {projects.projects.map((project, i) => (
+            <Project
+              key={i}
+              index={i}
+              project={project}
+              scrollRef={scrollRef}
+              scrollEnd={scrollEnd}
+              initialHeight={initialHeight}
+            />
+          ))}
 
           <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
             {(p) => (
@@ -409,12 +395,12 @@ export default function Home({
         </Section>
 
         <Section
-          css={[]}
+          css={[rcss.p(16), rcss.colWithGap(64)]}
           background={tokens.backgroundDefault}
           head={
             <Slant
               path={
-                IndexShowcase.length % 2 === 0
+                projects.projects.length % 2 === 0
                   ? "polygon(0 0, 0% 100%, 100% 0)"
                   : "polygon(0 0, 100% 100%, 100% 0)"
               }
@@ -423,32 +409,31 @@ export default function Home({
           }
         >
           <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
-            {(_, p) => (
+            {(p) => (
               <h1 css={Styles.ScrollHeader(p)}>
-                <Markdown markdown={Header.BlogIntro} />
+                <Markdown markdown={blog.title} />
               </h1>
             )}
           </Scroll>
           <Scroll scrollRef={scrollRef} end={scrollEnd}>
-            {(_, p) => (
-              <Paragraph percentage={p}>{Header.BlogDescription}</Paragraph>
-            )}
+            {(p) => <Paragraph percentage={p}>{blog.description}</Paragraph>}
           </Scroll>
-          {BlogShowcase.map(({ post, platform }, i) => <Scroll scrollRef={scrollRef} end={scrollEnd} key={i}>
-            {(p) => <LazyBlogPost post={post} platform={platform} percentage={p} key={i}/>}  
-          </Scroll>)}
+          {blog.posts.map(({ target: post, platform }, i) => (
+            <Scroll scrollRef={scrollRef} end={scrollEnd} key={i}>
+              {(p) => (
+                <LazyBlogPost
+                  post={post}
+                  platform={platform}
+                  percentage={p}
+                  key={i}
+                />
+              )}
+            </Scroll>
+          ))}
         </Section>
 
         <Footer />
       </View>
     </View>
   );
-}
-
-export async function getServerSideProps() {
-  const data = await loadPageData("Homepage");
-
-  return {
-    props: data,
-  };
 }

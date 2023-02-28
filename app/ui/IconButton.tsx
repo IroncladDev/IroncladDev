@@ -34,7 +34,7 @@ export const IconButton = ({
   return (
     <button
       css={[
-        rcss.p(8),
+        rcss.p(4),
         rcss.borderRadius(8),
         rcss.flex.row,
         rcss.center,

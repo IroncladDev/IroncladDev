@@ -159,3 +159,11 @@ img.emoji {
   display: inline;
   margin: 0;
 }
+
+.markdown code {
+  background: var(--background-depth);
+  padding: 2px 4px;
+  font-family: 'Monaco', monospace;
+  font-size: 0.8em;
+  border-radius: 4px;
+}

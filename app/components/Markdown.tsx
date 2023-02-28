@@ -24,7 +24,9 @@ const clean = (dirty: string) =>
   });
 
 export const Markdown = ({ markdown }) => {
-  const renderedMarkdown = clean(DOMPurify.sanitize(marked.parse(markdown||"")));
+  const renderedMarkdown = clean(
+    DOMPurify.sanitize(marked.parse(markdown || ""))
+  );
 
   return (
     <Tw>
