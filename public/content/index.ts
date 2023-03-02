@@ -2,7 +2,14 @@
  * Content for the Index page
  */
 
-import { Project, LazyBlogPost, BlogPostPlatform } from "./types";
+import { Projects } from "./projects";
+import {
+  Project,
+  LazyBlogPost,
+  BlogPostPlatform,
+  Social,
+  SocialPlatform
+} from "./types";
 
 const Content: IndexPageContent = {
   headline: {
@@ -23,30 +30,7 @@ const Content: IndexPageContent = {
   projects: {
     title: "Projects",
     description: "Here are some of my personal favorite projects.",
-    projects: [
-      {
-        title: "YouBarter",
-        description:
-          "YouBarter is a non-profit organization where everyone can share and help in their own community by bartering with each other.",
-        slides: ["YouBarter is a non-profit organization where everyone can share and help in their own community by bartering with each other.", "sliiiiide much fun wheeee"],
-        stack: ["next", "node", "react", "mongo", "sass"],
-        timeCreated: "2022-02-15",
-        url: "https://www.youbarter.us/",
-        sourceCodeUrl: "https://github.com/Conner1115/yb2",
-        images: ["https://images.connerow.dev/showcase/youbarter/index.png", "https://images.connerow.dev/showcase/youbarter/login.png", "https://images.connerow.dev/showcase/youbarter/function.png"],
-      },
-      {
-        title: "Celestron",
-        description:
-          "Celestron is a tower defense game based around the [Replit](https://replit.com) community. It won 1st place in a hackathon. Developed by me, [spotandjake](https://replit.com/@spotandjake), and [JDOG787](https://replit.com/@JDOG787).",
-        slides: ["Celestron is a tower defense game based around the [Replit](https://replit.com) community. It won 1st place in a hackathon. Developed by me, [spotandjake](https://replit.com/@spotandjake), and [JDOG787](https://replit.com/@JDOG787)."],
-        timeCreated: "2022-04-15",
-        stack: ["p5", "typescript", "sass", "node"],
-        url: "https://celestron.spotandjake.repl.co",
-        sourceCodeUrl: "https://github.com/Conner1115/Celestron",
-        images: ["https://images.connerow.dev/showcase/celestron/index.png", "https://images.connerow.dev/showcase/celestron/gameplay.png"],
-      },
-    ],
+    projects: Projects.slice(0, 3),
   },
   blog: {
     title: "Blog",
@@ -63,11 +47,36 @@ const Content: IndexPageContent = {
         platform: BlogPostPlatform.Dev,
       },
       {
+        target: "replit/introducing-amjadgpt-an-ai-chatbot-that-acts-like-the-ceo-of-replit-4kl1",
+        platform: BlogPostPlatform.Dev
+      },
+      {
+        target: "ironcladdev/create-a-personalized-chatbot-with-langchain-in-three-simple-steps-p4g",
+        platform: BlogPostPlatform.Dev
+      },
+      {
         target: "802453",
         platform: BlogPostPlatform.Replit,
       },
     ],
   },
+  contact: {
+    title: "Let's get in touch",
+    socials: [
+      {
+        url: "https://twitter.com/IroncladDev",
+        platform: SocialPlatform.Twitter
+      },
+      {
+        url: "https://replit.com/@IroncladDev",
+        platform: SocialPlatform.Replit
+      },
+      {
+        url: "/discord",
+        platform: SocialPlatform.Discord
+      }
+    ]
+  }
 };
 
 interface IndexPageContent {
@@ -91,6 +100,10 @@ interface IndexPageContent {
     description: string;
     posts: Array<LazyBlogPost>;
   };
+  contact: {
+    title: string;
+    socials: Array<Social>;
+  }
 }
 
 export default Content;

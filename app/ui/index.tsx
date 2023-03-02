@@ -9,3 +9,4 @@ export * from "./Input";
 export * from "./TextArea";
 export * from "./Select";
 export * from "./OutlineButton";
+export * from "./Tooltip";

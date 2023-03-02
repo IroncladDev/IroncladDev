@@ -114,6 +114,7 @@ img.emoji {
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
+  outline: none !important;
 }
 
 @keyframes draw {
@@ -155,9 +156,18 @@ img.emoji {
   background: var(--accent-primary-stronger) !important;
 }
 
-.markdown p {
-  display: inline;
+.markdown ul, .markdown ol {
+  margin-left: 32px;
+  padding: 0;
+}
+
+.markdown > * {
   margin: 0;
+  margin-bottom: 8px;
+  padding: 0;
+}
+.markdown > *:last-of-type {
+  margin-bottom: 0px;
 }
 
 .markdown code {

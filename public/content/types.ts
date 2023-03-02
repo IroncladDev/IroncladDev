@@ -1,9 +1,21 @@
-export type Technology = "bash" | "html" | "mongo" | "next" | "node" | "python" | "react" | "sass" | "stripe" | "typescript" | "langchain" | "p5";
+export enum Technology {
+  bash = "bash",
+  html = "html",
+  mongo = "mongo",
+  next = "next",
+  node = "node",
+  python = "python",
+  react = "react",
+  sass = "sass",
+  stripe = "stripe",
+  typescript = "typescript",
+  langchain = "langchain",
+  p5 = "p5",
+}
 
 export interface Project {
   title: string;
-  description: string; // array of strings later
-  timeCreated: string; // date later
+  timeCreated: string;
   url?: string;
   sourceCodeUrl?: string;
   images: Array<string>;
@@ -19,6 +31,22 @@ export enum BlogPostPlatform {
 export interface LazyBlogPost {
   target: string;
   platform: BlogPostPlatform;
+}
+
+export enum SocialPlatform {
+  Twitter,
+  Dev,
+  Replit,
+  Email,
+  Polywork,
+  Discord,
+  Codepen,
+  Github
+}
+
+export interface Social {
+  url: string;
+  platform: SocialPlatform;
 }
 
 export interface BlogPost {}

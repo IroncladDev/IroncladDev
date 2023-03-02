@@ -6,3 +6,6 @@ export * from "./Scroll";
 export * from "./Paragraph";
 export * from "./Markdown";
 export * from "./Footer";
+export * from "./Modal";
+export * from "./Gallery";
+export * from './SocialCard';

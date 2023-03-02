@@ -17,7 +17,7 @@ import { Project } from "app/components/Project";
 import { LazyBlogPost } from "app/components/BlogPost";
 import Content from "public/content/index";
 
-const { headline, about, projects, blog } = Content;
+const { headline, about, projects, blog, contact } = Content;
 
 const Styles = {
   Container: css([
@@ -182,9 +182,8 @@ export default function Home() {
           css={[rcss.center, rcss.flex.column]}
           style={{
             minHeight: initialHeight,
-            background: `linear-gradient(${
-              135 + (scrollTop / initialHeight) * (180 - 135)
-            }deg, 
+            background: `linear-gradient(${135 + (scrollTop / initialHeight) * (180 - 135)
+              }deg, 
               ${tokens.backgroundRoot} 0%,
               ${tokens.subgroundDefault} 50%,  
               ${tokens.subgroundRoot} 50%,
@@ -366,11 +365,9 @@ export default function Home() {
           {projects.projects.map((project, i) => (
             <Project
               key={i}
-              index={i}
               project={project}
               scrollRef={scrollRef}
               scrollEnd={scrollEnd}
-              initialHeight={initialHeight}
             />
           ))}
 
@@ -395,15 +392,11 @@ export default function Home() {
         </Section>
 
         <Section
-          css={[rcss.p(16), rcss.colWithGap(64)]}
+          css={[rcss.p(16), rcss.colWithGap(32)]}
           background={tokens.backgroundDefault}
           head={
             <Slant
-              path={
-                projects.projects.length % 2 === 0
-                  ? "polygon(0 0, 0% 100%, 100% 0)"
-                  : "polygon(0 0, 100% 100%, 100% 0)"
-              }
+              path="polygon(0 0, 100% 100%, 100% 0)"
               background={tokens.backgroundRoot}
             />
           }
@@ -418,18 +411,59 @@ export default function Home() {
           <Scroll scrollRef={scrollRef} end={scrollEnd}>
             {(p) => <Paragraph percentage={p}>{blog.description}</Paragraph>}
           </Scroll>
-          {blog.posts.map(({ target: post, platform }, i) => (
-            <Scroll scrollRef={scrollRef} end={scrollEnd} key={i}>
+          <View
+            css={[
+              rcss.flex.row,
+              rcss.justify.center,
+              rcss.p(16),
+              {
+                flexWrap: "wrap",
+                gap: 16,
+              },
+            ]}
+          >
+            {blog.posts.map(({ target: post, platform }, i) => (
+              <LazyBlogPost
+                post={post}
+                platform={platform}
+                key={i}
+                scrollRef={scrollRef}
+                scrollEnd={scrollEnd}
+              />
+            ))}
+          </View>
+
+          <View css={[rcss.flex.row, rcss.center]}>
+            <Link href="/work" passHref>
+              <a>
+                <OutlineButton text="Read More >>" />
+              </a>
+            </Link>
+          </View>
+        </Section>
+
+        <Section
+          css={[rcss.p(16), rcss.colWithGap(32), rcss.flex.row, rcss.center]}
+          background={`linear-gradient(
+            ${tokens.backgroundRoot}, 
+            ${tokens.backgroundHigher}
+          )`}
+          head={
+            <Slant
+              path="polygon(0 0, 100% 100%, 100% 0)"
+              background={tokens.backgroundDefault}
+            />
+          }
+        >
+          <View>
+            <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
               {(p) => (
-                <LazyBlogPost
-                  post={post}
-                  platform={platform}
-                  percentage={p}
-                  key={i}
-                />
+                <h1 css={Styles.ScrollHeader(p)}>
+                  <Markdown markdown={contact.title} />
+                </h1>
               )}
             </Scroll>
-          ))}
+          </View>
         </Section>
 
         <Footer />

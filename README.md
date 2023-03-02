@@ -1,5 +1,6 @@
 # Todo
 
- - Click on project images to expand them
- - Tooltips for each programming stack icon + descriptions for each one
+ - Make blog posts look better
  - Add more projects
+ - Add github, replit, twitter, and dev.to stats in About Me page
+ - 404 page

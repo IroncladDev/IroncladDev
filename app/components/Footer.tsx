@@ -109,9 +109,11 @@ export const Footer = () => {
                 <Text>Blog</Text>
               </a>
             </Link>
-            <a href="https://discord.com/invite/kuGvdgn5SK" target="_blank">
-              <Text>Discord</Text>
-            </a>
+           <Link href="/discord" passHref>
+              <a>
+                <Text>Discord</Text>
+              </a>
+            </Link>
           </FlexCol>
         </View>
       </View>

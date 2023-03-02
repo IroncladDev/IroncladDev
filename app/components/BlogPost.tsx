@@ -1,11 +1,12 @@
 import { View, rcss, tokens, Text, Button } from "app/ui";
 import { useGetJSONLazy } from "app/hooks/fetch";
 import { useQuery } from "app/hooks/gql/useQuery";
-import { useEffect } from "react";
-import { ExternalLink, Heart, MessageSquare } from "react-feather";
+import { RefObject, useEffect } from "react";
+import { Heart, MessageSquare } from "react-feather";
 import { formatRelative } from "date-fns";
 import { Markdown } from ".";
 import { BlogPostPlatform as BlogPlatform } from "public/content/types";
+import { Scroll } from "app/components";
 
 interface BlogPostType {
   title: string;
@@ -19,117 +20,127 @@ interface BlogPostType {
 
 export default function BlogPost({
   post,
-  p,
+  scrollRef,
+  scrollEnd,
 }: {
   post: BlogPostType;
-  p: number;
+  scrollRef: RefObject<HTMLDivElement>;
+  scrollEnd: number;
 }) {
-  return (
-    <View
-      css={[
-        rcss.flex.column,
-        rcss.py(16),
-        rcss.colWithGap(16),
-        {
-          borderBottom: `solid 2px ${tokens.backgroundHighest}`,
-        },
-      ]}
-      style={{
-        transform: `translatey(${(1 - p) * 15}vh)`,
-        opacity: p + 0.5,
-      }}
-    >
-      <View css={[rcss.flex.row]}>
-        <a
-          href={post.url}
-          target="_blank"
-          rel="noreferrer"
-          style={{ textDecoration: "none" }}
-        >
+
+  return <View
+    css={[
+      rcss.flex.row,
+      rcss.borderRadius(8),
+      {
+        flex: '1 1 0',
+        minWidth: 400,
+        maxWidth: 700,
+        '@media(max-width: 1000px)': {
+          minWidh: 300
+        }
+      },
+    ]}
+  >
+    <View css={[rcss.position.relative, {
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%'
+    }]}>
+      <Scroll scrollRef={scrollRef} end={scrollEnd}>
+        {(p) => (
           <View
             css={[
-              rcss.rowWithGap(8),
-              rcss.align.center,
+              rcss.flex.column,
+              rcss.borderRadius(8),
               {
-                borderBottom: `solid 2px ${tokens.backgroundHigher}`,
+                border: `solid 1px ${tokens.backgroundHigher}`,
+                transition: 'ease-out 0.5s'
               },
             ]}
+            style={{
+              transform: `translatey(${(1 - p) * 15}vh)`,
+              opacity: p,
+            }}
           >
-            <Text variant="subheadBig">{post.title}</Text>
-            <ExternalLink size={16} />
-          </View>
-        </a>
-      </View>
+            {post.coverImage ? (
+              <View
+                css={{
+                  "& img": {
+                    borderRadius: "8px 8px 0 0",
+                    width: "100%",
+                  },
+                }}
+              >
+                <img src={post.coverImage} />
+              </View>
+            ) : null}
 
-      {post.coverImage ? (
-        <View
-          css={{
-            "& img": {
-              border: `solid 2px ${tokens.backgroundHigher}`,
-              borderRadius: 8,
-              width: "100%",
-              maxWidth: 500,
-            },
-          }}
-        >
-          <img src={post.coverImage} />
-        </View>
-      ) : null}
+            <View css={[rcss.p(16), rcss.flex.column, rcss.colWithGap(16)]}>
+              <a
+                href={post.url}
+                target="_blank"
+                rel="noreferrer"
+                css={{ textDecoration: "none" }}
+              >
+                <View css={[rcss.rowWithGap(8), rcss.align.center]}>
+                  <Text variant="subheadDefault" multiline>
+                    {post.title}
+                  </Text>
+                </View>
+              </a>
 
-      <View
-        css={[
-          rcss.pl(16),
-          rcss.py(8),
-          {
-            borderLeft: `solid 2px ${tokens.backgroundHighest}`,
-          },
-        ]}
-      >
-        <View
-          css={{
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            lineClamp: 2,
-            WebkitBoxOrient: "vertical",
-          }}
-        >
-          <Text color="dimmer" multiline>
-            <Markdown markdown={post.description} />
-          </Text>
-        </View>
-      </View>
+              <View
+                css={{
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2,
+                  lineClamp: 2,
+                  WebkitBoxOrient: "vertical",
+                }}
+              >
+                <Text color="dimmer" multiline>
+                  <Markdown markdown={post.description} />
+                </Text>
+              </View>
 
-      <View css={[rcss.rowWithGap(16)]}>
-        {post.reactionCount ? (
-          <View css={[rcss.rowWithGap(4), rcss.align.center]}>
-            <Heart size={16} />
-            <Text>{post.reactionCount}</Text>
+              <View css={[rcss.rowWithGap(16)]}>
+                {post.reactionCount ? (
+                  <View css={[rcss.rowWithGap(4), rcss.align.center]}>
+                    <Heart size={16} />
+                    <Text>{post.reactionCount}</Text>
+                  </View>
+                ) : null}
+                {post.commentCount ? (
+                  <View css={[rcss.rowWithGap(4), rcss.align.center]}>
+                    <MessageSquare size={16} />
+                    <Text>{post.commentCount}</Text>
+                  </View>
+                ) : null}
+                <Text color="dimmer">
+                  {formatRelative(new Date(post?.timeCreated || 0), new Date())}
+                </Text>
+              </View>
+            </View>
           </View>
-        ) : null}
-        {post.commentCount ? (
-          <View css={[rcss.rowWithGap(4), rcss.align.center]}>
-            <MessageSquare size={16} />
-            <Text>{post.commentCount}</Text>
-          </View>
-        ) : null}
-        <Text color="dimmer">
-          {formatRelative(new Date(post?.timeCreated || 0), new Date())}
-        </Text>
-      </View>
+        )}
+      </Scroll>
     </View>
-  );
+  </View>
 }
 
 export function LazyBlogPost({
   post,
   platform,
-  percentage: p,
+  scrollRef,
+  scrollEnd,
 }: {
   post: string;
   platform: BlogPlatform;
-  percentage: number;
+  scrollRef: RefObject<HTMLDivElement>;
+  scrollEnd: number;
 }) {
   const [loadDevPost, { data: devPost, loading: devPostLoading }] =
     useGetJSONLazy("https://dev.to/api/articles/" + post);
@@ -185,7 +196,8 @@ export function LazyBlogPost({
               reactionCount: devPost.public_reactions_count,
               commentCount: devPost.comments_count,
             }}
-            p={p}
+            scrollRef={scrollRef}
+            end={scrollEnd}
           />
         )}
       </>
@@ -208,7 +220,8 @@ export function LazyBlogPost({
               timeCreated: replitPost.post.timeCreated,
               commentCount: replitPost.post.replComment?.replies?.length,
             }}
-            p={p}
+            scrollRef={scrollRef}
+            end={scrollEnd}
           />
         )}
       </>

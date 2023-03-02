@@ -16,6 +16,10 @@ const clean = (dirty: string) =>
       "br",
       "s",
       "strike",
+      "br",
+      "ul",
+      "ol",
+      "li",
     ],
     allowedAttributes: {
       a: ["href", "target", "rel"],

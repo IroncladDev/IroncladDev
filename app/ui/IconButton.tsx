@@ -46,12 +46,13 @@ export const IconButton = ({
           transition: "0.25s",
           "&:hover": {
             background: elevationNext,
+            borderColor: tokens.accentPrimaryDefault,
           },
           "&:active": {
             borderColor: tokens.accentPrimaryStronger,
           },
           "&:focus": {
-            borderColor: tokens.backgroundHighest,
+            borderColor: tokens.accentPrimaryDefault,
           },
         },
       ]}
