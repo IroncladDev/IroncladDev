@@ -8,7 +8,7 @@ import {
   LazyBlogPost,
   BlogPostPlatform,
   Social,
-  SocialPlatform
+  SocialPlatform,
 } from "./types";
 
 const Content: IndexPageContent = {
@@ -47,12 +47,14 @@ const Content: IndexPageContent = {
         platform: BlogPostPlatform.Dev,
       },
       {
-        target: "replit/introducing-amjadgpt-an-ai-chatbot-that-acts-like-the-ceo-of-replit-4kl1",
-        platform: BlogPostPlatform.Dev
+        target:
+          "replit/introducing-amjadgpt-an-ai-chatbot-that-acts-like-the-ceo-of-replit-4kl1",
+        platform: BlogPostPlatform.Dev,
       },
       {
-        target: "ironcladdev/create-a-personalized-chatbot-with-langchain-in-three-simple-steps-p4g",
-        platform: BlogPostPlatform.Dev
+        target:
+          "ironcladdev/create-a-personalized-chatbot-with-langchain-in-three-simple-steps-p4g",
+        platform: BlogPostPlatform.Dev,
       },
       {
         target: "802453",
@@ -65,18 +67,18 @@ const Content: IndexPageContent = {
     socials: [
       {
         url: "https://twitter.com/IroncladDev",
-        platform: SocialPlatform.Twitter
+        platform: SocialPlatform.Twitter,
       },
       {
         url: "https://replit.com/@IroncladDev",
-        platform: SocialPlatform.Replit
+        platform: SocialPlatform.Replit,
       },
       {
         url: "/discord",
-        platform: SocialPlatform.Discord
-      }
-    ]
-  }
+        platform: SocialPlatform.Discord,
+      },
+    ],
+  },
 };
 
 interface IndexPageContent {
@@ -103,7 +105,7 @@ interface IndexPageContent {
   contact: {
     title: string;
     socials: Array<Social>;
-  }
+  };
 }
 
 export default Content;

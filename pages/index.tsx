@@ -8,8 +8,9 @@ import {
   Slant,
   LogoHeader,
   Paragraph,
+  SocialCard,
 } from "app/components";
-import { useRef } from "react";
+import { useRef, RefObject } from "react";
 import useScroll from "app/hooks/useScroll";
 import { css } from "@emotion/react";
 import Link from "next/link";
@@ -169,7 +170,7 @@ const Styles = {
 };
 
 export default function Home() {
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const { initialHeight, scrollTop } = useScroll(scrollRef);
   const scrollEnd = initialHeight / 2;
 
@@ -182,8 +183,9 @@ export default function Home() {
           css={[rcss.center, rcss.flex.column]}
           style={{
             minHeight: initialHeight,
-            background: `linear-gradient(${135 + (scrollTop / initialHeight) * (180 - 135)
-              }deg, 
+            background: `linear-gradient(${
+              135 + (scrollTop / initialHeight) * (180 - 135)
+            }deg, 
               ${tokens.backgroundRoot} 0%,
               ${tokens.subgroundDefault} 50%,  
               ${tokens.subgroundRoot} 50%,
@@ -211,7 +213,7 @@ export default function Home() {
             <button
               css={Styles.DownButton}
               onClick={() => {
-                scrollRef.current.scrollBy(0, innerHeight);
+                scrollRef.current?.scrollBy(0, innerHeight);
               }}
             ></button>
           </View>
@@ -381,7 +383,7 @@ export default function Home() {
                   transition: "ease-out 0.5s",
                 }}
               >
-                <Link href="/work" passHref>
+                <Link href="/showcase" passHref>
                   <a>
                     <OutlineButton text="See all >>" />
                   </a>
@@ -434,7 +436,7 @@ export default function Home() {
           </View>
 
           <View css={[rcss.flex.row, rcss.center]}>
-            <Link href="/work" passHref>
+            <Link href="/blog" passHref>
               <a>
                 <OutlineButton text="Read More >>" />
               </a>
@@ -443,10 +445,10 @@ export default function Home() {
         </Section>
 
         <Section
-          css={[rcss.p(16), rcss.colWithGap(32), rcss.flex.row, rcss.center]}
-          background={`linear-gradient(
-            ${tokens.backgroundRoot}, 
-            ${tokens.backgroundHigher}
+          css={[rcss.p(16), rcss.colWithGap(32), rcss.align.center]}
+          background={`linear-gradient( 
+            ${tokens.backgroundRoot},
+            ${tokens.subgroundRoot}
           )`}
           head={
             <Slant
@@ -455,7 +457,17 @@ export default function Home() {
             />
           }
         >
-          <View>
+          <View
+            css={[
+              rcss.p(16),
+              rcss.flex.column,
+              rcss.colWithGap(8),
+              {
+                width: "70vw",
+                maxWidth: 500,
+              },
+            ]}
+          >
             <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
               {(p) => (
                 <h1 css={Styles.ScrollHeader(p)}>
@@ -463,6 +475,16 @@ export default function Home() {
                 </h1>
               )}
             </Scroll>
+
+            {contact.socials.map(({ url, platform }, i) => (
+              <SocialCard
+                url={url}
+                platform={platform}
+                scrollRef={scrollRef}
+                scrollEnd={scrollEnd}
+                key={i}
+              />
+            ))}
           </View>
         </Section>
 

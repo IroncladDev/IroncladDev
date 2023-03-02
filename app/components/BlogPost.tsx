@@ -27,108 +27,118 @@ export default function BlogPost({
   scrollRef: RefObject<HTMLDivElement>;
   scrollEnd: number;
 }) {
+  return (
+    <View
+      css={[
+        rcss.flex.row,
+        rcss.borderRadius(8),
+        {
+          flex: "1 1 0",
+          minWidth: 400,
+          maxWidth: 700,
+          "@media(max-width: 1000px)": {
+            minWidth: 300,
+          },
+        },
+      ]}
+    >
+      <View
+        css={[
+          rcss.position.relative,
+          {
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+          },
+        ]}
+      >
+        <Scroll scrollRef={scrollRef} end={scrollEnd}>
+          {(p) => (
+            <View
+              css={[
+                rcss.flex.column,
+                rcss.borderRadius(8),
+                {
+                  border: `solid 1px ${tokens.backgroundHighest}`,
+                  transition: "ease-out 0.5s",
+                },
+              ]}
+              style={{
+                transform: `translatey(${(1 - p) * 15}vh)`,
+                opacity: p,
+              }}
+            >
+              {post.coverImage ? (
+                <View
+                  css={{
+                    "& img": {
+                      borderRadius: "8px 8px 0 0",
+                      width: "100%",
+                      borderBottom: `solid 1px ${tokens.backgroundHighest}`,
+                    },
+                  }}
+                >
+                  <img src={post.coverImage} />
+                </View>
+              ) : null}
 
-  return <View
-    css={[
-      rcss.flex.row,
-      rcss.borderRadius(8),
-      {
-        flex: '1 1 0',
-        minWidth: 400,
-        maxWidth: 700,
-        '@media(max-width: 1000px)': {
-          minWidh: 300
-        }
-      },
-    ]}
-  >
-    <View css={[rcss.position.relative, {
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%'
-    }]}>
-      <Scroll scrollRef={scrollRef} end={scrollEnd}>
-        {(p) => (
-          <View
-            css={[
-              rcss.flex.column,
-              rcss.borderRadius(8),
-              {
-                border: `solid 1px ${tokens.backgroundHigher}`,
-                transition: 'ease-out 0.5s'
-              },
-            ]}
-            style={{
-              transform: `translatey(${(1 - p) * 15}vh)`,
-              opacity: p,
-            }}
-          >
-            {post.coverImage ? (
-              <View
-                css={{
-                  "& img": {
-                    borderRadius: "8px 8px 0 0",
-                    width: "100%",
-                  },
-                }}
-              >
-                <img src={post.coverImage} />
-              </View>
-            ) : null}
+              <View css={[rcss.p(16), rcss.flex.column, rcss.colWithGap(16)]}>
+                <a
+                  href={post.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  css={{ textDecoration: "none" }}
+                >
+                  <View css={[rcss.rowWithGap(8), rcss.align.center]}>
+                    <Text variant="subheadDefault" multiline>
+                      {post.title}
+                    </Text>
+                  </View>
+                </a>
 
-            <View css={[rcss.p(16), rcss.flex.column, rcss.colWithGap(16)]}>
-              <a
-                href={post.url}
-                target="_blank"
-                rel="noreferrer"
-                css={{ textDecoration: "none" }}
-              >
-                <View css={[rcss.rowWithGap(8), rcss.align.center]}>
-                  <Text variant="subheadDefault" multiline>
-                    {post.title}
+                <View
+                  css={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    lineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                  }}
+                >
+                  <Text color="dimmer" multiline>
+                    <Markdown markdown={post.description} />
                   </Text>
                 </View>
-              </a>
 
-              <View
-                css={{
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  display: "-webkit-box",
-                  WebkitLineClamp: 2,
-                  lineClamp: 2,
-                  WebkitBoxOrient: "vertical",
-                }}
-              >
-                <Text color="dimmer" multiline>
-                  <Markdown markdown={post.description} />
-                </Text>
-              </View>
-
-              <View css={[rcss.rowWithGap(16)]}>
-                {post.reactionCount ? (
-                  <View css={[rcss.rowWithGap(4), rcss.align.center]}>
-                    <Heart size={16} />
-                    <Text>{post.reactionCount}</Text>
-                  </View>
-                ) : null}
-                {post.commentCount ? (
-                  <View css={[rcss.rowWithGap(4), rcss.align.center]}>
-                    <MessageSquare size={16} />
-                    <Text>{post.commentCount}</Text>
-                  </View>
-                ) : null}
-                <Text color="dimmer">
-                  {formatRelative(new Date(post?.timeCreated || 0), new Date())}
-                </Text>
+                <View css={[rcss.rowWithGap(16)]}>
+                  {post.reactionCount ? (
+                    <View css={[rcss.rowWithGap(4), rcss.align.center]}>
+                      <Heart size={16} />
+                      <Text>{post.reactionCount}</Text>
+                    </View>
+                  ) : null}
+                  {post.commentCount ? (
+                    <View css={[rcss.rowWithGap(4), rcss.align.center]}>
+                      <MessageSquare size={16} />
+                      <Text>{post.commentCount}</Text>
+                    </View>
+                  ) : null}
+                  <Text color="dimmer">
+                    {formatRelative(
+                      new Date(post?.timeCreated || 0),
+                      new Date()
+                    )}
+                  </Text>
+                </View>
               </View>
             </View>
-          </View>
-        )}
-      </Scroll>
+          )}
+        </Scroll>
+      </View>
     </View>
-  </View>
+  );
 }
 
 export function LazyBlogPost({
@@ -197,7 +207,7 @@ export function LazyBlogPost({
               commentCount: devPost.comments_count,
             }}
             scrollRef={scrollRef}
-            end={scrollEnd}
+            scrollEnd={scrollEnd}
           />
         )}
       </>
@@ -221,7 +231,7 @@ export function LazyBlogPost({
               commentCount: replitPost.post.replComment?.replies?.length,
             }}
             scrollRef={scrollRef}
-            end={scrollEnd}
+            scrollEnd={scrollEnd}
           />
         )}
       </>

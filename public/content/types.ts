@@ -41,7 +41,8 @@ export enum SocialPlatform {
   Polywork,
   Discord,
   Codepen,
-  Github
+  Github,
+  Youtube,
 }
 
 export interface Social {

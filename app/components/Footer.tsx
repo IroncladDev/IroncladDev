@@ -92,9 +92,9 @@ export const Footer = () => {
             </Link>
           </FlexCol>
           <FlexCol gap={16}>
-            <Link href="/work" passHref>
+            <Link href="/showcase" passHref>
               <a>
-                <Text>Work</Text>
+                <Text>Showcase</Text>
               </a>
             </Link>
             <Link href="/contact" passHref>
@@ -109,7 +109,7 @@ export const Footer = () => {
                 <Text>Blog</Text>
               </a>
             </Link>
-           <Link href="/discord" passHref>
+            <Link href="/discord" passHref>
               <a>
                 <Text>Discord</Text>
               </a>

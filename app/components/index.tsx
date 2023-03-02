@@ -8,4 +8,4 @@ export * from "./Markdown";
 export * from "./Footer";
 export * from "./Modal";
 export * from "./Gallery";
-export * from './SocialCard';
+export * from "./SocialCard";

@@ -64,7 +64,7 @@ const PreviewImage = ({
             },
           ]}
           style={{
-            opacity: 0.25 + percentage / 2,
+            opacity: percentage,
             filter: `grayscale(${1 - percentage})`,
           }}
           onClick={openGallery}
@@ -73,6 +73,21 @@ const PreviewImage = ({
     </Scroll>
   );
 };
+
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 export const Project = ({
   project,
@@ -84,6 +99,8 @@ export const Project = ({
   scrollEnd: number;
 }) => {
   const [slideIndex, setSlideIndex] = useState(0);
+
+  const date = new Date(project.timeCreated);
 
   return (
     <Scroll scrollRef={scrollRef} end={scrollEnd}>
@@ -156,6 +173,10 @@ export const Project = ({
             <View>
               <Paragraph>{project.slides[slideIndex]}</Paragraph>
             </View>
+            <Text color="dimmest" variant="small">
+              {"• "}
+              {monthNames[date.getMonth()]} {date.getFullYear()}
+            </Text>
 
             <View css={[rcss.flex.row, rcss.rowWithGap(8), rcss.align.center]}>
               {project.stack.map((technology) => (
@@ -269,7 +290,7 @@ export const Project = ({
               <View
                 css={[
                   rcss.flex.grow(1),
-                  rcss.pl(16),
+                  rcss.pl(project.slides.length > 1 ? 16 : 0),
                   rcss.flex.row,
                   rcss.rowWithGap(8),
                   {

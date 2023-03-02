@@ -88,7 +88,7 @@ export const Navbar = ({ scrollRef }) => {
           <FlexSpacer />
           <FlexRow gap={24} center>
             <NavLink href="/about" text="About" />
-            <NavLink href="/work" text="Work" />
+            <NavLink href="/showcase" text="Showcase" />
             <NavLink href="/blog" text="Blog" />
             <NavLink href="/contact" text="Contact" />
           </FlexRow>
