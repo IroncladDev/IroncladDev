@@ -70,6 +70,7 @@ export const Gallery = (props) => {
 
             {images.map((_, i) => (
               <button
+                key={i}
                 css={[
                   rcss.borderRadius("full"),
                   {

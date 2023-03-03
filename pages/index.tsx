@@ -267,7 +267,7 @@ export default function Home() {
                   )}
                 </Scroll>
               </div>
-              {about.paragraphs.map((text, i: number) => (
+              {about.paragraphs.map((text, i) => (
                 <Scroll scrollRef={scrollRef} end={scrollEnd} key={i}>
                   {(p) => <Paragraph percentage={p}>{text}</Paragraph>}
                 </Scroll>

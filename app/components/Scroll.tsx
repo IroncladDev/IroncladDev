@@ -23,7 +23,7 @@ export const Scroll = ({
   useEffect(() => {
     const box = elementRef.current?.getBoundingClientRect();
     const totalHeight = window.innerHeight - end;
-    const scrollValue = (totalHeight - (box.top - end)) / totalHeight;
+    const scrollValue = (totalHeight - (box?.top - end)) / totalHeight;
 
     setPercentage(constrain(scrollValue, 0, 1));
 

@@ -163,6 +163,98 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     ],
   },
   {
+    title: "Tarragon",
+    slides: [
+      `A few Replit commmunity members and I made Tarragon for Replit's annual Kajam game jam.  This was not an entry, as we were "Kajam mentors", or helpers for competitors and participants.  We made this game as a surprise for the competitors to play at the end.`,
+      `I drew the graphics and did most of the game mechanics.  The others who developed this had little experience with p5, and didn't have the time or ability to work on the graphics.`,
+      `Building the four boss fights was really fun.  It was so cool to play around with movement, and make the bosses appear to be "smart" (still all if-else statements in the background).`,
+      `This game is one of the most polished and beautiful games I've ever developed, and I really like how it turned out.  It was really fun to play around and experiment with pixel art animation, and it's really cool how animated it can be given the fact that pixel art is blocky.`,
+    ],
+    timeCreated: "2022-06-14",
+    stack: [Tc.p5, Tc.html],
+    url: "https://tarragon.haroon.repl.co/",
+    sourceCodeUrl: "https://replit.com/@haroon/Tarragon",
+    images: [
+      "https://images.connerow.dev/showcase/tarragon/index.png",
+      "https://images.connerow.dev/showcase/tarragon/ice.png",
+      "https://images.connerow.dev/showcase/tarragon/portal.png",
+      "https://images.connerow.dev/showcase/tarragon/fire.png",
+      "https://images.connerow.dev/showcase/tarragon/stone.png",
+    ],
+  },
+  {
+    title: "Face the Darkness",
+    slides: [
+      `The creation Face the Darkness dates back to early 2020, when I was still using processing.js.  Although it's one of my oldest projects, it's one of the most polished ones I made as well.
+        \nP5.js is quite simillar to processing.js, but is more performant, and is the modern version.`,
+      `I wanted to try taking a metallic-glowy approach to the art style.  To accomplish this, I had to use a lot of loops, and also use image caching, or the game would be super laggy.
+        \nThis was one of the first times I'd ever used image caching, and it has helped me a lot in making future games faster.`,
+      `I originally made Face the Darkness on Khan Academy, but it never took off.  After posting it to Replit, a lot of people were able to discover it and play it.`,
+      `My favorite part about building this project was designing the levels and enemies, and playing through it.`
+    ],
+    timeCreated: "2020-02-01",
+    stack: [Tc.html],
+    url: "https://face-the-darkness.ironcladdev.repl.co/",
+    sourceCodeUrl: "https://replit.com/@IroncladDev/face-the-darkness",
+    images: [
+      "https://images.connerow.dev/showcase/face-the-darkness/index.png",
+      "https://images.connerow.dev/showcase/face-the-darkness/climb.png",
+      "https://images.connerow.dev/showcase/face-the-darkness/enemies.png",
+      "https://images.connerow.dev/showcase/face-the-darkness/sorcerer.png",
+      "https://images.connerow.dev/showcase/face-the-darkness/wraith.png",
+    ],
+  },
+  {
+    title: "Intercepter",
+    slides: [
+      `I built Intercepter for Replit's creator fund, and also won a spot and $500.  
+        \nI had recently stumbled across [starblast.io](https://starblast.io), and really liked the gameplay and interface.  Another large inspiration was [Ivan Dubovik's artwork](https://dribbble.com/search/ivan-dubovik-march-of-robots) on Dribbble.  `,
+      `The graphics in this game were relatively simple and took very little time.  I struggled with keeping the game performant, making the animations smooth, and implementing the pathfinding AI for the enemies and allies.`,
+      `In terms of sound design, I think this game is my best one in that aspect, and also in terms of UI development.  
+        \nPeople loved the game a lot and really wanted more levels to play, but I didn't have the capacity to add more since I was packed with other projects.
+        \nI find it quite funny that one person in particular loved this game so much they tried to sell it to other people along with [swordbattle.io](https://swordbattle.io).`,
+      `Overall, like the other games I developed, this one was really fun to make.  It was really fun to explore new methods, tweak and mess with the game, and last but not least, playing the game.`
+    ],
+    timeCreated: "2020-02-01",
+    stack: [Tc.html, Tc.p5],
+    url: "https://intercepter.ironcladdev.repl.co/",
+    sourceCodeUrl: "https://replit.com/@IroncladDev/Intercepter",
+    images: [
+      "https://images.connerow.dev/showcase/intercepter/index.png",
+      "https://images.connerow.dev/showcase/intercepter/rules.png",
+      "https://images.connerow.dev/showcase/intercepter/gameplay1.png",
+      "https://images.connerow.dev/showcase/intercepter/gameplay2.png",
+      "https://images.connerow.dev/showcase/intercepter/gameplay3.png",
+    ],
+  },
+  {
+    title: "Vulcanist",
+    slides: [
+      `Vulcanist is a multiplayer first person shooter made for Replit's 2021 Kajam competition.  I spent 15-17 hours coding for seven days straight for the game jam, and I'm glad I spent that much of my time on it.
+        \nI remember the old days of Replit Apps and the fading remains of Repltalk.  I remember dying to get my project trending and was really happy when it did.
+        \nVulcanist won an honorable mention in the closing ceremony.  I of course was a little sad that all this work, time, and dedication didn't yield the results I wanted, but looking back I realize I didn't follow the jam theme closely at all.`,
+      `The first thing I did was come up with a story and draw the cutscenes.  In total, I believe there are over fifty cutscenes, drawn in pixel art.
+        \nAfter that, I started working on game mechanics, UI, audio and audio visualization, AI, and more.`,
+      `The two most challenging things I faced were the lag and the fact that people were botting the multiplayer and chat features, eventually leading to the game being broken down due to all this.
+        \nThe lag was so bad that I wondered if ever I'd even get to finish the game.  The abuse was also annoying, and bad enough to the point that I almost deleted the multiplayer features.
+        \nAfter sitting at a computer for so long and being smashed in the face with these issues, you really get drained.`,
+      `"Why a multiplayer feature?", you might ask.  I surprisingly was able to finish all the levels and game mechanics in the first five days, and decided I wanted to take it a step further and shoot for the winning prize.
+        \nIt took a lot of work to add custom skins and models for the multiplayers, but essentially I had the original classes such as bullets, players, etc - so I reused them.`
+    ],
+    timeCreated: "2021-11-07",
+    stack: [Tc.html, Tc.p5, Tc.node],
+    url: "https://vulcanist.ironcladdev.repl.co/",
+    sourceCodeUrl: "https://replit.com/@IroncladDev/Vulcanist",
+    images: [
+      "https://images.connerow.dev/showcase/vulcanist/index.png",
+      "https://images.connerow.dev/showcase/vulcanist/gameplay.png",
+      "https://images.connerow.dev/showcase/vulcanist/cutscene.png",
+      "https://images.connerow.dev/showcase/vulcanist/ooooh.png",
+      "https://images.connerow.dev/showcase/vulcanist/mom.png",
+      "https://images.connerow.dev/showcase/vulcanist/ded.png"
+    ],
+  },
+  {
     title: "Replyte",
     slides: [
       `Replyte is a realtime chat app hosted on Replit.  I found a way to hook up an express.js server to a Next.js application, so I utilized that to enable websockets with Socket.io.
@@ -178,6 +270,27 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     images: [
       "https://images.connerow.dev/showcase/replyte/index.png",
       "https://images.connerow.dev/showcase/replyte/chat.png",
+    ],
+  },
+  {
+    title: "Next-Admin",
+    slides: [
+      `I made a very simple Next.js password-gated admin dashboard that can be set up by just editing a json file to configure your page structure, and a single environment variable.`,
+      `This was a very small project, and I wasn't expecting many people to even see it, but it [took off on dev.to](https://dev.to/ironcladdev/adding-a-nextjs-administration-dashboard-to-your-site-in-seconds-7jb) and still remains one of my top posts today.
+        \nI got the Next.js Top Author of the Week badge as well as landing a spot in the top 7 posts of the week.`,
+      `I usually find it hard and annoying to have to go into my source code to change a single paragraph, so this is why I decided to build this project.
+        \nUnfortunately due to filesystem limitations, the next admin won't work in a production environment, and should be instead hooked up to a json database of some sort.
+        \nProduction has ceased on this project.`,
+    ],
+    timeCreated: "2022-08-15",
+    stack: [Tc.next, Tc.react, Tc.sass],
+    url: "https://next-admin.ironcladdev.repl.co/",
+    sourceCodeUrl: "https://github.com/Conner1115/next-admin",
+    images: [
+      "https://images.connerow.dev/showcase/next-admin/index.png",
+      "https://images.connerow.dev/showcase/next-admin/playground.png",
+      "https://images.connerow.dev/showcase/next-admin/login.png",
+      "https://images.connerow.dev/showcase/next-admin/edit2.png",
     ],
   },
   {

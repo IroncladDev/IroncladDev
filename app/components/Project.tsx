@@ -179,8 +179,9 @@ export const Project = ({
             </Text>
 
             <View css={[rcss.flex.row, rcss.rowWithGap(8), rcss.align.center]}>
-              {project.stack.map((technology) => (
+              {project.stack.map((technology, i) => (
                 <Tooltip
+                  key={i}
                   tooltip={
                     <View
                       css={[
@@ -242,6 +243,7 @@ export const Project = ({
 
                   {project.slides.map((_, i) => (
                     <button
+                      key={i}
                       css={[
                         rcss.borderRadius("full"),
                         {
