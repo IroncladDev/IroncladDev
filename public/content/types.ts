@@ -43,6 +43,7 @@ export enum SocialPlatform {
   Codepen,
   Github,
   Youtube,
+  Codingame
 }
 
 export interface Social {

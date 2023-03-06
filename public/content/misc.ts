@@ -1,4 +1,4 @@
-import { Technology as Tc } from "./types";
+import { SocialPlatform, Technology as Tc } from "./types";
 
 export const TechnologyDescription: {
   [key in Tc]: {
@@ -57,5 +57,64 @@ export const TechnologyDescription: {
     title: "p5",
     description:
       "p5 is a JavaScript library for creative coding, interactive graphics, and games",
+  },
+};
+
+export const SocialDescription: {
+  [key in SocialPlatform]: {
+    icon: string;
+    title: string;
+    url: string;
+  };
+} = {
+  [SocialPlatform.Twitter]: {
+    icon: "/icons/twitter.svg",
+    title: "Twitter",
+    url: "https://twitter.com/IroncladDev",
+  },
+  [SocialPlatform.Dev]: {
+    icon: "/icons/dev.svg",
+    title: "Dev.to",
+    url: "https://dev.to/ironcladdev",
+  },
+  [SocialPlatform.Github]: {
+    icon: "/icons/github.svg",
+    title: "Github",
+    url: "https://github.com/Conner1115",
+  },
+  [SocialPlatform.Replit]: {
+    icon: "/icons/replit.svg",
+    title: "Replit",
+    url: "https://replit.com/@IroncladDev",
+  },
+  [SocialPlatform.Email]: {
+    icon: "/icons/email.svg",
+    title: "Email",
+    url: "mailto:connerow1115@gmail.com",
+  },
+  [SocialPlatform.Polywork]: {
+    icon: "/icons/polywork.svg",
+    title: "Polywork",
+    url: "https://www.polywork.com/ironcladdev",
+  },
+  [SocialPlatform.Codepen]: {
+    icon: "/icons/codepen.svg",
+    title: "Codepen",
+    url: "https://codepen.io/IroncladDev",
+  },
+  [SocialPlatform.Discord]: {
+    icon: "/icons/discord.svg",
+    title: "Discord",
+    url: "/discord",
+  },
+  [SocialPlatform.Youtube]: {
+    icon: "/icons/youtube.svg",
+    title: "Youtube",
+    url: "https://youtube.com/@IroncladDev",
+  },
+  [SocialPlatform.Codingame]: {
+    icon: "/icons/codingame.svg",
+    title: "Codingame",
+    url: "https://www.codingame.com/profile/a8e83723bd266272a4564fe2bcd6a7907926134",
   },
 };

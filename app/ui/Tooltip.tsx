@@ -8,10 +8,12 @@ export const Tooltip = ({
   children,
   tooltip,
   align = ["center", "top"],
+  bg = tokens.backgroundHigher
 }: {
   children: React.ReactNode;
   tooltip: React.ReactNode | string;
   align?: [TooltipAlignmentX, TooltipAlignmentY];
+  bg?: string;
 }) => {
   const [mouseIn, setMouseIn] = useState(false);
   const [zIndex, setZindex] = useState(0);
@@ -93,7 +95,7 @@ export const Tooltip = ({
           rcss.borderRadius(8),
           rcss.p(8),
           {
-            background: tokens.backgroundHigher,
+            background: bg,
             border: `solid 1px ${tokens.backgroundHighest}`,
             left: `calc(${left} + ${mx}px)`,
             top: `calc(${top} + ${my}px)`,

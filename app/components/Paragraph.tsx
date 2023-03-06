@@ -15,7 +15,7 @@ export const Paragraph = ({
     <div
       {...props}
       css={[
-        { margin: 0, transition: "ease-out 0.5s" },
+        { margin: 0, transition: "ease-out 0.25s" },
         maxLines
           ? {
               overflow: "hidden",

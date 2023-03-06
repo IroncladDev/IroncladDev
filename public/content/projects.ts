@@ -190,7 +190,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       `I wanted to try taking a metallic-glowy approach to the art style.  To accomplish this, I had to use a lot of loops, and also use image caching, or the game would be super laggy.
         \nThis was one of the first times I'd ever used image caching, and it has helped me a lot in making future games faster.`,
       `I originally made Face the Darkness on Khan Academy, but it never took off.  After posting it to Replit, a lot of people were able to discover it and play it.`,
-      `My favorite part about building this project was designing the levels and enemies, and playing through it.`
+      `My favorite part about building this project was designing the levels and enemies, and playing through it.`,
     ],
     timeCreated: "2020-02-01",
     stack: [Tc.html],
@@ -213,7 +213,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       `In terms of sound design, I think this game is my best one in that aspect, and also in terms of UI development.  
         \nPeople loved the game a lot and really wanted more levels to play, but I didn't have the capacity to add more since I was packed with other projects.
         \nI find it quite funny that one person in particular loved this game so much they tried to sell it to other people along with [swordbattle.io](https://swordbattle.io).`,
-      `Overall, like the other games I developed, this one was really fun to make.  It was really fun to explore new methods, tweak and mess with the game, and last but not least, playing the game.`
+      `Overall, like the other games I developed, this one was really fun to make.  It was really fun to explore new methods, tweak and mess with the game, and last but not least, playing the game.`,
     ],
     timeCreated: "2020-02-01",
     stack: [Tc.html, Tc.p5],
@@ -239,7 +239,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
         \nThe lag was so bad that I wondered if ever I'd even get to finish the game.  The abuse was also annoying, and bad enough to the point that I almost deleted the multiplayer features.
         \nAfter sitting at a computer for so long and being smashed in the face with these issues, you really get drained.`,
       `"Why a multiplayer feature?", you might ask.  I surprisingly was able to finish all the levels and game mechanics in the first five days, and decided I wanted to take it a step further and shoot for the winning prize.
-        \nIt took a lot of work to add custom skins and models for the multiplayers, but essentially I had the original classes such as bullets, players, etc - so I reused them.`
+        \nIt took a lot of work to add custom skins and models for the multiplayers, but essentially I had the original classes such as bullets, players, etc - so I reused them.`,
     ],
     timeCreated: "2021-11-07",
     stack: [Tc.html, Tc.p5, Tc.node],
@@ -251,7 +251,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       "https://images.connerow.dev/showcase/vulcanist/cutscene.png",
       "https://images.connerow.dev/showcase/vulcanist/ooooh.png",
       "https://images.connerow.dev/showcase/vulcanist/mom.png",
-      "https://images.connerow.dev/showcase/vulcanist/ded.png"
+      "https://images.connerow.dev/showcase/vulcanist/ded.png",
     ],
   },
   {

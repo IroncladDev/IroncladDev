@@ -1,11 +1,11 @@
 import Gql from "server/lib/gql";
-import { Request, Response } from "express";
+import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
 
 const gql = new Gql("");
 
 const app = nc();
-app.post(async (req: Request, res: Response) => {
+app.post(async (req: NextApiRequest, res: NextApiResponse) => {
   const gqlRes = await gql.raw(req.body);
   res.json(gqlRes);
 });

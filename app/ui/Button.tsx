@@ -45,7 +45,14 @@ export const Button = ({
       ]}
       {...props}
     >
-      <View css={[rcss.flex.row, rcss.rowWithGap(8), rcss.align.center]}>
+      <View
+        css={[
+          rcss.flex.row,
+          rcss.rowWithGap(8),
+          rcss.align.center,
+          rcss.justify.center,
+        ]}
+      >
         {iconLeft || null}
         <Text>{text}</Text>
         {iconRight || null}

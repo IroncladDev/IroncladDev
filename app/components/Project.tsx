@@ -55,7 +55,7 @@ const PreviewImage = ({
               backgroundPosition: "0 0",
               backgroundRepeat: "no-repeat",
               opacity: 0.25,
-              transition: "ease-out 0.5s",
+              transition: "ease-out 0.25s",
               border: `solid 2px ${tokens.backgroundHigher}`,
               "&:hover": {
                 border: `solid 2px ${tokens.accentPrimaryStronger}`,

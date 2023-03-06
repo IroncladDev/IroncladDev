@@ -8,7 +8,7 @@ import { Markdown } from ".";
 import { BlogPostPlatform as BlogPlatform } from "public/content/types";
 import { Scroll } from "app/components";
 
-interface BlogPostType {
+export interface BlogPostType {
   title: string;
   description: string;
   coverImage?: string;
@@ -61,7 +61,7 @@ export default function BlogPost({
                 rcss.borderRadius(8),
                 {
                   border: `solid 1px ${tokens.backgroundHighest}`,
-                  transition: "ease-out 0.5s",
+                  transition: "ease-out 0.25s",
                 },
               ]}
               style={{

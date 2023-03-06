@@ -177,3 +177,16 @@ img.emoji {
   font-size: 0.8em;
   border-radius: 4px;
 }
+
+@keyframes load {
+  0% {
+    background: linear-gradient(90deg, var(--background-default) 25%, var(--background-highest));
+    background-size: 200% 200%;
+    background-position: 0 0;
+  }
+  100% {
+    background: linear-gradient(90deg, var(--background-default) 25%, var(--background-highest));
+    background-size: 200% 200%;
+    background-position: -200% 0;
+  }
+}
