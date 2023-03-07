@@ -17,7 +17,7 @@ const Content: IndexPageContent = {
     title: "Fullstack",
     subTitle: "Web Developer",
     description:
-      "I'm Conner Ow, a Fullstack Web Developer that lives out in the county.  I currently do Support Engineering at [Replit](https://replit.com).",
+      "I'm Conner Ow, a Fullstack Web Developer that lives out in the country.  I currently do Support Engineering at [Replit](https://replit.com).",
   },
   about: {
     title: "About Me 👋",
