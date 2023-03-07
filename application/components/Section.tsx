@@ -1,6 +1,6 @@
-import { View, rcss, tokens } from "app/ui";
+import { View, rcss, tokens } from "application/ui";
 import { ReactNode } from "react";
-import { ObjectAny } from "app/types";
+import { ObjectAny } from "application/types";
 
 export const Section = ({
   children,

@@ -1,5 +1,5 @@
-import useScroll from "app/hooks/useScroll";
-import { View, rcss, tokens, FlexSpacer, FlexRow } from "app/ui";
+import useScroll from "application/hooks/useScroll";
+import { View, rcss, tokens, FlexSpacer, FlexRow } from "application/ui";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactNode } from "react";

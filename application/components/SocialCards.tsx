@@ -1,5 +1,5 @@
-import { View, tokens, rcss, Text, Tooltip, Button, FlexSpacer } from "app/ui";
-import { useGetJSON } from "app/hooks/fetch";
+import { View, tokens, rcss, Text, Tooltip, Button, FlexSpacer } from "application/ui";
+import { useGetJSON } from "application/hooks/fetch";
 import {
   Heart,
   Clock,

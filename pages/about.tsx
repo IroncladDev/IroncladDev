@@ -1,4 +1,4 @@
-import { View, Text, tokens, rcss, FlexSpacer, OutlineButton } from "app/ui";
+import { View, Text, tokens, rcss, FlexSpacer, OutlineButton } from "application/ui";
 import {
   Navbar,
   Section,
@@ -9,9 +9,9 @@ import {
   LogoHeader,
   Paragraph,
   SocialCard,
-} from "app/components";
+} from "application/components";
 import { useRef, RefObject } from "react";
-import useScroll from "app/hooks/useScroll";
+import useScroll from "application/hooks/useScroll";
 import { css } from "@emotion/react";
 import Content from "public/content/about";
 import Styles from "lib/baseStyles";

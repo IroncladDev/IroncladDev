@@ -4,7 +4,7 @@ import NextNProgress from "nextjs-progressbar";
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { Modal } from "app/components";
+import { Modal } from "application/components";
 
 interface AnimatedCursorOptions {
   innerSize: number;

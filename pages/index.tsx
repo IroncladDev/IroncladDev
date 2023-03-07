@@ -1,4 +1,4 @@
-import { View, Text, tokens, rcss, FlexSpacer, OutlineButton } from "app/ui";
+import { View, Text, tokens, rcss, FlexSpacer, OutlineButton } from "application/ui";
 import {
   Navbar,
   Section,
@@ -9,13 +9,13 @@ import {
   LogoHeader,
   Paragraph,
   SocialCard,
-} from "app/components";
+} from "application/components";
 import { useRef, RefObject } from "react";
-import useScroll from "app/hooks/useScroll";
+import useScroll from "application/hooks/useScroll";
 import { css } from "@emotion/react";
 import Link from "next/link";
-import { Project } from "app/components/Project";
-import { LazyBlogPost } from "app/components/BlogPost";
+import { Project } from "application/components/Project";
+import { LazyBlogPost } from "application/components/BlogPost";
 import Content from "public/content/index";
 import Styles from "lib/baseStyles";
 

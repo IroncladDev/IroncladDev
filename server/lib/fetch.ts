@@ -1,4 +1,4 @@
-import { ObjectAny } from "app/types";
+import { ObjectAny } from "application/types";
 
 
 export const GetJSON = async (url: string, bearer?: string) => {

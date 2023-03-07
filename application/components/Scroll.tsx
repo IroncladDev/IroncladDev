@@ -1,6 +1,6 @@
 import { ReactElement, RefObject, useRef, useState, useEffect } from "react";
-import { View } from "app/ui";
-import useScroll from "app/hooks/useScroll";
+import { View } from "application/ui";
+import useScroll from "application/hooks/useScroll";
 import { constrain } from "lib";
 
 export const Scroll = ({

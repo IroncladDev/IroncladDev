@@ -1,12 +1,12 @@
-import { View, rcss, tokens, Text, Button } from "app/ui";
-import { useGetJSONLazy } from "app/hooks/fetch";
-import { useQuery } from "app/hooks/gql/useQuery";
+import { View, rcss, tokens, Text, Button } from "application/ui";
+import { useGetJSONLazy } from "application/hooks/fetch";
+import { useQuery } from "application/hooks/gql/useQuery";
 import { RefObject, useEffect } from "react";
 import { Heart, MessageSquare } from "react-feather";
 import { formatRelative } from "date-fns";
 import { Markdown } from ".";
 import { BlogPostPlatform as BlogPlatform } from "public/content/types";
-import { Scroll } from "app/components";
+import { Scroll } from "application/components";
 
 export interface BlogPostType {
   title: string;

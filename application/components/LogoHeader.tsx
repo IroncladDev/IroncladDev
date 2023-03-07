@@ -1,4 +1,4 @@
-import { tokens } from "app/ui";
+import { tokens } from "application/ui";
 
 const pathStyle = {
   fill: "none",

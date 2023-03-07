@@ -1,4 +1,4 @@
-import { ObjectAny } from "app/types";
+import { ObjectAny } from "application/types";
 import { useState, useEffect } from "react";
 
 export const useGetJSON = (

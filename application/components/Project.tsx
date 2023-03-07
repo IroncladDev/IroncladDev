@@ -7,7 +7,7 @@ import {
   Button,
   IconButton,
   FlexSpacer,
-} from "app/ui";
+} from "application/ui";
 import { RefObject } from "react";
 import { Scroll } from "./Scroll";
 import { Paragraph } from ".";
@@ -15,8 +15,8 @@ import { ExternalLink, Code, ChevronLeft, ChevronRight } from "react-feather";
 import { Project as ProjectType, Technology } from "public/content/types";
 import { useState } from "react";
 import { TechnologyDescription } from "public/content/misc";
-import useModal from "app/hooks/useModal";
-import { RenderedComponent } from "app/types";
+import useModal from "application/hooks/useModal";
+import { RenderedComponent } from "application/types";
 
 const PreviewImage = ({
   url,

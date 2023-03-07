@@ -1,4 +1,4 @@
-import { ObjectAny } from "app/types";
+import { ObjectAny } from "application/types";
 
 // Inputs & Outputs for the different hooks
 export interface QueryInput {

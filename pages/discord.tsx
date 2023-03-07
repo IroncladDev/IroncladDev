@@ -1,5 +1,5 @@
-import { View, Text, tokens, rcss, Button } from "app/ui";
-import { Navbar } from "app/components";
+import { View, Text, tokens, rcss, Button } from "application/ui";
+import { Navbar } from "application/components";
 import { useRef } from "react";
 import Styles from "lib/baseStyles";
 import { signIn, useSession } from "next-auth/react";

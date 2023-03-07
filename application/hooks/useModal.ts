@@ -1,6 +1,6 @@
 import { atom, useAtom } from "jotai";
-import { ObjectAny } from "app/types";
-import { RenderedComponent } from "app/types";
+import { ObjectAny } from "application/types";
+import { RenderedComponent } from "application/types";
 
 export const state = {
   ComponentName: atom<RenderedComponent | null>(null),

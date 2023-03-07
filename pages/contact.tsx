@@ -1,8 +1,8 @@
-import { View, Text, tokens, rcss, FlexSpacer, OutlineButton } from "app/ui";
-import { Navbar, Section, Footer } from "app/components";
+import { View, Text, tokens, rcss, FlexSpacer, OutlineButton } from "application/ui";
+import { Navbar, Section, Footer } from "application/components";
 import { useRef } from "react";
 import Styles from "lib/baseStyles";
-import { GithubCard, ReplitCard, DevCard, CGCard, BaseCard } from "app/components/SocialCards";
+import { GithubCard, ReplitCard, DevCard, CGCard, BaseCard } from "application/components/SocialCards";
 import { SocialPlatform } from "public/content/types";
 
 export default function Contact() {

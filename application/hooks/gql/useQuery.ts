@@ -1,6 +1,6 @@
 import { QueryInput, QueryOutput, GraphInput } from "./types";
 import { useState, useEffect } from "react";
-import { ObjectAny } from "app/types";
+import { ObjectAny } from "application/types";
 
 // Queries graphql
 export const useQuery = ({

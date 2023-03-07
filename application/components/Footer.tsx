@@ -1,4 +1,4 @@
-import { View, tokens, rcss, FlexRow, Text, FlexSpacer, FlexCol } from "app/ui";
+import { View, tokens, rcss, FlexRow, Text, FlexSpacer, FlexCol } from "application/ui";
 import { css } from "@emotion/react";
 import Link from "next/link";
 import Image from "next/image";

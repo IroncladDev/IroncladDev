@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { rcss, tokens } from "app/ui";
+import { rcss, tokens } from "application/ui";
 
 const Styles = {
   Container: css([

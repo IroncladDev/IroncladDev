@@ -1,12 +1,12 @@
-import { View, Text, tokens, rcss, FlexSpacer, OutlineButton } from "app/ui";
-import { Navbar, Section, Markdown, Footer, Slant } from "app/components";
+import { View, Text, tokens, rcss, FlexSpacer, OutlineButton } from "application/ui";
+import { Navbar, Section, Markdown, Footer, Slant } from "application/components";
 import { useRef, useEffect, useState } from "react";
-import useScroll from "app/hooks/useScroll";
+import useScroll from "application/hooks/useScroll";
 import Content from "public/content/blog";
-import { useGetJSON } from "app/hooks/fetch";
-import { useQuery } from "app/hooks/gql/useQuery";
-import BlogPost, { BlogPostType } from "app/components/BlogPost";
-import { ObjectAny } from "app/types";
+import { useGetJSON } from "application/hooks/fetch";
+import { useQuery } from "application/hooks/gql/useQuery";
+import BlogPost, { BlogPostType } from "application/components/BlogPost";
+import { ObjectAny } from "application/types";
 import Styles from "lib/baseStyles";
 
 const { title, description } = Content;

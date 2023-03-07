@@ -1,4 +1,4 @@
-import { View, tokens } from "app/ui";
+import { View, tokens } from "application/ui";
 
 export const Slant = ({
   path,

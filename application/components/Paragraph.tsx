@@ -1,4 +1,4 @@
-import { Text } from "app/ui";
+import { Text } from "application/ui";
 import { Markdown } from "./Markdown";
 
 export const Paragraph = ({

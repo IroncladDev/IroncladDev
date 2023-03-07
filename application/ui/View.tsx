@@ -1,6 +1,6 @@
 import { tokens, rcss } from ".";
 import { ReactNode, RefObject } from "react";
-import { ObjectAny } from "app/types";
+import { ObjectAny } from "application/types";
 
 interface ViewProps {
   css?: ObjectAny | Array<ObjectAny>;

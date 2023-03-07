@@ -1,5 +1,5 @@
 import { SocialPlatform } from "public/content/types";
-import { View, rcss, tokens, Text } from "app/ui";
+import { View, rcss, tokens, Text } from "application/ui";
 import { RefObject } from "react";
 import { Scroll } from ".";
 
