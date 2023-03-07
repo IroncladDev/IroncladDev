@@ -8,7 +8,7 @@ export const Tooltip = ({
   children,
   tooltip,
   align = ["center", "top"],
-  bg = tokens.backgroundHigher
+  bg = tokens.backgroundHigher,
 }: {
   children: React.ReactNode;
   tooltip: React.ReactNode | string;

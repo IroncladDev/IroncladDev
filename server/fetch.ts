@@ -1,12 +1,11 @@
 import { ObjectAny } from "application/types";
 
-
 export const GetJSON = async (url: string, bearer?: string) => {
   return await fetch(url, {
     method: "GET",
     headers: {
-      "Accept": "application/json",
-      "Authorization": `Bearer ${bearer}`,
+      Accept: "application/json",
+      Authorization: `Bearer ${bearer}`,
     },
   }).then((r) => r.json());
 };

@@ -1,5 +1,12 @@
 import useModal from "application/hooks/useModal";
-import { rcss, View, tokens, Text, IconButton, FlexSpacer } from "application/ui";
+import {
+  rcss,
+  View,
+  tokens,
+  Text,
+  IconButton,
+  FlexSpacer,
+} from "application/ui";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "react-feather";
 

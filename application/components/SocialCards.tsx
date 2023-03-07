@@ -1,4 +1,12 @@
-import { View, tokens, rcss, Text, Tooltip, Button, FlexSpacer } from "application/ui";
+import {
+  View,
+  tokens,
+  rcss,
+  Text,
+  Tooltip,
+  Button,
+  FlexSpacer,
+} from "application/ui";
 import { useGetJSON } from "application/hooks/fetch";
 import {
   Heart,
@@ -13,12 +21,12 @@ import {
   List,
   BarChart2,
   Award as Badge,
-  BarChart
+  BarChart,
 } from "react-feather";
 import { SocialPlatform } from "public/content/types";
 import { SocialDescription } from "public/content/misc";
-import { useEffect, useReducer, useRef } from 'react';
-import { format } from 'date-fns';
+import { useEffect, useReducer, useRef } from "react";
+import { format } from "date-fns";
 
 interface CardStat {
   icon: React.ReactNode;
@@ -34,7 +42,7 @@ interface StatObj {
 export const BaseCard = ({
   social,
   stats = [],
-  loading = false
+  loading = false,
 }: {
   social: SocialPlatform;
   stats?: Array<CardStat>;
@@ -49,7 +57,7 @@ export const BaseCard = ({
         {
           background: tokens.backgroundHigher,
           maxWidth: 400,
-          minWidth: 300
+          minWidth: 300,
         },
       ]}
     >
@@ -67,27 +75,39 @@ export const BaseCard = ({
         </View>
         <Text variant="subheadBig">{SocialDescription[social].title}</Text>
 
-        {stats.length === 0 ? <>
-          <FlexSpacer />
-          <a
-            href={SocialDescription[social].url}
-            target="_blank"
-            rel="noreferrer"
-            style={{ flexGrow: 1, display: "flex", textDecoration: "none" }}
-          >
-            <Button
-              text={social === SocialPlatform.Discord ? `Join Server` : `${SocialDescription[social].title} ${social === SocialPlatform.Email ? "Me" : "Profile"}`}
-              iconRight={<ArrowRight />}
-              css={[rcss.flex.grow(1)]}
-              small
-            />
-          </a>
-        </> : null}
+        {stats.length === 0 ? (
+          <>
+            <FlexSpacer />
+            <a
+              href={SocialDescription[social].url}
+              target="_blank"
+              rel="noreferrer"
+              style={{ flexGrow: 1, display: "flex", textDecoration: "none" }}
+            >
+              <Button
+                text={
+                  social === SocialPlatform.Discord
+                    ? `Join Server`
+                    : `${SocialDescription[social].title} ${
+                        social === SocialPlatform.Email ? "Me" : "Profile"
+                      }`
+                }
+                iconRight={<ArrowRight />}
+                css={[rcss.flex.grow(1)]}
+                small
+              />
+            </a>
+          </>
+        ) : null}
       </View>
       {stats.length && !loading ? (
         <View css={[rcss.flex.column, rcss.colWithGap(8)]}>
           {stats.map((stat, i) => (
-            <Tooltip key={i} tooltip={stat.description} bg={tokens.backgroundHighest}>
+            <Tooltip
+              key={i}
+              tooltip={stat.description}
+              bg={tokens.backgroundHighest}
+            >
               <View
                 css={[rcss.flex.row, rcss.rowWithGap(8), rcss.align.center]}
                 key={i}
@@ -110,32 +130,45 @@ export const BaseCard = ({
         </View>
       ) : null}
 
-      {stats.length && loading ? stats.map((_, i) => <View css={[rcss.p(4), rcss.borderRadius(4), {
-        animation: `load 1s infinite ease-in`
-      }]} key={i}></View>) : null}
+      {stats.length && loading
+        ? stats.map((_, i) => (
+            <View
+              css={[
+                rcss.p(4),
+                rcss.borderRadius(4),
+                {
+                  animation: `load 1s infinite ease-in`,
+                },
+              ]}
+              key={i}
+            ></View>
+          ))
+        : null}
 
-      {stats?.length > 0 ? <View css={[rcss.flex.row]}>
-        <a
-          href={SocialDescription[social].url}
-          target="_blank"
-          rel="noreferrer"
-          style={{ flexGrow: 1, display: "flex", textDecoration: "none" }}
-        >
-          <Button
-            text={`View ${SocialDescription[social].title} Profile`}
-            iconRight={<ArrowRight />}
-            css={[rcss.flex.grow(1)]}
-            small
-          />
-        </a>
-      </View> : null}
+      {stats?.length > 0 ? (
+        <View css={[rcss.flex.row]}>
+          <a
+            href={SocialDescription[social].url}
+            target="_blank"
+            rel="noreferrer"
+            style={{ flexGrow: 1, display: "flex", textDecoration: "none" }}
+          >
+            <Button
+              text={`View ${SocialDescription[social].title} Profile`}
+              iconRight={<ArrowRight />}
+              css={[rcss.flex.grow(1)]}
+              small
+            />
+          </a>
+        </View>
+      ) : null}
     </View>
   );
 };
 
 export const DevCard = () => {
   const { data, loading } = useGetJSON("/api/profiles/dev");
-  const [, reload] = useReducer(x => x + 1, 0)
+  const [, reload] = useReducer((x) => x + 1, 0);
 
   const stats = useRef<StatObj>({
     posts: {
@@ -160,17 +193,20 @@ export const DevCard = () => {
       icon: <Clock size={16} />,
       title: "Joined",
       description: "The date I joined Dev.to",
-      value: 'December 4th, 2020',
+      value: "December 4th, 2020",
     },
-  })
+  });
 
   useEffect(() => {
     if (data?.user && data?.posts?.length) {
       const { user, posts } = data;
       stats.current.posts.value = posts.length;
-      stats.current.likes.value = posts.map(x => x.public_reactions_count
-      ).reduce((a, b) => a + b);
-      stats.current.comments.value = posts.map(x => x.comments_count).reduce((a, b) => a + b);
+      stats.current.likes.value = posts
+        .map((x) => x.public_reactions_count)
+        .reduce((a, b) => a + b);
+      stats.current.comments.value = posts
+        .map((x) => x.comments_count)
+        .reduce((a, b) => a + b);
       stats.current.dateJoined.value = format(
         new Date(user.joined_at),
         "MMMM Qo, yyyy"
@@ -190,7 +226,7 @@ export const DevCard = () => {
 
 export const ReplitCard = () => {
   const { data, loading } = useGetJSON("/api/profiles/replit");
-  const [, reload] = useReducer(x => x + 1, 0)
+  const [, reload] = useReducer((x) => x + 1, 0);
 
   const stats = useRef<StatObj>({
     followers: {
@@ -221,21 +257,25 @@ export const ReplitCard = () => {
       icon: <Clock size={16} />,
       title: "Joined",
       description: "The date I joined Replit",
-      value: 'September 3rd, 2020',
+      value: "September 3rd, 2020",
     },
-  })
+  });
 
   useEffect(() => {
     if (data?.data?.userByUsername) {
       const user = data.data.userByUsername;
       stats.current.followers.value = user.followerCount;
-      stats.current.likes.value = user.publicRepls?.items?.map(x => x.likeCount).reduce((a, b) => a + b);
+      stats.current.likes.value = user.publicRepls?.items
+        ?.map((x) => x.likeCount)
+        .reduce((a, b) => a + b);
       stats.current.dateJoined.value = format(
         new Date(user.timeCreated),
         "MMMM Qo, yyyy"
       );
-      stats.current.forks.value = user.publicRepls?.items?.map(x => x.publicForkCount).reduce((a, b) => a + b);
-      stats.current.repls.value = user.publicRepls?.items?.length
+      stats.current.forks.value = user.publicRepls?.items
+        ?.map((x) => x.publicForkCount)
+        .reduce((a, b) => a + b);
+      stats.current.repls.value = user.publicRepls?.items?.length;
       reload();
     }
   }, [data, loading]);
@@ -251,7 +291,7 @@ export const ReplitCard = () => {
 
 export const CGCard = () => {
   const { data, loading } = useGetJSON("/api/profiles/codingame");
-  const [, reload] = useReducer(x => x + 1, 0)
+  const [, reload] = useReducer((x) => x + 1, 0);
 
   const stats = useRef<StatObj>({
     rankCoc: {
@@ -278,7 +318,7 @@ export const CGCard = () => {
       description: "Total amount of clashes I've participated in",
       value: 1566,
     },
-  })
+  });
 
   useEffect(() => {
     if (data?.user && data?.rank) {
@@ -287,8 +327,8 @@ export const CGCard = () => {
       stats.current.rankGlobal.value = user.codingamer.rank;
       stats.current.badges.value = user.achievementCount;
       stats.current.clashes.value = rank.clashesCount;
-      stats.current.rankCoc.description = `Global Clash of Code Rank out of ${user.codingamePointsRankingDto.numberCodingamers} users.`
-      stats.current.rankGlobal.description = `Global Rank out of ${user.codingamePointsRankingDto.numberCodingamers} users.`
+      stats.current.rankCoc.description = `Global Clash of Code Rank out of ${user.codingamePointsRankingDto.numberCodingamers} users.`;
+      stats.current.rankGlobal.description = `Global Rank out of ${user.codingamePointsRankingDto.numberCodingamers} users.`;
       reload();
     }
   }, [data, loading]);
@@ -304,7 +344,7 @@ export const CGCard = () => {
 
 export const GithubCard = () => {
   const { data, loading } = useGetJSON("/api/profiles/github");
-  const [, reload] = useReducer(x => x + 1, 0)
+  const [, reload] = useReducer((x) => x + 1, 0);
 
   const stats = useRef<StatObj>({
     stars: {
@@ -335,9 +375,9 @@ export const GithubCard = () => {
       icon: <Clock size={16} />,
       title: "Joined",
       description: "The date I joined Github",
-      value: 'May 2nd, 2019',
+      value: "May 2nd, 2019",
     },
-  })
+  });
 
   useEffect(() => {
     if (data) {
@@ -348,9 +388,13 @@ export const GithubCard = () => {
       );
 
       stats.current.repositories.value = repos.length;
-      stats.current.forks.value = repos.map(x => x.forks_count).reduce((a, b) => a + b);
+      stats.current.forks.value = repos
+        .map((x) => x.forks_count)
+        .reduce((a, b) => a + b);
       stats.current.followers.value = user.followers;
-      stats.current.stars.value = repos.map(x => x.stargazers_count).reduce((a, b) => a + b);
+      stats.current.stars.value = repos
+        .map((x) => x.stargazers_count)
+        .reduce((a, b) => a + b);
       reload();
     }
   }, [data, loading]);

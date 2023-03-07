@@ -1,8 +1,14 @@
-import { View, Text, tokens, rcss, FlexSpacer, OutlineButton } from "application/ui";
+import { View, tokens, rcss } from "application/ui";
 import { Navbar, Section, Footer } from "application/components";
 import { useRef } from "react";
 import Styles from "lib/baseStyles";
-import { GithubCard, ReplitCard, DevCard, CGCard, BaseCard } from "application/components/SocialCards";
+import {
+  GithubCard,
+  ReplitCard,
+  DevCard,
+  CGCard,
+  BaseCard,
+} from "application/components/SocialCards";
 import { SocialPlatform } from "public/content/types";
 
 export default function Contact() {
@@ -37,18 +43,28 @@ export default function Contact() {
             <ReplitCard />
             <DevCard />
             <CGCard />
-            <View css={[rcss.colWithGap(16), {
-              maxWidth: 400,
-              minWidth: 300
-            }]}>
+            <View
+              css={[
+                rcss.colWithGap(16),
+                {
+                  maxWidth: 400,
+                  minWidth: 300,
+                },
+              ]}
+            >
               <BaseCard social={SocialPlatform.Twitter} />
               <BaseCard social={SocialPlatform.Email} />
               <BaseCard social={SocialPlatform.Polywork} />
             </View>
-            <View css={[rcss.colWithGap(16), {
-              maxWidth: 400,
-              minWidth: 300
-            }]}>
+            <View
+              css={[
+                rcss.colWithGap(16),
+                {
+                  maxWidth: 400,
+                  minWidth: 300,
+                },
+              ]}
+            >
               <BaseCard social={SocialPlatform.Discord} />
               <BaseCard social={SocialPlatform.Codepen} />
               <BaseCard social={SocialPlatform.Youtube} />

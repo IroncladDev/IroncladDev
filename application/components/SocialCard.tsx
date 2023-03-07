@@ -2,29 +2,7 @@ import { SocialPlatform } from "public/content/types";
 import { View, rcss, tokens, Text } from "application/ui";
 import { RefObject } from "react";
 import { Scroll } from ".";
-
-const ParseSocial = (url: SocialPlatform): { icon: string; title: string } => {
-  switch (url) {
-    case SocialPlatform.Twitter:
-      return { icon: "/icons/twitter.svg", title: "Twitter" };
-    case SocialPlatform.Dev:
-      return { icon: "/icons/dev.svg", title: "Dev" };
-    case SocialPlatform.Replit:
-      return { icon: "/icons/replit.svg", title: "Replit" };
-    case SocialPlatform.Email:
-      return { icon: "/icons/email.svg", title: "Email" };
-    case SocialPlatform.Polywork:
-      return { icon: "/icons/polywork.svg", title: "Polywork" };
-    case SocialPlatform.Discord:
-      return { icon: "/icons/discord.svg", title: "Discord" };
-    case SocialPlatform.Codepen:
-      return { icon: "/icons/codepen.svg", title: "Codepen" };
-    case SocialPlatform.Github:
-      return { icon: "/icons/github.svg", title: "Github" };
-    case SocialPlatform.Youtube:
-      return { icon: "/icons/youtube.svg", title: "Youtube" };
-  }
-};
+import { SocialDescription } from "public/content/misc";
 
 export const SocialCard = ({
   url,
@@ -79,7 +57,11 @@ export const SocialCard = ({
                 },
               ]}
             >
-              <img src={ParseSocial(platform).icon} width={32} />
+              <img
+                src={SocialDescription[platform].icon}
+                width={32}
+                alt="social platform icon"
+              />
             </View>
             <View
               css={[
@@ -94,7 +76,7 @@ export const SocialCard = ({
               ]}
             >
               <Text variant="subheadDefault">
-                {ParseSocial(platform).title}
+                {SocialDescription[platform].title}
               </Text>
               <Text variant="small" color="dimmer">
                 {url.startsWith("/") ? "https://www.connerow.dev" : ""}

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
-import Gql from "server/lib/gql";
+import Gql from "server/gql";
 
 const gql = new Gql("");
 

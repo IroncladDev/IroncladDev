@@ -9,9 +9,9 @@ export interface QueryInput {
   hold?: boolean;
 }
 export interface QueryOutput {
-  data: ObjectAny;
+  data: ObjectAny | null;
   loading: boolean;
-  error: string;
+  error: string | null;
   refetch: (vars?: ObjectAny) => void;
 }
 

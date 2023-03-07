@@ -90,7 +90,7 @@ function textCss(
 }
 
 export const Text = ({
-  variant,
+  variant = "text",
   color,
   maxLines,
   multiline,

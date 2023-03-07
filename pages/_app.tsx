@@ -5,6 +5,7 @@ import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { Modal } from "application/components";
+import { SessionProvider } from "next-auth/react";
 
 interface AnimatedCursorOptions {
   innerSize: number;
@@ -22,11 +23,14 @@ const AnimatedCursor = dynamic<AnimatedCursorOptions>(
   }
 );
 
-function AppContainer({ Component, pageProps }: AppProps) {
+function AppContainer({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   const router = useRouter();
 
   return (
-    <>
+    <SessionProvider session={session}>
       <Head>
         <title>IroncladDev</title>
         <link rel="icon" href="/brand/favicon.svg" />
@@ -50,7 +54,7 @@ function AppContainer({ Component, pageProps }: AppProps) {
           />
         )}
       </div>
-    </>
+    </SessionProvider>
   );
 }
 

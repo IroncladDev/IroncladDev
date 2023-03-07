@@ -1,4 +1,11 @@
-import { View, Text, tokens, rcss, FlexSpacer, OutlineButton } from "application/ui";
+import {
+  View,
+  Text,
+  tokens,
+  rcss,
+  FlexSpacer,
+  OutlineButton,
+} from "application/ui";
 import {
   Navbar,
   Section,
@@ -10,9 +17,8 @@ import {
   Paragraph,
   SocialCard,
 } from "application/components";
-import { useRef, RefObject } from "react";
+import { useRef } from "react";
 import useScroll from "application/hooks/useScroll";
-import { css } from "@emotion/react";
 import Link from "next/link";
 import { Project } from "application/components/Project";
 import { LazyBlogPost } from "application/components/BlogPost";
@@ -178,7 +184,7 @@ export default function Home() {
                       transition: "ease-out 0.25s",
                     }}
                   >
-                    <Link href="/about" passHref>
+                    <Link href="/about" legacyBehavior>
                       <a>
                         <OutlineButton text="Read More >>" />
                       </a>
@@ -235,7 +241,7 @@ export default function Home() {
                   transition: "ease-out 0.25s",
                 }}
               >
-                <Link href="/showcase" passHref>
+                <Link href="/showcase" legacyBehavior>
                   <a>
                     <OutlineButton text="See all >>" />
                   </a>
@@ -288,7 +294,7 @@ export default function Home() {
           </View>
 
           <View css={[rcss.flex.row, rcss.center]}>
-            <Link href="/blog" passHref>
+            <Link href="/blog" legacyBehavior>
               <a>
                 <OutlineButton text="Read More >>" />
               </a>

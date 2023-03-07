@@ -1,5 +1,11 @@
-import { View, Text, tokens, rcss, FlexSpacer, OutlineButton } from "application/ui";
-import { Navbar, Section, Markdown, Footer, Slant } from "application/components";
+import { View, Text, tokens, rcss, FlexSpacer } from "application/ui";
+import {
+  Navbar,
+  Section,
+  Markdown,
+  Footer,
+  Slant,
+} from "application/components";
 import { useRef, useEffect, useState } from "react";
 import useScroll from "application/hooks/useScroll";
 import Content from "public/content/blog";

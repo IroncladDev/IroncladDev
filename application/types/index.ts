@@ -10,3 +10,22 @@ export type KeyType = "string" | "number" | "date";
 export enum RenderedComponent {
   Gallery = "Gallery",
 }
+
+export enum AuthError {
+  Configuration = "Configuration",
+  AccessDenied = "AccessDenied",
+  Verification = "Verification",
+  Validity = "Validity",
+  ThreshStrike = "ThreshStrike",
+  Exists = "Exists",
+  CantSend = "CantSend",
+  Default = "Default",
+}
+
+export interface AuthenticatedUser {
+  verified: boolean;
+  discordId: string;
+  email: string;
+  discriminator: string;
+  avatar?: string;
+}

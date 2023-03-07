@@ -16,7 +16,7 @@ export const IconButton = ({
   innerRef?: RefObject<any>;
 }) => {
   let elevationDefault = tokens.backgroundRoot;
-  let elevationNext = tokens.backgroundDefault;
+  let elevationNext: string | undefined = tokens.backgroundDefault;
   switch (elevation) {
     case "default":
       elevationDefault = tokens.backgroundDefault;

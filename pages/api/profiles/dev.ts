@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
-import { GetJSON, PostJSON } from "server/lib/fetch";
+import { GetJSON, PostJSON } from "server/fetch";
 
 const app = nc();
 app.get(async (req: NextApiRequest, res: NextApiResponse) => {

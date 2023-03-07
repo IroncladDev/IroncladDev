@@ -1,4 +1,4 @@
-import { View, Text, tokens, rcss, FlexSpacer, OutlineButton } from "application/ui";
+import { View, Text, tokens, rcss, FlexSpacer } from "application/ui";
 import {
   Navbar,
   Section,
@@ -207,6 +207,7 @@ export default function About() {
                       style={{
                         transform: `translatex(-${(1 - p) * 100}%)`,
                       }}
+                      alt="pic"
                     />
                     <View
                       css={[

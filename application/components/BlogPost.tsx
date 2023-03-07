@@ -215,7 +215,7 @@ export function LazyBlogPost({
   } else {
     return (
       <>
-        {replitPostLoading || !replitPost.post ? (
+        {replitPostLoading || !replitPost?.post ? (
           "loading"
         ) : (
           <BlogPost

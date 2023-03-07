@@ -1,20 +1,21 @@
 import NextAuth from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
-import { User } from "server/lib/mongoose";
-import config from "server/lib/server.config";
-import verifyEmail from "server/lib/email";
-import axios from 'axios';
+import { User } from "server/mongoose";
+import config from "server/server.config";
+import verifyEmail from "server/email";
+import axios from "axios";
+import fetch from "node-fetch";
 
 export const authOptions = {
   providers: [
     DiscordProvider({
-      clientId: process.env.DISCORD_ID,
-      clientSecret: process.env.DISCORD_AUTH_SECRET,
+      clientId: process.env.DISCORD_ID || "",
+      clientSecret: process.env.DISCORD_AUTH_SECRET || "",
       authorization: `https://discord.com/api/oauth2/authorize?client_id=${
         config.botId
       }&redirect_uri=${encodeURIComponent(
         process.env.NEXTAUTH_URL + "/api/auth/callback/discord"
-      )}&response_type=code&scope=identify%20guilds.join%20email`,
+      )}&response_type=code&scope=email%20identify%20guilds.join`,
     }),
   ],
   callbacks: {
@@ -33,25 +34,28 @@ export const authOptions = {
           await newUser.save();
 
           // we add the user to the guild
-          await axios({
-            method: "PUT",
-            url: `https://discord.com/api/v10/guilds/${config.guildId}/members/${user.id}`,
-            data: {
-              access_token: account.access_token,
-            },
-            headers: {
-              Authorization: `Bot ${process.env.BOT_TOKEN}`,
-            },
-          });
+          await fetch(
+            `https://discord.com/api/v10/guilds/${process.env.GUILD_ID}/members/${user.id}`,
+            {
+              method: "PUT",
+              headers: {
+                Authorization: `Bot ${process.env.BOT_TOKEN}`,
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                access_token: account.access_token,
+              }),
+            }
+          );
         }
         return true;
       } else {
-        return `/?error=${verified.err}`;
+        return `/discord?error=${verified.err}`;
       }
     },
   },
   pages: {
-    error: "/",
+    error: "/discord",
   },
 };
 

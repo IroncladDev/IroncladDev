@@ -1,7 +1,8 @@
 import axios from "axios";
-import config from './server.config';
+import dotenv from "dotenv";
+dotenv.config();
 
-export const discordClient = axios.create({
+const discordClient = axios.create({
   baseURL: "https://discord.com/api/v8",
   headers: { Authorization: `Bot ${process.env.BOT_TOKEN}` },
 });
@@ -36,21 +37,13 @@ const verifyCommand = {
   dm_permission: true,
 };
 
-export function createCommand(command) {
-  discordClient.post(`/applications/${process.env.DISCORD_ID}/guilds/${config.guildId}/commands`, command);
+function createCommand(command) {
+  discordClient.post(
+    `/applications/${process.env.DISCORD_ID}/guilds/${process.env.GUILD_ID}/commands`,
+    command
+  );
 }
 
-export function initCommands () {
-  console.log('Commands are ready!');  
-  createCommand(userCommand);
-  createCommand(verifyCommand);
-}
-
-export function verifyUser (user) {
-  return fetch( `https://discord.com/api/v10/guilds/${config.guildId}/members/${user}/roles/${config.roleToAdd}`,
-      {
-        method: "PUT",
-        headers: { Authorization: `Bot ${process.env.BOT_TOKEN}` },
-      }
-    );
-}
+console.log("Commands are ready!");
+createCommand(userCommand);
+createCommand(verifyCommand);

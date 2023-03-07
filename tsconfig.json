@@ -26,7 +26,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "server/script/initSlashCommands.js"  ],
   "exclude": [
     "node_modules"
   ]

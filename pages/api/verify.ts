@@ -1,9 +1,9 @@
-import { simplifyEmail } from "server/lib/email";
-import { User } from "server/lib/mongoose";
+import { simplifyEmail } from "server/email";
+import { User } from "server/mongoose";
 import jwt from "jsonwebtoken";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./auth/[...nextauth]";
-import { verifyUser } from "server/lib/discord";
+import { verifyUser } from "server/discord";
 
 export default async function Handler(req, res) {
   try {
@@ -12,7 +12,9 @@ export default async function Handler(req, res) {
       ignoreExpiration: true,
     });
 
-    if (!session) {
+    console.log(session);
+
+    if (!session?.user) {
       return res.json({
         verified: false,
         error: "User not logged in.",
@@ -21,20 +23,21 @@ export default async function Handler(req, res) {
       const user = await User.findOne({ email: decoded.email });
       if (!user) {
         return res.json({
-          error: "The user doesn't exists.",
+          error: "User does not exist",
           verified: false,
         });
       } else {
         if (!user.verified) {
           await verifyUser(user.discordId);
-          await user.update({ verified: true });
+          user.verified = true;
+          await user.save();
         }
         res.redirect("/me");
       }
     } else {
       res.json({
         verified: false,
-        error: "This is not your token.",
+        error: "Access Denied",
       });
     }
   } catch (_) {

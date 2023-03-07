@@ -9,13 +9,15 @@ export default function useScroll(ref: RefObject<HTMLDivElement>) {
   useEffect(() => {
     if (ref?.current) {
       const callback = () => {
-        setOuterHeight(ref.current?.scrollHeight);
-        setScrollTop(ref.current?.scrollTop);
-        setInitialheight(ref.current?.offsetHeight);
-        setPercentage(
-          ref.current?.scrollTop /
-            (ref.current?.scrollHeight - ref.current?.offsetHeight)
-        );
+        if (typeof ref.current?.scrollHeight === "number") {
+          setOuterHeight(ref.current?.scrollHeight);
+          setScrollTop(ref.current?.scrollTop);
+          setInitialheight(ref.current?.offsetHeight);
+          setPercentage(
+            ref.current?.scrollTop /
+              (ref.current?.scrollHeight - ref.current?.offsetHeight)
+          );
+        }
       };
       callback();
       ref.current.addEventListener("scroll", callback);

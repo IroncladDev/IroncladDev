@@ -34,7 +34,7 @@ const Styles = {
 
 const NavLink = ({ text, href }: { text: ReactNode; href: string }) => {
   return (
-    <Link href={href} passHref>
+    <Link href={href} legacyBehavior>
       <a
         css={[
           rcss.handleMaxWidth(512, {
@@ -69,7 +69,7 @@ export const Navbar = ({ scrollRef }) => {
         }}
       >
         <View css={Styles.NavInner}>
-          <Link href="/" passHref>
+          <Link href="/" legacyBehavior>
             <a>
               <FlexRow gap={8} center>
                 <Image

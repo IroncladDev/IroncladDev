@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
-import { PostJSON } from "server/lib/fetch";
+import { PostJSON } from "server/fetch";
 
 const app = nc();
 app.get(async (req: NextApiRequest, res: NextApiResponse) => {
@@ -11,11 +11,11 @@ app.get(async (req: NextApiRequest, res: NextApiResponse) => {
   const rank = await PostJSON(
     "https://www.codingame.com/services/Leaderboards/getCodinGamerClashRanking",
     [4316297, null, null]
-  )
+  );
 
   res.json({
     user,
-    rank
+    rank,
   });
 });
 

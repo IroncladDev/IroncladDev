@@ -1,4 +1,12 @@
-import { View, tokens, rcss, FlexRow, Text, FlexSpacer, FlexCol } from "application/ui";
+import {
+  View,
+  tokens,
+  rcss,
+  FlexRow,
+  Text,
+  FlexSpacer,
+  FlexCol,
+} from "application/ui";
 import { css } from "@emotion/react";
 import Link from "next/link";
 import Image from "next/image";
@@ -57,7 +65,7 @@ export const Footer = () => {
     <View css={Styles.Container}>
       <View css={Styles.InnerFlex}>
         <View>
-          <Link href="/" passHref>
+          <Link href="/" legacyBehavior>
             <a>
               <FlexRow gap={8} center>
                 <Image
@@ -80,36 +88,36 @@ export const Footer = () => {
         <View css={Styles.Links}>
           <div />
           <FlexCol gap={16}>
-            <Link href="/" passHref>
+            <Link href="/" legacyBehavior>
               <a>
                 <Text>Home</Text>
               </a>
             </Link>
-            <Link href="/about" passHref>
+            <Link href="/about" legacyBehavior>
               <a>
                 <Text>About</Text>
               </a>
             </Link>
           </FlexCol>
           <FlexCol gap={16}>
-            <Link href="/showcase" passHref>
+            <Link href="/showcase" legacyBehavior>
               <a>
                 <Text>Showcase</Text>
               </a>
             </Link>
-            <Link href="/contact" passHref>
+            <Link href="/contact" legacyBehavior>
               <a>
                 <Text>Contact</Text>
               </a>
             </Link>
           </FlexCol>
           <FlexCol gap={16}>
-            <Link href="/blog" passHref>
+            <Link href="/blog" legacyBehavior>
               <a>
                 <Text>Blog</Text>
               </a>
             </Link>
-            <Link href="/discord" passHref>
+            <Link href="/discord" legacyBehavior>
               <a>
                 <Text>Discord</Text>
               </a>
