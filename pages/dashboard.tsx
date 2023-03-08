@@ -44,10 +44,6 @@ export default function Dashboard() {
     setPage((p) => p + 1);
   }
 
-  function addVerifiedRole(user) {
-    fetch("/api/role/" + user);
-  }
-
   return (
     <View css={Styles.Container}>
       <Navbar scrollRef={scrollRef} />

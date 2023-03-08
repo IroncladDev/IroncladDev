@@ -158,6 +158,7 @@ export const Project = ({
               {
                 transition: "ease-out 0.25s",
                 marginTop: 24,
+                maxWidth: `calc(100% - 32px)`,
                 "@media(min-width: 700px)": {
                   flex: "1 1 0",
                   height: "100%",

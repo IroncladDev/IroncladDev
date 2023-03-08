@@ -141,7 +141,7 @@ export default function Home() {
               ]}
             >
               <Scroll scrollRef={scrollRef} end={scrollEnd}>
-                {(p, P) => (
+                {(p) => (
                   <div
                     css={{
                       position: "relative",
@@ -167,7 +167,7 @@ export default function Home() {
                         },
                       ]}
                       style={{
-                        opacity: P / 2,
+                        opacity: p * 0.75,
                         transform: `scale(${p * 75}%)`,
                       }}
                     />

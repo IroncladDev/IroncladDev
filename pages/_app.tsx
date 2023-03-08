@@ -59,16 +59,14 @@ function AppContainer({
       <div className="root">
         <Component {...pageProps} />
         <Modal />
-        {router.pathname === "/admin" ? null : (
-          <AnimatedCursor
-            innerSize={8}
-            outerSize={16}
-            color="191, 210, 231"
-            innerScale={0.75}
-            outerScale={2}
-            trailingSpeed={4}
-          />
-        )}
+        <AnimatedCursor
+          innerSize={8}
+          outerSize={16}
+          color="191, 210, 231"
+          innerScale={0.75}
+          outerScale={2}
+          trailingSpeed={4}
+        />
       </div>
     </SessionProvider>
   );

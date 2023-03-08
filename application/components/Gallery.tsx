@@ -58,6 +58,7 @@ export const Gallery = (props) => {
             maxWidth: 800,
             maxHeight: `calc(100vh - 128px)`,
           }}
+          alt="Gallery Image"
         />
 
         {images.length > 1 ? (

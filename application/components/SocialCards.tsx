@@ -71,7 +71,12 @@ export const BaseCard = ({
             },
           ]}
         >
-          <img src={SocialDescription[social].icon} width={32} height={32} />
+          <img
+            src={SocialDescription[social].icon}
+            width={32}
+            height={32}
+            alt="Social Icon"
+          />
         </View>
         <Text variant="subheadBig">{SocialDescription[social].title}</Text>
 

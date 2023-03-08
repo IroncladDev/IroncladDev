@@ -84,6 +84,11 @@ export const Navbar = ({ scrollRef }) => {
                   alt="Headline"
                   height="24"
                   width={8 * 15}
+                  css={[
+                    rcss.handleMaxWidth(400, {
+                      display: "none",
+                    }),
+                  ]}
                 />
               </FlexRow>
             </a>

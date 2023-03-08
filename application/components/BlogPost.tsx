@@ -188,7 +188,8 @@ export function LazyBlogPost({
     } else {
       loadReplitPost();
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [platform]);
 
   if (platform === BlogPlatform.Dev) {
     return (

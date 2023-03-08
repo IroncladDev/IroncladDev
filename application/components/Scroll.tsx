@@ -10,7 +10,7 @@ export const Scroll = ({
   inline,
   ...props
 }: {
-  children: (percentage: number, absolutePercentage: number) => ReactElement;
+  children: (percentage: number) => ReactElement;
   end?: number;
   scrollRef: RefObject<HTMLDivElement>;
   inline?: boolean;
@@ -18,7 +18,6 @@ export const Scroll = ({
   const { scrollTop } = useScroll(scrollRef);
   const elementRef = useRef<HTMLDivElement>(null);
   const [percentage, setPercentage] = useState(0);
-  const [absolutePercentage, setAbsolutePercentage] = useState(0);
 
   useEffect(() => {
     const box = elementRef.current?.getBoundingClientRect();
@@ -26,8 +25,6 @@ export const Scroll = ({
     const scrollValue = (totalHeight - (Number(box?.top) - end)) / totalHeight;
 
     setPercentage(constrain(scrollValue, 0, 1));
-
-    setAbsolutePercentage(constrain(scrollValue, 0, scrollValue));
   }, [scrollTop, end]);
 
   return (
@@ -36,7 +33,7 @@ export const Scroll = ({
       innerRef={elementRef}
       css={inline ? { display: "inline" } : undefined}
     >
-      {children(percentage, absolutePercentage)}
+      {children(percentage)}
     </View>
   );
 };

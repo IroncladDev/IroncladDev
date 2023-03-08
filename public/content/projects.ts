@@ -215,7 +215,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
         \nI find it quite funny that one person in particular loved this game so much they tried to sell it to other people along with [swordbattle.io](https://swordbattle.io).`,
       `Overall, like the other games I developed, this one was really fun to make.  It was really fun to explore new methods, tweak and mess with the game, and last but not least, playing the game.`,
     ],
-    timeCreated: "2020-02-01",
+    timeCreated: "2022-08-01",
     stack: [Tc.html, Tc.p5],
     url: "https://intercepter.ironcladdev.repl.co/",
     sourceCodeUrl: "https://replit.com/@IroncladDev/Intercepter",
@@ -225,6 +225,39 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       "https://images.connerow.dev/showcase/intercepter/gameplay1.png",
       "https://images.connerow.dev/showcase/intercepter/gameplay2.png",
       "https://images.connerow.dev/showcase/intercepter/gameplay3.png",
+    ],
+  },
+  {
+    title: "Orbitron Tower Defense",
+    slides: [
+      `The name "Orbitron Tower Defense" was inspired by the [Orbitron google font](https://fonts.google.com/specimen/Orbitron?query=orbitron).  This tower defense was made for a mini-jam on Khan Academy following the theme of no text.  Although there is text in the game, I drew the font out of pixel art.`,
+      `This was one of the first games where I started to use a lot of image caching and optimize for performance.  Thousands of particles and items can be running on the screen with a decent framerate.
+        \nI'm very proud of this project and still play it on my own sometimes.`,
+    ],
+    timeCreated: "2021-04-01",
+    stack: [Tc.html, Tc.p5],
+    url: "https://orbitron-3.ironcladdev.repl.co/",
+    sourceCodeUrl: "https://replit.com/@IroncladDev/Orbitron-3",
+    images: [
+      "https://images.connerow.dev/showcase/orbitron/index.png",
+      "https://images.connerow.dev/showcase/orbitron/gameplay1.png",
+      "https://images.connerow.dev/showcase/orbitron/gameplay2.png",
+    ],
+  },
+  {
+    title: "Advanced P5.js Platformer Engine",
+    slides: [
+      `I used Matter.js and P5.js to make this easy-to-use platformer template for people to kickstart their next game with.  Not only does this engine support default physics and mechanics, but also wall jumping, irregularly-shaped blocks, and more.`,
+      `The documentation on how to use the engine is provided within the Repl, in a folder named "docs".`,
+    ],
+    timeCreated: "2022-08-02",
+    stack: [Tc.html, Tc.p5],
+    url: "https://advanced-p5js-platformer-engine.ironcladdev.repl.co/",
+    sourceCodeUrl:
+      "https://replit.com/@IroncladDev/Advanced-P5js-Platformer-Engine?v=1",
+    images: [
+      "https://images.connerow.dev/showcase/p5platform/index.png",
+      "https://images.connerow.dev/showcase/p5platform/jump.png",
     ],
   },
   {
