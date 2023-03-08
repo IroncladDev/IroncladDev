@@ -217,6 +217,7 @@ export const Project = ({
                         border: `solid 1px ${tokens.backgroundHighest}`,
                       },
                     ]}
+                    alt="Technology"
                   />
                 </Tooltip>
               ))}

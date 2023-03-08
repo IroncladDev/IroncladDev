@@ -79,7 +79,7 @@ export default function BlogPost({
                     },
                   }}
                 >
-                  <img src={post.coverImage} />
+                  <img src={post.coverImage} alt="Cover Image"/>
                 </View>
               ) : null}
 
@@ -200,7 +200,7 @@ export function LazyBlogPost({
           <BlogPost
             post={{
               title: devPost.title,
-              description: devPost.body_markdown,
+              description: devPost.body_markdown.slice(0, 360) + "...",
               url: devPost.canonical_url,
               coverImage: devPost.cover_image,
               timeCreated: devPost.created_at,
@@ -222,7 +222,8 @@ export function LazyBlogPost({
           <BlogPost
             post={{
               title: replitPost.post.title,
-              description: replitPost.post.replComment.body,
+              description:
+                replitPost.post.replComment.body.slice(0, 360) + "...",
               url:
                 "https://replit.com" +
                 replitPost.post.repl.url +
