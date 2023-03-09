@@ -2,7 +2,6 @@
 #run = 'npx nodemon -x "npm start || npm start"'
 
 run = "npm run dev"
-onBoot="sh boot.sh"
 
 hidden=['.git', '.config', '.next', 'boot.sh', '.eslintrc.json', '.gitignore', 'next-env.d.ts', 'next.config.mjs', 'tsconfig.json']
 
