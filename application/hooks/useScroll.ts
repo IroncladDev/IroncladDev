@@ -7,21 +7,27 @@ export default function useScroll(ref: RefObject<HTMLDivElement>) {
   const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
-    if (ref?.current) {
+    const current = ref.current;
+
+    if (current) {
       const callback = () => {
-        if (typeof ref.current?.scrollHeight === "number") {
-          setOuterHeight(ref.current?.scrollHeight);
-          setScrollTop(ref.current?.scrollTop);
-          setInitialHeight(ref.current?.offsetHeight);
+        if (typeof current.scrollHeight === "number") {
+          setOuterHeight(current.scrollHeight);
+          setScrollTop(current.scrollTop);
+          setInitialHeight(current.offsetHeight);
           setPercentage(
-            ref.current?.scrollTop /
-              (ref.current?.scrollHeight - ref.current?.offsetHeight)
+            current.scrollTop / (current?.scrollHeight - current.offsetHeight)
           );
         }
       };
       callback();
-      ref.current.addEventListener("scroll", callback);
+      current.addEventListener("scroll", callback);
       window.addEventListener("resize", callback);
+
+      return () => {
+        window.removeEventListener("resize", callback);
+        current.removeEventListener("scroll", callback);
+      };
     }
   }, [ref]);
 

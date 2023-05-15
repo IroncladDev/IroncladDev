@@ -79,7 +79,7 @@ export default function BlogPost({
                     },
                   }}
                 >
-                  <img src={post.coverImage} alt="Cover Image"/>
+                  <img src={post.coverImage} alt="Cover Image" />
                 </View>
               ) : null}
 

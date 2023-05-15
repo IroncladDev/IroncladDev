@@ -62,32 +62,19 @@ export const Tooltip = ({
       break;
   }
 
-  useEffect(() => {
-    if (tooltipRef?.current) {
-      window.addEventListener("mousemove", (e) => {
-        const mouseX = e.clientX;
-        const mouseY = e.clientY;
-        const rect = tooltipRef?.current?.getBoundingClientRect();
-
-        if (
-          rect &&
-          mouseX > rect.left &&
-          mouseX < rect.right &&
-          mouseY > rect.top &&
-          mouseY < rect.bottom
-        ) {
-          setZindex(100);
-          setMouseIn(true);
-        } else {
-          setZindex(0);
-          setMouseIn(false);
-        }
-      });
-    }
-  }, [tooltipRef]);
-
   return (
-    <View innerRef={tooltipRef} css={[rcss.position.relative]}>
+    <View
+      innerRef={tooltipRef}
+      css={[rcss.position.relative]}
+      onMouseEnter={() => {
+        setZindex(100);
+        setMouseIn(true);
+      }}
+      onMouseLeave={() => {
+        setZindex(0);
+        setMouseIn(false);
+      }}
+    >
       {children}
       <View
         css={[

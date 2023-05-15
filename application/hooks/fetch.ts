@@ -29,7 +29,7 @@ export const useGetJSON = (
       });
   };
 
-  useEffect(callback, []);
+  useEffect(callback, [url]);
 
   return { data, loading, error, refetch: callback };
 };
