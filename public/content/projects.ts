@@ -30,9 +30,9 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     url: "https://ai.repl.page",
     sourceCodeUrl: "https://github.com/Conner1115/Amjad-GPT",
     images: [
-      "https://images.connerow.dev/showcase/amjadGPT/login.png",
-      "https://images.connerow.dev/showcase/amjadGPT/index.png",
-      "https://images.connerow.dev/showcase/amjadGPT/settings.png",
+      "/images/amjadGPT/login.png",
+      "/images/amjadGPT/index.png",
+      "/images/amjadGPT/settings.png",
     ],
   },
   {
@@ -49,10 +49,28 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     url: "https://www.youbarter.us/",
     sourceCodeUrl: "https://github.com/Conner1115/yb2",
     images: [
-      "https://images.connerow.dev/showcase/youbarter/index.png",
-      "https://images.connerow.dev/showcase/youbarter/login.png",
-      "https://images.connerow.dev/showcase/youbarter/function.png",
-      "https://images.connerow.dev/showcase/youbarter/spotlight.png",
+      "/images/youbarter/index.png",
+      "/images/youbarter/login.png",
+      "/images/youbarter/function.png",
+      "/images/youbarter/spotlight.png",
+    ],
+  },
+  {
+    title: "Agape Chiropractic TX",
+    slides: [
+      `I rebuilt my dad's home business chiropractic website with Framer Motion and Next.js.  The first version (bottom of page) is a literal embarrassment compared to this one.
+        \nI took on a minimalistic black-on-white design and used some fancy animations with the aid of Framer Motion.  It turned out as one of the cleanest and most polished websites I'd ever built.`,
+      `I'm really happy how this one turned out, and thanks to this, I'd adopted Framer Motion (React) as a new technology for my programming stack.
+        \nLove you dad <3`,
+    ],
+    timeCreated: "2020-04-1",
+    stack: [Tc.next, Tc.react],
+    url: "https://agapechiro-tx.com/",
+    sourceCodeUrl: "https://github.com/Conner1115/AgapeChirow",
+    images: [
+      "/images/agapev2/index.png",
+      "/images/agapev2/services.png",
+      "/images/agapev2/contact.png",
     ],
   },
   {
@@ -69,11 +87,11 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     stack: [Tc.next, Tc.react, Tc.sass],
     timeCreated: "2021-11-15",
     images: [
-      "https://images.connerow.dev/showcase/mod-dash/index.png",
-      "https://images.connerow.dev/showcase/mod-dash/filter.png",
-      "https://images.connerow.dev/showcase/mod-dash/select.png",
-      "https://images.connerow.dev/showcase/mod-dash/action.png",
-      "https://images.connerow.dev/showcase/mod-dash/tools.png",
+      "/images/mod-dash/index.png",
+      "/images/mod-dash/filter.png",
+      "/images/mod-dash/select.png",
+      "/images/mod-dash/action.png",
+      "/images/mod-dash/tools.png",
     ],
   },
   {
@@ -89,10 +107,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     stack: [Tc.p5, Tc.typescript, Tc.sass, Tc.node],
     url: "https://celestron.spotandjake.repl.co",
     sourceCodeUrl: "https://github.com/Conner1115/Celestron",
-    images: [
-      "https://images.connerow.dev/showcase/celestron/index.png",
-      "https://images.connerow.dev/showcase/celestron/gameplay.png",
-    ],
+    images: ["/images/celestron/index.png", "/images/celestron/gameplay.png"],
   },
   {
     title: "Langchain.js LLM Template",
@@ -105,10 +120,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     url: "https://twitter.com/IroncladDev/status/1629534148091162626?s=20",
     sourceCodeUrl:
       "https://github.com/Conner1115/Celestronhttps://github.com/Conner1115/LangChain.js-LLM-Template",
-    images: [
-      "https://images.connerow.dev/showcase/llm-template/gh.png",
-      "https://images.connerow.dev/showcase/llm-template/files.png",
-    ],
+    images: ["/images/llm-template/gh.png", "/images/llm-template/files.png"],
   },
   {
     title: "Fendorea",
@@ -122,9 +134,9 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     url: "https://fendorea.ironcladdev.repl.co/",
     sourceCodeUrl: "https://replit.com/@IroncladDev/Fendorea",
     images: [
-      "https://images.connerow.dev/showcase/fendorea/index.png",
-      "https://images.connerow.dev/showcase/fendorea/prompt.png",
-      "https://images.connerow.dev/showcase/fendorea/spotlight.png",
+      "/images/fendorea/index.png",
+      "/images/fendorea/prompt.png",
+      "/images/fendorea/spotlight.png",
     ],
   },
   {
@@ -140,9 +152,9 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     url: "https://www.allmetalwelding.com/",
     sourceCodeUrl: "https://github.com/Conner1115/Metal",
     images: [
-      "https://images.connerow.dev/showcase/amw/index.png",
-      "https://images.connerow.dev/showcase/amw/about.png",
-      "https://images.connerow.dev/showcase/amw/features.png",
+      "/images/amw/index.png",
+      "/images/amw/about.png",
+      "/images/amw/features.png",
     ],
   },
   {
@@ -157,9 +169,9 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     url: "https://www.kuhnhong.com/",
     sourceCodeUrl: "https://github.com/Conner1115/KuhnHong",
     images: [
-      "https://images.connerow.dev/showcase/kuhnhong/index.png",
-      "https://images.connerow.dev/showcase/kuhnhong/preview.png",
-      "https://images.connerow.dev/showcase/kuhnhong/gallery.png",
+      "/images/kuhnhong/index.png",
+      "/images/kuhnhong/preview.png",
+      "/images/kuhnhong/gallery.png",
     ],
   },
   {
@@ -175,11 +187,11 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     url: "https://tarragon.haroon.repl.co/",
     sourceCodeUrl: "https://replit.com/@haroon/Tarragon",
     images: [
-      "https://images.connerow.dev/showcase/tarragon/index.png",
-      "https://images.connerow.dev/showcase/tarragon/ice.png",
-      "https://images.connerow.dev/showcase/tarragon/portal.png",
-      "https://images.connerow.dev/showcase/tarragon/fire.png",
-      "https://images.connerow.dev/showcase/tarragon/stone.png",
+      "/images/tarragon/index.png",
+      "/images/tarragon/ice.png",
+      "/images/tarragon/portal.png",
+      "/images/tarragon/fire.png",
+      "/images/tarragon/stone.png",
     ],
   },
   {
@@ -197,11 +209,11 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     url: "https://face-the-darkness.ironcladdev.repl.co/",
     sourceCodeUrl: "https://replit.com/@IroncladDev/face-the-darkness",
     images: [
-      "https://images.connerow.dev/showcase/face-the-darkness/index.png",
-      "https://images.connerow.dev/showcase/face-the-darkness/climb.png",
-      "https://images.connerow.dev/showcase/face-the-darkness/enemies.png",
-      "https://images.connerow.dev/showcase/face-the-darkness/sorcerer.png",
-      "https://images.connerow.dev/showcase/face-the-darkness/wraith.png",
+      "/images/face-the-darkness/index.png",
+      "/images/face-the-darkness/climb.png",
+      "/images/face-the-darkness/enemies.png",
+      "/images/face-the-darkness/sorcerer.png",
+      "/images/face-the-darkness/wraith.png",
     ],
   },
   {
@@ -220,11 +232,11 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     url: "https://intercepter.ironcladdev.repl.co/",
     sourceCodeUrl: "https://replit.com/@IroncladDev/Intercepter",
     images: [
-      "https://images.connerow.dev/showcase/intercepter/index.png",
-      "https://images.connerow.dev/showcase/intercepter/rules.png",
-      "https://images.connerow.dev/showcase/intercepter/gameplay1.png",
-      "https://images.connerow.dev/showcase/intercepter/gameplay2.png",
-      "https://images.connerow.dev/showcase/intercepter/gameplay3.png",
+      "/images/intercepter/index.png",
+      "/images/intercepter/rules.png",
+      "/images/intercepter/gameplay1.png",
+      "/images/intercepter/gameplay2.png",
+      "/images/intercepter/gameplay3.png",
     ],
   },
   {
@@ -239,9 +251,9 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     url: "https://orbitron-3.ironcladdev.repl.co/",
     sourceCodeUrl: "https://replit.com/@IroncladDev/Orbitron-3",
     images: [
-      "https://images.connerow.dev/showcase/orbitron/index.png",
-      "https://images.connerow.dev/showcase/orbitron/gameplay1.png",
-      "https://images.connerow.dev/showcase/orbitron/gameplay2.png",
+      "/images/orbitron/index.png",
+      "/images/orbitron/gameplay1.png",
+      "/images/orbitron/gameplay2.png",
     ],
   },
   {
@@ -255,10 +267,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     url: "https://advanced-p5js-platformer-engine.ironcladdev.repl.co/",
     sourceCodeUrl:
       "https://replit.com/@IroncladDev/Advanced-P5js-Platformer-Engine?v=1",
-    images: [
-      "https://images.connerow.dev/showcase/p5platform/index.png",
-      "https://images.connerow.dev/showcase/p5platform/jump.png",
-    ],
+    images: ["/images/p5platform/index.png", "/images/p5platform/jump.png"],
   },
   {
     title: "Vulcanist",
@@ -279,12 +288,12 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     url: "https://vulcanist.ironcladdev.repl.co/",
     sourceCodeUrl: "https://replit.com/@IroncladDev/Vulcanist",
     images: [
-      "https://images.connerow.dev/showcase/vulcanist/index.png",
-      "https://images.connerow.dev/showcase/vulcanist/gameplay.png",
-      "https://images.connerow.dev/showcase/vulcanist/cutscene.png",
-      "https://images.connerow.dev/showcase/vulcanist/ooooh.png",
-      "https://images.connerow.dev/showcase/vulcanist/mom.png",
-      "https://images.connerow.dev/showcase/vulcanist/ded.png",
+      "/images/vulcanist/index.png",
+      "/images/vulcanist/gameplay.png",
+      "/images/vulcanist/cutscene.png",
+      "/images/vulcanist/ooooh.png",
+      "/images/vulcanist/mom.png",
+      "/images/vulcanist/ded.png",
     ],
   },
   {
@@ -300,10 +309,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     stack: [Tc.next, Tc.react, Tc.sass, Tc.mongo, Tc.node],
     url: "https://replyte.connerow.dev/",
     sourceCodeUrl: "https://replit.com/@IroncladDev/Replyte-Chat-App",
-    images: [
-      "https://images.connerow.dev/showcase/replyte/index.png",
-      "https://images.connerow.dev/showcase/replyte/chat.png",
-    ],
+    images: ["/images/replyte/index.png", "/images/replyte/chat.png"],
   },
   {
     title: "Next-Admin",
@@ -320,14 +326,14 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     url: "https://next-admin.ironcladdev.repl.co/",
     sourceCodeUrl: "https://github.com/Conner1115/next-admin",
     images: [
-      "https://images.connerow.dev/showcase/next-admin/index.png",
-      "https://images.connerow.dev/showcase/next-admin/playground.png",
-      "https://images.connerow.dev/showcase/next-admin/login.png",
-      "https://images.connerow.dev/showcase/next-admin/edit2.png",
+      "/images/next-admin/index.png",
+      "/images/next-admin/playground.png",
+      "/images/next-admin/login.png",
+      "/images/next-admin/edit2.png",
     ],
   },
   {
-    title: "Agape Chiropractic TX",
+    title: "Agape Chiropractic TX (Old)",
     slides: [
       `Agape Chiropractic TX was one of the first websites I'd built back in 2020 for my dad.  
         \nIt's built in static HTML and uses a sort of whacky and old design.`,
@@ -338,9 +344,9 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     url: "https://agapechiro-tx.com/",
     sourceCodeUrl: "https://github.com/Conner1115/AgapeChirow",
     images: [
-      "https://images.connerow.dev/showcase/agape/index.png",
-      "https://images.connerow.dev/showcase/agape/animal.png",
-      "https://images.connerow.dev/showcase/agape/pricing.png",
+      "/images/agape/index.png",
+      "/images/agape/animal.png",
+      "/images/agape/pricing.png",
     ],
   },
   {
@@ -352,10 +358,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     timeCreated: "2020-02-15",
     stack: [Tc.html],
     url: "https://gracerbcbonham.com/",
-    images: [
-      "https://images.connerow.dev/showcase/grbc/index.png",
-      "https://images.connerow.dev/showcase/grbc/worship.png",
-    ],
+    images: ["/images/grbc/index.png", "/images/grbc/worship.png"],
   },
 ];
 
