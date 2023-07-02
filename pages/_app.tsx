@@ -39,11 +39,11 @@ function AppContainer({
         <meta property="og:title" content="Ironclad Web Development" />
         <meta
           property="og:description"
-          content="Conner Ow is a Fullstack Web Developer who lives out in the country.  He is currently doing Support Engineering at Replit."
+          content="Conner Ow is a Fullstack Web Developer who lives out in the country."
         />
         <meta
           name="description"
-          content="Conner Ow is a Fullstack Web Developer who lives out in the country.  He is currently doing Support Engineering at Replit."
+          content="Conner Ow is a Fullstack Web Developer who lives out in the country."
         />
         <meta property="og:image" content="/homepage.png" />
         <meta property="og:image:type" content="image/png" />

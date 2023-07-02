@@ -17,14 +17,14 @@ const Content: IndexPageContent = {
     title: "Fullstack",
     subTitle: "Web Developer",
     description:
-      "I'm Conner Ow, a Fullstack Web Developer that lives out in the country.  I currently do Support Engineering at [Replit](https://replit.com).",
+      "I'm Conner Ow, a Fullstack Web Developer that lives out in the country.  I enjoy developing websites, content creation, leveraging AI, and competitive programming.",
   },
   about: {
     title: "About Me 👋",
     paragraphs: [
-      "Hi there!  My name is Conner Ow (Pronounce 'ow' as if you got hurt), a seventeen-year-old fullstack developer who enjoys building Websites and blogging on developer platforms.",
-      "I work at [Replit](https://replit.com) as a Support Engineer.  I also enjoy content creation, Anti-Abuse, and Product Engineering.",
-      "Aside from coding, I enjoy drawing, solving puzzles, competitive programming, and doing Brazillian Jiu-Jitsu.",
+      "Hi there!  My name is Conner Ow (Pronounce 'ow' as if you got hurt), a seventeen-year-old Fullstack Developer.",
+      "My programming stack consists of Next.js, Framer Motion, Emotion CSS, Typescript, and MongoDB.",
+      "Aside from coding, I enjoy drawing, solving puzzles, and doing Brazillian Jiu-Jitsu.",
     ],
   },
   projects: {

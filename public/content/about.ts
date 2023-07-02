@@ -6,7 +6,7 @@ const Content: AboutContent = {
   introduction: {
     title: "Hi there 👋",
     paragraphs: [
-      `My name is Conner Ow (pronounced "ow" like when you get hurt). I'm a seventeen-year-old Christian homeschooler who is currently doing Support Engineering at [Replit](https://replit.com). I love poking around with AI, doing DevRel for fun, and creating cool content here and there.`,
+      `My name is Conner Ow (pronounced "ow" like when you get hurt). I'm a seventeen-year-old Christian homeschooler. I love poking around with AI, doing DevRel for fun, and creating cool content here and there.`,
       "I'm currently living in Texas, far out in the country.  It's a peaceful, simple, and relaxing life out here.  I usually do some farm work on weekends.",
       "Outside of work, I enjoy drawing, solving puzzles, carpentry, competitive programming, hanging out with the Replit community, and Brazilian Jiu-Jitsu.  Jiu-Jitsu is a martial art sort of like wrestline that keeps me active and challenges me in a different way.",
       "I'm currently doing my college courses online at the University of the People, which takes only a couple of hours a week.",
@@ -26,7 +26,7 @@ const Content: AboutContent = {
       "I created a lot more content with Next.js, started building moderation tools, and changed the way moderation worked at Replit.  I did some contract work for Replit's moderation team for a bit.",
       "Finally, I decided to try to apply to work at Replit again.  I had racked up a large amount of knowledge in the past year and was ready to try again.",
       "I wrote an [email](https://email.ironcladdev.repl.co) to Amjad Masad, the CEO of Replit and sent the HTML email to him with Node.js.  I almost got in, but the engineering team didn't have the time or capacity to mentor me.  My manager posted in discord that he needed a support engineer, and I jumped into that entry point.  After going through all the interviews, I got hired.",
-      "Now I'm here continuing to grow and learn in Replit.  I'm currently trying to lean into Product Engineering and DevRel more outside of Support Engineering.",
+      "Now I'm here continuing to grow and learn in Replit.  I'm currently maintaining the [Replit Extensions Client](https://github.com/replit/extensions) and helping out with DevRel alongside doing my Support Engineer duties.",
     ],
   },
   faq: {
@@ -37,10 +37,6 @@ const Content: AboutContent = {
       "**Q: Can you collaborate with me?**\n\n**A**: Unfortunately I'll have to turn the collaboration request down.  I'm completely packed with work and side projects at the moment.",
       "**Q: What do you have against python?**\n\n**A**: I really despise the fact that python uses indentation instead of curly braces for wrapping code.  Object indexing is also annoying that you can't use dot notation.  Performance is slow, etc.",
       "**Q: Can you accept my discord friend request?**\n\n**A**: I try to limit the amount of friends I have on discord.  If you share a mutual server, DMs are open.",
-      "**Q: I found a bug in Replit, can you fix it?**\n\n**A**: Create a post on the [Ask Forum](https://ask.replit.com).",
-      "**Q: There's a malicious user in Replit, can you take action on them?**\n\n**A**: Use the built-in report feature.",
-      "**Q: I have an account issue in Replit, can you help me?**\n\n**A**: Create a ticket at https://replit.com/support and we'll get to you in a bit.",
-      "**Q: Can you help me/do something for me?**\n\n**A**: It depends on the request.  Ask away.",
     ],
   },
   skillsHeader: "Skills 🛠",
