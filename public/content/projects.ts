@@ -312,44 +312,6 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     images: ["/images/replyte/index.png", "/images/replyte/chat.png"],
   },
   {
-    title: "Next-Admin",
-    slides: [
-      `I made a very simple Next.js password-gated admin dashboard that can be set up by just editing a json file to configure your page structure, and a single environment variable.`,
-      `This was a very small project, and I wasn't expecting many people to even see it, but it [took off on dev.to](https://dev.to/ironcladdev/adding-a-nextjs-administration-dashboard-to-your-site-in-seconds-7jb) and still remains one of my top posts today.
-        \nI got the Next.js Top Author of the Week badge as well as landing a spot in the top 7 posts of the week.`,
-      `I usually find it hard and annoying to have to go into my source code to change a single paragraph, so this is why I decided to build this project.
-        \nUnfortunately due to filesystem limitations, the next admin won't work in a production environment, and should be instead hooked up to a json database of some sort.
-        \nProduction has ceased on this project.`,
-    ],
-    timeCreated: "2022-08-15",
-    stack: [Tc.next, Tc.react, Tc.sass],
-    url: "https://next-admin.ironcladdev.repl.co/",
-    sourceCodeUrl: "https://github.com/Conner1115/next-admin",
-    images: [
-      "/images/next-admin/index.png",
-      "/images/next-admin/playground.png",
-      "/images/next-admin/login.png",
-      "/images/next-admin/edit2.png",
-    ],
-  },
-  {
-    title: "Agape Chiropractic TX (Old)",
-    slides: [
-      `Agape Chiropractic TX was one of the first websites I'd built back in 2020 for my dad.  
-        \nIt's built in static HTML and uses a sort of whacky and old design.`,
-      `Despite being a simple site, the time it took to fix all the typos and perfect it took over three months.`,
-    ],
-    timeCreated: "2020-04-1",
-    stack: [Tc.html],
-    url: "https://agapechiro-tx.com/",
-    sourceCodeUrl: "https://github.com/Conner1115/AgapeChirow",
-    images: [
-      "/images/agape/index.png",
-      "/images/agape/animal.png",
-      "/images/agape/pricing.png",
-    ],
-  },
-  {
     title: "Grace Reformed Baptist Church",
     slides: [
       `I made the website for my church, which is currently located in Honey Grove, Texas.  My dad took some pictures at church and gave them to me to insert in the site.
