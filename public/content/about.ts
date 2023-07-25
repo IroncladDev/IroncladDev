@@ -35,8 +35,8 @@ const Content: AboutContent = {
       - Built some AI projects
       - Maintained the [Replit Extensions Client](https://github.com/replit/extensions)
       - Helped out with DevRel & Marketing on twitter`,
-      `### Return
-      \nI did some things I really shouldn't have, and now I'm back here.  In the next steps of my life, I want to dive deeper into Content Creation and Entrepreneurship.`,
+      `### Next steps
+      \nIn the next step of my life, I want to dive deeper into Content Creation and Entrepreneurship.`,
     ],
   },
   faq: {
