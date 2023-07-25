@@ -1,12 +1,12 @@
-import { View, rcss } from "application/ui";
 import useModal, { state } from "application/hooks/useModal";
-import { useAtom } from "jotai";
 import { RenderedComponent } from "application/types";
 import { Gallery as GalleryComponent } from ".";
+import { View, rcss } from "application/ui";
+import { useAtom } from "jotai";
 
 export const Modal = () => {
-  const [componentName] = useAtom(state.ComponentName);
   const [componentProps] = useAtom(state.ComponentProps);
+  const [componentName] = useAtom(state.ComponentName);
   const { close } = useModal();
 
   return componentName ? (

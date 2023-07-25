@@ -17,19 +17,19 @@ const Content: IndexPageContent = {
     title: "Fullstack",
     subTitle: "Web Developer",
     description:
-      "I'm Conner Ow, a Fullstack Web Developer that lives out in the country.  I enjoy developing websites, content creation, leveraging AI, and competitive programming.",
+      "I'm IroncladDev, a Fullstack Web Developer who lives out in the country.  I ship results to production without relying on coffee.",
   },
   about: {
     title: "About Me 👋",
     paragraphs: [
-      "Hi there!  My name is Conner Ow (Pronounce 'ow' as if you got hurt), a seventeen-year-old Fullstack Developer.",
-      "My programming stack consists of Next.js, Framer Motion, Emotion CSS, Typescript, and MongoDB.",
-      "Aside from coding, I enjoy drawing, solving puzzles, and doing Brazillian Jiu-Jitsu.",
+      'Hi there!  My name is Conner Ow (Pronounced "ow" as if you got hurt), a seventeen-year-old Fullstack Developer.',
+      "I enjoy developing websites, creating content, building with AI, competitive programming, and Brazillian Jiu-Jitsu.",
+      "Most importantly, I can center a div and exit vim without much hassle.  Not committing node_modules and .env is a challenge sometimes.",
     ],
   },
   projects: {
     title: "Projects",
-    description: "Here are some of my personal favorite projects.",
+    description: "My top three personal favorites.",
     projects: Projects.slice(0, 3),
   },
   blog: {
@@ -70,8 +70,8 @@ const Content: IndexPageContent = {
         platform: SocialPlatform.Twitter,
       },
       {
-        url: "https://replit.com/@IroncladDev",
-        platform: SocialPlatform.Replit,
+        url: "https://github.com/Conner1115",
+        platform: SocialPlatform.Github,
       },
       {
         url: "/discord",

@@ -11,6 +11,9 @@ export enum Technology {
   typescript = "typescript",
   langchain = "langchain",
   p5 = "p5",
+  emotion = "emotion",
+  kaboom = "kaboom",
+  framer = "framer",
 }
 
 export interface Project {
@@ -36,12 +39,9 @@ export interface LazyBlogPost {
 export enum SocialPlatform {
   Twitter,
   Dev,
-  Replit,
-  Email,
-  Polywork,
   Discord,
-  Codepen,
   Github,
+  Replit,
   Youtube,
   Codingame,
 }

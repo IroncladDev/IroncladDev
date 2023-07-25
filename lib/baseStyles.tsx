@@ -62,28 +62,6 @@ const Styles = {
     }),
   ]),
 
-  ScrollHeader: (percentage: number) =>
-    css({
-      transform: `translatex(${(1 - percentage) * 25}vw)`,
-      position: "relative",
-      display: "inline-block",
-      margin: 0,
-      transition: "ease-out 0.25s",
-      opacity: percentage,
-      "&::after": {
-        content: '""',
-        position: "absolute",
-        left: "100%",
-        top: "50%",
-        transform: `translate(8px, -50%)`,
-        background: tokens.linearDefault,
-        width: "100vw",
-        height: 4,
-        transition: "ease-out 0.25s",
-        opacity: percentage < 1 ? percentage : 0,
-      },
-    }),
-
   DownButton: css([
     rcss.p(16),
     rcss.borderRadius("full"),

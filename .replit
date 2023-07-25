@@ -6,7 +6,7 @@ run = "npm run dev"
 hidden=['.git', '.config', '.next', 'boot.sh', '.eslintrc.json', '.gitignore', 'next-env.d.ts', 'next.config.mjs', 'tsconfig.json']
 
 [nix]
-channel = "stable-21_11"
+channel = "stable-22_11"
 
 [env]
 XDG_CONFIG_HOME = "/home/runner/.config"

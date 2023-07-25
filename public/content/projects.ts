@@ -25,6 +25,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       Tc.mongo,
       Tc.node,
       Tc.sass,
+      Tc.emotion,
     ],
     timeCreated: "2023-02-23",
     url: "https://ai.repl.page",
@@ -33,6 +34,61 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       "/images/amjadGPT/login.png",
       "/images/amjadGPT/index.png",
       "/images/amjadGPT/settings.png",
+    ],
+  },
+  {
+    title: "Agape Chiropractic TX",
+    slides: [
+      `I rebuilt my dad's home business chiropractic website with Framer Motion and Next.js.  The first version (bottom of page) is a literal embarrassment compared to this one.
+        \nI took on a minimalistic black-on-white design and used some fancy animations with the aid of Framer Motion.  It turned out as one of the cleanest and most polished websites I'd ever built.`,
+      `I'm really happy how this one turned out, and thanks to this, I'd adopted Framer Motion (React) as a new technology for my programming stack.
+        \nLove you dad <3`,
+    ],
+    timeCreated: "2020-04-1",
+    stack: [Tc.next, Tc.react, Tc.emotion],
+    url: "https://agapechiro-tx.com/",
+    sourceCodeUrl: "https://github.com/Conner1115/AgapeChirow",
+    images: [
+      "/images/agapev2/index.png",
+      "/images/agapev2/services.png",
+      "/images/agapev2/contact.png",
+    ],
+  },
+  {
+    title: "Replit",
+    slides: [
+      `I worked at Replit as a Support Engineer from August 2022 to July 2023 and used a wide range of technologies from GraphQL to Next.js and implemented various features.
+      \nOne of the first things I fixed was jumping to a comment from your notifications.  Previously, there was no way to find which notification a comment was linked to.`,
+      `Over the course of a few months, I redesigned and improved the structure of Replit's documentation and became the top contributor.`,
+      `I redesigned the Ask forum by modifying the discourse default theme with over a thousand lines of SCSS.  It's a bit unpolished, but it looks more like Replit.`,
+      `The Support Team migrated to the Ask Forum for bug reports and feedback instead of directly letting users contact Support.
+      \nI built the Support Flow located in the Help menu in the sidebar.`,
+      `The job of a Support Engineer is to try and help users find a solution as soon as possible, preferably before contacting the Support Team.
+      \nI built an indicator that linked to the Status page and displayed whenever there was an ongoing incident to prevent further user confusion.`,
+      `I had been in the Replit Community for almost three years and really enjoyed engaging with and updating them with newly-released features.
+      \nI took ownership of writing the [Replit Changelog](https://docs.replit.com/updates) and eventually came around to tweeting it from the main [Replit Twitter Account](https://twitter.com/replit).`,
+      `I built and wrote most of the documentation for Replit Extensions, including tutorials, examples, and the API reference.`,
+      `I maintained the Replit Extensions Client and became one of the top two contributors of the [Repository](https://github.com/replit/extensions).
+      \nI also built the foundations of the React Client to provide extension developers with a seamless and easy-to-use library for making Replit Extensions.`,
+      `The Extensions API would often break at times, resulting in multiple incidents and creating a bad developer and end-user experience.
+      \n I made an API tester to ensure that all the existing APIs worked as expected.`,
+      `My last project and the one I'm most proud of is the Extensions store.  I implemented a search, ordering, and filtering form to enable people to find the Extension they need.`,
+    ],
+    timeCreated: "2020-04-1",
+    stack: [Tc.next, Tc.typescript, Tc.react, Tc.emotion],
+    url: "https://replit.com",
+    images: [
+      "/images/replit/index.png",
+      "/images/replit/comment-jump.png",
+      "/images/replit/docs-index.png",
+      "/images/replit/ask.png",
+      "/images/replit/support-flow.png",
+      "/images/replit/status-indicator.png",
+      "/images/replit/changelog.png",
+      "/images/replit/extension-docs.png",
+      "/images/replit/extensions-client.png",
+      "/images/replit/extensions-tester.png",
+      "/images/replit/extensions-store.png",
     ],
   },
   {
@@ -56,42 +112,37 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     ],
   },
   {
-    title: "Agape Chiropractic TX",
+    title: "AI Playground (Replit Extension)",
     slides: [
-      `I rebuilt my dad's home business chiropractic website with Framer Motion and Next.js.  The first version (bottom of page) is a literal embarrassment compared to this one.
-        \nI took on a minimalistic black-on-white design and used some fancy animations with the aid of Framer Motion.  It turned out as one of the cleanest and most polished websites I'd ever built.`,
-      `I'm really happy how this one turned out, and thanks to this, I'd adopted Framer Motion (React) as a new technology for my programming stack.
-        \nLove you dad <3`,
+      `I built a Replit Extension that allows users to chat with multiple AI models, customize the base prompts, and even run and compare different AI models in parallel.`,
+      `Users can switch between a **chat** and **prompt** interface to choose between parallel mode and chat mode.
+      \nAs of July 2023, the AI playground remains the top Replit Extension in the store with over 6,200 installs.`,
     ],
-    timeCreated: "2020-04-1",
-    stack: [Tc.next, Tc.react],
-    url: "https://agapechiro-tx.com/",
-    sourceCodeUrl: "https://github.com/Conner1115/AgapeChirow",
+    stack: [Tc.next, Tc.node, Tc.react, Tc.mongo, Tc.sass],
+    timeCreated: "2022-02-15",
+    url: "https://replit.com/extensions",
     images: [
-      "/images/agapev2/index.png",
-      "/images/agapev2/services.png",
-      "/images/agapev2/contact.png",
+      "/images/ai-playground/index.png",
+      "/images/ai-playground/chat.png",
+      "/images/ai-playground/compare.png",
     ],
   },
   {
-    title: "Replit Moderation Dashboard",
+    title: "ReplTV (Replit Extension)",
     slides: [
-      `I built Replit's official Moderation Dashboard as a contract project before I started working at Replit.  At the time of creation, we had a very clunky and unorganized way we handled reports.
-        \nThe entirety of the project took over a year, including a complete remake.
-        \nAs of March 2023, the dashboard is being remade by some other community moderators.`,
-      `The two main parts of the dashboard consist of a Reports page where we view and take action on reports made by users, and a Tools page where we can perform mass actions on larger amounts of users, or Repls.`,
-      `Things started to get very unorganized and messy around mid-2022 so that's when I started remaking it to display more info, look better, and perform better.  I went from using next.js + scss to using Replit's UI library.
-        \nAfter that, things started to flow better.  Finally in early 2023, I got occupied with other work and couldn't work on this anymore, so I ceased production and currently a new dashboard is being developed.`,
-      `Overall this is one of the projects I'm most proud of.  I've gained experience, knowledge, and a much better topological view of abuse at Replit.`,
+      `ReplTV allows you to stream your code directly within the Replit Workspace.  A collaboration between [bddy](https://replit.com/@bddy), [haroon](https://replit.com/@haroon), and I.
+      \nThe extension watches the contents of the current file you are coding in and streams it to all viewers over websockets.`,
+      `Viewers can post in the built-in chat and watch exactly what the streamer is coding.
+      \nStreamers can self-moderate their own streams such as temporarily kicking or muting an abusive viewer.`,
+      `This was a really challenging project to make as it was the most complex use of websockets I'd ever attempted, but the result was extremely satisfying.`,
     ],
-    stack: [Tc.next, Tc.react, Tc.sass],
-    timeCreated: "2021-11-15",
+    stack: [Tc.next, Tc.node, Tc.react, Tc.mongo, Tc.sass],
+    timeCreated: "2022-02-15",
+    url: "https://replit.com/extensions",
     images: [
-      "/images/mod-dash/index.png",
-      "/images/mod-dash/filter.png",
-      "/images/mod-dash/select.png",
-      "/images/mod-dash/action.png",
-      "/images/mod-dash/tools.png",
+      "/images/repltv/index.png",
+      "/images/repltv/watch-stream.png",
+      "/images/repltv/as-streamer.png",
     ],
   },
   {
@@ -257,6 +308,27 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     ],
   },
   {
+    title: "Taime is Ticking",
+    slides: [
+      `A time-based dungeon crawler game made for the [Huggingface Open Source AI Game Jam](https://itch.io/jam/open-source-ai-game-jam) in 48 hours.  
+      \nKaboom.js v3000 had been released a few days beforehand and I was eager to try it out.`,
+      `The game was heavily inspired by [Enter the Chronosphere](https://effort-star.itch.io/enter-the-chronosphere).  Playtesting it and trying to get the timing engine to work properly were both challenging and fun.
+      \nOne of my personal favorite aspects of the game is that you get to deflect bullets.`,
+      `I stayed up coding for about 30-32 out of the 48 hours.  This was one of the shortest jams I'd ever participated in.  I lost a lot of sleep but the result was worth it.
+      \nI didn't have any spare time to make graphics so I decided to use Twemoji for the player and enemies.  It turned out better than I expected.`,
+    ],
+    timeCreated: "2023-07-11",
+    stack: [Tc.html, Tc.kaboom],
+    url: "https://taime-is-ticking.ironcladdev.repl.co/",
+    sourceCodeUrl: "https://replit.com/@IroncladDev/TAIme-is-ticking",
+    images: [
+      "/images/taime/index.png",
+      "/images/taime/meelee.png",
+      "/images/taime/bullets.png",
+      "/images/taime/level.png",
+    ],
+  },
+  {
     title: "Advanced P5.js Platformer Engine",
     slides: [
       `I used Matter.js and P5.js to make this easy-to-use platformer template for people to kickstart their next game with.  Not only does this engine support default physics and mechanics, but also wall jumping, irregularly-shaped blocks, and more.`,
@@ -310,6 +382,27 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     url: "https://replyte.connerow.dev/",
     sourceCodeUrl: "https://replit.com/@IroncladDev/Replyte-Chat-App",
     images: ["/images/replyte/index.png", "/images/replyte/chat.png"],
+  },
+  {
+    title: "Replit Moderation Dashboard",
+    slides: [
+      `I built Replit's official Moderation Dashboard as a contract project before I started working at Replit.  At the time of creation, we had a very clunky and unorganized way we handled reports.
+        \nThe entirety of the project took over a year, including a complete remake.
+        \nAs of March 2023, the dashboard is being remade by some other community moderators.`,
+      `The two main parts of the dashboard consist of a Reports page where we view and take action on reports made by users, and a Tools page where we can perform mass actions on larger amounts of users, or Repls.`,
+      `Things started to get very unorganized and messy around mid-2022 so that's when I started remaking it to display more info, look better, and perform better.  I went from using next.js + scss to using Replit's UI library.
+        \nAfter that, things started to flow better.  Finally in early 2023, I got occupied with other work and couldn't work on this anymore, so I ceased production and currently a new dashboard is being developed.`,
+      `Overall this is one of the projects I'm most proud of.  I've gained experience, knowledge, and a much better topological view of abuse at Replit.`,
+    ],
+    stack: [Tc.next, Tc.react, Tc.sass],
+    timeCreated: "2021-11-15",
+    images: [
+      "/images/mod-dash/index.png",
+      "/images/mod-dash/filter.png",
+      "/images/mod-dash/select.png",
+      "/images/mod-dash/action.png",
+      "/images/mod-dash/tools.png",
+    ],
   },
   {
     title: "Grace Reformed Baptist Church",

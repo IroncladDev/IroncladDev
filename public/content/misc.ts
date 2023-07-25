@@ -18,18 +18,22 @@ export const TechnologyDescription: {
     title: "MongoDB",
     description: "MongoDB is a powerful NoSQL database",
   },
+  [Tc.typescript]: {
+    title: "Typescript",
+    description: "Typescript is a JavaScript type-checking language",
+  },
   [Tc.next]: {
     title: "Next.js",
     description: "Next.js is a react framework for building web apps",
   },
+  [Tc.framer]: {
+    title: "Framer Motion",
+    description:
+      "Framer Motion is a React library for making beautiful and performant animations",
+  },
   [Tc.node]: {
     title: "Node.js",
     description: "Node.js is a JavaScript runtime for the UNIX-like system",
-  },
-  [Tc.python]: {
-    title: "Python",
-    description:
-      "Python is a multipurpose programming language useful for AI, ML, web apps, and more",
   },
   [Tc.react]: {
     title: "React",
@@ -40,13 +44,14 @@ export const TechnologyDescription: {
     description:
       "Sass is a CSS preprocessor with improved syntax and functionality",
   },
+  [Tc.python]: {
+    title: "Python",
+    description:
+      "Python is a multipurpose programming language useful for AI, ML, web apps, and more",
+  },
   [Tc.stripe]: {
     title: "Stripe",
     description: "Stripe is a payment processing platform",
-  },
-  [Tc.typescript]: {
-    title: "Typescript",
-    description: "Typescript is a JavaScript type-checking language",
   },
   [Tc.langchain]: {
     title: "LangChain",
@@ -58,6 +63,16 @@ export const TechnologyDescription: {
     description:
       "p5 is a JavaScript library for creative coding, interactive graphics, and games",
   },
+  [Tc.emotion]: {
+    title: "Emotion CSS",
+    description:
+      "Emotion is a library designed for writing css styles with JavaScript",
+  },
+  [Tc.kaboom]: {
+    title: "Kaboom.js",
+    description:
+      "Kaboom is a Javascript framework for making 2D browser-based games.",
+  },
 };
 
 export const SocialDescription: {
@@ -65,56 +80,61 @@ export const SocialDescription: {
     icon: string;
     title: string;
     url: string;
+    handle?: string;
+    description?: string;
   };
 } = {
   [SocialPlatform.Twitter]: {
     icon: "/icons/twitter.svg",
     title: "Twitter",
     url: "https://twitter.com/IroncladDev",
+    handle: "IroncladDev",
+    description:
+      "I create and post Programming / AI content on Twitter regularly.",
   },
   [SocialPlatform.Dev]: {
     icon: "/icons/dev.svg",
     title: "Dev.to",
     url: "https://dev.to/ironcladdev",
+    handle: "IroncladDev",
+    description:
+      "I occasionally make programming tutorials and articles on Dev.",
   },
   [SocialPlatform.Github]: {
     icon: "/icons/github.svg",
     title: "Github",
     url: "https://github.com/Conner1115",
+    handle: "Conner1115",
+    description:
+      "If you look carefully, you might catch me committing node_modules or .env.",
   },
   [SocialPlatform.Replit]: {
     icon: "/icons/replit.svg",
     title: "Replit",
     url: "https://replit.com/@IroncladDev",
-  },
-  [SocialPlatform.Email]: {
-    icon: "/icons/email.svg",
-    title: "Email",
-    url: "mailto:connerow1115@gmail.com",
-  },
-  [SocialPlatform.Polywork]: {
-    icon: "/icons/polywork.svg",
-    title: "Polywork",
-    url: "https://www.polywork.com/ironcladdev",
-  },
-  [SocialPlatform.Codepen]: {
-    icon: "/icons/codepen.svg",
-    title: "Codepen",
-    url: "https://codepen.io/IroncladDev",
+    handle: "IroncladDev",
+    description: "I host games, small websites, and part of my blog on Replit.",
   },
   [SocialPlatform.Discord]: {
     icon: "/icons/discord.svg",
     title: "Discord",
     url: "/discord",
+    handle: "ironcladdev",
+    description:
+      "Discord is the best place to reach me.  DMs are open for mutual servers.",
   },
   [SocialPlatform.Youtube]: {
     icon: "/icons/youtube.svg",
     title: "Youtube",
     url: "https://youtube.com/@IroncladDev",
+    handle: "IroncladDev",
+    description: "Nothing much on my youtube channel.",
   },
   [SocialPlatform.Codingame]: {
     icon: "/icons/codingame.svg",
     title: "Codingame",
     url: "https://www.codingame.com/profile/a8e83723bd266272a4564fe2bcd6a7907926134",
+    handle: "IroncladDev",
+    description: "I unleash my competitive programming desires on Codingame.",
   },
 };

@@ -1,9 +1,10 @@
-import useScroll from "application/hooks/useScroll";
 import { View, rcss, tokens, FlexSpacer, FlexRow } from "application/ui";
+import { useTransform, motion, useSpring } from "framer-motion";
+import { useScrollControl } from "application/hooks/useScroll";
+import { css } from "@emotion/react";
+import { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode } from "react";
-import { css } from "@emotion/react";
 
 const Styles = {
   NavContainer: css([
@@ -51,21 +52,34 @@ const NavLink = ({ text, href }: { text: ReactNode; href: string }) => {
   );
 };
 
-export const Navbar = ({ scrollRef }) => {
-  const { scrollTop, percentage, initialHeight } = useScroll(scrollRef);
+export const Navbar = () => {
+  const { scrollTop, initialHeight, percentage } = useScrollControl();
+
+  const smoothPercentage = useSpring(percentage, {
+    mass: 0.05,
+  });
+
+  const background = useTransform(
+    smoothPercentage,
+    (p) => `linear-gradient(
+    135deg,
+    ${tokens.backgroundRoot} 0%,
+    ${tokens.backgroundDefault} ${p * 100}%,
+    ${tokens.backgroundRoot} ${p * 100}%,
+    ${tokens.backgroundDefault} 100%
+  )`
+  );
+
+  const width = useTransform(scrollTop, (s) =>
+    s >= initialHeight ? "100%" : "0%"
+  );
 
   return (
     <>
       <View
         css={Styles.NavContainer}
         style={{
-          background: `linear-gradient(
-          135deg,
-          ${tokens.backgroundRoot} 0%,
-          ${tokens.backgroundDefault} ${percentage * 100}%,
-          ${tokens.backgroundRoot} ${percentage * 100}%,
-          ${tokens.backgroundDefault} 100%
-        )`,
+          background,
         }}
       >
         <View css={Styles.NavInner}>
@@ -101,13 +115,13 @@ export const Navbar = ({ scrollRef }) => {
             <NavLink href="/contact" text="Contact" />
           </View>
         </View>
-        <div
+        <motion.div
           style={{
             content: '""',
             position: "absolute",
             top: "100%",
             right: 0,
-            width: scrollTop >= initialHeight ? "100%" : "0%",
+            width,
             height: 2,
             background: tokens.linearDefault,
             transition: "0.25s",

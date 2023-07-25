@@ -1,9 +1,6 @@
 { pkgs }: {
 	deps = [
-    pkgs.nodejs-17_x
-		pkgs.cowsay
-		pkgs.unzip
-		pkgs.vim
+    pkgs.nodejs-18_x
     pkgs.yarn
 		pkgs.nodePackages.npm
     pkgs.nodePackages.typescript-language-server

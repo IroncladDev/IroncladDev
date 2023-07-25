@@ -1,8 +1,8 @@
 import DOMPurify from "isomorphic-dompurify";
-import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
-import Tw from "react-twemoji";
+import { marked } from "marked";
 import { useMemo } from "react";
+import Tw from "react-twemoji";
 
 const clean = (dirty: string) =>
   sanitizeHtml(dirty, {
@@ -21,6 +21,10 @@ const clean = (dirty: string) =>
       "ul",
       "ol",
       "li",
+      "h10",
+      "h2",
+      "h3",
+      "h4",
     ],
     allowedAttributes: {
       a: ["href", "target", "rel"],

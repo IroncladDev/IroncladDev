@@ -1,12 +1,13 @@
-import { View, rcss, tokens, Text, Button } from "application/ui";
-import { useGetJSONLazy } from "application/hooks/fetch";
+import { BlogPostPlatform as BlogPlatform } from "public/content/types";
 import { useQuery } from "application/hooks/gql/useQuery";
-import { RefObject, useEffect } from "react";
+import { View, rcss, tokens, Text } from "application/ui";
+import { useGetJSONLazy } from "application/hooks/fetch";
+import { useSpring, useTransform } from "framer-motion";
+import { ScrollControl } from "application/components";
 import { Heart, MessageSquare } from "react-feather";
 import { formatRelative } from "date-fns";
+import { useEffect } from "react";
 import { Markdown } from ".";
-import { BlogPostPlatform as BlogPlatform } from "public/content/types";
-import { Scroll } from "application/components";
 
 export interface BlogPostType {
   title: string;
@@ -20,12 +21,12 @@ export interface BlogPostType {
 
 export default function BlogPost({
   post,
-  scrollRef,
   scrollEnd,
+  index,
 }: {
   post: BlogPostType;
-  scrollRef: RefObject<HTMLDivElement>;
   scrollEnd: number;
+  index?: number;
 }) {
   return (
     <View
@@ -53,89 +54,100 @@ export default function BlogPost({
           },
         ]}
       >
-        <Scroll scrollRef={scrollRef} end={scrollEnd}>
-          {(p) => (
-            <View
-              css={[
-                rcss.flex.column,
-                rcss.borderRadius(8),
-                {
-                  border: `solid 1px ${tokens.backgroundHighest}`,
-                  transition: "ease-out 0.25s",
-                },
-              ]}
-              style={{
-                transform: `translatey(${(1 - p) * 15}vh)`,
-                opacity: p,
-              }}
-            >
-              {post.coverImage ? (
-                <View
-                  css={{
-                    "& img": {
-                      borderRadius: "8px 8px 0 0",
-                      width: "100%",
-                      borderBottom: `solid 1px ${tokens.backgroundHighest}`,
-                    },
-                  }}
-                >
-                  <img src={post.coverImage} alt="Cover Image" />
-                </View>
-              ) : null}
+        <ScrollControl end={scrollEnd}>
+          {(p) => {
+            const smooth = useSpring(p, {
+              mass: (index || 0) % 2 === 0 ? 0.25 : 1,
+            });
 
-              <View css={[rcss.p(16), rcss.flex.column, rcss.colWithGap(16)]}>
-                <a
-                  href={post.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  css={{ textDecoration: "none" }}
-                >
-                  <View css={[rcss.rowWithGap(8), rcss.align.center]}>
-                    <Text variant="subheadDefault" multiline>
-                      {post.title}
+            const transform = useTransform(
+              smooth,
+              (pr) => `translatey(${(1 - pr) * 15}vh)`
+            );
+
+            return (
+              <View
+                css={[
+                  rcss.flex.column,
+                  rcss.borderRadius(8),
+                  {
+                    border: `solid 1px ${tokens.backgroundHighest}`,
+                    transition: "ease-out 0.25s",
+                  },
+                ]}
+                style={{
+                  transform,
+                  opacity: smooth,
+                }}
+              >
+                {post.coverImage ? (
+                  <View
+                    css={{
+                      "& img": {
+                        borderRadius: "8px 8px 0 0",
+                        width: "100%",
+                        borderBottom: `solid 1px ${tokens.backgroundHighest}`,
+                      },
+                    }}
+                  >
+                    <img src={post.coverImage} alt="Cover Image" />
+                  </View>
+                ) : null}
+
+                <View css={[rcss.p(16), rcss.flex.column, rcss.colWithGap(16)]}>
+                  <a
+                    href={post.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    css={{ textDecoration: "none" }}
+                  >
+                    <View css={[rcss.rowWithGap(8), rcss.align.center]}>
+                      <Text variant="subheadDefault" multiline>
+                        {post.title}
+                      </Text>
+                    </View>
+                  </a>
+
+                  <View
+                    css={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      lineClamp: 2,
+                      WebkitBoxOrient: "vertical",
+                    }}
+                  >
+                    <Text color="dimmer" multiline>
+                      <Markdown markdown={post.description} />
                     </Text>
                   </View>
-                </a>
 
-                <View
-                  css={{
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    display: "-webkit-box",
-                    WebkitLineClamp: 2,
-                    lineClamp: 2,
-                    WebkitBoxOrient: "vertical",
-                  }}
-                >
-                  <Text color="dimmer" multiline>
-                    <Markdown markdown={post.description} />
-                  </Text>
-                </View>
-
-                <View css={[rcss.rowWithGap(16)]}>
-                  {post.reactionCount ? (
-                    <View css={[rcss.rowWithGap(4), rcss.align.center]}>
-                      <Heart size={16} />
-                      <Text>{post.reactionCount}</Text>
-                    </View>
-                  ) : null}
-                  {post.commentCount ? (
-                    <View css={[rcss.rowWithGap(4), rcss.align.center]}>
-                      <MessageSquare size={16} />
-                      <Text>{post.commentCount}</Text>
-                    </View>
-                  ) : null}
-                  <Text color="dimmer">
-                    {formatRelative(
-                      new Date(post?.timeCreated || 0),
-                      new Date()
-                    )}
-                  </Text>
+                  <View css={[rcss.rowWithGap(16)]}>
+                    {post.reactionCount ? (
+                      <View css={[rcss.rowWithGap(4), rcss.align.center]}>
+                        <Heart size={16} />
+                        <Text>{post.reactionCount}</Text>
+                      </View>
+                    ) : null}
+                    {post.commentCount ? (
+                      <View css={[rcss.rowWithGap(4), rcss.align.center]}>
+                        <MessageSquare size={16} />
+                        <Text>{post.commentCount}</Text>
+                      </View>
+                    ) : null}
+                    <Text color="dimmer">
+                      {formatRelative(
+                        new Date(post?.timeCreated || 0),
+                        new Date()
+                      )}
+                    </Text>
+                  </View>
                 </View>
               </View>
-            </View>
-          )}
-        </Scroll>
+            );
+          }}
+        </ScrollControl>
       </View>
     </View>
   );
@@ -144,13 +156,13 @@ export default function BlogPost({
 export function LazyBlogPost({
   post,
   platform,
-  scrollRef,
   scrollEnd,
+  index,
 }: {
   post: string;
   platform: BlogPlatform;
-  scrollRef: RefObject<HTMLDivElement>;
   scrollEnd: number;
+  index?: number;
 }) {
   const [loadDevPost, { data: devPost, loading: devPostLoading }] =
     useGetJSONLazy("https://dev.to/api/articles/" + post);
@@ -207,8 +219,8 @@ export function LazyBlogPost({
               reactionCount: devPost.public_reactions_count,
               commentCount: devPost.comments_count,
             }}
-            scrollRef={scrollRef}
             scrollEnd={scrollEnd}
+            index={index}
           />
         )}
       </>
@@ -232,8 +244,8 @@ export function LazyBlogPost({
               timeCreated: replitPost.post.timeCreated,
               commentCount: replitPost.post.replComment?.replies?.length,
             }}
-            scrollRef={scrollRef}
             scrollEnd={scrollEnd}
+            index={index}
           />
         )}
       </>

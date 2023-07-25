@@ -1,27 +1,37 @@
-import { View, Text, tokens, rcss, FlexSpacer } from "application/ui";
-import {
-  Navbar,
-  Section,
-  Markdown,
-  Footer,
-  Slant,
-} from "application/components";
-import { useRef, useEffect, useState } from "react";
-import useScroll from "application/hooks/useScroll";
-import Content from "public/content/blog";
-import { useGetJSON } from "application/hooks/fetch";
-import { useQuery } from "application/hooks/gql/useQuery";
+import { Section, Markdown, Footer, Slant } from "application/components";
 import BlogPost, { BlogPostType } from "application/components/BlogPost";
+import { View, Text, tokens, rcss, FlexSpacer } from "application/ui";
+import { useScrollControl } from "application/hooks/useScroll";
+import { useQuery } from "application/hooks/gql/useQuery";
+import { useSpring, useTransform } from "framer-motion";
+import { useGetJSON } from "application/hooks/fetch";
 import { ObjectAny } from "application/types";
+import { useEffect, useState } from "react";
+import Content from "public/content/blog";
 import Styles from "lib/baseStyles";
 
 const { title, description } = Content;
 
 export default function Blog() {
   const [posts, setPosts] = useState<Array<BlogPostType>>([]);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const { initialHeight, scrollTop } = useScroll(scrollRef);
+  const { initialHeight, scrollTop } = useScrollControl();
   const scrollEnd = initialHeight / 2;
+
+  const scrollSpring = useSpring(scrollTop, {
+    mass: 0.05,
+  });
+
+  const background = useTransform(
+    scrollSpring,
+    (scroll) => `linear-gradient(${
+      135 + (scroll / initialHeight) * (180 - 135)
+    }deg, 
+      ${tokens.backgroundRoot} 0%,
+      ${tokens.subgroundDefault} 50%,  
+      ${tokens.subgroundRoot} 50%,
+      ${tokens.backgroundDefault} 100%
+    )`
+  );
 
   const { data: devPosts, loading: devPostsLoading } = useGetJSON(
     "https://dev.to/api/articles?username=ironcladdev"
@@ -92,77 +102,62 @@ export default function Blog() {
   }, [devPostsLoading, replitPostsLoading, devPosts, replitPosts]);
 
   return (
-    <View css={Styles.Container}>
-      <Navbar scrollRef={scrollRef} />
-      <View css={Styles.BodyContainer} innerRef={scrollRef}>
-        {/* Header Section */}
-        <View
-          css={[rcss.center, rcss.flex.column]}
-          style={{
-            minHeight: initialHeight,
-            background: `linear-gradient(${
-              135 + (scrollTop / initialHeight) * (180 - 135)
-            }deg, 
-              ${tokens.backgroundRoot} 0%,
-              ${tokens.subgroundDefault} 50%,  
-              ${tokens.subgroundRoot} 50%,
-              ${tokens.backgroundDefault} 100%
-            )`,
-          }}
-        >
-          <View css={Styles.HeaderContentContainer}>
-            <View css={Styles.HeaderContentTextCenter}>
-              <View css={Styles.HeaderContents}>
-                <h1 css={Styles.HeaderTitleSecondary}>{title}</h1>
-              </View>
-              <FlexSpacer />
-              <Text color="dimmer" multiline>
-                <Markdown markdown={description} />
-              </Text>
+    <>
+      {/* Header Section */}
+      <View
+        css={[rcss.center, rcss.flex.column]}
+        style={{
+          minHeight: initialHeight,
+          background,
+        }}
+      >
+        <View css={Styles.HeaderContentContainer}>
+          <View css={Styles.HeaderContentTextCenter}>
+            <View css={Styles.HeaderContents}>
+              <h1 css={Styles.HeaderTitleSecondary}>{title}</h1>
             </View>
+            <FlexSpacer />
+            <Text color="dimmer" multiline>
+              <Markdown markdown={description} />
+            </Text>
           </View>
-          <Slant
-            path="polygon(100% 0, 0% 100%, 100% 100%)"
-            background={tokens.backgroundRoot}
-            borderTop
-          />
         </View>
+        <Slant
+          path="polygon(100% 0, 0% 100%, 100% 100%)"
+          background={tokens.backgroundRoot}
+          borderTop
+        />
+      </View>
 
-        {/* Posts */}
-        <Section
+      {/* Posts */}
+      <Section
+        css={[
+          rcss.p(16),
+          rcss.colWithGap(64),
+          {
+            paddingBottom: "50vh",
+          },
+        ]}
+        background={tokens.backgroundRoot}
+      >
+        <View
           css={[
+            rcss.flex.row,
+            rcss.justify.center,
             rcss.p(16),
-            rcss.colWithGap(64),
             {
-              paddingBottom: "50vh",
+              flexWrap: "wrap",
+              gap: 16,
             },
           ]}
-          background={tokens.backgroundRoot}
         >
-          <View
-            css={[
-              rcss.flex.row,
-              rcss.justify.center,
-              rcss.p(16),
-              {
-                flexWrap: "wrap",
-                gap: 16,
-              },
-            ]}
-          >
-            {posts.map((post, i) => (
-              <BlogPost
-                post={post}
-                scrollRef={scrollRef}
-                scrollEnd={scrollEnd}
-                key={i}
-              />
-            ))}
-          </View>
-        </Section>
+          {posts.map((post, i) => (
+            <BlogPost post={post} scrollEnd={scrollEnd} key={i} />
+          ))}
+        </View>
+      </Section>
 
-        <Footer />
-      </View>
-    </View>
+      <Footer />
+    </>
   );
 }

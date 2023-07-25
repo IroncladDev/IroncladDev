@@ -1,6 +1,7 @@
 import { tokens, rcss } from ".";
 import { ReactNode, RefObject } from "react";
 import { ObjectAny } from "application/types";
+import { motion } from "framer-motion";
 
 interface ViewProps {
   css?: ObjectAny | Array<ObjectAny>;
@@ -11,8 +12,8 @@ interface ViewProps {
 
 export const View = ({ children, innerRef, ...props }: ViewProps) => {
   return (
-    <div {...props} css={rcss.ViewElement} ref={innerRef}>
+    <motion.div {...props} css={rcss.ViewElement} ref={innerRef}>
       {children}
-    </div>
+    </motion.div>
   );
 };

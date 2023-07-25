@@ -5,8 +5,5 @@ export * from "./View";
 export * from "./Text";
 export * from "./Flexbox";
 export * from "./IconButton";
-export * from "./Input";
-export * from "./TextArea";
-export * from "./Select";
 export * from "./OutlineButton";
 export * from "./Tooltip";

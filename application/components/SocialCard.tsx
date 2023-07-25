@@ -1,22 +1,19 @@
-import { SocialPlatform } from "public/content/types";
 import { View, rcss, tokens, Text } from "application/ui";
-import { RefObject } from "react";
-import { Scroll } from ".";
 import { SocialDescription } from "public/content/misc";
+import { SocialPlatform } from "public/content/types";
+import { ScrollControl } from ".";
 
 export const SocialCard = ({
   url,
   platform,
-  scrollRef,
   scrollEnd,
 }: {
   url: string;
   platform: SocialPlatform;
-  scrollRef: RefObject<HTMLDivElement>;
   scrollEnd: number;
 }) => {
   return (
-    <Scroll scrollRef={scrollRef} end={scrollEnd}>
+    <ScrollControl end={scrollEnd}>
       {(p) => (
         <a
           href={url}
@@ -86,6 +83,6 @@ export const SocialCard = ({
           </View>
         </a>
       )}
-    </Scroll>
+    </ScrollControl>
   );
 };

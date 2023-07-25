@@ -1,184 +1,219 @@
 import { View, Text, tokens, rcss, FlexSpacer } from "application/ui";
+import { ScrollHeader } from "application/components/ScrollHeader";
+import { useSpring, useTransform, motion } from "framer-motion";
+import { useScrollControl } from "application/hooks/useScroll";
+import { TechnologyDescription } from "public/content/misc";
+import Content from "public/content/about";
+import Styles from "lib/baseStyles";
 import {
-  Navbar,
   Section,
-  Scroll,
   Markdown,
   Footer,
   Slant,
-  LogoHeader,
-  Paragraph,
-  SocialCard,
+  ScrollControl,
+  ParagraphControl,
 } from "application/components";
-import { useRef, RefObject } from "react";
-import useScroll from "application/hooks/useScroll";
-import { css } from "@emotion/react";
-import Content from "public/content/about";
-import Styles from "lib/baseStyles";
-import { TechnologyDescription } from "public/content/misc";
 
 const { title, description, introduction, journey, faq, skills, skillsHeader } =
   Content;
 
 export default function About() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const { initialHeight, scrollTop } = useScroll(scrollRef);
+  const { initialHeight, scrollTop } = useScrollControl();
   const scrollEnd = initialHeight / 2;
 
+  const scrollSpring = useSpring(scrollTop, {
+    mass: 0.05,
+  });
+
+  const background = useTransform(
+    scrollSpring,
+    (scroll) => `linear-gradient(${
+      135 + (scroll / initialHeight) * (180 - 135)
+    }deg, 
+      ${tokens.backgroundRoot} 0%,
+      ${tokens.subgroundDefault} 50%,  
+      ${tokens.subgroundRoot} 50%,
+      ${tokens.backgroundDefault} 100%
+    )`
+  );
+
   return (
-    <View css={Styles.Container}>
-      <Navbar scrollRef={scrollRef} />
-      <View css={Styles.BodyContainer} innerRef={scrollRef}>
-        {/* Header Section */}
-        <View
-          css={[rcss.center, rcss.flex.column]}
-          style={{
-            minHeight: initialHeight,
-            background: `linear-gradient(${
-              135 + (scrollTop / initialHeight) * (180 - 135)
-            }deg, 
-              ${tokens.backgroundRoot} 0%,
-              ${tokens.subgroundDefault} 50%,  
-              ${tokens.subgroundRoot} 50%,
-              ${tokens.backgroundDefault} 100%
-            )`,
-          }}
-        >
-          <View css={Styles.HeaderContentContainer}>
-            <View css={Styles.HeaderContentTextCenter}>
-              <View css={Styles.HeaderContents}>
-                <h1 css={Styles.HeaderTitleSecondary}>{title}</h1>
-              </View>
-              <FlexSpacer />
-              <Text color="dimmer" multiline>
-                <Markdown markdown={description} />
-              </Text>
+    <>
+      {/* Header Section */}
+      <View
+        css={[rcss.center, rcss.flex.column]}
+        style={{
+          minHeight: initialHeight,
+          background,
+        }}
+      >
+        <View css={Styles.HeaderContentContainer}>
+          <View css={Styles.HeaderContentTextCenter}>
+            <View css={Styles.HeaderContents}>
+              <h1 css={Styles.HeaderTitleSecondary}>{title}</h1>
             </View>
+            <FlexSpacer />
+            <Text color="dimmer" multiline>
+              <Markdown markdown={description} />
+            </Text>
           </View>
-          <Slant
-            path="polygon(100% 0, 0% 100%, 100% 100%)"
-            background={tokens.backgroundRoot}
-            borderTop
-          />
         </View>
-
-        <Section
-          css={[
-            rcss.p(16),
-            rcss.flex.column,
-            rcss.justify.center,
-            {
-              paddingBottom: 64,
-            },
-          ]}
+        <Slant
+          path="polygon(100% 0, 0% 100%, 100% 100%)"
           background={tokens.backgroundRoot}
-        >
-          <View css={[rcss.colWithGap(32)]}>
-            <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
-              {(p) => (
-                <h1 css={Styles.ScrollHeader(p)}>
-                  <Markdown markdown={introduction.title} />
-                </h1>
-              )}
-            </Scroll>
-            {introduction.paragraphs.map((text, i) => (
-              <Scroll scrollRef={scrollRef} end={scrollEnd} key={i}>
-                {(p) => <Paragraph percentage={p}>{text}</Paragraph>}
-              </Scroll>
-            ))}
-          </View>
-        </Section>
+          borderTop
+        />
+      </View>
 
-        <Section
-          css={[
-            rcss.p(16),
-            rcss.colWithGap(32),
-            {
-              paddingBottom: 64,
-            },
-          ]}
-          head={
-            <Slant
-              path="polygon(100% 0, 100% 100%, 0 0)"
-              background={tokens.backgroundRoot}
-            />
-          }
-          background={tokens.backgroundDefault}
-        >
-          <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
+      {/* About */}
+      <Section
+        css={[
+          rcss.p(16),
+          rcss.flex.column,
+          rcss.center,
+          {
+            paddingBottom: 64,
+          },
+        ]}
+        background={tokens.backgroundRoot}
+      >
+        <View css={[rcss.colWithGap(32), rcss.maxWidth(600)]}>
+          <ScrollControl end={scrollEnd} inline>
             {(p) => (
-              <h1 css={Styles.ScrollHeader(p)}>
-                <Markdown markdown={journey.title} />
-              </h1>
+              <ScrollHeader percentage={p}>
+                <Markdown markdown={introduction.title} />
+              </ScrollHeader>
             )}
-          </Scroll>
-          {journey.paragraphs.map((text, i) => (
-            <Scroll scrollRef={scrollRef} end={scrollEnd} key={i}>
-              {(p) => <Paragraph percentage={p}>{text}</Paragraph>}
-            </Scroll>
+          </ScrollControl>
+          {introduction.paragraphs.map((text, i) => (
+            <ScrollControl end={scrollEnd} key={i}>
+              {(p) => (
+                <ParagraphControl percentage={p} index={i}>
+                  {text}
+                </ParagraphControl>
+              )}
+            </ScrollControl>
           ))}
-        </Section>
+        </View>
+      </Section>
 
-        <Section
-          css={[
-            rcss.p(16),
-            rcss.flex.column,
-            rcss.justify.center,
-            {
-              paddingBottom: 64,
-            },
-          ]}
-          head={
-            <Slant
-              path="polygon(100% 0, 0% 100%, 0 0)"
-              background={tokens.backgroundDefault}
-            />
-          }
-          background={tokens.backgroundRoot}
-        >
-          <View css={[rcss.colWithGap(32)]}>
-            <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
-              {(p) => (
-                <h1 css={Styles.ScrollHeader(p)}>
-                  <Markdown markdown={faq.title} />
-                </h1>
-              )}
-            </Scroll>
-            {faq.paragraphs.map((text, i) => (
-              <Scroll scrollRef={scrollRef} end={scrollEnd} key={i}>
-                {(p) => <Paragraph percentage={p}>{text}</Paragraph>}
-              </Scroll>
-            ))}
-          </View>
-        </Section>
-
-        <Section
-          css={[
-            rcss.p(16),
-            rcss.colWithGap(32),
-            {
-              paddingBottom: "50vh",
-            },
-          ]}
-          head={
-            <Slant
-              path="polygon(100% 0, 0% 100%, 0 0)"
-              background={tokens.backgroundRoot}
-            />
-          }
-          background={tokens.backgroundDefault}
-        >
-          <Scroll scrollRef={scrollRef} end={scrollEnd} inline>
+      {/* Journey */}
+      <Section
+        css={[
+          rcss.p(16),
+          rcss.flex.column,
+          rcss.align.center,
+          {
+            paddingBottom: 64,
+          },
+        ]}
+        head={
+          <Slant
+            path="polygon(100% 0, 100% 100%, 0 0)"
+            background={tokens.backgroundRoot}
+          />
+        }
+        background={tokens.backgroundDefault}
+      >
+        <View css={[rcss.colWithGap(32), rcss.maxWidth(600)]}>
+          <ScrollControl end={scrollEnd} inline>
             {(p) => (
-              <h1 css={Styles.ScrollHeader(p)}>
-                <Markdown markdown={skillsHeader} />
-              </h1>
+              <ScrollHeader percentage={p}>
+                <Markdown markdown={journey.title} />
+              </ScrollHeader>
             )}
-          </Scroll>
-
-          {skills.map((sk, i) => (
-            <Scroll scrollRef={scrollRef} end={scrollEnd} key={i}>
+          </ScrollControl>
+          {journey.paragraphs.map((text, i) => (
+            <ScrollControl end={scrollEnd} key={i}>
               {(p) => (
+                <ParagraphControl percentage={p} index={i}>
+                  {text}
+                </ParagraphControl>
+              )}
+            </ScrollControl>
+          ))}
+        </View>
+      </Section>
+
+      {/* FAQ */}
+      <Section
+        css={[
+          rcss.p(16),
+          rcss.flex.column,
+          rcss.center,
+          {
+            paddingBottom: 64,
+          },
+        ]}
+        head={
+          <Slant
+            path="polygon(100% 0, 0% 100%, 0 0)"
+            background={tokens.backgroundDefault}
+          />
+        }
+        background={tokens.backgroundRoot}
+      >
+        <View css={[rcss.colWithGap(32), rcss.maxWidth(600)]}>
+          <ScrollControl end={scrollEnd} inline>
+            {(p) => (
+              <ScrollHeader percentage={p}>
+                <Markdown markdown={faq.title} />
+              </ScrollHeader>
+            )}
+          </ScrollControl>
+          {faq.paragraphs.map((text, i) => (
+            <ScrollControl end={scrollEnd} key={i}>
+              {(p) => (
+                <ParagraphControl percentage={p} index={i}>
+                  {text}
+                </ParagraphControl>
+              )}
+            </ScrollControl>
+          ))}
+        </View>
+      </Section>
+
+      {/* Skills */}
+      <Section
+        css={[
+          rcss.p(16),
+          rcss.colWithGap(32),
+          {
+            paddingBottom: "50vh",
+          },
+        ]}
+        head={
+          <Slant
+            path="polygon(100% 0, 0% 100%, 0 0)"
+            background={tokens.backgroundRoot}
+          />
+        }
+        background={tokens.backgroundDefault}
+      >
+        <ScrollControl end={scrollEnd} inline>
+          {(p) => (
+            <ScrollHeader percentage={p}>
+              <Markdown markdown={skillsHeader} />
+            </ScrollHeader>
+          )}
+        </ScrollControl>
+
+        {skills.map((sk, i) => (
+          <ScrollControl end={scrollEnd} key={i}>
+            {(p) => {
+              const smooth = useSpring(p, {
+                mass: 0.5,
+              });
+              const transformLeft = useTransform(
+                smooth,
+                (p) => `translatex(-${(1 - p) * 100}%)`
+              );
+              const transformRight = useTransform(
+                smooth,
+                (p) => `translatex(${(1 - p) * 100}%)`
+              );
+
+              return (
                 <View
                   css={[rcss.flex.grow(1), rcss.flex.row, rcss.justify.center]}
                 >
@@ -194,7 +229,7 @@ export default function About() {
                     ]}
                     style={{ opacity: p }}
                   >
-                    <img
+                    <motion.img
                       src={`/skills/${sk}.webp`}
                       width="64"
                       height="64"
@@ -205,7 +240,7 @@ export default function About() {
                         },
                       ]}
                       style={{
-                        transform: `translatex(-${(1 - p) * 100}%)`,
+                        transform: transformLeft,
                       }}
                       alt="pic"
                     />
@@ -217,7 +252,7 @@ export default function About() {
                         },
                       ]}
                       style={{
-                        transform: `translatex(${(1 - p) * 100}%)`,
+                        transform: transformRight,
                       }}
                     >
                       <Text variant="subheadDefault">
@@ -229,13 +264,13 @@ export default function About() {
                     </View>
                   </View>
                 </View>
-              )}
-            </Scroll>
-          ))}
-        </Section>
+              );
+            }}
+          </ScrollControl>
+        ))}
+      </Section>
 
-        <Footer />
-      </View>
-    </View>
+      <Footer />
+    </>
   );
 }

@@ -1,15 +1,7 @@
-import {
-  View,
-  tokens,
-  rcss,
-  FlexRow,
-  Text,
-  FlexSpacer,
-  FlexCol,
-} from "application/ui";
 import { css } from "@emotion/react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { View, tokens, rcss, FlexRow, Text, FlexCol } from "application/ui";
 
 const Styles = {
   Container: css([
