@@ -70,7 +70,7 @@ const Content: IndexPageContent = {
         platform: SocialPlatform.Twitter,
       },
       {
-        url: "https://github.com/Conner1115",
+        url: "https://github.com/IroncladDev",
         platform: SocialPlatform.Github,
       },
       {

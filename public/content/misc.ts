@@ -103,8 +103,8 @@ export const SocialDescription: {
   [SocialPlatform.Github]: {
     icon: "/icons/github.svg",
     title: "Github",
-    url: "https://github.com/Conner1115",
-    handle: "Conner1115",
+    url: "https://github.com/IroncladDev",
+    handle: "IroncladDev",
     description:
       "If you look carefully, you might catch me committing node_modules or .env.",
   },
