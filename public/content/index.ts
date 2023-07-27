@@ -48,7 +48,7 @@ const Content: IndexPageContent = {
       },
       {
         target:
-          "replit/introducing-amjadgpt-an-ai-chatbot-that-acts-like-the-ceo-of-replit-4kl1",
+          "ironcladdev/introducing-amjadgpt-an-ai-chatbot-that-acts-like-the-ceo-of-replit-4kl1",
         platform: BlogPostPlatform.Dev,
       },
       {

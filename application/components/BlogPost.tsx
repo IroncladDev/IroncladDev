@@ -207,13 +207,13 @@ export function LazyBlogPost({
         ) : (
           <BlogPost
             post={{
-              title: devPost.title,
-              description: devPost.body_markdown.slice(0, 360) + "...",
-              url: devPost.canonical_url,
-              coverImage: devPost.cover_image,
-              timeCreated: devPost.created_at,
-              reactionCount: devPost.public_reactions_count,
-              commentCount: devPost.comments_count,
+              title: devPost?.title || "",
+              description: devPost.body_markdown?.slice(0, 360) + "...",
+              url: devPost?.canonical_url || "",
+              coverImage: devPost?.cover_image || "",
+              timeCreated: devPost?.created_at || "",
+              reactionCount: devPost?.public_reactions_count || 0,
+              commentCount: devPost?.comments_count || 0,
             }}
             index={index}
           />
