@@ -12,11 +12,21 @@ export function useScrollControl() {
   const [initialHeight, setInitialHeight] = useState(0);
   const [outerHeight, setOuterHeight] = useState(0);
 
-  useEffect(() => {
+  const updateRefs = () => {
     if (!scrollRef.current) return;
 
     setInitialHeight(scrollRef.current.offsetHeight);
     setOuterHeight(scrollRef.current.scrollHeight);
+  };
+
+  useEffect(() => {
+    updateRefs();
+
+    window.addEventListener("resize", updateRefs);
+
+    return () => {
+      window.removeEventListener("resize", updateRefs);
+    };
   }, [scrollRef]);
 
   return {

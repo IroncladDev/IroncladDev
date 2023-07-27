@@ -35,19 +35,16 @@ const Styles = {
 
 const NavLink = ({ text, href }: { text: ReactNode; href: string }) => {
   return (
-    <Link href={href} legacyBehavior>
-      <a
-        css={[
-          rcss.handleMaxWidth(512, {
-            fontSize: tokens.fontSizeSmall,
-          }),
-          {
-            textDecoration: "none",
-          },
-        ]}
-      >
-        {text}
-      </a>
+    <Link
+      css={[
+        rcss.handleMaxWidth(512, {
+          fontSize: tokens.fontSizeSmall,
+        }),
+      ]}
+      style={{ textDecoration: "none" }}
+      href={href}
+    >
+      {text}
     </Link>
   );
 };

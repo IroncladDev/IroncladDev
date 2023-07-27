@@ -43,6 +43,7 @@ export const Button = ({
           },
         },
       ]}
+      aria-label={text}
       {...props}
     >
       <View

@@ -6,14 +6,12 @@ import { ScrollControl } from ".";
 export const SocialCard = ({
   url,
   platform,
-  scrollEnd,
 }: {
   url: string;
   platform: SocialPlatform;
-  scrollEnd: number;
 }) => {
   return (
-    <ScrollControl end={scrollEnd}>
+    <ScrollControl>
       {(p) => (
         <a
           href={url}
@@ -57,6 +55,7 @@ export const SocialCard = ({
               <img
                 src={SocialDescription[platform].icon}
                 width={32}
+                height={32}
                 alt="social platform icon"
               />
             </View>

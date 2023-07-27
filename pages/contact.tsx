@@ -57,7 +57,7 @@ function Card({
             },
           ]}
         >
-          <img src={icon} width={64} height={64} />
+          <img src={icon} width={64} height={64} alt="icon" />
         </View>
         <View
           css={[

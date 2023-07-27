@@ -10,7 +10,6 @@ const { title, description, projects } = Content;
 
 export default function Work() {
   const { initialHeight, scrollTop } = useScrollControl();
-  const scrollEnd = initialHeight / 2;
 
   const scrollSpring = useSpring(scrollTop, {
     mass: 0.05,
@@ -68,7 +67,7 @@ export default function Work() {
         background={tokens.backgroundRoot}
       >
         {projects.map((project, i) => (
-          <Project key={i} project={project} scrollEnd={scrollEnd} />
+          <Project key={i} project={project} />
         ))}
       </Section>
 

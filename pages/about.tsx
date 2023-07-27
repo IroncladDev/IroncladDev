@@ -1,6 +1,6 @@
 import { View, Text, tokens, rcss, FlexSpacer } from "application/ui";
 import { ScrollHeader } from "application/components/ScrollHeader";
-import { useSpring, useTransform, motion } from "framer-motion";
+import { useSpring, useTransform, motion, MotionValue } from "framer-motion";
 import { useScrollControl } from "application/hooks/useScroll";
 import { TechnologyDescription } from "public/content/misc";
 import Content from "public/content/about";
@@ -13,13 +13,13 @@ import {
   ScrollControl,
   ParagraphControl,
 } from "application/components";
+import { Technology } from "public/content/types";
 
 const { title, description, introduction, journey, faq, skills, skillsHeader } =
   Content;
 
 export default function About() {
   const { initialHeight, scrollTop } = useScrollControl();
-  const scrollEnd = initialHeight / 2;
 
   const scrollSpring = useSpring(scrollTop, {
     mass: 0.05,
@@ -78,7 +78,7 @@ export default function About() {
         background={tokens.backgroundRoot}
       >
         <View css={[rcss.colWithGap(32), rcss.maxWidth(600)]}>
-          <ScrollControl end={scrollEnd} inline>
+          <ScrollControl inline>
             {(p) => (
               <ScrollHeader percentage={p}>
                 <Markdown markdown={introduction.title} />
@@ -86,7 +86,7 @@ export default function About() {
             )}
           </ScrollControl>
           {introduction.paragraphs.map((text, i) => (
-            <ScrollControl end={scrollEnd} key={i}>
+            <ScrollControl key={i}>
               {(p) => (
                 <ParagraphControl percentage={p} index={i}>
                   {text}
@@ -116,7 +116,7 @@ export default function About() {
         background={tokens.backgroundDefault}
       >
         <View css={[rcss.colWithGap(32), rcss.maxWidth(600)]}>
-          <ScrollControl end={scrollEnd} inline>
+          <ScrollControl inline>
             {(p) => (
               <ScrollHeader percentage={p}>
                 <Markdown markdown={journey.title} />
@@ -124,7 +124,7 @@ export default function About() {
             )}
           </ScrollControl>
           {journey.paragraphs.map((text, i) => (
-            <ScrollControl end={scrollEnd} key={i}>
+            <ScrollControl key={i}>
               {(p) => (
                 <ParagraphControl percentage={p} index={i}>
                   {text}
@@ -154,7 +154,7 @@ export default function About() {
         background={tokens.backgroundRoot}
       >
         <View css={[rcss.colWithGap(32), rcss.maxWidth(600)]}>
-          <ScrollControl end={scrollEnd} inline>
+          <ScrollControl inline>
             {(p) => (
               <ScrollHeader percentage={p}>
                 <Markdown markdown={faq.title} />
@@ -162,7 +162,7 @@ export default function About() {
             )}
           </ScrollControl>
           {faq.paragraphs.map((text, i) => (
-            <ScrollControl end={scrollEnd} key={i}>
+            <ScrollControl key={i}>
               {(p) => (
                 <ParagraphControl percentage={p} index={i}>
                   {text}
@@ -190,7 +190,7 @@ export default function About() {
         }
         background={tokens.backgroundDefault}
       >
-        <ScrollControl end={scrollEnd} inline>
+        <ScrollControl inline>
           {(p) => (
             <ScrollHeader percentage={p}>
               <Markdown markdown={skillsHeader} />
@@ -199,78 +199,78 @@ export default function About() {
         </ScrollControl>
 
         {skills.map((sk, i) => (
-          <ScrollControl end={scrollEnd} key={i}>
-            {(p) => {
-              const smooth = useSpring(p, {
-                mass: 0.5,
-              });
-              const transformLeft = useTransform(
-                smooth,
-                (p) => `translatex(-${(1 - p) * 100}%)`
-              );
-              const transformRight = useTransform(
-                smooth,
-                (p) => `translatex(${(1 - p) * 100}%)`
-              );
-
-              return (
-                <View
-                  css={[rcss.flex.grow(1), rcss.flex.row, rcss.justify.center]}
-                >
-                  <View
-                    css={[
-                      rcss.flex.row,
-                      rcss.rowWithGap(16),
-                      rcss.align.center,
-                      {
-                        maxWidth: 500,
-                        flex: "1 1 0",
-                      },
-                    ]}
-                    style={{ opacity: p }}
-                  >
-                    <motion.img
-                      src={`/skills/${sk}.webp`}
-                      width="64"
-                      height="64"
-                      css={[
-                        rcss.borderRadius(8),
-                        {
-                          border: `solid 1px ${tokens.backgroundHigher}`,
-                        },
-                      ]}
-                      style={{
-                        transform: transformLeft,
-                      }}
-                      alt="pic"
-                    />
-                    <View
-                      css={[
-                        rcss.colWithGap(8),
-                        {
-                          flex: "1 1 0",
-                        },
-                      ]}
-                      style={{
-                        transform: transformRight,
-                      }}
-                    >
-                      <Text variant="subheadDefault">
-                        {TechnologyDescription[sk].title}
-                      </Text>
-                      <Text color="dimmer" multiline>
-                        {TechnologyDescription[sk].description}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-              );
-            }}
+          <ScrollControl key={i}>
+            {(p) => <Skill p={p} sk={sk} />}
           </ScrollControl>
         ))}
       </Section>
 
       <Footer />
     </>
+  );
+}
+
+function Skill({ sk, p }: { sk: Technology; p: MotionValue<number> }) {
+  const smooth = useSpring(p, {
+    mass: 0.5,
+  });
+  const transformLeft = useTransform(
+    smooth,
+    (p) => `translatex(-${(1 - p) * 100}%)`
+  );
+  const transformRight = useTransform(
+    smooth,
+    (p) => `translatex(${(1 - p) * 100}%)`
+  );
+
+  return (
+    <View css={[rcss.flex.grow(1), rcss.flex.row, rcss.justify.center]}>
+      <View
+        css={[
+          rcss.flex.row,
+          rcss.rowWithGap(16),
+          rcss.align.center,
+          {
+            maxWidth: 500,
+            flex: "1 1 0",
+          },
+        ]}
+        style={{ opacity: p }}
+      >
+        <motion.img
+          src={`/skills/${sk}.webp`}
+          width="64"
+          height="64"
+          css={[
+            rcss.borderRadius(8),
+            {
+              border: `solid 1px ${tokens.backgroundHigher}`,
+            },
+          ]}
+          style={{
+            transform: transformLeft,
+          }}
+          alt="pic"
+        />
+        <View
+          css={[
+            rcss.colWithGap(8),
+            {
+              flex: "1 1 0",
+            },
+          ]}
+          style={{
+            transform: transformRight,
+          }}
+        >
+          <Text variant="subheadDefault">
+            {TechnologyDescription[sk].title}
+          </Text>
+          <Text color="dimmer" multiline>
+            {TechnologyDescription[sk].description}
+          </Text>
+        </View>
+      </View>
+    </View>
   );
 }

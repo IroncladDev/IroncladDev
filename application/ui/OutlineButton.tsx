@@ -43,6 +43,7 @@ export const OutlineButton = ({
           },
         },
       ]}
+      aria-label={text}
       {...props}
     >
       <View css={[rcss.flex.row, rcss.rowWithGap(8), rcss.center]}>

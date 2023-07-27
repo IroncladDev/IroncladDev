@@ -52,7 +52,7 @@ function FaceImage({ percentage }: { percentage: MotionValue<number> }) {
       style={{ border }}
     >
       <motion.img
-        src="/me.jpg"
+        src="/me.webp"
         alt="oh look its a face reveal"
         css={[
           rcss.handleMaxWidth(675, {
@@ -160,7 +160,8 @@ function Header() {
           onClick={() => {
             scrollRef.current?.scrollBy(0, window.innerHeight);
           }}
-        ></button>
+          aria-label="scroll down"
+        />
       </View>
       <Slant
         path="polygon(100% 0, 0% 100%, 100% 100%)"
@@ -172,9 +173,6 @@ function Header() {
 }
 
 function Introduction() {
-  const { initialHeight } = useScrollControl();
-  const scrollEnd = initialHeight / 2;
-
   return (
     <View
       css={[
@@ -211,7 +209,7 @@ function Introduction() {
           ]}
         >
           <div>
-            <ScrollControl end={scrollEnd} inline>
+            <ScrollControl inline>
               {(p) => (
                 <ScrollHeader percentage={p}>
                   <Markdown markdown={about.title} />
@@ -220,7 +218,7 @@ function Introduction() {
             </ScrollControl>
           </div>
           {about.paragraphs.map((text, i) => (
-            <ScrollControl end={scrollEnd} key={i}>
+            <ScrollControl key={i}>
               {(p) => (
                 <ParagraphControl percentage={p} index={i}>
                   {text}
@@ -238,10 +236,8 @@ function Introduction() {
             rcss.align.center,
           ]}
         >
-          <ScrollControl end={scrollEnd}>
-            {(p) => <FaceImage percentage={p} />}
-          </ScrollControl>
-          <ScrollControl end={scrollEnd} inline>
+          <ScrollControl>{(p) => <FaceImage percentage={p} />}</ScrollControl>
+          <ScrollControl inline>
             {(p) => (
               <FadeUpButton percentage={p} href="/about" text="Read More >>" />
             )}
@@ -253,9 +249,6 @@ function Introduction() {
 }
 
 function Projects() {
-  const { initialHeight } = useScrollControl();
-  const scrollEnd = initialHeight / 2;
-
   return (
     <Section
       css={[rcss.p(16), rcss.colWithGap(64)]}
@@ -268,14 +261,14 @@ function Projects() {
       }
     >
       <View css={[rcss.colWithGap(16)]}>
-        <ScrollControl end={scrollEnd} inline>
+        <ScrollControl inline>
           {(p) => (
             <ScrollHeader percentage={p}>
               <Markdown markdown={projects.title} />
             </ScrollHeader>
           )}
         </ScrollControl>
-        <ScrollControl end={scrollEnd}>
+        <ScrollControl>
           {(p) => (
             <ParagraphControl percentage={p}>
               {projects.description}
@@ -285,10 +278,10 @@ function Projects() {
       </View>
 
       {projects.projects.map((project, i) => (
-        <Project key={i} project={project} scrollEnd={scrollEnd} />
+        <Project key={i} project={project} />
       ))}
 
-      <ScrollControl end={scrollEnd} inline>
+      <ScrollControl inline>
         {(p) => (
           <FadeUpButton
             percentage={p}
@@ -302,9 +295,6 @@ function Projects() {
 }
 
 function BlogPosts() {
-  const { initialHeight } = useScrollControl();
-  const scrollEnd = initialHeight / 2;
-
   return (
     <Section
       css={[rcss.p(16), rcss.colWithGap(32)]}
@@ -316,14 +306,14 @@ function BlogPosts() {
         />
       }
     >
-      <ScrollControl end={scrollEnd} inline>
+      <ScrollControl inline>
         {(p) => (
           <ScrollHeader percentage={p}>
             <Markdown markdown={blog.title} />
           </ScrollHeader>
         )}
       </ScrollControl>
-      <ScrollControl end={scrollEnd}>
+      <ScrollControl>
         {(p) => (
           <ParagraphControl percentage={p}>{blog.description}</ParagraphControl>
         )}
@@ -340,17 +330,11 @@ function BlogPosts() {
         ]}
       >
         {blog.posts.map(({ target: post, platform }, i) => (
-          <LazyBlogPost
-            post={post}
-            platform={platform}
-            key={i}
-            scrollEnd={scrollEnd}
-            index={i}
-          />
+          <LazyBlogPost post={post} platform={platform} key={i} index={i} />
         ))}
       </View>
 
-      <ScrollControl end={scrollEnd} inline>
+      <ScrollControl inline>
         {(p) => (
           <FadeUpButton percentage={p} href="/blog" text="Read More >>" />
         )}
@@ -360,9 +344,6 @@ function BlogPosts() {
 }
 
 function Contact() {
-  const { initialHeight } = useScrollControl();
-  const scrollEnd = initialHeight / 2;
-
   return (
     <Section
       css={[rcss.p(16), rcss.align.center]}
@@ -388,7 +369,7 @@ function Contact() {
           },
         ]}
       >
-        <ScrollControl end={scrollEnd} inline>
+        <ScrollControl inline>
           {(p) => (
             <ScrollHeader percentage={p}>
               <Markdown markdown={contact.title} />
@@ -398,12 +379,7 @@ function Contact() {
 
         <View css={[rcss.colWithGap(16)]}>
           {contact.socials.map(({ url, platform }, i) => (
-            <SocialCard
-              url={url}
-              platform={platform}
-              scrollEnd={scrollEnd}
-              key={i}
-            />
+            <SocialCard url={url} platform={platform} key={i} />
           ))}
         </View>
       </View>

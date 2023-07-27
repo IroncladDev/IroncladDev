@@ -21,11 +21,9 @@ export interface BlogPostType {
 
 export default function BlogPost({
   post,
-  scrollEnd,
   index,
 }: {
   post: BlogPostType;
-  scrollEnd: number;
   index?: number;
 }) {
   return (
@@ -54,7 +52,7 @@ export default function BlogPost({
           },
         ]}
       >
-        <ScrollControl end={scrollEnd}>
+        <ScrollControl>
           {(p) => {
             const smooth = useSpring(p, {
               mass: (index || 0) % 2 === 0 ? 0.25 : 1,
@@ -156,12 +154,10 @@ export default function BlogPost({
 export function LazyBlogPost({
   post,
   platform,
-  scrollEnd,
   index,
 }: {
   post: string;
   platform: BlogPlatform;
-  scrollEnd: number;
   index?: number;
 }) {
   const [loadDevPost, { data: devPost, loading: devPostLoading }] =
@@ -219,7 +215,6 @@ export function LazyBlogPost({
               reactionCount: devPost.public_reactions_count,
               commentCount: devPost.comments_count,
             }}
-            scrollEnd={scrollEnd}
             index={index}
           />
         )}
@@ -244,7 +239,6 @@ export function LazyBlogPost({
               timeCreated: replitPost.post.timeCreated,
               commentCount: replitPost.post.replComment?.replies?.length,
             }}
-            scrollEnd={scrollEnd}
             index={index}
           />
         )}

@@ -15,7 +15,6 @@ const { title, description } = Content;
 export default function Blog() {
   const [posts, setPosts] = useState<Array<BlogPostType>>([]);
   const { initialHeight, scrollTop } = useScrollControl();
-  const scrollEnd = initialHeight / 2;
 
   const scrollSpring = useSpring(scrollTop, {
     mass: 0.05,
@@ -152,7 +151,7 @@ export default function Blog() {
           ]}
         >
           {posts.map((post, i) => (
-            <BlogPost post={post} scrollEnd={scrollEnd} key={i} />
+            <BlogPost post={post} key={i} />
           ))}
         </View>
       </Section>

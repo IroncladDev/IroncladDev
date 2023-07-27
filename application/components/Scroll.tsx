@@ -12,16 +12,14 @@ import {
 
 export const ScrollControl = ({
   children,
-  end = 0,
   inline,
   ...props
 }: {
   children: (percentage: MotionValue<number>) => ReactElement;
-  end?: number;
   inline?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollTop } = useScrollControl();
+  const { scrollTop, initialHeight } = useScrollControl();
   const inView = useInView(containerRef);
   const percentage = useMotionValue(0);
   const scrollRef = useScrollRef();
@@ -30,8 +28,9 @@ export const ScrollControl = ({
     if (!inView || !scrollRef.current || !containerRef.current) return;
 
     const box = containerRef.current.getBoundingClientRect();
-    const totalHeight = window.innerHeight - end;
-    const scrollValue = (totalHeight - (Number(box?.top) - end)) / totalHeight;
+    const totalHeight = window.innerHeight - initialHeight / 2;
+    const scrollValue =
+      (totalHeight - (Number(box?.top) - initialHeight / 2)) / totalHeight;
 
     percentage.set(constrain(scrollValue, 0, 1));
   });

@@ -58,6 +58,7 @@ const PreviewImage = ({
           "&:hover": {
             border: `solid 2px ${tokens.accentPrimaryStronger}`,
             transform: `scale(1.025)`,
+            cursor: "pointer",
           },
         },
       ]}
@@ -85,19 +86,13 @@ const monthNames = [
   "December",
 ];
 
-export const Project = ({
-  project,
-  scrollEnd,
-}: {
-  project: ProjectType;
-  scrollEnd: number;
-}) => {
+export const Project = ({ project }: { project: ProjectType }) => {
   const [slideIndex, setSlideIndex] = useState(0);
 
   const date = new Date(project.timeCreated);
 
   return (
-    <ScrollControl end={scrollEnd}>
+    <ScrollControl>
       {(p) => {
         const transform = useTransform(
           p,
@@ -146,7 +141,7 @@ export const Project = ({
                     : slideIndex + 2
                 )
                 .map((url, i) => (
-                  <ScrollControl key={i} end={scrollEnd}>
+                  <ScrollControl key={i}>
                     {(p) => (
                       <PreviewImage
                         key={i}

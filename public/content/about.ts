@@ -27,14 +27,14 @@ const Content: AboutContent = {
       \nIn the next eight months, I did a three-month internship at [Saasbox](https://saasbox.net), raced solving algorithms on [Codingame](https://codingame.com), learned and build multiple projects with Next.js, and took up the responsibility of moderating the Replit community.
       \nI made some impactful improvements to Replit's moderation tools and did some contract work for their Trust and Safety team.  I decided it was time to apply for Replit again.`,
       `### Opportunity ✨
-      \nAfter two more attempts, I got hired by Replit as a Support Engineer.  For the next year, I
-      - Built more powerful anti-abuse tools
-      - Fixed bugs and added features I'd been requesting
-      - Improved some of Replit's Support Tools
-      - Remodeled and maintained the docs
-      - Built some AI projects
-      - Maintained the [Replit Extensions Client](https://github.com/replit/extensions)
-      - Helped out with DevRel & Marketing on twitter`,
+      \nAfter two more attempts, I got hired by Replit as a Support Engineer.  For the next year, I:
+\n- Built and improved anti-abuse tools
+- Fixed some small bugs and added some new features
+- Improved some of Replit's Support Tools
+- Remodeled and maintained the docs
+- Built some AI projects
+- Maintained the [Replit Extensions Client](https://github.com/replit/extensions)
+- Helped out with DevRel & Marketing on twitter`,
       `### Next steps
       \nIn the next step of my life, I want to dive deeper into Content Creation and Entrepreneurship.`,
     ],

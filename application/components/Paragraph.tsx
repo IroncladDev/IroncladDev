@@ -9,7 +9,7 @@ export const ParagraphControl = ({
   index = 0,
   ...props
 }: {
-  children: React.ReactNode;
+  children: string;
   percentage: MotionValue<number>;
   maxLines?: number;
   index?: number;
