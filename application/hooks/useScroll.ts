@@ -9,9 +9,7 @@ export function useScrollControl() {
     layoutEffect: false,
   });
 
-  const windowHeight = typeof window !== "undefined" ? window.innerHeight : 0;
-
-  const [initialHeight, setInitialHeight] = useState(windowHeight);
+  const [initialHeight, setInitialHeight] = useState(0);
 
   const updateRefs = () => {
     if (!scrollRef.current) return;
