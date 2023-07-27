@@ -9,14 +9,14 @@ export function useScrollControl() {
     layoutEffect: false,
   });
 
-  const [initialHeight, setInitialHeight] = useState(0);
-  const [outerHeight, setOuterHeight] = useState(0);
+  const windowHeight = typeof window !== "undefined" ? window.innerHeight : 0;
+
+  const [initialHeight, setInitialHeight] = useState(windowHeight);
 
   const updateRefs = () => {
     if (!scrollRef.current) return;
 
     setInitialHeight(scrollRef.current.offsetHeight);
-    setOuterHeight(scrollRef.current.scrollHeight);
   };
 
   useEffect(() => {
@@ -33,7 +33,6 @@ export function useScrollControl() {
     percentage: scrollYProgress,
     scrollTop: scrollY,
     initialHeight,
-    outerHeight,
     scrollRef,
   };
 }
