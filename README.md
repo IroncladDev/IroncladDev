@@ -1,5 +1,3 @@
-![Cover Image](https://connerow.dev/brand/banner.png)
-
 # 👋 Hello, I'm IroncladDev
 
 I'm IroncladDev, a seventeen-year-old Fullstack Web Developer who lives out in the country. 
