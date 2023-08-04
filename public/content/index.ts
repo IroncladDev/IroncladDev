@@ -66,7 +66,7 @@ const Content: IndexPageContent = {
     title: "Let's get in touch",
     socials: [
       {
-        url: "https://twitter.com/intent/follow?screen_name=IroncladDev",
+        url: "https://twitter.com/IroncladDev",
         platform: SocialPlatform.Twitter,
       },
       {
