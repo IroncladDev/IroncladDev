@@ -80,8 +80,8 @@ export default function Home() {
     <>
       {/* Header Section */}
       <div css={[rcss.flex.column, rcss.center, rcss.p(16)]}>
-        <div css={[rcss.p(16), rcss.colWithGap(16)]}>
-          <div css={[rcss.flex.column, rcss.colWithGap(8), rcss.align.center]}>
+        <div css={[rcss.colWithGap(16)]}>
+          <div css={[rcss.flex.column, rcss.colWithGap(8), rcss.align.center, rcss.p(16), rcss.minHeight('100vh')]}>
             <h2 css={{ marginTop: 0 }}>Color Tokens</h2>
 
             <div
