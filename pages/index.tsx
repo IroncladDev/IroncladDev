@@ -134,7 +134,7 @@ function Header() {
     <View
       css={[rcss.center, rcss.flex.column]}
       style={{
-        minHeight: 'calc(100vh - 100px)',
+        minHeight: "calc(100vh - 100px)",
         background,
       }}
     >
