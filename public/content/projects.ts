@@ -74,6 +74,24 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     ],
   },
   {
+    title: "Agape Chiropractic TX",
+    slides: [
+      `I rebuilt my dad's home business chiropractic website with Framer Motion and Next.js.  The first version (bottom of page) is a literal embarrassment compared to this one.
+        \nI took on a minimalistic black-on-white design and used some fancy animations with the aid of Framer Motion.  It turned out as one of the cleanest and most polished websites I'd ever built.`,
+      `I'm really happy how this one turned out, and thanks to this, I'd adopted Framer Motion (React) as a new technology for my programming stack.
+        \nLove you dad <3`,
+    ],
+    timeCreated: "June 2023",
+    stack: [Tc.next, Tc.react, Tc.emotion],
+    url: "https://agapechiro-tx.com/",
+    sourceCodeUrl: "https://github.com/Conner1115/AgapeChirow",
+    images: [
+      "/images/agapev2/index.png",
+      "/images/agapev2/services.png",
+      "/images/agapev2/contact.png",
+    ],
+  },
+  {
     title: "Liberty Cappy",
     slides: [
       `I built a website for [Liberty Cappy](https://twitter.com/LibertyCappy), a large Twitter/X influencer.
@@ -91,24 +109,6 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       "/images/cappy/about.png",
       "/images/cappy/shop.png",
       "/images/cappy/accounts.png",
-    ],
-  },
-  {
-    title: "Agape Chiropractic TX",
-    slides: [
-      `I rebuilt my dad's home business chiropractic website with Framer Motion and Next.js.  The first version (bottom of page) is a literal embarrassment compared to this one.
-        \nI took on a minimalistic black-on-white design and used some fancy animations with the aid of Framer Motion.  It turned out as one of the cleanest and most polished websites I'd ever built.`,
-      `I'm really happy how this one turned out, and thanks to this, I'd adopted Framer Motion (React) as a new technology for my programming stack.
-        \nLove you dad <3`,
-    ],
-    timeCreated: "June 2023",
-    stack: [Tc.next, Tc.react, Tc.emotion],
-    url: "https://agapechiro-tx.com/",
-    sourceCodeUrl: "https://github.com/Conner1115/AgapeChirow",
-    images: [
-      "/images/agapev2/index.png",
-      "/images/agapev2/services.png",
-      "/images/agapev2/contact.png",
     ],
   },
   {
