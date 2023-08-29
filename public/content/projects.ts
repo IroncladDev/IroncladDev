@@ -27,31 +27,13 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       Tc.sass,
       Tc.emotion,
     ],
-    timeCreated: "2023-02-23",
+    timeCreated: "February 2023",
     url: "https://ai.repl.page",
     sourceCodeUrl: "https://github.com/Conner1115/Amjad-GPT",
     images: [
       "/images/amjadGPT/login.png",
       "/images/amjadGPT/index.png",
       "/images/amjadGPT/settings.png",
-    ],
-  },
-  {
-    title: "Agape Chiropractic TX",
-    slides: [
-      `I rebuilt my dad's home business chiropractic website with Framer Motion and Next.js.  The first version (bottom of page) is a literal embarrassment compared to this one.
-        \nI took on a minimalistic black-on-white design and used some fancy animations with the aid of Framer Motion.  It turned out as one of the cleanest and most polished websites I'd ever built.`,
-      `I'm really happy how this one turned out, and thanks to this, I'd adopted Framer Motion (React) as a new technology for my programming stack.
-        \nLove you dad <3`,
-    ],
-    timeCreated: "2020-04-1",
-    stack: [Tc.next, Tc.react, Tc.emotion],
-    url: "https://agapechiro-tx.com/",
-    sourceCodeUrl: "https://github.com/Conner1115/AgapeChirow",
-    images: [
-      "/images/agapev2/index.png",
-      "/images/agapev2/services.png",
-      "/images/agapev2/contact.png",
     ],
   },
   {
@@ -74,7 +56,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       \n I made an API tester to ensure that all the existing APIs worked as expected.`,
       `My last project and the one I'm most proud of is the Extensions store.  I implemented a search, ordering, and filtering form to enable people to find the Extension they need.`,
     ],
-    timeCreated: "2020-04-1",
+    timeCreated: "August 2022",
     stack: [Tc.next, Tc.typescript, Tc.react, Tc.emotion],
     url: "https://replit.com",
     images: [
@@ -92,6 +74,44 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     ],
   },
   {
+    title: "Liberty Cappy",
+    slides: [
+      `I built a website for [Liberty Cappy](https://twitter.com/LibertyCappy), a large Twitter/X influencer.
+        \nI had a lot of fun building, tweaking, and polishing the site. The scroll-linked animations built with Framer Motion, SVG, and HTML Canvas, were very fun to build.`,
+      `One of the major challenges I faced was figuring out how to fit the Shop and Contacts page on a mobile device.
+        \nThanks to Framer Motion's mouse drag utilities, I was able to add a horizontal carousel for smaller screens without corrupting the rest of the UI.`,
+      `Out of all the projects I've built, this one probably has the best lighthouse score (still a little whacky on mobile).
+        \nI'm really happy to be able to support a guy like this and I'm really appreciative of the opportunity this guy gave me.`,
+    ],
+    timeCreated: "August 2023",
+    stack: [Tc.next, Tc.react, Tc.framer, Tc.emotion, Tc.typescript],
+    url: "https://libertycappy.com/",
+    images: [
+      "/images/cappy/scroll1.png",
+      "/images/cappy/about.png",
+      "/images/cappy/shop.png",
+      "/images/cappy/accounts.png",
+    ],
+  },
+  {
+    title: "Agape Chiropractic TX",
+    slides: [
+      `I rebuilt my dad's home business chiropractic website with Framer Motion and Next.js.  The first version (bottom of page) is a literal embarrassment compared to this one.
+        \nI took on a minimalistic black-on-white design and used some fancy animations with the aid of Framer Motion.  It turned out as one of the cleanest and most polished websites I'd ever built.`,
+      `I'm really happy how this one turned out, and thanks to this, I'd adopted Framer Motion (React) as a new technology for my programming stack.
+        \nLove you dad <3`,
+    ],
+    timeCreated: "June 2023",
+    stack: [Tc.next, Tc.react, Tc.emotion],
+    url: "https://agapechiro-tx.com/",
+    sourceCodeUrl: "https://github.com/Conner1115/AgapeChirow",
+    images: [
+      "/images/agapev2/index.png",
+      "/images/agapev2/services.png",
+      "/images/agapev2/contact.png",
+    ],
+  },
+  {
     title: "YouBarter",
     slides: [
       "YouBarter is a non-profit organization where everyone can share and help in their own community by bartering with each other.",
@@ -101,7 +121,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       `At the moment, there are no active users and the project has died.  Nonetheless, I really am proud to have this project on my portfolio.`,
     ],
     stack: [Tc.next, Tc.node, Tc.react, Tc.mongo, Tc.sass],
-    timeCreated: "2022-02-15",
+    timeCreated: "February 2022",
     url: "https://www.youbarter.us/",
     sourceCodeUrl: "https://github.com/Conner1115/yb2",
     images: [
@@ -119,7 +139,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       \nAs of July 2023, the AI playground remains the top Replit Extension in the store with over 6,200 installs.`,
     ],
     stack: [Tc.next, Tc.node, Tc.react, Tc.mongo, Tc.sass],
-    timeCreated: "2022-02-15",
+    timeCreated: "April 2023",
     url: "https://replit.com/extensions",
     images: [
       "/images/ai-playground/index.png",
@@ -137,7 +157,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       `This was a really challenging project to make as it was the most complex use of websockets I'd ever attempted, but the result was extremely satisfying.`,
     ],
     stack: [Tc.next, Tc.node, Tc.react, Tc.mongo, Tc.sass],
-    timeCreated: "2022-02-15",
+    timeCreated: "March 2023",
     url: "https://replit.com/extensions",
     images: [
       "/images/repltv/index.png",
@@ -154,7 +174,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       `For a week, me and my teammates coded like never before to get the project across the finish line.
         \nThis was the first project in which I used Typescript and Sass.  I ended up loving and picking up Sass as an official part of my programming stack.`,
     ],
-    timeCreated: "2022-04-15",
+    timeCreated: "April 2022",
     stack: [Tc.p5, Tc.typescript, Tc.sass, Tc.node],
     url: "https://celestron.spotandjake.repl.co",
     sourceCodeUrl: "https://github.com/Conner1115/Celestron",
@@ -166,7 +186,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       `Shortly after launching AmjadGPT, Langchain.js just got released.  I created a template with it and made a tweet thread that went viral.
         \nI made the template because I really dislike the syntax of Python.`,
     ],
-    timeCreated: "2023-02-29",
+    timeCreated: "February 2023",
     stack: [Tc.node, Tc.langchain],
     url: "https://twitter.com/IroncladDev/status/1629534148091162626?s=20",
     sourceCodeUrl:
@@ -180,7 +200,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       `I really enjoyed building this project, and seeing how many cool images users generated.  I also implemented a moderation system, and a word blocklist to ensure that no NSFW content got exposed or generated.
         \nThe project still remains partially active and is still being used by many Replit users today.`,
     ],
-    timeCreated: "2022-09-11",
+    timeCreated: "August 2022",
     stack: [Tc.next, Tc.react, Tc.sass],
     url: "https://fendorea.ironcladdev.repl.co/",
     sourceCodeUrl: "https://replit.com/@IroncladDev/Fendorea",
@@ -198,7 +218,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       `If you open the site, it still has a bit of Lorem Ipsum text on it since the content was never filled out completely by the client.
         \nThis was one of my first Next.js projects, and I'm happy how it turned out.`,
     ],
-    timeCreated: "2021-05-31",
+    timeCreated: "May 2021",
     stack: [Tc.next, Tc.react],
     url: "https://www.allmetalwelding.com/",
     sourceCodeUrl: "https://github.com/Conner1115/Metal",
@@ -215,7 +235,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
           \nThe design style I took on for this project is unique among all my other projects, and I really like how it turned out.`,
       `I had originally made this website in Flask, HTML, and CSS a year before (it looked horrible), but decided to remake it after having fallen in love with Next.js.`,
     ],
-    timeCreated: "2021-08-11",
+    timeCreated: "August 2021",
     stack: [Tc.next, Tc.react],
     url: "https://www.kuhnhong.com/",
     sourceCodeUrl: "https://github.com/Conner1115/KuhnHong",
@@ -233,7 +253,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       `Building the four boss fights was really fun.  It was so cool to play around with movement, and make the bosses appear to be "smart" (still all if-else statements in the background).`,
       `This game is one of the most polished and beautiful games I've ever developed, and I really like how it turned out.  It was really fun to play around and experiment with pixel art animation, and it's really cool how animated it can be given the fact that pixel art is blocky.`,
     ],
-    timeCreated: "2022-06-14",
+    timeCreated: "June 2021",
     stack: [Tc.p5, Tc.html],
     url: "https://tarragon.haroon.repl.co/",
     sourceCodeUrl: "https://replit.com/@haroon/Tarragon",
@@ -255,7 +275,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       `I originally made Face the Darkness on Khan Academy, but it never took off.  After posting it to Replit, a lot of people were able to discover it and play it.`,
       `My favorite part about building this project was designing the levels and enemies, and playing through it.`,
     ],
-    timeCreated: "2020-02-01",
+    timeCreated: "February 2020",
     stack: [Tc.html],
     url: "https://face-the-darkness.ironcladdev.repl.co/",
     sourceCodeUrl: "https://replit.com/@IroncladDev/face-the-darkness",
@@ -278,7 +298,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
         \nI find it quite funny that one person in particular loved this game so much they tried to sell it to other people along with [swordbattle.io](https://swordbattle.io).`,
       `Overall, like the other games I developed, this one was really fun to make.  It was really fun to explore new methods, tweak and mess with the game, and last but not least, playing the game.`,
     ],
-    timeCreated: "2022-08-01",
+    timeCreated: "August 2022",
     stack: [Tc.html, Tc.p5],
     url: "https://intercepter.ironcladdev.repl.co/",
     sourceCodeUrl: "https://replit.com/@IroncladDev/Intercepter",
@@ -297,7 +317,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       `This was one of the first games where I started to use a lot of image caching and optimize for performance.  Thousands of particles and items can be running on the screen with a decent framerate.
         \nI'm very proud of this project and still play it on my own sometimes.`,
     ],
-    timeCreated: "2021-04-01",
+    timeCreated: "April 2021",
     stack: [Tc.html, Tc.p5],
     url: "https://orbitron-3.ironcladdev.repl.co/",
     sourceCodeUrl: "https://replit.com/@IroncladDev/Orbitron-3",
@@ -317,7 +337,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       `I stayed up coding for about 30-32 out of the 48 hours.  This was one of the shortest jams I'd ever participated in.  I lost a lot of sleep but the result was worth it.
       \nI didn't have any spare time to make graphics so I decided to use Twemoji for the player and enemies.  It turned out better than I expected.`,
     ],
-    timeCreated: "2023-07-11",
+    timeCreated: "July 2023",
     stack: [Tc.html, Tc.kaboom],
     url: "https://taime-is-ticking.ironcladdev.repl.co/",
     sourceCodeUrl: "https://replit.com/@IroncladDev/TAIme-is-ticking",
@@ -334,7 +354,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       `I used Matter.js and P5.js to make this easy-to-use platformer template for people to kickstart their next game with.  Not only does this engine support default physics and mechanics, but also wall jumping, irregularly-shaped blocks, and more.`,
       `The documentation on how to use the engine is provided within the Repl, in a folder named "docs".`,
     ],
-    timeCreated: "2022-08-02",
+    timeCreated: "August 2022",
     stack: [Tc.html, Tc.p5],
     url: "https://advanced-p5js-platformer-engine.ironcladdev.repl.co/",
     sourceCodeUrl:
@@ -355,7 +375,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       `"Why a multiplayer feature?", you might ask.  I surprisingly was able to finish all the levels and game mechanics in the first five days, and decided I wanted to take it a step further and shoot for the winning prize.
         \nIt took a lot of work to add custom skins and models for the multiplayers, but essentially I had the original classes such as bullets, players, etc - so I reused them.`,
     ],
-    timeCreated: "2021-11-07",
+    timeCreated: "November 2021",
     stack: [Tc.html, Tc.p5, Tc.node],
     url: "https://vulcanist.ironcladdev.repl.co/",
     sourceCodeUrl: "https://replit.com/@IroncladDev/Vulcanist",
@@ -377,7 +397,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
         \nFighting abuse, spammers, and botters took the most time in building this - so much to the point where I just tightened ratelimits, and prevented users from posting images.`,
       `At the moment, the project remains active only partially.  Most of the usage comes from either curious people who stumble across my profile, or students in school who want to communicate with each other.`,
     ],
-    timeCreated: "2022-08-15",
+    timeCreated: "August 2022",
     stack: [Tc.next, Tc.react, Tc.sass, Tc.mongo, Tc.node],
     url: "https://replyte.connerow.dev/",
     sourceCodeUrl: "https://replit.com/@IroncladDev/Replyte-Chat-App",
@@ -395,7 +415,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       `Overall this is one of the projects I'm most proud of.  I've gained experience, knowledge, and a much better topological view of abuse at Replit.`,
     ],
     stack: [Tc.next, Tc.react, Tc.sass],
-    timeCreated: "2021-11-15",
+    timeCreated: "November 2021",
     images: [
       "/images/mod-dash/index.png",
       "/images/mod-dash/filter.png",
@@ -410,7 +430,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
       `I made the website for my church, which is currently located in Honey Grove, Texas.  My dad took some pictures at church and gave them to me to insert in the site.
         \nThis website was made in static HTML, and adopts some of the worst web dev practices, of which I will never to use again.`,
     ],
-    timeCreated: "2020-02-15",
+    timeCreated: "February 2020",
     stack: [Tc.html],
     url: "https://gracerbcbonham.com/",
     images: ["/images/grbc/index.png", "/images/grbc/worship.png"],

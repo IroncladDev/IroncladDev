@@ -71,25 +71,8 @@ const PreviewImage = ({
   );
 };
 
-const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
 export const Project = ({ project }: { project: ProjectType }) => {
   const [slideIndex, setSlideIndex] = useState(0);
-
-  const date = new Date(project.timeCreated);
 
   return (
     <ScrollControl>
@@ -181,7 +164,7 @@ export const Project = ({ project }: { project: ProjectType }) => {
               </View>
               <Text color="dimmest" variant="small">
                 {"• "}
-                {monthNames[date.getMonth()]} {date.getFullYear()}
+                {project.timeCreated}
               </Text>
 
               <View
