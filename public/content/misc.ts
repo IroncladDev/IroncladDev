@@ -80,15 +80,15 @@ export const SocialDescription: {
     icon: string;
     title: string;
     url: string;
-    handle?: string;
-    description?: string;
+    handle: string;
+    description: string;
   };
 } = {
   [SocialPlatform.Twitter]: {
     icon: "/icons/twitter.svg",
     title: "Twitter",
     url: "https://twitter.com/IroncladDev",
-    handle: "IroncladDev",
+    handle: "@IroncladDev",
     description:
       "I create and post Programming / AI content on Twitter regularly.",
   },
@@ -96,7 +96,7 @@ export const SocialDescription: {
     icon: "/icons/dev.svg",
     title: "Dev.to",
     url: "https://dev.to/ironcladdev",
-    handle: "IroncladDev",
+    handle: "@IroncladDev",
     description:
       "I occasionally make programming tutorials and articles on Dev.",
   },
@@ -104,7 +104,7 @@ export const SocialDescription: {
     icon: "/icons/github.svg",
     title: "Github",
     url: "https://github.com/IroncladDev",
-    handle: "IroncladDev",
+    handle: "@IroncladDev",
     description:
       "If you look carefully, you might catch me committing node_modules or .env.",
   },
@@ -112,29 +112,22 @@ export const SocialDescription: {
     icon: "/icons/replit.svg",
     title: "Replit",
     url: "https://replit.com/@IroncladDev",
-    handle: "IroncladDev",
+    handle: "@IroncladDev",
     description: "I host games, small websites, and part of my blog on Replit.",
   },
   [SocialPlatform.Discord]: {
     icon: "/icons/discord.svg",
     title: "Discord",
     url: "/discord",
-    handle: "ironcladdev",
+    handle: "@ironcladdev",
     description:
       "Discord is the best place to reach me.  DMs are open for mutual servers.",
   },
-  [SocialPlatform.Youtube]: {
-    icon: "/icons/youtube.svg",
-    title: "Youtube",
-    url: "https://youtube.com/@IroncladDev",
-    handle: "IroncladDev",
-    description: "Nothing much on my youtube channel.",
-  },
-  [SocialPlatform.Codingame]: {
-    icon: "/icons/codingame.svg",
-    title: "Codingame",
-    url: "https://www.codingame.com/profile/a8e83723bd266272a4564fe2bcd6a7907926134",
-    handle: "IroncladDev",
-    description: "I unleash my competitive programming desires on Codingame.",
+  [SocialPlatform.Email]: {
+    icon: "/icons/email.svg",
+    title: "Email",
+    handle: "conner@connerow.dev",
+    url: "mailto:conner@connerow.dev",
+    description: "Don't have a social media account?  Send an email my way.",
   },
 };

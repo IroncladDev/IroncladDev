@@ -1,5 +1,4 @@
 import { ChevronLeft, ChevronRight, X } from "react-feather";
-import useModal from "application/hooks/useModal";
 import {
   rcss,
   View,
@@ -9,15 +8,19 @@ import {
   FlexSpacer,
 } from "application/ui";
 import { useState } from "react";
+import useGallery from "application/hooks/useGallery";
 
-export const Gallery = (props) => {
-  const images = props?.images || [];
-  const image = props?.image || "";
-
+export const Gallery = ({
+  images,
+  image,
+}: {
+  images: Array<string>;
+  image: string;
+}) => {
   const [slideIndex, setSlideIndex] = useState(
     images?.findIndex((x) => x === image) || 0
   );
-  const { close } = useModal();
+  const { close } = useGallery();
 
   if (images) {
     return (

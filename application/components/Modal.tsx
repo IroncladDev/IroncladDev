@@ -1,15 +1,15 @@
-import useModal, { state } from "application/hooks/useModal";
-import { RenderedComponent } from "application/types";
-import { Gallery as GalleryComponent } from ".";
 import { View, rcss } from "application/ui";
-import { useAtom } from "jotai";
 
-export const Modal = () => {
-  const [componentProps] = useAtom(state.ComponentProps);
-  const [componentName] = useAtom(state.ComponentName);
-  const { close } = useModal();
-
-  return componentName ? (
+export const Modal = ({
+  children,
+  isVisible,
+  onClose,
+}: {
+  children: React.ReactNode;
+  isVisible: boolean;
+  onClose: () => void;
+}) => {
+  return isVisible ? (
     <View
       css={[
         {
@@ -18,6 +18,7 @@ export const Modal = () => {
           left: 0,
           width: "100vw",
           height: "100vh",
+          zIndex: 100,
         },
       ]}
     >
@@ -33,7 +34,7 @@ export const Modal = () => {
             zIndex: 101,
           },
         ]}
-        onClick={close}
+        onClick={onClose}
       />
 
       <View
@@ -47,9 +48,7 @@ export const Modal = () => {
           },
         ]}
       >
-        {componentName === RenderedComponent.Gallery ? (
-          <GalleryComponent {...componentProps} />
-        ) : null}
+        {children}
       </View>
     </View>
   ) : null;

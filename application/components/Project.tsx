@@ -2,8 +2,6 @@ import { ExternalLink, Code, ChevronLeft, ChevronRight } from "react-feather";
 import { Project as ProjectType, Technology } from "public/content/types";
 import { TechnologyDescription } from "public/content/misc";
 import { MotionValue, useTransform } from "framer-motion";
-import { RenderedComponent } from "application/types";
-import useModal from "application/hooks/useModal";
 import { ParagraphControl } from "./Paragraph";
 import { ScrollControl } from "./Scroll";
 import { useState } from "react";
@@ -17,6 +15,7 @@ import {
   IconButton,
   FlexSpacer,
 } from "application/ui";
+import useGallery from "application/hooks/useGallery";
 
 const PreviewImage = ({
   url,
@@ -27,15 +26,12 @@ const PreviewImage = ({
   percentage: MotionValue<number>;
   images: Array<string>;
 }) => {
-  const { open } = useModal();
+  const { open } = useGallery();
 
   const openGallery = () => {
     open({
-      component: RenderedComponent.Gallery,
-      props: {
-        images,
-        image: url,
-      },
+      images,
+      image: url,
     });
   };
 

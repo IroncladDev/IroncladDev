@@ -1,5 +1,5 @@
 import { ScrollContext } from "application/state";
-import { Navbar } from "application/components";
+import { Gallery, Navbar } from "application/components";
 import NextNProgress from "nextjs-progressbar";
 import { Modal } from "application/components";
 import type { AppProps } from "next/app";
@@ -9,6 +9,7 @@ import { useEffect, useRef } from "react";
 import Head from "next/head";
 import "styles/globals.css";
 import { useRouter } from "next/router";
+import useGallery from "application/hooks/useGallery";
 
 function AppContainer({
   Component,
@@ -23,6 +24,8 @@ function AppContainer({
       behavior: "smooth",
     });
   }, [pathname, scrollRef]);
+
+  const { galleryVisible, close, galleryImage, images } = useGallery();
 
   return (
     <>
@@ -70,7 +73,9 @@ function AppContainer({
               <Component {...pageProps} />
             </View>
           </View>
-          <Modal />
+          <Modal isVisible={galleryVisible} onClose={close}>
+            <Gallery images={images} image={galleryImage || ""} />
+          </Modal>
         </div>
       </ScrollContext.Provider>
     </>

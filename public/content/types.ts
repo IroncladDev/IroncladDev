@@ -37,13 +37,12 @@ export interface LazyBlogPost {
 }
 
 export enum SocialPlatform {
-  Twitter,
-  Dev,
-  Discord,
-  Github,
-  Replit,
-  Youtube,
-  Codingame,
+  Twitter = "twitter",
+  Dev = "dev",
+  Discord = "discord",
+  Github = "github",
+  Replit = "replit",
+  Email = "email",
 }
 
 export interface Social {
