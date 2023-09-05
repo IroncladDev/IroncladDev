@@ -5,6 +5,7 @@ import {
   rcss,
   FlexSpacer,
   IconButton,
+  Button,
 } from "application/ui";
 import { useSpring, useTransform } from "framer-motion";
 import { useScrollControl } from "application/hooks/useScroll";
@@ -21,10 +22,11 @@ import { SocialPlatform } from "public/content/types";
 import { ContactHeaderDraw } from "application/components/ContactHeaderDraw";
 import QRCode from "react-qr-code";
 import { useState } from "react";
-import { LightningAddress } from "alby-tools";
+import { Invoice, LightningAddress } from "alby-tools";
 import type { WebLNProvider } from "webln";
 import { CopyButton } from "./tokens";
 import { X } from "react-feather";
+import { Proof } from "@cashu/cashu-ts";
 
 declare global {
   interface Window {
@@ -33,14 +35,52 @@ declare global {
 }
 
 const LightningModal = ({
-  invoice,
   isOpen,
   close,
 }: {
-  invoice: string;
   isOpen: boolean;
   close: () => void;
 }) => {
+  const [invoice, setInvoice] = useState<Invoice | null>(null);
+  const [amt, setAmt] = useState("1000");
+
+  const handlePayment = async () => {
+    const ln = new LightningAddress("ironclad@getalby.com");
+    await ln.fetch();
+
+    const inv = await ln.requestInvoice({ satoshi: Number(amt) });
+
+    setInvoice(inv);
+
+    if (typeof window.webln !== "undefined") {
+      try {
+        await window.webln.enable();
+        await window.webln.sendPayment(inv.paymentRequest);
+      } catch (e) {
+        console.log(e);
+        close();
+      }
+    }
+
+    const payCheckInterval = setInterval(() => {
+      inv
+        .isPaid()
+        .then((paid) => {
+          if (paid) {
+            setInvoice(null);
+            close();
+            alert("Thanks for the tip!");
+            clearInterval(payCheckInterval);
+          }
+        })
+        .catch((e) => {
+          close();
+          console.error(e);
+          clearInterval(payCheckInterval);
+        });
+    }, 1000);
+  };
+
   return (
     <Modal isVisible={isOpen} onClose={close}>
       <View
@@ -57,36 +97,162 @@ const LightningModal = ({
           rcss.center,
         ]}
       >
-        <View css={[rcss.flex.column, rcss.colWithGap(8)]}>
-          <View
-            css={[rcss.flex.row, rcss.justify.spaceBetween, rcss.align.center]}
-          >
-            <Text variant="subheadDefault">Lightning Payment</Text>
+        {invoice?.paymentRequest && typeof window.webln === "undefined" ? (
+          <>
+            <View css={[rcss.flex.column, rcss.colWithGap(8)]}>
+              <View
+                css={[
+                  rcss.flex.row,
+                  rcss.justify.spaceBetween,
+                  rcss.align.center,
+                ]}
+              >
+                <Text variant="subheadDefault">Lightning Payment</Text>
 
-            <IconButton onClick={close}>
-              <X size={16} color={tokens.foregroundDefault} />
-            </IconButton>
-          </View>
+                <IconButton onClick={close}>
+                  <X size={16} color={tokens.foregroundDefault} />
+                </IconButton>
+              </View>
 
-          <Text multiline color="dimmer">
-            Scan the QR code or paste the lightning payment request to tip me
-            ~$5 in bitcoin
-          </Text>
+              <Text multiline color="dimmer">
+                Scan the QR code or paste the lightning payment request to tip
+                me ~$5 in bitcoin
+              </Text>
 
-          <View css={[rcss.flex.row, rcss.rowWithGap(8), rcss.align.center]}>
-            <CopyButton text={invoice} />
-            <Text>Copy</Text>
-          </View>
-        </View>
+              <View
+                css={[rcss.flex.row, rcss.rowWithGap(8), rcss.align.center]}
+              >
+                <CopyButton text={invoice.paymentRequest} />
+                <Text>Copy</Text>
+              </View>
+            </View>
 
-        <View css={[rcss.minWidth(200), rcss.minHeight(200)]}>
-          <QRCode
-            value={invoice}
-            size={200}
-            bgColor={tokens.backgroundDefault}
-            fgColor={tokens.foregroundDimmer}
-          />
-        </View>
+            <View css={[rcss.minWidth(200), rcss.minHeight(200)]}>
+              <QRCode
+                value={invoice.paymentRequest}
+                size={200}
+                bgColor={tokens.backgroundDefault}
+                fgColor={tokens.foregroundDimmer}
+              />
+            </View>
+          </>
+        ) : (
+          <>
+            <View css={[rcss.flex.column, rcss.colWithGap(4)]}>
+              <Text>Enter Amount (Satoshis)</Text>
+              <Text variant="small" color="dimmest">
+                *1 Satoshi = 1/100M BTC ($0.0002 USD)
+              </Text>
+            </View>
+
+            <View
+              css={[rcss.flex.column, rcss.colWithGap(8), rcss.width("100%")]}
+            >
+              <input
+                value={amt}
+                onChange={(e) => setAmt(e.target.value)}
+                css={[
+                  rcss.p(8),
+                  rcss.borderRadius(8),
+                  rcss.width("100%"),
+                  {
+                    background: tokens.backgroundDefault,
+                    border: `solid 1px ${tokens.backgroundHighest}`,
+                    color: tokens.foregroundDefault,
+                    "&::placeholder": {
+                      color: tokens.foregroundDimmest,
+                    },
+                  },
+                ]}
+                placeholder="1000"
+              />
+              <Button
+                text="Send Tip"
+                css={rcss.width("100%")}
+                onClick={handlePayment}
+              />
+            </View>
+          </>
+        )}
+      </View>
+    </Modal>
+  );
+};
+
+const EcashModal = ({
+  isOpen,
+  close,
+}: {
+  isOpen: boolean;
+  close: () => void;
+}) => {
+  const [token, setToken] = useState("");
+
+  const sendToken = () => {
+    if (token) {
+      fetch("/api/ecash", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          accept: "*/*",
+        },
+        body: JSON.stringify({
+          token,
+        }),
+      })
+        .then((r) => r.json())
+        .then(async (res) => {
+          if (res.success) {
+            alert("Thanks for the tip!");
+            close();
+          } else {
+            alert("Something went wrong");
+            close();
+          }
+        });
+    }
+  };
+
+  return (
+    <Modal isVisible={isOpen} onClose={close}>
+      <View
+        css={[
+          rcss.flex.column,
+          rcss.colWithGap(8),
+          {
+            background: tokens.backgroundDefault,
+            border: `solid 1px ${tokens.backgroundHigher}`,
+          },
+          rcss.p(16),
+          rcss.borderRadius(8),
+          rcss.maxWidth(300),
+        ]}
+      >
+        <Text>Enter Ecash Token</Text>
+        <textarea
+          value={token}
+          onChange={(e) => setToken(e.target.value)}
+          css={[
+            rcss.p(8),
+            rcss.borderRadius(8),
+            rcss.width("100%"),
+            {
+              background: tokens.backgroundDefault,
+              border: `solid 1px ${tokens.backgroundHighest}`,
+              color: tokens.foregroundDefault,
+              "&::placeholder": {
+                color: tokens.foregroundDimmest,
+              },
+            },
+          ]}
+          placeholder="cashuAeyJ0b2..."
+        />
+        <Button
+          text="Send Tip"
+          css={rcss.width("100%")}
+          onClick={sendToken}
+          disabled={!token}
+        />
       </View>
     </Modal>
   );
@@ -96,7 +262,7 @@ export default function About() {
   const { initialHeight, scrollTop, scrollRef } = useScrollControl();
 
   const [lightningModal, setLightningModal] = useState(false);
-  const [invoice, setInvoice] = useState<string | null>(null);
+  const [ecashModal, setEcashModal] = useState(false);
 
   const scrollSpring = useSpring(scrollTop, {
     mass: 0.05,
@@ -113,32 +279,6 @@ export default function About() {
       ${tokens.backgroundDefault} 100%
     )`
   );
-
-  const handleLightning = async () => {
-    const ln = new LightningAddress("ironclad@getalby.com");
-    await ln.fetch();
-
-    const invoice = await ln.requestInvoice({ satoshi: 20000 });
-
-    if (typeof window.webln !== "undefined") {
-      await window.webln.enable();
-      await window.webln.sendPayment(invoice.paymentRequest);
-    } else {
-      setLightningModal(true);
-      setInvoice(invoice.paymentRequest);
-    }
-
-    const payCheckInterval = setInterval(() => {
-      invoice.isPaid().then((paid) => {
-        if (paid) {
-          setInvoice(null);
-          setLightningModal(false);
-          alert("Thanks for the tip!");
-          clearInterval(payCheckInterval);
-        }
-      });
-    }, 1000);
-  };
 
   return (
     <>
@@ -243,7 +383,7 @@ export default function About() {
         >
           <View
             css={[rcss.flex.column, rcss.colWithGap(8), rcss.center]}
-            onClick={handleLightning}
+            onClick={() => setLightningModal(true)}
           >
             <View
               css={[
@@ -267,6 +407,34 @@ export default function About() {
               />
             </View>
             <Text>Lightning</Text>
+          </View>
+
+          <View
+            css={[rcss.flex.column, rcss.colWithGap(8), rcss.center]}
+            onClick={() => setEcashModal(true)}
+          >
+            <View
+              css={[
+                rcss.p(16),
+                rcss.borderRadius(8),
+                {
+                  border: `solid 1px ${tokens.backgroundHighest}`,
+                  transition: "0.25s",
+                  cursor: "pointer",
+                  "&:hover": {
+                    background: tokens.backgroundHigher,
+                  },
+                },
+              ]}
+            >
+              <img
+                src="/icons/ebtc.svg"
+                width={64}
+                height={64}
+                alt="Lightning Network"
+              />
+            </View>
+            <Text>Bitcoin Ecash</Text>
           </View>
 
           <a
@@ -356,13 +524,12 @@ export default function About() {
 
       <Footer />
 
-      {invoice && lightningModal ? (
-        <LightningModal
-          isOpen={lightningModal}
-          close={() => setLightningModal(false)}
-          invoice={invoice}
-        />
-      ) : null}
+      <LightningModal
+        isOpen={lightningModal}
+        close={() => setLightningModal(false)}
+      />
+
+      <EcashModal isOpen={ecashModal} close={() => setEcashModal(false)} />
     </>
   );
 }
