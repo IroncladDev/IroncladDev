@@ -434,7 +434,7 @@ export default function About() {
                 alt="Lightning Network"
               />
             </View>
-            <Text>Bitcoin Ecash</Text>
+            <Text><a href="https://cashu.me" target="_blank" rel="noreferrer">Cashu</a> Ecash</Text>
           </View>
 
           <a
