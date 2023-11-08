@@ -73,6 +73,30 @@ export const TechnologyDescription: {
     description:
       "Kaboom is a Javascript framework for making 2D browser-based games.",
   },
+  [Tc.supabase]: {
+    title: "Supabase",
+    description:
+      "Supabase is a cloud-based database that lets you manage your data securely and privately",
+  },
+  [Tc.htmx]: {
+    title: "HTMX",
+    description: "High-Power Tools for HTML",
+  },
+  [Tc.hyperscript]: {
+    title: "Hyperscript",
+    description:
+      "Hyperscript simplifies front-end web development by embedding code directly on web page elements for easy event handling and DOM manipulation.",
+  },
+  [Tc.bun]: {
+    title: "Bun",
+    description:
+      "Bun is a TypeScript compiler that compiles your code to JavaScript.",
+  },
+  [Tc.tailwind]: {
+    title: "Tailwind CSS",
+    description:
+      "Tailwind is a utility-first CSS framework that lets you focus on your content.",
+  },
 };
 
 export const SocialDescription: {

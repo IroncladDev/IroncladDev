@@ -14,6 +14,11 @@ export enum Technology {
   emotion = "emotion",
   kaboom = "kaboom",
   framer = "framer",
+  supabase = "supabase",
+  htmx = "htmx",
+  hyperscript = "hyperscript",
+  bun = "bun",
+  tailwind = "tailwind",
 }
 
 export interface Project {

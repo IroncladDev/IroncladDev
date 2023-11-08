@@ -29,11 +29,58 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     ],
     timeCreated: "February 2023",
     url: "https://ai.repl.page",
-    sourceCodeUrl: "https://github.com/Conner1115/Amjad-GPT",
+    sourceCodeUrl: "https://github.com/IroncladDev/Amjad-GPT",
     images: [
       "/images/amjadGPT/login.png",
       "/images/amjadGPT/index.png",
       "/images/amjadGPT/settings.png",
+    ],
+  },
+  {
+    title: "Hyperdome",
+    slides: [
+      `Hyperdome, short for "HTMX Thunderdome" is an AI chat app that comes with three AI presets consisting of:
+
+- the [@htmx_org](https://x.com/htmx_org) twitter account
+- Carson Gross, the creator of HTMX
+- Grug, the main character in [grugbrain.dev](https://grugbrain.dev)
+
+This was my first time actually using Bun, HTMX, and Hyperscript in a project and I had a **blast**`,
+      `After [Replit](https://replit.com) announced [Modelfarm](https://blog.replit.com/modelfarm), I decided I wanted to build a project with it.
+
+I wasn't familiar with how context, embeddings, and vectors worked yet, so I created a bounty which [Tanya Kemkar](https://twitter.com/kemkartanya) built for me.
+
+I modified the completed bounty and published a template [Modelfarm with Context](https://replit.com/@IroncladDev/Modelfarm-With-Context?v=1) on Replit.
+
+Shortly after, Replit announced their [Virtual Modelfarm Hackathon](https://twitter.com/Replit/status/1703834805572715003), which was an even better excuse for me to build this.`,
+      `I then proceeded to build Hyperdome while trying out a few new technologies.
+      
+I trained it on a ton of data including:
+
+- The HTMX [Github Repository](https://github.com/bigskysoftware/htmx) and [Documentation](https://htmx.org/)
+- The Hyperscript [Source code](https://github.com/bigskysoftware/_hyperscript) and [Documentation](https://hyperscript.org/docs/)
+- [Hypermedia Systems](https://hypermedia.systems)
+- [Grugbrain.dev](https://grugbrain.dev/)
+- Tons of tweets
+- Documented trends, lore, and famous players in the HTMX shitposting history`,
+    ],
+    stack: [
+      Tc.typescript,
+      Tc.next,
+      Tc.supabase,
+      Tc.htmx,
+      Tc.hyperscript,
+      Tc.tailwind,
+      Tc.bun,
+    ],
+    timeCreated: "November 2023",
+    url: "https://h-t.mx",
+    sourceCodeUrl: "https://github.com/IroncladDev/HTMXBot",
+    images: [
+      "/images/hyperdome/index.png",
+      "/images/hyperdome/presets.png",
+      "/images/hyperdome/chat.png",
+      "/images/hyperdome/presets.png",
     ],
   },
   {
@@ -84,7 +131,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     timeCreated: "June 2023",
     stack: [Tc.next, Tc.react, Tc.emotion],
     url: "https://agapechiro-tx.com/",
-    sourceCodeUrl: "https://github.com/Conner1115/AgapeChirow",
+    sourceCodeUrl: "https://github.com/IroncladDev/AgapeChirow",
     images: [
       "/images/agapev2/index.png",
       "/images/agapev2/services.png",
@@ -123,7 +170,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     stack: [Tc.next, Tc.node, Tc.react, Tc.mongo, Tc.sass],
     timeCreated: "February 2022",
     url: "https://www.youbarter.us/",
-    sourceCodeUrl: "https://github.com/Conner1115/yb2",
+    sourceCodeUrl: "https://github.com/IroncladDev/yb2",
     images: [
       "/images/youbarter/index.png",
       "/images/youbarter/login.png",
@@ -177,7 +224,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     timeCreated: "April 2022",
     stack: [Tc.p5, Tc.typescript, Tc.sass, Tc.node],
     url: "https://celestron.spotandjake.repl.co",
-    sourceCodeUrl: "https://github.com/Conner1115/Celestron",
+    sourceCodeUrl: "https://github.com/IroncladDev/Celestron",
     images: ["/images/celestron/index.png", "/images/celestron/gameplay.png"],
   },
   {
@@ -190,7 +237,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     stack: [Tc.node, Tc.langchain],
     url: "https://twitter.com/IroncladDev/status/1629534148091162626?s=20",
     sourceCodeUrl:
-      "https://github.com/Conner1115/Celestronhttps://github.com/Conner1115/LangChain.js-LLM-Template",
+      "https://github.com/IroncladDev/Celestronhttps://github.com/IroncladDev/LangChain.js-LLM-Template",
     images: ["/images/llm-template/gh.png", "/images/llm-template/files.png"],
   },
   {
@@ -201,7 +248,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
         \nThe project still remains partially active and is still being used by many Replit users today.`,
     ],
     timeCreated: "August 2022",
-    stack: [Tc.next, Tc.react, Tc.sass],
+    stack: [Tc.next, Tc.react, Tc.supabase, Tc.sass],
     url: "https://fendorea.ironcladdev.repl.co/",
     sourceCodeUrl: "https://replit.com/@IroncladDev/Fendorea",
     images: [
@@ -221,7 +268,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     timeCreated: "May 2021",
     stack: [Tc.next, Tc.react],
     url: "https://www.allmetalwelding.com/",
-    sourceCodeUrl: "https://github.com/Conner1115/Metal",
+    sourceCodeUrl: "https://github.com/IroncladDev/Metal",
     images: [
       "/images/amw/index.png",
       "/images/amw/about.png",
@@ -238,7 +285,7 @@ This was my first time exploring Langchain.  It was a wild adventure from starti
     timeCreated: "August 2021",
     stack: [Tc.next, Tc.react],
     url: "https://www.kuhnhong.com/",
-    sourceCodeUrl: "https://github.com/Conner1115/KuhnHong",
+    sourceCodeUrl: "https://github.com/IroncladDev/KuhnHong",
     images: [
       "/images/kuhnhong/index.png",
       "/images/kuhnhong/preview.png",

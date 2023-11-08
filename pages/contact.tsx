@@ -26,7 +26,6 @@ import { Invoice, LightningAddress } from "alby-tools";
 import type { WebLNProvider } from "webln";
 import { CopyButton } from "./tokens";
 import { X } from "react-feather";
-import { Proof } from "@cashu/cashu-ts";
 
 declare global {
   interface Window {
@@ -434,7 +433,12 @@ export default function About() {
                 alt="Lightning Network"
               />
             </View>
-            <Text><a href="https://cashu.me" target="_blank" rel="noreferrer">Cashu</a> Ecash</Text>
+            <Text>
+              <a href="https://cashu.me" target="_blank" rel="noreferrer">
+                Cashu
+              </a>{" "}
+              Ecash
+            </Text>
           </View>
 
           <a
