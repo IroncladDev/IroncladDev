@@ -241,23 +241,6 @@ I trained it on a ton of data including:
     images: ["/images/llm-template/gh.png", "/images/llm-template/files.png"],
   },
   {
-    title: "Fendorea",
-    slides: [
-      `Fendorea is a site where users can create images with DALLE and with a prompt generator.  This was my first time using supabase, my first time making a typescript project on my own, and my last hobby project before starting work at Replit.`,
-      `I really enjoyed building this project, and seeing how many cool images users generated.  I also implemented a moderation system, and a word blocklist to ensure that no NSFW content got exposed or generated.
-        \nThe project still remains partially active and is still being used by many Replit users today.`,
-    ],
-    timeCreated: "August 2022",
-    stack: [Tc.next, Tc.react, Tc.supabase, Tc.sass],
-    url: "https://fendorea.ironcladdev.repl.co/",
-    sourceCodeUrl: "https://replit.com/@IroncladDev/Fendorea",
-    images: [
-      "/images/fendorea/index.png",
-      "/images/fendorea/prompt.png",
-      "/images/fendorea/spotlight.png",
-    ],
-  },
-  {
     title: "All Metal Welding",
     slides: [
       `All Metal Welding was one of my freelance projects for a welder, Philip Davis.
