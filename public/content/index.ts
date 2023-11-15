@@ -22,7 +22,7 @@ const Content: IndexPageContent = {
   about: {
     title: "About Me 👋",
     paragraphs: [
-      'Hi there!  My name is Conner Ow (Pronounced "ow" as if you got hurt), a seventeen-year-old Fullstack Developer.',
+      'Hi there!  My name is Conner Ow (Pronounced "ow" as if you got hurt), an eighteen-year-old Fullstack Developer.',
       "I enjoy developing websites, creating content, building with AI, competitive programming, and Brazillian Jiu-Jitsu.",
       "Most importantly, I can center a div and exit vim without much hassle.  Not committing node_modules and .env is a challenge sometimes.",
     ],
