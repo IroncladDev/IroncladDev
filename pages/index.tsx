@@ -329,8 +329,8 @@ function BlogPosts() {
           },
         ]}
       >
-        {blog.posts.map(({ target: post, platform }, i) => (
-          <LazyBlogPost post={post} platform={platform} key={i} index={i} />
+        {blog.posts.map(({ target: post }, i) => (
+          <LazyBlogPost post={post} key={i} index={i} />
         ))}
       </View>
 

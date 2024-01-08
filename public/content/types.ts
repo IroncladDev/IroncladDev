@@ -33,7 +33,6 @@ export interface Project {
 
 export enum BlogPostPlatform {
   Dev = "Dev",
-  Replit = "Replit",
 }
 
 export interface LazyBlogPost {

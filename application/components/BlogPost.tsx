@@ -1,5 +1,3 @@
-import { BlogPostPlatform as BlogPlatform } from "public/content/types";
-import { useQuery } from "application/hooks/gql/useQuery";
 import { View, rcss, tokens, Text } from "application/ui";
 import { useGetJSONLazy } from "application/hooks/fetch";
 import { useSpring, useTransform } from "framer-motion";
@@ -153,96 +151,36 @@ export default function BlogPost({
 
 export function LazyBlogPost({
   post,
-  platform,
   index,
 }: {
   post: string;
-  platform: BlogPlatform;
   index?: number;
 }) {
   const [loadDevPost, { data: devPost, loading: devPostLoading }] =
     useGetJSONLazy("https://dev.to/api/articles/" + post);
 
-  const {
-    data: replitPost,
-    loading: replitPostLoading,
-    refetch: loadReplitPost,
-  } = useQuery({
-    query: `query post($id: Int!) {
-      post(id: $id) {
-        title
-        id
-        url
-        timeCreated
-        replComment {
-          id
-          body
-          replies { id }
-        }
-        repl {
-          url
-        }
-      }
-    }`,
-    variables: {
-      id: Number(post),
-    },
-    hold: true,
-  });
-
   useEffect(() => {
-    if (platform === BlogPlatform.Dev) {
-      loadDevPost();
-    } else {
-      loadReplitPost();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [platform]);
+    loadDevPost();
+  }, []);
 
-  if (platform === BlogPlatform.Dev) {
-    return (
-      <>
-        {devPostLoading || !devPost ? (
-          "loading..."
-        ) : (
-          <BlogPost
-            post={{
-              title: devPost?.title || "",
-              description: devPost.body_markdown?.slice(0, 360) + "...",
-              url: devPost?.canonical_url || "",
-              coverImage: devPost?.cover_image || "",
-              timeCreated: devPost?.created_at || "",
-              reactionCount: devPost?.public_reactions_count || 0,
-              commentCount: devPost?.comments_count || 0,
-            }}
-            index={index}
-          />
-        )}
-      </>
-    );
-  } else {
-    return (
-      <>
-        {replitPostLoading || !replitPost?.post ? (
-          "loading"
-        ) : (
-          <BlogPost
-            post={{
-              title: replitPost.post.title,
-              description:
-                replitPost.post.replComment.body.slice(0, 360) + "...",
-              url:
-                "https://replit.com" +
-                replitPost.post.repl.url +
-                "?c=" +
-                replitPost.post.replComment?.id,
-              timeCreated: replitPost.post.timeCreated,
-              commentCount: replitPost.post.replComment?.replies?.length,
-            }}
-            index={index}
-          />
-        )}
-      </>
-    );
-  }
+  return (
+    <>
+      {devPostLoading || !devPost ? (
+        "loading..."
+      ) : (
+        <BlogPost
+          post={{
+            title: devPost?.title || "",
+            description: devPost.body_markdown?.slice(0, 360) + "...",
+            url: devPost?.canonical_url || "",
+            coverImage: devPost?.cover_image || "",
+            timeCreated: devPost?.created_at || "",
+            reactionCount: devPost?.public_reactions_count || 0,
+            commentCount: devPost?.comments_count || 0,
+          }}
+          index={index}
+        />
+      )}
+    </>
+  );
 }

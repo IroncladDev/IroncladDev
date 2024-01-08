@@ -178,90 +178,10 @@ const LightningModal = ({
   );
 };
 
-const EcashModal = ({
-  isOpen,
-  close,
-}: {
-  isOpen: boolean;
-  close: () => void;
-}) => {
-  const [token, setToken] = useState("");
-
-  const sendToken = () => {
-    if (token) {
-      fetch("/api/ecash", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          accept: "*/*",
-        },
-        body: JSON.stringify({
-          token,
-        }),
-      })
-        .then((r) => r.json())
-        .then(async (res) => {
-          if (res.success) {
-            alert("Thanks for the tip!");
-            close();
-          } else {
-            alert("Something went wrong");
-            close();
-          }
-        });
-    }
-  };
-
-  return (
-    <Modal isVisible={isOpen} onClose={close}>
-      <View
-        css={[
-          rcss.flex.column,
-          rcss.colWithGap(8),
-          {
-            background: tokens.backgroundDefault,
-            border: `solid 1px ${tokens.backgroundHigher}`,
-          },
-          rcss.p(16),
-          rcss.borderRadius(8),
-          rcss.maxWidth(300),
-        ]}
-      >
-        <Text>Enter Ecash Token</Text>
-        <textarea
-          value={token}
-          onChange={(e) => setToken(e.target.value)}
-          css={[
-            rcss.p(8),
-            rcss.borderRadius(8),
-            rcss.width("100%"),
-            {
-              background: tokens.backgroundDefault,
-              border: `solid 1px ${tokens.backgroundHighest}`,
-              color: tokens.foregroundDefault,
-              "&::placeholder": {
-                color: tokens.foregroundDimmest,
-              },
-            },
-          ]}
-          placeholder="cashuAeyJ0b2..."
-        />
-        <Button
-          text="Send Tip"
-          css={rcss.width("100%")}
-          onClick={sendToken}
-          disabled={!token}
-        />
-      </View>
-    </Modal>
-  );
-};
-
 export default function About() {
   const { initialHeight, scrollTop, scrollRef } = useScrollControl();
 
   const [lightningModal, setLightningModal] = useState(false);
-  const [ecashModal, setEcashModal] = useState(false);
 
   const scrollSpring = useSpring(scrollTop, {
     mass: 0.05,
@@ -408,39 +328,6 @@ export default function About() {
             <Text>Lightning</Text>
           </View>
 
-          <View
-            css={[rcss.flex.column, rcss.colWithGap(8), rcss.center]}
-            onClick={() => setEcashModal(true)}
-          >
-            <View
-              css={[
-                rcss.p(16),
-                rcss.borderRadius(8),
-                {
-                  border: `solid 1px ${tokens.backgroundHighest}`,
-                  transition: "0.25s",
-                  cursor: "pointer",
-                  "&:hover": {
-                    background: tokens.backgroundHigher,
-                  },
-                },
-              ]}
-            >
-              <img
-                src="/icons/ebtc.svg"
-                width={64}
-                height={64}
-                alt="Lightning Network"
-              />
-            </View>
-            <Text>
-              <a href="https://cashu.me" target="_blank" rel="noreferrer">
-                Cashu
-              </a>{" "}
-              Ecash
-            </Text>
-          </View>
-
           <a
             href="https://ko-fi.com/ironcladdev"
             target="_blank"
@@ -532,8 +419,6 @@ export default function About() {
         isOpen={lightningModal}
         close={() => setLightningModal(false)}
       />
-
-      <EcashModal isOpen={ecashModal} close={() => setEcashModal(false)} />
     </>
   );
 }

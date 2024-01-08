@@ -53,12 +53,8 @@ const Content: IndexPageContent = {
       },
       {
         target:
-          "ironcladdev/create-a-personalized-chatbot-with-langchain-in-three-simple-steps-p4g",
+          "ironcladdev/smooth-scrolling-with-react-framer-motion-dih",
         platform: BlogPostPlatform.Dev,
-      },
-      {
-        target: "802453",
-        platform: BlogPostPlatform.Replit,
       },
     ],
   },

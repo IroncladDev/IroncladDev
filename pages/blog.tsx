@@ -2,7 +2,6 @@ import { Section, Markdown, Footer, Slant } from "application/components";
 import BlogPost, { BlogPostType } from "application/components/BlogPost";
 import { View, Text, tokens, rcss, FlexSpacer } from "application/ui";
 import { useScrollControl } from "application/hooks/useScroll";
-import { useQuery } from "application/hooks/gql/useQuery";
 import { useSpring, useTransform } from "framer-motion";
 import { useGetJSON } from "application/hooks/fetch";
 import { ObjectAny } from "application/types";
@@ -36,34 +35,8 @@ export default function Blog() {
     "https://dev.to/api/articles?username=ironcladdev"
   );
 
-  const { data: replitPosts, loading: replitPostsLoading } = useQuery({
-    query: `query repl($url: String!) {
-      repl(url: $url) {
-        ...on Repl {
-          id url slug
-          posts(count: 100) {
-            items {
-              title id
-              commentCount
-              timeCreated
-              replComment {
-                body
-              }
-            }
-          }
-        }
-      }
-    }`,
-    variables: {
-      url: "/@IroncladDev/Replit-Blog-IroncladDev",
-    },
-  });
-
   useEffect(() => {
     const devPostsArr = devPosts?.length ? devPosts : [];
-    const replitPostsArr = replitPosts?.repl?.posts?.items?.length
-      ? replitPosts.repl.posts.items
-      : [];
 
     const allPosts: Array<BlogPostType> = [];
 
@@ -79,26 +52,13 @@ export default function Blog() {
       });
     });
 
-    replitPostsArr.forEach((p: ObjectAny) => {
-      if (p?.replComment?.body) {
-        allPosts.push({
-          title: p.title,
-          description: p.replComment.body,
-          timeCreated: p.timeCreated,
-          url:
-            "https://replit.com/@IroncladDev/Replit-Blog-IroncladDev?c=" + p.id,
-          commentCount: p.commentCount,
-        });
-      }
-    });
-
     setPosts(
       allPosts.sort(
         (a, b) =>
           new Date(b.timeCreated).getTime() - new Date(a.timeCreated).getTime()
       )
     );
-  }, [devPostsLoading, replitPostsLoading, devPosts, replitPosts]);
+  }, [devPostsLoading, devPosts]);
 
   return (
     <>
