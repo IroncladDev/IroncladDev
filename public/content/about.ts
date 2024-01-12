@@ -1,4 +1,4 @@
-import { Technology as Tc } from "./types";
+import { Technology as Tc, Technology } from "./types";
 
 const Content: AboutContent = {
   title: "About Me",
@@ -50,22 +50,7 @@ const Content: AboutContent = {
     ],
   },
   skillsHeader: "Skills 🛠",
-  skills: [
-    Tc.next,
-    Tc.node,
-    Tc.react,
-    Tc.typescript,
-    Tc.framer,
-    Tc.mongo,
-    Tc.emotion,
-    Tc.langchain,
-    Tc.html,
-    Tc.p5,
-    Tc.sass,
-    Tc.python,
-    Tc.stripe,
-    Tc.kaboom,
-  ],
+  skills: Object.keys(Tc).sort((a, b) => a.localeCompare(b)) as Array<Technology>,
 };
 
 interface AboutContent {

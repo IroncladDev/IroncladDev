@@ -19,6 +19,8 @@ export enum Technology {
   hyperscript = "hyperscript",
   bun = "bun",
   tailwind = "tailwind",
+  redis = "redis",
+  prisma = "prisma"
 }
 
 export interface Project {

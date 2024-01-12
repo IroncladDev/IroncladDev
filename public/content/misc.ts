@@ -97,6 +97,14 @@ export const TechnologyDescription: {
     description:
       "Tailwind is a utility-first CSS framework that lets you focus on your content.",
   },
+  [Tc.redis]: {
+    title: "Redis",
+    description: "Redis is an open source, in-memory data structure store",
+  },
+  [Tc.prisma]: {
+    title: "Prisma",
+    description: "Prisma is a Node.js & TypeScript ORM which provides global database caching, connection pooling, and real-time database events.",
+  }
 };
 
 export const SocialDescription: {
