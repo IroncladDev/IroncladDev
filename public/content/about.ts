@@ -42,11 +42,11 @@ const Content: AboutContent = {
   faq: {
     title: "Frequently Asked Questions ❓❓",
     paragraphs: [
-      "**Q: What's your favorite programming language?**\n\n**A**: Typescript.  It's like Javascript but more scalable and with a much better Developer Experience.",
-      "**Q: What's your worst favorite programming language?**\n\n**A**: Java.  Super heavy Object-oriented programming and mandatory semicolons are pure pain.",
-      "**Q: Are you available for hire?**\n\n**A**: Yes!",
-      "**Q: Are you open to collaboration?**\n\n**A**: I have multiple ongoing projects at the moment, but I'd be happy to try out and provide feedback on your project.",
-      "**Q: What's the best way to reach you?**\n\n**A**: Join my [Discord Server](/discord) and ping me, or reach out to me with a Twitter Direct Message.",
+      "**Q: What's your favorite programming language?**\n\n**A**: Typescript",
+      "**Q: What's your worst favorite programming language?**\n\n**A**: Java",
+      "**Q: Are you available for hire?**\n\n**A**: Not at the moment",
+      "**Q: Are you open to collaboration?**\n\n**A**: I'm currently packed with work and side projects, so I'm unavailable",
+      "**Q: What's the best way to reach you?**\n\n**A**: Join my [Discord Server](/discord) and send me a Direct Message, or hit me up through [email](mailto:conner@connerow.dev) / [X/Twitter](https://x.com/IroncladDev) DMs.",
     ],
   },
   skillsHeader: "Skills 🛠",
