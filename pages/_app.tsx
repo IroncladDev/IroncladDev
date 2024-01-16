@@ -30,9 +30,26 @@ function AppContainer({
   return (
     <>
       <Head>
-        <title>Ironclad Web Development</title>
+        <title>Ironclad Web Development</title> 
+        
         <meta property="og:title" content="Ironclad Web Development" />
         <meta name="twitter:title" content="Ironclad Web Development" />
+        <meta name="twitter:title" content="Ironclad Web Development" />
+        <meta name="twitter:text:title" content="Ironclad Web Development" />
+        <meta property="og:site_name" content="Ironclad Web Development" />
+
+        <meta charSet="UTF-8"/>
+        <meta name="keywords" content="" />
+        <meta name="next-head-count" content="1" />
+        <meta property="og:locale" content="en_US" />
+        <meta name="theme-color" content="#FFFFFF" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="robots" content="max-image-preview:large" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta
+          name="copyright"
+          content="Copyright 2023-2024 IroncladDev. All rights reserved."
+        />
 
         <meta
           property="og:description"
@@ -47,12 +64,23 @@ function AppContainer({
           content="Conner Ow (IroncladDev) is a Fullstack Developer who lives out in the country. He enjoys building with AI, Content Creation, and Brazillian Jiu-Jitsu."
         />
 
-        <meta property="og:image" content="/homepage.png" />
+        <meta property="og:image" content="https://connerow.dev/homepage.png" />
+        <meta
+          property="og:image:secure_url"
+          content="https://connerow.dev/homepage.png"
+        />
+        <meta name="twitter:image" content="https://connerow.dev/homepage.png" />
+        <meta name="twitter:image:src" content="https://connerow.dev/homepage.png" />
+        <meta name="twitter:image:alt" content="Homepage" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="700" />
-        <meta name="twitter:image" content="/homepage.png" />
         <meta name="twitter:card" content="summary_large_image" />
+
+        <meta property="og:url" content="https://connerow.dev" />
+        <meta name="twitter:url" content="https://connerow.dev" />
+
+        <meta property="og:type" content="website" />
 
         <meta name="twitter:site" content="@IroncladDev" />
         <meta name="twitter:creator" content="@IroncladDev" />
