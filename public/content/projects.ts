@@ -2,6 +2,40 @@ import { Project, Technology as Tc } from "./types";
 
 export const Projects: Array<Project> = [
   {
+    title: "LLM Arena",
+    slides: [
+      `LLM Arena is my largest and most polished web dev project as of May 2024. It was originally an idea of a side project by [Amjad Masad](https://x.com/amasad) that I took on in December 2023.
+
+In short, it's a tool where you can create and share side-by-side LLM Comparisons.`,
+      `The biggest question and technical challenge for me was "Who is going to keep all the data up-to-date?"
+
+I decided to do something like Twitter/X's Community Notes feature where entities require multiple user approvals to prevent spam, abuse, and adding the wrong information.
+
+Any user who has been accepted to be a contributor can upload an LLM, but for that LLM to be able to be used in comparisons, it needs to be approved.`,
+      `For some time, building the contribution system was so hard I didn't know if I could make it. I pushed on through and I made it.
+
+I just hope that people will find LLM Arena as a useful tool and help me keep it thriving.`,
+    ],
+    stack: [
+      Tc.typescript,
+      Tc.next,
+      Tc.react,
+      Tc.prisma,
+      Tc.bun,
+      Tc.tailwind,
+      Tc.framer,
+    ],
+    timeCreated: "May 2024",
+    url: "https://llmarena.ai",
+    sourceCodeUrl: "https://github.com/IroncladDev/llm-arena",
+    images: [
+      "/images/llmarena/index.jpeg",
+      "/images/llmarena/edit.jpeg",
+      "/images/llmarena/login.jpeg",
+      "/images/llmarena/submit.jpeg",
+    ],
+  },
+  {
     title: "AmjadGPT",
     slides: [
       `AmjadGPT is a chatbot trained to act like Amjad Masad, built with LangChain and Next.js.
@@ -417,21 +451,6 @@ I trained it on a ton of data including:
       "/images/vulcanist/mom.png",
       "/images/vulcanist/ded.png",
     ],
-  },
-  {
-    title: "Replyte",
-    slides: [
-      `Replyte is a realtime chat app hosted on Replit.  I found a way to hook up an express.js server to a Next.js application, so I utilized that to enable websockets with Socket.io.
-        \nThis project won a spot in the Replit's [Creator Fund](https://replit.com/@replit/Replit-Creator-Fund) program, and I won $500 for it.`,
-      `Overall, Replyte was a really fun project to build.  Not only did I make a chat system, but I also made a fully-functional moderation system and a bot.
-        \nFighting abuse, spammers, and botters took the most time in building this - so much to the point where I just tightened ratelimits, and prevented users from posting images.`,
-      `At the moment, the project remains active only partially.  Most of the usage comes from either curious people who stumble across my profile, or students in school who want to communicate with each other.`,
-    ],
-    timeCreated: "August 2022",
-    stack: [Tc.next, Tc.react, Tc.sass, Tc.mongo, Tc.node],
-    url: "https://replyte.connerow.dev/",
-    sourceCodeUrl: "https://replit.com/@IroncladDev/Replyte-Chat-App",
-    images: ["/images/replyte/index.png", "/images/replyte/chat.png"],
   },
   {
     title: "Replit Moderation Dashboard",
