@@ -1,187 +1,14 @@
-import {
-  View,
-  Text,
-  tokens,
-  rcss,
-  FlexSpacer,
-  IconButton,
-  Button,
-} from "application/ui";
+import { View, Text, tokens, rcss, FlexSpacer } from "application/ui";
 import { useSpring, useTransform } from "framer-motion";
 import { useScrollControl } from "application/hooks/useScroll";
 import { SocialDescription } from "public/content/misc";
 import Styles from "lib/baseStyles";
-import {
-  Section,
-  Markdown,
-  Footer,
-  Slant,
-  Modal,
-} from "application/components";
+import { Section, Markdown, Footer, Slant } from "application/components";
 import { SocialPlatform } from "public/content/types";
 import { ContactHeaderDraw } from "application/components/ContactHeaderDraw";
-import QRCode from "react-qr-code";
-import { useState } from "react";
-import { Invoice, LightningAddress } from "alby-tools";
-import type { WebLNProvider } from "webln";
-import { CopyButton } from "./tokens";
-import { X } from "react-feather";
-
-declare global {
-  interface Window {
-    webln?: WebLNProvider;
-  }
-}
-
-const LightningModal = ({
-  isOpen,
-  close,
-}: {
-  isOpen: boolean;
-  close: () => void;
-}) => {
-  const [invoice, setInvoice] = useState<Invoice | null>(null);
-  const [amt, setAmt] = useState("1000");
-
-  const handlePayment = async () => {
-    const ln = new LightningAddress("ironclad@getalby.com");
-    await ln.fetch();
-
-    const inv = await ln.requestInvoice({ satoshi: Number(amt) });
-
-    setInvoice(inv);
-
-    if (typeof window.webln !== "undefined") {
-      try {
-        await window.webln.enable();
-        await window.webln.sendPayment(inv.paymentRequest);
-      } catch (e) {
-        console.log(e);
-        close();
-      }
-    }
-
-    const payCheckInterval = setInterval(() => {
-      inv
-        .isPaid()
-        .then((paid) => {
-          if (paid) {
-            setInvoice(null);
-            close();
-            alert("Thanks for the tip!");
-            clearInterval(payCheckInterval);
-          }
-        })
-        .catch((e) => {
-          close();
-          console.error(e);
-          clearInterval(payCheckInterval);
-        });
-    }, 1000);
-  };
-
-  return (
-    <Modal isVisible={isOpen} onClose={close}>
-      <View
-        css={[
-          rcss.flex.column,
-          rcss.colWithGap(16),
-          {
-            background: tokens.backgroundDefault,
-            border: `solid 1px ${tokens.backgroundHigher}`,
-          },
-          rcss.p(16),
-          rcss.borderRadius(8),
-          rcss.maxWidth(300),
-          rcss.center,
-        ]}
-      >
-        {invoice?.paymentRequest && typeof window.webln === "undefined" ? (
-          <>
-            <View css={[rcss.flex.column, rcss.colWithGap(8)]}>
-              <View
-                css={[
-                  rcss.flex.row,
-                  rcss.justify.spaceBetween,
-                  rcss.align.center,
-                ]}
-              >
-                <Text variant="subheadDefault">Lightning Payment</Text>
-
-                <IconButton onClick={close}>
-                  <X size={16} color={tokens.foregroundDefault} />
-                </IconButton>
-              </View>
-
-              <Text multiline color="dimmer">
-                Scan the QR code or paste the lightning payment request to tip
-                me ~$5 in bitcoin
-              </Text>
-
-              <View
-                css={[rcss.flex.row, rcss.rowWithGap(8), rcss.align.center]}
-              >
-                <CopyButton text={invoice.paymentRequest} />
-                <Text>Copy</Text>
-              </View>
-            </View>
-
-            <View css={[rcss.minWidth(200), rcss.minHeight(200)]}>
-              <QRCode
-                value={invoice.paymentRequest}
-                size={200}
-                bgColor={tokens.backgroundDefault}
-                fgColor={tokens.foregroundDimmer}
-              />
-            </View>
-          </>
-        ) : (
-          <>
-            <View css={[rcss.flex.column, rcss.colWithGap(4)]}>
-              <Text>Enter Amount (Satoshis)</Text>
-              <Text variant="small" color="dimmest">
-                *1 Satoshi = 1/100M BTC ($0.0002 USD)
-              </Text>
-            </View>
-
-            <View
-              css={[rcss.flex.column, rcss.colWithGap(8), rcss.width("100%")]}
-            >
-              <input
-                value={amt}
-                onChange={(e) => setAmt(e.target.value)}
-                css={[
-                  rcss.p(8),
-                  rcss.borderRadius(8),
-                  rcss.width("100%"),
-                  {
-                    background: tokens.backgroundDefault,
-                    border: `solid 1px ${tokens.backgroundHighest}`,
-                    color: tokens.foregroundDefault,
-                    "&::placeholder": {
-                      color: tokens.foregroundDimmest,
-                    },
-                  },
-                ]}
-                placeholder="1000"
-              />
-              <Button
-                text="Send Tip"
-                css={rcss.width("100%")}
-                onClick={handlePayment}
-              />
-            </View>
-          </>
-        )}
-      </View>
-    </Modal>
-  );
-};
 
 export default function About() {
   const { initialHeight, scrollTop, scrollRef } = useScrollControl();
-
-  const [lightningModal, setLightningModal] = useState(false);
 
   const scrollSpring = useSpring(scrollTop, {
     mass: 0.05,
@@ -222,15 +49,15 @@ export default function About() {
                   color: tokens.foregroundDimmest,
                 }}
               >
-                (Not a hugger btw)
+                (Not a hugger, btw)
               </h2>
             </View>
             <Text multiline color="dimmer">
-              <Markdown markdown="I'm always open to fellow developers and technology enthusiasts." />
+              My DMs are always open to fellow programmers and techbros.
             </Text>
 
             <Text multiline color="dimmer">
-              <Markdown markdown="Say Hi and pitch me what you're building!" />
+              Say Hi. Let&apos;s talk.
             </Text>
 
             <FlexSpacer />
@@ -278,96 +105,6 @@ export default function About() {
       </Section>
 
       <Section
-        css={[rcss.flex.column, rcss.center, rcss.colWithGap(32)]}
-        background={tokens.backgroundDefault}
-        head={
-          <Slant
-            path="polygon(100% 0, 100% 100%, 0 0)"
-            background={tokens.backgroundRoot}
-          />
-        }
-      >
-        <Text variant="headerDefault">Support Me</Text>
-
-        <View
-          css={[
-            rcss.flex.row,
-            rcss.flex.wrap,
-            rcss.width("100%"),
-            rcss.center,
-            {
-              gap: 16,
-            },
-          ]}
-        >
-          <View
-            css={[rcss.flex.column, rcss.colWithGap(8), rcss.center]}
-            onClick={() => setLightningModal(true)}
-          >
-            <View
-              css={[
-                rcss.p(16),
-                rcss.borderRadius(8),
-                {
-                  border: `solid 1px ${tokens.backgroundHighest}`,
-                  transition: "0.25s",
-                  cursor: "pointer",
-                  "&:hover": {
-                    background: tokens.backgroundHigher,
-                  },
-                },
-              ]}
-            >
-              <img
-                src="/icons/lightning.svg"
-                width={64}
-                height={64}
-                alt="Lightning Network"
-              />
-            </View>
-            <Text>Lightning</Text>
-          </View>
-
-          <a
-            href="https://ko-fi.com/ironcladdev"
-            target="_blank"
-            rel="noreferrer"
-            css={{
-              textDecoration: "none",
-              "& *": {
-                textDecoration: "none !important",
-              },
-            }}
-          >
-            <View css={[rcss.flex.column, rcss.colWithGap(8), rcss.center]}>
-              <View
-                css={[
-                  rcss.p(16),
-                  rcss.borderRadius(8),
-                  {
-                    border: `solid 1px ${tokens.backgroundHighest}`,
-                    transition: "0.25s",
-                    cursor: "pointer",
-                    "&:hover": {
-                      background: tokens.backgroundHigher,
-                    },
-                  },
-                ]}
-              >
-                <img
-                  src="/icons/java.svg"
-                  width={64}
-                  height={64}
-                  alt="Ko-fi... ...or not?"
-                />
-              </View>
-              <Text>Buy me a Coffee</Text>
-            </View>
-          </a>
-        </View>
-      </Section>
-
-      <Section
         css={[
           rcss.flex.column,
           rcss.center,
@@ -375,11 +112,11 @@ export default function About() {
           rcss.p(16),
           rcss.minHeight("100vh"),
         ]}
-        background={tokens.backgroundRoot}
+        background={tokens.backgroundDefault}
         head={
           <Slant
             path="polygon(100% 0, 100% 100%, 0 0)"
-            background={tokens.backgroundDefault}
+            background={tokens.backgroundRoot}
           />
         }
       >
@@ -414,11 +151,6 @@ export default function About() {
       </Section>
 
       <Footer />
-
-      <LightningModal
-        isOpen={lightningModal}
-        close={() => setLightningModal(false)}
-      />
     </>
   );
 }

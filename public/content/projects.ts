@@ -24,6 +24,7 @@ I just hope that people will find LLM Arena as a useful tool and help me keep it
       Tc.bun,
       Tc.tailwind,
       Tc.framer,
+      Tc.neovim,
     ],
     timeCreated: "May 2024",
     url: "https://llmarena.ai",

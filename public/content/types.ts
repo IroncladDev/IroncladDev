@@ -20,7 +20,9 @@ export enum Technology {
   bun = "bun",
   tailwind = "tailwind",
   redis = "redis",
-  prisma = "prisma"
+  prisma = "prisma",
+  neovim = "neovim",
+  rust = "rust",
 }
 
 export interface Project {
@@ -31,15 +33,6 @@ export interface Project {
   images: Array<string>;
   slides: Array<string>;
   stack: Array<Technology>;
-}
-
-export enum BlogPostPlatform {
-  Dev = "Dev",
-}
-
-export interface LazyBlogPost {
-  target: string;
-  platform: BlogPostPlatform;
 }
 
 export enum SocialPlatform {
@@ -55,5 +48,3 @@ export interface Social {
   url: string;
   platform: SocialPlatform;
 }
-
-export interface BlogPost {}

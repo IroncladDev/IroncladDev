@@ -104,11 +104,6 @@ export const Footer = () => {
             </Link>
           </FlexCol>
           <FlexCol gap={16}>
-            <Link href="/blog" legacyBehavior>
-              <a>
-                <Text>Blog</Text>
-              </a>
-            </Link>
             <Link href="/discord" legacyBehavior>
               <a>
                 <Text>Discord</Text>

@@ -1,6 +1,5 @@
 import { MotionValue, useSpring, useTransform, motion } from "framer-motion";
 import { ScrollHeader } from "application/components/ScrollHeader";
-import { LazyBlogPost } from "application/components/BlogPost";
 import { useScrollControl } from "application/hooks/useScroll";
 import { Project } from "application/components/Project";
 import { Projects as AllProjects } from "public/content/projects";
@@ -26,7 +25,7 @@ import {
   OutlineButton,
 } from "application/ui";
 
-const { headline, about, projects, blog, contact } = Content;
+const { headline, about, projects, contact } = Content;
 
 function FaceImage({ percentage }: { percentage: MotionValue<number> }) {
   const smooth = useSpring(percentage, {
@@ -52,8 +51,8 @@ function FaceImage({ percentage }: { percentage: MotionValue<number> }) {
       style={{ border }}
     >
       <motion.img
-        src="/me.webp"
-        alt="oh look its a face reveal"
+        src="/murica.webp"
+        alt="'Murica"
         css={[
           rcss.handleMaxWidth(675, {
             maxWidth: 300,
@@ -64,7 +63,6 @@ function FaceImage({ percentage }: { percentage: MotionValue<number> }) {
             borderRadius: "50%",
             zIndex: 1,
             width: "100%",
-            filter: "grayscale(100%)",
           },
         ]}
         style={{
@@ -294,67 +292,18 @@ function Projects() {
   );
 }
 
-function BlogPosts() {
-  return (
-    <Section
-      css={[rcss.p(16), rcss.colWithGap(32)]}
-      background={tokens.backgroundDefault}
-      head={
-        <Slant
-          path="polygon(0 0, 100% 100%, 100% 0)"
-          background={tokens.backgroundRoot}
-        />
-      }
-    >
-      <ScrollControl inline>
-        {(p) => (
-          <ScrollHeader percentage={p}>
-            <Markdown markdown={blog.title} />
-          </ScrollHeader>
-        )}
-      </ScrollControl>
-      <ScrollControl>
-        {(p) => (
-          <ParagraphControl percentage={p}>{blog.description}</ParagraphControl>
-        )}
-      </ScrollControl>
-      <View
-        css={[
-          rcss.flex.row,
-          rcss.justify.center,
-          rcss.p(16),
-          {
-            flexWrap: "wrap",
-            gap: 16,
-          },
-        ]}
-      >
-        {blog.posts.map(({ target: post }, i) => (
-          <LazyBlogPost post={post} key={i} index={i} />
-        ))}
-      </View>
-
-      <ScrollControl inline>
-        {(p) => (
-          <FadeUpButton percentage={p} href="/blog" text="Read More >>" />
-        )}
-      </ScrollControl>
-    </Section>
-  );
-}
-
 function Contact() {
   return (
     <Section
       css={[rcss.p(16), rcss.align.center]}
       background={`linear-gradient( 
-            ${tokens.backgroundRoot},
+            ${tokens.backgroundDefault},
             ${tokens.subgroundRoot}
           )`}
       head={
         <Slant
           path="polygon(0 0, 100% 100%, 100% 0)"
-          background={tokens.backgroundDefault}
+          background={tokens.backgroundRoot}
         />
       }
     >
@@ -398,9 +347,6 @@ export default function Home() {
 
       {/* Showcase projects */}
       <Projects />
-
-      {/* Blog */}
-      <BlogPosts />
 
       {/* Contact */}
       <Contact />

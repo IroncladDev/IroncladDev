@@ -245,7 +245,7 @@ function Skill({ sk, p }: { sk: Technology; p: MotionValue<number> }) {
             rcss.borderRadius(8),
             {
               border: `solid 1px ${tokens.backgroundHigher}`,
-              backgroundColor: tokens.backgroundRoot
+              backgroundColor: tokens.backgroundRoot,
             },
           ]}
           style={{
