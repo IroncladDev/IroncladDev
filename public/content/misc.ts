@@ -105,6 +105,15 @@ export const TechnologyDescription: {
     description:
       "Prisma is a Node.js & TypeScript ORM which provides global database caching, connection pooling, and real-time database events.",
   },
+  [Tc.neovim]: {
+    title: "Neovim",
+    description: "I use Neovim, btw",
+  },
+  [Tc.rust]: {
+    title: "Rust",
+    description:
+      "Rust is a systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety.",
+  },
 };
 
 export const SocialDescription: {
@@ -145,7 +154,8 @@ export const SocialDescription: {
     title: "Replit",
     url: "https://replit.com/@IroncladDev",
     handle: "@IroncladDev",
-    description: "I host games, small websites, and part of my blog on Replit.",
+    description:
+      "Some of my projects are hosted on Replit. I use it for prototyping.",
   },
   [SocialPlatform.Discord]: {
     icon: "/icons/discord.svg",

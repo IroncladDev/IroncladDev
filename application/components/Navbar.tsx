@@ -108,7 +108,6 @@ export const Navbar = () => {
           <View css={[rcss.flex.row, rcss.align.center, rcss.rowWithGap(16)]}>
             <NavLink href="/about" text="About" />
             <NavLink href="/showcase" text="Showcase" />
-            <NavLink href="/blog" text="Blog" />
             <NavLink href="/contact" text="Contact" />
           </View>
         </View>
