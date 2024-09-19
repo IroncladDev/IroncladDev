@@ -1,12 +1,10 @@
-# 👋 Hello, I'm IroncladDev
+# Oh hi
 
-I'm IroncladDev, an eighteen-year-old Fullstack Web Developer who lives out in the country.
+I'm IroncladDev, a Texan fullstack dev who lives out in the country.
 
-I enjoy developing websites, creating content, building with AI, competitive programming, and Brazillian Jiu-Jitsu.
+Neovim on a Mac, btw.
 
-I code because it allows me to express my imagination and creativity. What other programmers develop inspires me to build and inspire others.
+Check out my [Website](https://connerow.dev).
 
-- [Website 🌐](https://connerow.dev)
-- [Twitter / 𝕏](https://twitter.com/IroncladDev)
-- [Email ✉️](mailto:conner@connerow.dev)
-- [Dev.to ✍️](https://dev.to/ironcladdev)
+I'm most active on [𝕏](https://twitter.com/IroncladDev) and [Discord](https://connerow.dev/discord)
+ 
