@@ -2,6 +2,30 @@ import { Project, Technology as Tc } from "./types";
 
 export const Projects: Array<Project> = [
   {
+    title: "TehcCringe",
+    slides: [
+      `TehcCringe is an open source satirical tech news website.
+
+It cross-posts to [X (formerly twitter)](https://x.com/TehcCringe) and [Blu*sky](https://bsky.app/profile/tehccringe.bsky.social) whenever a PR containing a new article is merged.
+
+I picked some collaborators to help with the project, and they did great writing some hilarious articles for the initial launch.`,
+      `I've always found satire news hilarious. I once opened an account on X to post funny tech-related satire, but after a while I got bored and deleted it.
+
+After getting some inspiration from [The Babylon Bee](https://babylonbee.com) and [Uncyclopedia](https://uncyclopedia.com), I thought about making an open source version that anyone could contribute to.
+
+The idea sounded great so I paused my current side project (unfinished as of Nov 2024), and built this one.`,
+    ],
+    stack: [Tc.typescript, Tc.next, Tc.react, Tc.bun, Tc.tailwind, Tc.neovim],
+    timeCreated: "November 2024",
+    url: "https://tehccringe.com",
+    sourceCodeUrl: "https://github.com/TehcCringe/TehcCringe",
+    images: [
+      "/images/tehccringe/index.png",
+      "/images/tehccringe/article.png",
+      "/images/tehccringe/readme.png",
+    ],
+  },
+  {
     title: "LLM Arena",
     slides: [
       `LLM Arena is my largest and most polished web dev project as of May 2024. It was originally an idea of a side project by [Amjad Masad](https://x.com/amasad) that I took on in December 2023.
@@ -214,40 +238,6 @@ I trained it on a ton of data including:
     ],
   },
   {
-    title: "AI Playground (Replit Extension)",
-    slides: [
-      `I built a Replit Extension that allows users to chat with multiple AI models, customize the base prompts, and even run and compare different AI models in parallel.`,
-      `Users can switch between a **chat** and **prompt** interface to choose between parallel mode and chat mode.
-      \nAs of July 2023, the AI playground remains the top Replit Extension in the store with over 6,200 installs.`,
-    ],
-    stack: [Tc.next, Tc.node, Tc.react, Tc.mongo, Tc.sass],
-    timeCreated: "April 2023",
-    url: "https://replit.com/extensions",
-    images: [
-      "/images/ai-playground/index.png",
-      "/images/ai-playground/chat.png",
-      "/images/ai-playground/compare.png",
-    ],
-  },
-  {
-    title: "ReplTV (Replit Extension)",
-    slides: [
-      `ReplTV allows you to stream your code directly within the Replit Workspace.  A collaboration between [bddy](https://replit.com/@bddy), [haroon](https://replit.com/@haroon), and I.
-      \nThe extension watches the contents of the current file you are coding in and streams it to all viewers over websockets.`,
-      `Viewers can post in the built-in chat and watch exactly what the streamer is coding.
-      \nStreamers can self-moderate their own streams such as temporarily kicking or muting an abusive viewer.`,
-      `This was a really challenging project to make as it was the most complex use of websockets I'd ever attempted, but the result was extremely satisfying.`,
-    ],
-    stack: [Tc.next, Tc.node, Tc.react, Tc.mongo, Tc.sass],
-    timeCreated: "March 2023",
-    url: "https://replit.com/extensions",
-    images: [
-      "/images/repltv/index.png",
-      "/images/repltv/watch-stream.png",
-      "/images/repltv/as-streamer.png",
-    ],
-  },
-  {
     title: "Celestron",
     slides: [
       `Celestron is a tower defense game based around the [Replit](https://replit.com) community.
@@ -308,6 +298,30 @@ I trained it on a ton of data including:
       "/images/kuhnhong/index.png",
       "/images/kuhnhong/preview.png",
       "/images/kuhnhong/gallery.png",
+    ],
+  },
+  {
+    title: "Salvadoran Reclamation: MS-13",
+    slides: [
+      `This game was my entry for [JS13K](https://js13kgames.com) 2024. The theme for the jam was "Triskidephobia", fear of the number 13. It took a lot of thinking, but I remembered a short documentary about how Nayib Bukele cleaned out the MS-13 gangs in El Salvador.
+
+I decided to make my game around that theme.`,
+      `As far as game jam entries go, I usually put EVERYTHING I have into building it. Towards the end, I was on the computer sometimes 16 hours a day - 8 hours jamming and 8 hours working. I really burnt myself out on this one, and I decided I wouldn't do another game jam in a long time.
+
+Despite the overwhelming effort I put into this, I enjoyed making it and I'm very happy with the result.`,
+
+      `You play as an El Salvadoran soldier under the command of Nayib Bukele. The objective is to neutralize all the gangs in various levels.
+
+The hardest part was getting the enemies to behave right, and they're still a little buggy.`,
+    ],
+    timeCreated: "August 2024",
+    stack: [Tc.typescript, Tc.bun, Tc.neovim],
+    url: "https://js13kgames.com/2024/games/salvadoran-reclamation-ms-13",
+    images: [
+      "/images/salvadoran-reclamation/index.png",
+      "/images/salvadoran-reclamation/map.png",
+      "/images/salvadoran-reclamation/gameplay1.png",
+      "/images/salvadoran-reclamation/gameplay2.png",
     ],
   },
   {
