@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400..800;1,100..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/src/base.css" />
+    <link rel="stylesheet" href="index.css" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/img/brand/svg/icon.svg" />
+    <link rel="icon" type="image/png" href="/img/brand/png/icon@20.png" />
+
+    <!-- Preloaded Images to prevent flickering -->
+    <link rel="preload" as="image" href="/img/icon-off.svg" />
+    <link rel="preload" as="image" href="/img/helmet-off.svg" />
+    <link rel="preload" as="image" href="/img/neck.svg" />
+    <link rel="preload" as="image" href="/img/brand/svg/logo.svg" />
+
+    <!-- Web Components -->
+    <script src="/src/components/nav-bar.js" type="module"></script>
+
+    <title>IroncladDev</title>
+  </head>
+
+  <body>
+    <div flex col>
+      <main dir="ltr">
+        <header snap flex col>
+          <nav-bar></nav-bar>
+          <div grow flex col center>
+            <h1>1</h1>
+            <h1>2</h1>
+          </div>
+        </header>
+
+        <div id="scroll-tl" snap>
+          <div class="sticky">
+            <div class="sticky-item">
+              <h1>2</h1>
+              <h1>3</h1>
+              <h1>4</h1>
+            </div>
+          </div>
+          <section snap />
+          <section snap />
+        </div>
+
+        <section snap flex center>
+          <h1>5</h1>
+        </section>
+
+        <section snap flex center>
+          <h1>6</h1>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
