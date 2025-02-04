@@ -1,0 +1,184 @@
+:root {
+  /* Colors */
+  --root: #14131e;
+  --surface0: #1f1d2d;
+  --surface1: #242336;
+  --surface2: #353553;
+  --surface3: #494764;
+  --surface4: #555275;
+  --accent0: #616649;
+  --accent1: #7b8257;
+  --accent2: #919C5E;
+  --accent3: #bfd06d;
+  --accent4: #e7ff5e;
+  --foreground0: #c8d5f1;
+  --foreground1: #949bb9;
+  --foreground2: #747a9c;
+
+  /* Spacing/Sizes */
+  --max-content-width: 1000px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body,
+html {
+  font-family: "JetBrains Mono", serif;
+  background-color: var(--root);
+  color: var(--foreground0);
+}
+
+main {
+  scroll-snap-type: y mandatory;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: scroll;
+  scrollbar-color: var(--accent2) var(--surface2);
+  scrollbar-width: thin;
+}
+
+section {
+  height: 100vh;
+  flex: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section[snap] > div {
+  max-width: var(--max-content-width);
+}
+
+.sticky {
+  top: 0;
+  position: sticky;
+  overflow: hidden;
+}
+
+/* Navbar */
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface1);
+  padding: 16px;
+  border-bottom: 2px solid var(--surface2);
+}
+
+nav > div {
+  max-width: var(--max-content-width);
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#nav-logo-icon {
+  width: 48px;
+}
+
+#nav-title {
+  margin: 0;
+  font-size: 36px;
+  color: var(--foreground0);
+}
+
+@media (max-width: 768px) {
+  #nav-title {
+    display: none;
+  }
+  nav {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+#nav-home-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+}
+
+#nav-links > a[is="nav-link"] {
+  color: var(--foreground1);
+  transition: color 0.1s ease-in-out;
+
+  &:hover {
+    color: var(--accent3);
+  }
+}
+
+/* Utils */
+
+[snap] {
+  scroll-snap-align: center;
+}
+
+[flex] {
+  display: flex;
+}
+
+[col] {
+  flex-direction: column;
+}
+
+[row] {
+  flex-direction: row;
+}
+
+[grow] {
+  flex-grow: 1;
+}
+
+[center] {
+  align-items: center;
+  justify-content: center;
+}
+
+[no-basis] {
+  flex-basis: 0;
+}
+
+[align="start"] {
+  align-items: flex-start;
+}
+
+[align="center"] {
+  align-items: center;
+}
+
+[align="end"] {
+  align-items: flex-end;
+}
+
+[justify="center"] {
+  justify-content: center;
+}
+
+[justify="start"] {
+  justify-content: flex-start;
+}
+
+[justify="end"] {
+  justify-content: flex-end;
+}
+
+[gap="4"] {
+  gap: 4px;
+}
+
+[gap="8"] {
+  gap: 8px;
+}
+
+[gap="16"] {
+  gap: 16px;
+}
