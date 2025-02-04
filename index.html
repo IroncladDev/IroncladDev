@@ -17,26 +17,43 @@
   <link rel="stylesheet" href="./src/style.css" />
 
   <!-- Icons -->
-  <link rel="icon" type="image/svg+xml" href="/img/icon-off.svg" />
+  <link rel="icon" type="image/svg+xml" href="/img/brand/svg/icon.svg" />
   <link rel="icon" type="image/png" href="/img/brand/png/icon@20.png" />
 
   <!-- Preloaded Images to prevent flickering -->
-  <link rel="preload" as="image" href="/img/brand/svg/icon.svg" />
+  <link rel="preload" as="image" href="/img/icon-off.svg" />
   <link rel="preload" as="image" href="/img/helmet-off.svg" />
   <link rel="preload" as="image" href="/img/neck.svg" />
   <link rel="preload" as="image" href="/img/brand/svg/transparent.svg" />
 
-  <!-- Web Components -->
-  <script src="./src/components/nav-link.js" type="module"></script>
-
-  <!-- Custom Page Style -->
+  <!-- Header -->
   <style>
+    main {
+      background: var(--surface0);
+    }
+
     header {
       height: 100vh;
       flex: none;
       display: flex;
       position: relative;
       overflow: hidden;
+      view-timeline-name: --header;
+      view-timeline-axis: block;
+      animation: linear unreveal both;
+      animation-timeline: --header;
+      animation-range: 100vh;
+      background: var(--root);
+    }
+
+    @keyframes unreveal {
+      0% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      }
+
+      100% {
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+      }
     }
 
     #header-container {
@@ -75,6 +92,64 @@
       transition: opacity 2s ease-in-out;
     }
 
+    #title {
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    #subtitle {
+      font-size: 32px;
+      color: var(--foreground1);
+      line-height: 1;
+    }
+
+    #nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      list-style: none;
+    }
+
+    #nav-list>li>a {
+      color: var(--foreground2);
+      transition: color 0.1s ease-in-out;
+
+      &:hover {
+        color: var(--accent3);
+      }
+    }
+
+    #nav-list>li::before {
+      content: "-";
+      color: var(--accent3);
+      margin-right: 8px;
+    }
+
+    @media (max-width: 768px) {
+      #helmet-container {
+        width: 100%;
+        height: calc(50% - 16px);
+      }
+
+      #helmet-head,
+      #helmet-neck {
+        height: 100%;
+      }
+
+      #header-container {
+        flex-direction: column-reverse;
+        align-items: center;
+        z-index: 5;
+        padding: 16px;
+      }
+
+      #nav-list,
+      #scroll-indicator {
+        display: none;
+      }
+    }
+
     @keyframes activate {
       0% {
         opacity: 0.5;
@@ -99,6 +174,13 @@
       }
     }
   </style>
+
+  <!-- Intro -->
+  <style>
+    #intro {
+      background: var(--surface0);
+    }
+  </style>
 </head>
 
 <body>
@@ -107,14 +189,14 @@
       <header snap flex col>
         <nav>
           <div>
-            <a href="/" is="nav-link" id="nav-home-link">
+            <a href="/" id="nav-home-link">
               <img id="nav-logo-icon" src="/img/icon-off.svg" />
               <h1 id="nav-title">Ironclad</h1>
             </a>
             <div id="nav-links" flex justify="end" grow gap="16">
-              <a href="/about.html" is="nav-link">About</a>
-              <a href="/showcase.html" is="nav-link">Showcase</a>
-              <a href="/contact.html" is="nav-link">Contact</a>
+              <a href="/about.html">About</a>
+              <a href="/showcase.html">Showcase</a>
+              <a href="/contact.html">Contact</a>
             </div>
           </div>
         </nav>
@@ -126,24 +208,41 @@
 
         <div id="header-container">
           <div grow no-basis></div>
-          <div grow no-basis flex col justify="center" gap="16">
-            <h1>Oh hi</h1>
+          <div grow no-basis flex col justify="center" gap="32">
+            <div flex col gap="8">
+              <h1 id="title">
+                <span style="color: var(--accent3)">Redneck</span> Fullstack
+              </h1>
+              <h2 id="subtitle">Web Developer</h2>
+            </div>
+            <p>
+              I'm IroncladDev, a Texan software engineer who lives out in the
+              country.
+            </p>
+            <ul id="nav-list">
+              <li><a href="/about.html">Read my story &gt;&gt;</a></li>
+              <li><a href="/showcase.html">View my work &gt;&gt;</a></li>
+              <li><a href="/contact.html">Get in touch &gt;&gt;</a></li>
+            </ul>
+            <h3 id="scroll-indicator">
+              You could also <a href="#intro">scroll down &gt;&gt;</a>
+            </h3>
           </div>
         </div>
       </header>
 
-      <section snap flex center>
-        <h1>5</h1>
+      <section snap flex center id="intro">
+        <h1>To be Continued</h1>
       </section>
 
-      <section snap flex center>
-        <h1>6</h1>
+      <section snap flex center style="background: var(--root)">
+        <h1>Later :)</h1>
       </section>
     </main>
   </div>
 
   <script>
-    // Whenever you add an id to an element, it gets declared as a global variable
+    // Whenever you add an id to an element, it gets declared as a global variable on the window object
     const helmet = window["helmet-head"];
     const neck = window["helmet-neck"];
     const navLogo = window["nav-logo-icon"];
@@ -151,34 +250,34 @@
       'link[rel="icon"][type="image/svg+xml"]',
     );
 
+    const iconOn = "/img/brand/svg/icon.svg";
+    const helmetOn = "/img/brand/svg/transparent.svg";
+    const iconOff = "/img/icon-off.svg";
+    const helmetOff = "/img/helmet-off.svg";
+
     // Animate the helmet startup on page startup
     setTimeout(() => {
-      helmet.src = "/img/brand/svg/transparent.svg";
-      navLogo.src = "/img/brand/svg/icon.svg";
-      favicon.src = "/img/brand/svg/icon.svg";
+      helmet.src = helmetOn;
+      navLogo.src = favicon.src = iconOn;
     }, 500);
     setTimeout(() => {
-      helmet.src = "/img/helmet-off.svg";
-      navLogo.src = "/img/icon-off.svg";
-      favicon.src = "/img/icon-off.svg";
+      helmet.src = helmetOff;
+      navLogo.src = favicon.src = iconOff;
     }, 1000);
     setTimeout(() => {
-      helmet.src = "/img/brand/svg/transparent.svg";
-      navLogo.src = "/img/brand/svg/icon.svg";
-      favicon.src = "/img/brand/svg/icon.svg";
+      helmet.src = helmetOn;
+      navLogo.src = favicon.src = iconOn;
     }, 1200);
     setTimeout(() => {
-      helmet.src = "/img/helmet-off.svg";
-      navLogo.src = "/img/icon-off.svg";
-      favicon.src = "/img/icon-off.svg";
+      helmet.src = helmetOff;
+      navLogo.src = favicon.src = iconOff;
 
       helmet.style.animation = "activate 2s ease-in-out forwards";
       neck.style.opacity = "1";
     }, 1300);
     setTimeout(() => {
-      helmet.src = "/img/brand/svg/transparent.svg";
-      navLogo.src = "/img/brand/svg/icon.svg";
-      favicon.src = "/img/brand/svg/icon.svg";
+      helmet.src = helmetOn;
+      navLogo.src = favicon.src = iconOn;
     }, 1400);
   </script>
 </body>
