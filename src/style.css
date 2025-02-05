@@ -6,14 +6,17 @@
   --surface2: #353553;
   --surface3: #494764;
   --surface4: #555275;
-  --accent0: #616649;
-  --accent1: #7b8257;
-  --accent2: #919C5E;
-  --accent3: #bfd06d;
+  --accent0: #41443f;
+  --accent1: #58604d;
+  --accent2: #7e8b5a;
+  --accent3: #afc772;
   --accent4: #e7ff5e;
   --foreground0: #c8d5f1;
   --foreground1: #949bb9;
   --foreground2: #747a9c;
+  --blue-bg: #2d4c5c;
+  --link: #70b6db;
+  --link-hover: #89dceb;
 
   /* Spacing/Sizes */
   --max-content-width: 1000px;
@@ -28,7 +31,7 @@
 
 body,
 html {
-  font-family: "JetBrains Mono", serif;
+  font-family: "JetBrains Mono", Monaco, monospace;
   background-color: var(--root);
   color: var(--foreground0);
   margin: 0;
@@ -41,7 +44,7 @@ main {
   flex-direction: column;
   height: 100vh;
   overflow: scroll;
-  scrollbar-color: var(--accent2) var(--surface2);
+  scrollbar-color: var(--accent2) transparent;
   scrollbar-width: thin;
 }
 
@@ -51,10 +54,10 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-}
 
-section[snap] > div {
-  max-width: var(--max-content-width);
+  &[snap]>div {
+    max-width: var(--max-content-width);
+  }
 }
 
 .sticky {
@@ -76,15 +79,15 @@ nav {
   background: var(--surface1);
   padding: 16px;
   border-bottom: 2px solid var(--surface2);
-}
 
-nav > div {
-  max-width: var(--max-content-width);
-  width: 100%;
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  &>div {
+    max-width: var(--max-content-width);
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
 }
 
 #nav-logo-icon {
@@ -101,9 +104,15 @@ nav > div {
   #nav-title {
     display: none;
   }
+
   nav {
     padding-top: 8px;
     padding-bottom: 8px;
+  }
+
+  section>div {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
 
@@ -115,11 +124,11 @@ nav > div {
 }
 
 a {
-  color: var(--foreground1);
+  color: var(--link);
   transition: color 0.1s ease-in-out;
 
   &:hover {
-    color: var(--accent3);
+    color: var(--link-hover);
   }
 }
 
