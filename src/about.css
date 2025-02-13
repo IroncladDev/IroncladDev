@@ -1,0 +1,163 @@
+@import "./style.css";
+
+header {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  scroll-snap-align: end;
+
+  #header-content {
+    display: flex;
+    gap: 16px;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    padding: 64px 16px;
+  }
+}
+
+nav,
+footer {
+  display: flex;
+  justify-content: center;
+  background: var(--surface0);
+
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    width: 100%;
+    max-width: var(--max-reading-width);
+  }
+}
+
+footer {
+  scroll-snap-align: end;
+  background: var(--root);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--accent3);
+}
+
+h3 {
+  font-size: 20px;
+}
+
+.text-content {
+  max-width: var(--max-reading-width);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.stat-list {
+  li {
+    color: var(--foreground1);
+
+    strong {
+      color: var(--foreground0);
+    }
+  }
+}
+
+.nested {
+  margin-left: 2ch;
+}
+
+#timeline {
+  display: flex;
+  flex-direction: column;
+
+  div {
+    display: flex;
+    gap: 1ch;
+    position: relative;
+    padding-bottom: 16px;
+
+    &::before {
+      content: "●";
+      color: var(--foreground2);
+      z-index: 1;
+      padding-top: 3px;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0px;
+      left: calc(0.5ch - 1px);
+      width: 2px;
+      height: 100%;
+      background: var(--surface3);
+    }
+
+    &:first-of-type::after {
+      top: 12px;
+    }
+
+    &:last-of-type::after {
+      height: 12px;
+    }
+
+    ul {
+      span {
+        color: var(--foreground1);
+      }
+    }
+  }
+}
+
+section > div {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+#whoami,
+#skill-issues {
+  background: var(--surface0);
+}
+
+#tier {
+  display: flex;
+  flex-direction: column;
+
+  ul {
+    margin-bottom: 16px;
+    padding: 16px 1ch;
+    background: var(--surface1);
+  }
+
+  div {
+    width: 100%;
+    padding-left: 1ch;
+    padding-right: 1ch;
+    color: var(--root);
+
+    &#s-tier {
+      background: #a6d189;
+    }
+
+    &#a-tier {
+      background: var(--accent3);
+    }
+
+    &#b-tier {
+      background: #e5c890;
+    }
+
+    &#c-tier {
+      background: #ef9f76;
+    }
+
+    &#f-tier {
+      background: #e78284;
+    }
+  }
+}

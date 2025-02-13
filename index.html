@@ -11,108 +11,54 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400..800;1,100..800&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
 
     <!-- Styles -->
-    <link rel="stylesheet" href="./src/style.css" />
     <link rel="stylesheet" href="./src/index.css" />
 
     <!-- Icons -->
-    <link rel="icon" type="image/svg+xml" href="/img/icon-off.svg" />
+    <link rel="icon" type="image/svg+xml" href="/img/brand/svg/icon.svg" />
     <link rel="icon" type="image/png" href="/img/brand/png/icon@20.png" />
 
     <!-- Preloaded Images to prevent flickering -->
-    <link rel="preload" as="image" href="/img/icon-off.svg" />
     <link rel="preload" as="image" href="/img/helmet-off.svg" />
     <link rel="preload" as="image" href="/img/neck.svg" />
     <link rel="preload" as="image" href="/img/brand/svg/transparent.svg" />
   </head>
 
   <body>
-    <div flex col>
-      <main dir="ltr">
-        <header snap flex col>
-          <nav>
-            <div>
-              <a href="/" id="nav-home-link">
-                <img id="nav-logo-icon" src="/img/icon-off.svg" />
-                <h1 id="nav-title">Ironclad</h1>
-              </a>
-              <div id="nav-links" flex justify="end" grow gap="16">
-                <a href="/about.html">About</a>
-                <a href="/showcase.html">Showcase</a>
-                <a href="/contact.html">Contact</a>
-              </div>
-            </div>
-          </nav>
+    <header>
+      <div id="helmet-container">
+        <img id="helmet-neck" src="/img/neck.svg" alt="Profile Neck" />
+        <div id="helmet-head-wrapper">
+          <img id="helmet-head" src="/img/helmet-off.svg" alt="Profile Head" />
+        </div>
+      </div>
 
-          <div id="helmet-container">
-            <img id="helmet-neck" src="/img/neck.svg" />
-            <div id="helmet-head-wrapper">
-              <img id="helmet-head" src="/img/helmet-off.svg" />
-            </div>
+      <div id="header-container">
+        <div _flex="grow no-basis"></div>
+        <div _flex="grow no-basis col justify-center" gap="32">
+          <div _flex="col" gap="8">
+            <h1 id="title">
+              <span style="color: var(--accent3)">Redneck</span>
+              Fullstack
+            </h1>
+            <h2 id="subtitle">Web Developer</h2>
           </div>
-
-          <div id="header-container">
-            <div grow no-basis></div>
-            <div grow no-basis flex col justify="center" gap="32">
-              <div flex col gap="8">
-                <h1 id="title">
-                  <span style="color: var(--accent3)">Redneck</span> Fullstack
-                </h1>
-                <h2 id="subtitle">Web Developer</h2>
-              </div>
-              <p>
-                I&apos;m IroncladDev, a Texan software engineer who lives out in
-                the country.
-              </p>
-              <ul id="nav-list">
-                <li><a href="/about.html">[Read my story]</a></li>
-                <li><a href="/showcase.html">[View my work]</a></li>
-                <li><a href="/contact.html">[Get in touch]</a></li>
-              </ul>
-              <h3 id="scroll-indicator">
-                You could also <a href="#intro">[scroll down]</a>
-              </h3>
-            </div>
-          </div>
-        </header>
-
-        <section snap flex col center id="intro">
-          <div>
-            <div flex>
-              <h1># Howdy</h1>
-            </div>
-            <p>
-              I&apos;m Conner, a <span id="age">19</span>-year-old programmer
-              who aims to build and share great software with the rest of the
-              world.
-            </p>
-            <p>
-              Outside of coding, I love guns, Brazilian jiu-jitsu, and spending
-              time with my family.
-            </p>
-            <div flex>
-              <a href="/about.html">[Read more]</a>
-            </div>
-          </div>
-        </section>
-
-        <section snap flex center style="background: var(--root)">
-          <h1>More to come :)</h1>
-        </section>
-      </main>
-    </div>
+          <p>I&apos;m IroncladDev, a Texan software engineer who lives out in the country</p>
+          <ul id="nav-list">
+            <li><a href="/about.html">[Read my story]</a></li>
+            <li><a href="/showcase.html">[View my work]</a></li>
+            <li><a href="/contact.html">[Get in touch]</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
 
     <script>
       // Whenever you add an id to an element, it gets declared as a global variable on the window object
       const helmet = window["helmet-head"];
       const neck = window["helmet-neck"];
-      const navLogo = window["nav-logo-icon"];
-      const favicon = document.querySelector(
-        'link[rel="icon"][type="image/svg+xml"]',
-      );
 
       const iconOn = "/img/brand/svg/icon.svg";
       const helmetOn = "/img/brand/svg/transparent.svg";
@@ -122,34 +68,22 @@
       // Animate the helmet startup on page startup
       setTimeout(() => {
         helmet.src = helmetOn;
-        navLogo.src = favicon.href = iconOn;
       }, 500);
       setTimeout(() => {
         helmet.src = helmetOff;
-        navLogo.src = favicon.href = iconOff;
       }, 1000);
       setTimeout(() => {
         helmet.src = helmetOn;
-        navLogo.src = favicon.href = iconOn;
       }, 1200);
       setTimeout(() => {
         helmet.src = helmetOff;
-        navLogo.src = favicon.href = iconOff;
 
         helmet.style.animation = "activate 2s ease-in-out forwards";
         neck.style.opacity = "1";
       }, 1300);
       setTimeout(() => {
         helmet.src = helmetOn;
-        navLogo.src = favicon.href = iconOn;
       }, 1400);
-
-      // Set the age based on the year
-      const today = new Date();
-      const pastDate = new Date("2005-11-15");
-      const diffTime = today - pastDate;
-      const diffYears = diffTime / (1000 * 60 * 60 * 24 * 365.25);
-      age.textContent = Math.floor(diffYears);
     </script>
   </body>
 </html>

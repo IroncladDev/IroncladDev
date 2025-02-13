@@ -1,0 +1,134 @@
+@import "../style.css";
+
+#content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-grow: 1;
+  max-width: var(--max-content-width);
+  height: calc(100vh - 32px);
+  max-height: var(--max-content-height);
+  justify-content: center;
+  padding: 16px;
+}
+
+#cover {
+  flex-grow: 1;
+  display: flex;
+  border: solid 1px var(--surface2);
+  overflow: hidden;
+  background-position: center;
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 64px,
+      var(--surface0) 64px,
+      var(--surface0) 66px),
+    repeating-linear-gradient(90deg,
+      var(--root),
+      var(--root) 64px,
+      var(--surface0) 64px,
+      var(--surface0) 66px);
+
+  #cover-image {
+    flex-grow: 1;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.25s ease-out;
+    cursor: grab;
+
+    &.dragged {
+      transform: scale(2);
+      cursor: grabbing;
+    }
+  }
+}
+
+#header {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  justify-content: space-between;
+
+  #title {
+    font-size: 36px;
+    font-weight: bold;
+    flex-shrink: 1;
+  }
+
+  #source {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 768px) {
+  #title {
+    font-size: 24px;
+  }
+}
+
+#pagination {
+  display: flex;
+  border: solid 1px var(--surface2);
+  background: var(--surface1);
+}
+
+.pag-btn {
+  border-style: solid;
+  border-width: 0px;
+  border-left-width: 1px;
+  border-color: var(--surface2);
+  background: var(--surface1);
+  color: var(--foreground1);
+  outline: none;
+  font-size: 16px;
+  font-family: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  cursor: pointer;
+  transition: background 0.1s;
+
+  #pag-buttons>& {
+    flex-grow: 1;
+    flex-basis: 0;
+  }
+
+  &.focused {
+    background: var(--surface2);
+    color: var(--foreground0);
+    text-decoration: underline;
+
+    &:hover {
+      background: var(--surface3);
+    }
+  }
+
+  &:hover {
+    background: var(--surface2);
+  }
+}
+
+#description {
+  margin: 0;
+  padding: 8px 16px;
+  border: solid 1px var(--surface2);
+  background: var(--surface1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  & p {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+#prev-btn {
+  border-left-width: 0px;
+}
+
+#prev-btn,
+#next-btn {
+  padding-left: 16px;
+  padding-right: 16px;
+}

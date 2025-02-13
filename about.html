@@ -2,25 +2,503 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About</title>
-  <link rel="stylesheet" href="./src/style.css" />
-  <style>
-    h1 {
-      color: red;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Web Components -->
-  <script src="./src/components/nav-bar.js" type="module"></script>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400..800;1,100..800&display=swap"
+    rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./src/about.css" />
+
+  <!-- Icons -->
+  <link rel="icon" type="image/svg+xml" href="/img/brand/svg/icon.svg" />
+  <link rel="icon" type="image/png" href="/img/brand/png/icon@20.png" />
 </head>
 
 <body>
-  <h1>About</h1>
-  <h1>About</h1>
-  <a href="/" is="nav-link">Home</a>
+  <main>
+    <header id="about">
+      <nav>
+        <div>
+          <a href="/" _secondary>[Home]</a>
+          <div>
+            <a href="/showcase.html">[Showcase]</a>
+            <a href="/contact.html">[Contact]</a>
+          </div>
+        </div>
+      </nav>
+      <div id="header-content">
+        <div class="text-content">
+          <h1># Documentation</h1>
+          <p>
+            I&apos;m Conner, a Texas-based programmer who aims to produce and share
+            <a href="https://neovim.io" target="_blank">[great software ↗]</a>
+            with the world.
+          </p>
+          <p>I usually go by &quot;IroncladDev&quot; on the internet, but anything goes.</p>
+          <h2>## Contents</h2>
+          <ul>
+            <li><a href="#whoami">[# Who I Am]</a></li>
+            <li><a href="#story">[# My Story]</a></li>
+            <li><a href="#skill-issues">[# Skill Issues]</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <section snap id="whoami" center>
+      <div>
+        <div class="text-content">
+          <h2>## Who I Am</h2>
+          <p>
+            A single title doesn&apos;t really describe the whole picture, and a full-blown lecture on myself would be
+            highly redundant and inefficient, so here&apos;s a list of stats:
+          </p>
+          <div _flex="col" gap="8">
+            <h3>### Basic</h3>
+            <ul class="stat-list">
+              <li>
+                <strong>Nationality:</strong>
+                American
+              </li>
+              <li>
+                <strong>Type:</strong>
+                Asian
+              </li>
+              <li>
+                <strong>Class:</strong>
+                Functional Programmer
+              </li>
+              <li>
+                <strong>State:</strong>
+                [Texas, Locked In]
+              </li>
+              <li>
+                <strong>Age:</strong>
+                <span id="age">19</span>
+              </li>
+              <li>
+                <strong>Religion:</strong>
+                Christian
+              </li>
+              <li>
+                <strong>Political Alignment:</strong>
+                Libertarian
+              </li>
+              <li>
+                <strong>Status:</strong>
+                Employed (full-time, <a href="https://fedi.xyz" target="_blank">[Fedi ↗]</a>)
+              </li>
+              <li>
+                <strong>Primary Language:</strong>
+                <ul class="stat-list nested">
+                  <li>
+                    <strong>Spoken:</strong>
+                    English (American)
+                  </li>
+                  <li>
+                    <strong>Written:</strong>
+                    Markdown (American)
+                  </li>
+                  <li>
+                    <strong>Programming:</strong>
+                    Typescript (American)
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Hobbies:</strong>
+                <ul class="stat-list nested">
+                  <li>Jiu-Jitsu</li>
+                  <li>Configuring Neovim</li>
+                  <li>Streaming</li>
+                  <li>Drawing</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div _flex="col" gap="8">
+            <h3>### Software &amp; Hardware</h3>
+            <ul class="stat-list">
+              <li>
+                <strong>Editor:</strong>
+                <a href="https://neovim.io" target="_blank">[Neovim ↗]</a> (btw)
+              </li>
+              <li>
+                <strong>Browser:</strong>
+                <a href="https://brave.com/download-nightly/" target="_blank">[Brave ↗]</a>
+                (Nightly)
+              </li>
+              <li>
+                <strong>Terminal:</strong> <a href="https://sw.kovidgoyal.net/kitty/" target="_blank">[Kitty ↗]</a>
+              </li>
+              <li>
+                <strong>Operating System:</strong>
+                MacOS
+              </li>
+              <li>
+                <strong>Primary Weapon:</strong>
+                <a href="https://zastavaarmsusa.com/product/zpap92-zp92762ctr-rifle/" target="_blank">[Zastava ZPAP92
+                  ↗]</a>
+              </li>
+              <li>
+                <strong>Secondary Weapon:</strong>
+                <a href="https://www.usafirearms.com/product/girsan-mc9-9mm-42-17rd-blk" target="_blank">[Girsan MC-9
+                  ↗]</a>
+              </li>
+              <li>
+                <strong>Meelee Weapon:</strong>
+                <a href="https://karambit.com/products/brous-enforcer-acid-washed-folding-karambit"
+                  target="_blank">[Brous Enforcer ↗]</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section snap id="story">
+      <div>
+        <div class="text-content">
+          <h2>## My Story</h2>
+          <div id="timeline">
+            <div>
+              <ul>
+                <span>2016-2018</span>
+                <li>
+                  Discovered Programming on <a href="https://khanacademy.org" target="_blank">[Khan Academy ↗]</a>
+                </li>
+                <li>
+                  Built numerous small browser-based games with
+                  <a href="https://gotoloop.github.io/processing-js.github.io/" target="_blank">[Processing.js ↗]</a>
+                </li>
+                <li>Learned the basics of HTML, CSS, and JS DOM manipulation</li>
+                <li>Learned JQuery</li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <span>2018-2020</span>
+                <li>
+                  Learned more advanced HTML/CSS from
+                  <a href="https://freecodecamp.org" target="_blank">[Free Code Camp ↗]</a>
+                </li>
+                <li>
+                  Learned how to make Fullstack applications with Flask and Nodejs on
+                  <a href="https://codecademy.com" target="_blank">[Codecademy ↗]</a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <span>2020-2021</span>
+                <li>
+                  Found <a href="https://replit.com" target="_blank">[Replit ↗]</a> and used it to share and host my
+                  projects
+                </li>
+                <li>Became acquainted their community on the platform and in their discord server</li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <span>Nov 2021-Jan 2022</span>
+                <li>Participated in Replit&apos;s first official game jam</li>
+                <li>Became much closer to the Replit community</li>
+                <li>Decided I wanted to intern at Replit</li>
+                <li>Flunked the interview</li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <span>Jan 2022-Aug 2022</span>
+                <li>Got an internship at <a href="https://saasbox.net" target="_blank">[Saasbox ↗]</a></li>
+                <li>
+                  Got into competitive programming on
+                  <a href="https://codingame.com" target="_blank">[Codingame ↗]</a>
+                </li>
+                <li>Learned Next.js and built multiple projects with it</li>
+                <li>Joined Replit&apos;s Community Moderation team</li>
+                <li>
+                  Did some contracting work for Replit&apos;s Trust and Safety team and built some internal moderation
+                  tools
+                </li>
+                <li>Typescript arc</li>
+                <li>Applied to work at Replit again</li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <span>Aug 2022-Aug 2023</span>
+                <li>
+                  Hired at Replit as a Support Engineer:
+                  <ul class="nested">
+                    <li>Built and improved anti-abuse tools</li>
+                    <li>Fixed and implemented small bugs and features</li>
+                    <li>Improved internal support tools</li>
+                    <li>Redesigned and wrote large portions of the Replit Docs</li>
+                    <li>
+                      Actively maintained the open source
+                      <a href="https://github.com/replit/extensions" target="_blank">[Extensions API Client ↗]</a>
+                    </li>
+                    <li>Got Radicalized on Twitter by some libertarian meme pages</li>
+                    <li>Fired from Replit for multiple HR violations (political posts on twitter)</li>
+                  </ul>
+                </li>
+                <li>
+                  Attended the <a href="https://btcpp.dev" target="_blank">[Bitcoin++ ↗]</a> conference for the first
+                  time
+                </li>
+                <li>
+                  Built some viral AI projects near the release of OpenAI&apos;s text-davinci-003 and DALLE models
+                </li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <span>Aug 2023-Nov 2023</span>
+                <li>&lt;Gap in Resume&gt;</li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <span>Nov 2023-Dec 2023</span>
+                <li>
+                  Joined <a href="https://fedi.xyz" target="_blank">[Fedi ↗]</a> as a Frontend Software Engineer:
+                  <ul class="nested">
+                    <li>
+                      Built some
+                      <a href="https://fedibtc.github.io/fedi-docs/docs/mods/intro" target="_blank">[Fedi Mods ↗]</a>
+                      (sites that use webln & nostr and work in their mobile app)
+                    </li>
+                    <li>Revamped and improved multiple documentation pages</li>
+                    <li>Performed extensive work on the Fedi app and PWA</li>
+                    <li>Fixed and implemented major bugs and features in the app</li>
+                    <li>
+                      Got to travel the world and attend large bitcoin-related conferences and events with my team
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Redemption arc
+                  <ul class="nested">
+                    <li>Switched from VSC*de to Neovim</li>
+                    <li>Became a freedom maxi after learning about Bitcoin</li>
+                    <li>Started working out more</li>
+                    <li>Learned to appreciate getting to work at a small startup</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <span>Jan 2024-Dec 2024</span>
+                <li>Continued to work on Fedi</li>
+                <li>Attended multiple conferences around the country and the world</li>
+                <li>Went from an introvert to a more outgoing person</li>
+                <li>Learned the basics of Rust</li>
+                <li>Built some more complex projects with advanced Next.js, Tailwind, and Framer Motion</li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <span>Jan 2025-Present</span>
+                <li>Started streaming on X and Twitch</li>
+                <li>Got into Modern CSS and Web Components</li>
+                <li>Redesigned my website and rebranded</li>
+                <li>More to come...</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section snap id="skill-issues">
+      <div>
+        <div class="text-content">
+          <h2>## Skill Issues</h2>
+          <p>
+            A tier of opinions on different programming languages, libraries, and frameworks I&apos;ve used before.
+          </p>
+          <div id="tier">
+            <div id="s-tier">S - Based</div>
+            <ul>
+              <li>
+                <a href="https://bun.sh" target="_blank">[Bun ↗]</a> - Blazing fast JS runtime written in
+                <a href="https://ziglang.org" target="_blank">[Zig ↗]</a>
+              </li>
+              <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">[CSS ↗]</a> - Used to
+                style the web; I&apos;m talking advanced & Modern CSS
+              </li>
+              <li><a href="https://htmx.org" target="_blank">[HTMX ↗]</a> - High Power Tools for HTML</li>
+              <li>
+                <a href="https://www.lua.org" target="_blank">[Lua ↗]</a> - Used for configuring
+                <a href="https://neovim.io" target="_blank">[Neovim ↗]</a>
+              </li>
+              <li>
+                <a href="https://www.markdownguide.org" target="_blank">[Markdown ↗]</a> - Easy to write, easy to
+                read, and easy to inject XSS attacks into
+              </li>
+              <li>
+                <a href="https://www.postgresql.org" target="_blank">[PostgreSQL ↗]</a> - The GOAT of databases
+              </li>
+            </ul>
+            <div id="a-tier">A - Good</div>
+            <ul>
+              <li>
+                <a href="https://framer.com/motion" target="_blank">[Framer Motion ↗]</a> - Smoooooooooooooooth
+                animations
+              </li>
+              <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">[HTML ↗]</a> - Skeleton
+                of every website
+              </li>
+              <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">[JavaScript ↗]</a>
+                - Was destined for frontend dev until it wasn&apos;t
+              </li>
+              <li>
+                <a href="https://hyperscript.org" target="_blank">[HyperScript ↗]</a> - Manipulate the DOM with
+                english, and without AI
+              </li>
+              <li>
+                <a href="https://nixos.org" target="_blank">[Nix ↗]</a> - Great package manager, not-so-great
+                foundation board members
+              </li>
+              <li>
+                <a href="https://p5js.org" target="_blank">[P5.js ↗]</a> - Fun library to make games and graphics
+                with
+              </li>
+              <li>
+                <a href="https://www.prisma.io" target="_blank">[Prisma ↗]</a> - Great ORM for small js projects
+              </li>
+              <li>
+                <a href="https://www.rust-lang.org" target="_blank">[Rust ↗]</a> - The AK47 of programming languages,
+                made and loved by communists and freedom maxis alike
+              </li>
+              <li>
+                <a href="https://sass-lang.com" target="_blank">[SASS ↗]</a> - Inspired CSS to support the &amp;
+                selector natively, now rendered obsolete with a great mission accomplished
+              </li>
+              <li>
+                <a href="https://supabase.com" target="_blank">[Supabase ↗]</a> - Open source Firebase alternative;
+                super based imo
+              </li>
+              <li>
+                <a href="https://vite.dev" target="_blank">[Vite ↗]</a> - Lightweight Build Tool (Pronounced
+                &quot;vyte&quot; (American) / &quot;veet&quot; (French))
+              </li>
+              <li><a href="https://zod.dev" target="_blank">[Zod ↗]</a> - Better type safety than TS</li>
+            </ul>
+            <div id="b-tier">B - Mid</div>
+            <ul>
+              <li>
+                <a href="https://orm.drizzle.team" target="_blank">[Drizzle ORM ↗]</a> - Headless ORM with a head
+              </li>
+              <li>
+                <a href="https://jquery.com" target="_blank">[JQuery ↗]</a> - Those good ol&apos; days of the early
+                web
+              </li>
+              <li>
+                <a href="https://kaboomjs.com" target="_blank">[Kaboom.js ↗]</a> - Fun and easy-to-use javascript
+                game dev library
+              </li>
+              <li>
+                <a href="https://www.langchain.com" target="_blank">[LangChain ↗]</a> - Library for building LLMs
+                through composability
+              </li>
+              <li>
+                <a href="https://nextjs.org" target="_blank">[Next.js ↗]</a> - The Javascript framework for web dev,
+                powered by Vercel™
+              </li>
+              <li>
+                <a href="https://redis.io" target="_blank">[Redis ↗]</a> - Fast, in-memory database. Once
+                open-source, now no longer
+              </li>
+              <li>
+                <a href="https://react.dev" target="_blank">[React ↗]</a> - Inventor of infinite useEffect loops
+              </li>
+              <li>
+                <a href="https://www.typescriptlang.org" target="_blank">[TypeScript ↗]</a> - JavaScript with muh
+                type safety
+              </li>
+              <li><a href="https://prettier.io" target="_blank">[Prettier ↗]</a> - Opinionated code formatter</li>
+              <li></li>
+            </ul>
+            <div id="c-tier">C - Cringe</div>
+            <ul>
+              <li>
+                <a href="https://emotion.sh" target="_blank">[Emotion CSS ↗]</a> - CSS in JS library that
+                autogenerates random classNames at the end
+              </li>
+              <li>
+                <a href="https://www.java.com" target="_blank">[Java ↗]</a> - Object-Oriented Programming Language
+                with the only good use case being Minecraft
+              </li>
+              <li>
+                <a href="https://www.mongodb.com" target="_blank">[MongoDB ↗]</a> - Psssst..., hey kid, ever wanted
+                to store non-relational arbitrary json in a database?
+              </li>
+              <li>
+                <a href="https://nodejs.org" target="_blank">[Node.js ↗]</a> - You were supposed to destroy the sith,
+                not join them!
+              </li>
+              <li>
+                <a href="https://www.python.org" target="_blank">[Python ↗]</a> - What do AI enthusiasts, CS majors,
+                and thirteen-year-old script kiddies have in common?
+              </li>
+              <li>
+                <a href="https://reactnative.dev" target="_blank">[React Native ↗]</a> - JavaScript escapes
+                containment from web dev to now haunt mobile devs for all eternity
+              </li>
+            </ul>
+            <div id="f-tier">F - Skill Issues</div>
+            <ul>
+              <li>
+                <a href="https://eslint.org" target="_blank">[Eslint ↗]</a> - wArNInG: dO NoT UsE &lt;iMg&gt;
+                eLemEnT. uSE iMagE fROm nExT/IMagE fOR bETtER PerFoRmANCe AND oPtimIZAtIoN
+              </li>
+              <li>
+                <a href="https://tailwindcss.com" target="_blank">[Tailwind CSS ↗]</a> - inline-flex items-center
+                justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none
+                focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50
+                [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground shadow
+                hover:bg-primary/90 h-8 rounded-md px-3 text-xs
+              </li>
+              <li>
+                <a href="https://webpack.js.org" target="_blank">[Webpack ↗]</a> - The source of every frontend
+                developer&apos;s pain and suffering
+              </li>
+              <li>
+                <a href="https://turbo.build" target="_blank">[Turbopack ↗]</a> - The source of every frontend
+                developer&apos;s pain and suffering, but fast
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        <a href="/" _secondary>[Home]</a>
+        <div>
+          <a href="/showcase.html">[Showcase]</a>
+          <a href="/contact.html">[Contact]</a>
+          <a href="#about">[Back to Top]</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+  <vim-indicator></vim-indicator>
+  <script src="/src/vim-keybindings.js" type="module"></script>
+  <script src="/src/components/vim-indicator.js" type="module"></script>
 </body>
 
 </html>

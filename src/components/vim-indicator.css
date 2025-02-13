@@ -1,0 +1,44 @@
+#indicator {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px;
+  background: var(--surface1);
+  box-shadow: 0 0 8px var(--root);
+  border: solid 1px var(--surface2);
+
+  div {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+
+    button {
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      color: var(--foreground1);
+      font-family: "JetBrains Mono", Monaco, monospace;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--surface3);
+      }
+
+      &.focused {
+        background: var(--accent2);
+        color: var(--foreground0);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #indicator {
+    display: none;
+  }
+}
