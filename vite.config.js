@@ -12,7 +12,6 @@ export default defineConfig({
         about: resolve(__dirname, "about.html"),
         contact: resolve(__dirname, "contact.html"),
         showcase: resolve(__dirname, "showcase.html"),
-        brandkit: resolve(__dirname, "brandkit.html"),
         discord: resolve(__dirname, "discord.html"),
       },
     },

@@ -62,7 +62,7 @@ showcase-project {
   &[snap] > div {
     max-width: var(--max-content-width);
   }
-  &showcase-project {
+  &:is(showcase-project) {
     max-height: 100vh;
   }
 }
