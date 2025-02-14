@@ -1,5 +1,9 @@
 @import "./style.css";
 
+main {
+  background: var(--surface0);
+}
+
 header {
   flex: none;
   display: flex;
@@ -18,35 +22,24 @@ header {
   }
 }
 
-nav,
-footer {
-  display: flex;
-  justify-content: center;
-  background: var(--surface0);
-
-  & > div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px;
-    width: 100%;
-    max-width: var(--max-reading-width);
-  }
-}
-
-footer {
-  scroll-snap-align: end;
-  background: var(--root);
-}
-
 h1,
 h2,
 h3 {
-  color: var(--accent3);
+  color: var(--accent);
 }
 
 h3 {
   font-size: 20px;
+}
+
+section > div {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+#about,
+#story {
+  background: var(--root);
 }
 
 .text-content {
@@ -114,50 +107,45 @@ h3 {
   }
 }
 
-section > div {
-  padding-top: 64px;
-  padding-bottom: 64px;
-}
-
-#whoami,
-#skill-issues {
-  background: var(--surface0);
-}
-
 #tier {
   display: flex;
   flex-direction: column;
-
-  ul {
-    margin-bottom: 16px;
-    padding: 16px 1ch;
-    background: var(--surface1);
-  }
+  gap: 16px;
 
   div {
-    width: 100%;
-    padding-left: 1ch;
-    padding-right: 1ch;
-    color: var(--root);
+    display: flex;
+    flex-direction: column;
 
-    &#s-tier {
-      background: #a6d189;
+    ul {
+      padding: 16px 1ch;
+      background: var(--surface1);
     }
 
-    &#a-tier {
-      background: var(--accent3);
-    }
+    div {
+      width: 100%;
+      padding-left: 1ch;
+      padding-right: 1ch;
+      color: var(--root);
 
-    &#b-tier {
-      background: #e5c890;
-    }
+      &#s-tier {
+        background: #a6d189;
+      }
 
-    &#c-tier {
-      background: #ef9f76;
-    }
+      &#a-tier {
+        background: var(--accent);
+      }
 
-    &#f-tier {
-      background: #e78284;
+      &#b-tier {
+        background: #e5c890;
+      }
+
+      &#c-tier {
+        background: #ef9f76;
+      }
+
+      &#f-tier {
+        background: #e78284;
+      }
     }
   }
 }

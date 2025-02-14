@@ -1,18 +1,7 @@
-# Todo
+![](/public/img/cover.png)
 
-- Vim navigation
-    - [ ] j/k to scroll
-    - [ ] gg/G to to to the top/bottom of the page
-    - [ ] h/l? maybe to navigate/scroll project slides?
-    - [ ] <leader>gh to navigate home
-    - [ ] <leader>gs to go to showcase
-    - [ ] <leader>gc to go to contact
-    - [ ] <leader>ga to go to about
-    - [ ] <leader>gb to go to brandkit
-    - [x] h/j/k/l indicator in corner
-- [ ] Noscript / css support
-    - [ ] `@media (scripting: enabled)`
-- [ ] Axe bad compatibility on firefox
-- [ ] Meta tags
-- [ ] SEO
+I'm IroncladDev, a Texas-based programmer who aims to produce and share [great software](https://neovim.io) with the world
+
+Check out my [website](https://ironclad.sh) for more information
+
 

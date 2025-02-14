@@ -6,11 +6,8 @@
   --surface2: #353553;
   --surface3: #494764;
   --surface4: #555275;
-  --accent0: #41443f;
-  --accent1: #58604d;
-  --accent2: #7e8b5a;
-  --accent3: #afc772;
-  --accent4: #e7ff5e;
+  --accent-dim: #7e8b5a;
+  --accent: #afc772;
   --foreground0: #c8d5f1;
   --foreground1: #949bb9;
   --foreground2: #747a9c;
@@ -50,7 +47,7 @@ main {
   flex-direction: column;
   height: 100vh;
   overflow: scroll;
-  scrollbar-color: var(--accent2) transparent;
+  scrollbar-color: var(--accent-dim) transparent;
   scrollbar-width: thin;
 }
 
@@ -109,8 +106,47 @@ ul {
 
   & li::before {
     content: "- ";
-    color: var(--accent3);
+    color: var(--accent);
   }
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  background: var(--surface0);
+
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    width: 100%;
+    max-width: var(--max-reading-width);
+  }
+}
+
+footer {
+  scroll-snap-align: end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  background: var(--root);
+  gap: 16px;
+  padding: 16px;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: var(--max-reading-width);
+  }
+}
+
+hr {
+  border: none;
+  border-top: solid 1px var(--surface2);
 }
 
 @media (max-width: 768px) {

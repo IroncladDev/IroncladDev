@@ -18,16 +18,8 @@
   border: solid 1px var(--surface2);
   overflow: hidden;
   background-position: center;
-  background: repeating-linear-gradient(0deg,
-      transparent,
-      transparent 64px,
-      var(--surface0) 64px,
-      var(--surface0) 66px),
-    repeating-linear-gradient(90deg,
-      var(--root),
-      var(--root) 64px,
-      var(--surface0) 64px,
-      var(--surface0) 66px);
+  background: repeating-linear-gradient(0deg, transparent, transparent 64px, var(--surface0) 64px, var(--surface0) 66px),
+    repeating-linear-gradient(90deg, var(--root), var(--root) 64px, var(--surface0) 64px, var(--surface0) 66px);
 
   #cover-image {
     flex-grow: 1;
@@ -49,21 +41,26 @@
   align-items: flex-end;
   gap: 16px;
   justify-content: space-between;
+}
 
-  #title {
-    font-size: 36px;
-    font-weight: bold;
-    flex-shrink: 1;
-  }
+#title {
+  font-size: 36px;
+  font-weight: bold;
+  flex-shrink: 1;
+}
 
-  #source {
-    white-space: nowrap;
-  }
+#source {
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {
   #title {
     font-size: 24px;
+  }
+
+  #header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 

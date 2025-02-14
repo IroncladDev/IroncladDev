@@ -47,20 +47,20 @@ window.customElements.define(
       if (url) {
         const titleLink = document.createElement("a");
         titleLink.id = "title";
-        titleLink.textContent = title;
+        titleLink.textContent = `${title} ↗`;
         titleLink.href = url;
         titleLink.target = "_blank";
         shadow.querySelector("#header").appendChild(titleLink);
       } else {
-        const title = document.createElement("h2");
-        title.textContent = title;
-        title.id = "title";
-        shadow.querySelector("#header").appendChild(title);
+        const titleHeader = document.createElement("h2");
+        titleHeader.id = "title";
+        titleHeader.textContent = title;
+        shadow.querySelector("#header").appendChild(titleHeader);
       }
 
       if (source) {
         const sourceLink = document.createElement("a");
-        sourceLink.textContent = "[Source Code]";
+        sourceLink.textContent = "[Source Code ↗]";
         sourceLink.href = source;
         sourceLink.target = "_blank";
         sourceLink.id = "source";

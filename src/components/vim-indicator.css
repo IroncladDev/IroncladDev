@@ -30,7 +30,7 @@
       }
 
       &.focused {
-        background: var(--accent2);
+        background: var(--accent-dim);
         color: var(--foreground0);
       }
     }
