@@ -98,17 +98,17 @@ window.customElements.define(
     // Attach event listeners on initialization
     connectedCallback() {
       const shadow = this.shadowRoot;
-      const main = document.querySelector("main");
+      const vimScrollContainer = document.querySelector("vim-scroll-container");
 
       // If onscrollsnapchange is supported, use it over scrollend
       if ("onscrollsnapchange" in window) {
-        main.removeEventListener("scrollsnapchange", window.contentScrollEvent, { passive: true });
+        vimScrollContainer.removeEventListener("scrollsnapchange", window.contentScrollEvent, { passive: true });
         this.attachLeftRightHandlers();
-        main.addEventListener("scrollsnapchange", window.contentScrollEvent, { passive: true });
+        vimScrollContainer.addEventListener("scrollsnapchange", window.contentScrollEvent, { passive: true });
       } else {
-        main.removeEventListener("scrollend", window.contentScrollEvent, { passive: true });
+        vimScrollContainer.removeEventListener("scrollend", window.contentScrollEvent, { passive: true });
         this.attachLeftRightHandlers();
-        main.addEventListener("scrollend", window.contentScrollEvent, { passive: true });
+        vimScrollContainer.addEventListener("scrollend", window.contentScrollEvent, { passive: true });
       }
 
       // Attach event listeners to the next/prev pagination buttons

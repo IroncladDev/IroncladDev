@@ -9,6 +9,8 @@
     - [ ] <leader>gs to go to showcase
     - [ ] <leader>gc to go to contact
     - [ ] <leader>ga to go to about
+    - [ ] whichkey-like popover for keys if they are pressed
+
 - Brandkit page
     - [ ] Color palette
     - [ ] Logos of various sizes and types

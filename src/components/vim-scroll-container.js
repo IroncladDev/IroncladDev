@@ -1,8 +1,12 @@
-import styles from "./vim-indicator.css?inline";
+import styles from './vim-scroll-container.css?inline';
 
-const template = document.createElement("template");
+const template = document.createElement('template');
+
 template.innerHTML = `
 <style>${styles}</style>
+<main id="content">
+  <slot></slot>
+</main>
 <div id="indicator">
   <img src="/img/vim.svg" alt="Vim Icon" width="16" height="16" />
   <div>
@@ -12,25 +16,26 @@ template.innerHTML = `
     <button id="l-button">L</button>
   </div>
 </div>
-`;
+`
+
 
 window.customElements.define(
-  "vim-indicator",
+  'vim-scroll-container',
   class extends HTMLElement {
     constructor() {
       super();
 
-      const shadow = this.attachShadow({ mode: "open" });
+      const shadow = this.attachShadow({ mode: 'open' });
       shadow.appendChild(template.content.cloneNode(true));
     }
 
     connectedCallback() {
       const shadow = this.shadowRoot;
-      const main = document.querySelector("main");
+      const content = shadow.querySelector("#content");
 
       // Attach event listeners to the H/L buttons
-      shadow.querySelector("#j-button").addEventListener("click", () => main.scrollBy(0, 1));
-      shadow.querySelector("#k-button").addEventListener("click", () => main.scrollBy(0, -1));
+      shadow.querySelector("#j-button").addEventListener("click", () => content.scrollBy(0, 1));
+      shadow.querySelector("#k-button").addEventListener("click", () => content.scrollBy(0, -1));
 
       window.addEventListener("keydown", (event) => {
         if (event.key === "h" || event.key === "ArrowLeft") {
@@ -56,5 +61,5 @@ window.customElements.define(
         }
       });
     }
-  },
-);
+  }
+)

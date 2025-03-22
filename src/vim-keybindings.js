@@ -1,13 +1,26 @@
+const main = document.querySelector("main");
+
+const keybinds = [
+  [['ArrowDown'], () => {
+    main.scrollBy(0, window.innerHeight / 2);
+  }],
+  [['j'], () => {
+    main.scrollBy(0, window.innerHeight / 2);
+  }],
+  [['ArrowUp'], () => {
+    main.scrollBy(0, -window.innerHeight / 2);
+  }],
+  [['k'], () => {
+    main.scrollBy(0, -window.innerHeight / 2);
+  }],
+  [['g', 'g'], () => {
+    main.scrollBy(0, -main.scrollHeight);
+  }],
+]
+
 /* Some window-scoped functions for vim-like keybindings */
 window.addEventListener("keydown", (event) => {
-  const main = document.querySelector("main");
 
-  // Scoll down/up by one pixel, mandatory scroll snapping takes care of the rest
-  if (event.key === "j" || event.key === "ArrowDown") {
-    main.scrollBy(0, window.innerHeight / 2);
-  } else if (event.key === "k" || event.key === "ArrowUp") {
-    main.scrollBy(0, -window.innerHeight / 2);
-  }
 });
 
 window.leftRightKeys = function () {};

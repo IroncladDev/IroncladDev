@@ -1,6 +1,6 @@
 @import "./style.css";
 
-main {
+vim-scroll-container {
   background: var(--surface0);
 }
 

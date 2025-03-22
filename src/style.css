@@ -41,7 +41,7 @@ html {
   overflow: hidden;
 }
 
-main {
+vim-scroll-container {
   scroll-snap-type: y mandatory;
   display: flex;
   flex-direction: column;
@@ -78,7 +78,7 @@ p {
   }
 
   strong{
-    font-weight: 900;
+   font-weight: 900;
   }
 }
 
