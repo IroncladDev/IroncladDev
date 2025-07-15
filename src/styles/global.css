@@ -1,0 +1,234 @@
+@layer base, utils, components;
+
+@import '@webtui/css/base.css';
+@import '@webtui/css/utils/box.css';
+@import '@webtui/css/components/button.css';
+@import '@webtui/css/components/typography.css';
+@import '@webtui/css/components/badge.css';
+@import '@webtui/css/components/separator.css';
+
+@import '@/styles/flexbox.css';
+@import '@/styles/padding.css';
+@import '@webtui/plugin-nf';
+
+@layer base {
+  :root {
+    /* Colors */
+    --root: #14131e;
+    --background0: #1f1d2d;
+    --background1: #242336;
+    --background2: #353553;
+    --background3: #494764;
+    --foreground0: #c8d5f1;
+    --foreground1: #949bb9;
+    --foreground2: #747a9c;
+
+    --accent-dim: #7e8b5a;
+    --accent: #afc772;
+    --blue-bg: #75badf20;
+    --link: #75badf;
+    --link-hover: #89dceb;
+    --yellow: #f9e2af;
+    --red: #f38ba8;
+    --blue: #89b4fa;
+    --green: #a6e3a1;
+
+    --font-size: 18px;
+    --line-height: 1.4;
+
+    /* Spacing/Sizes */
+    --max-reading-width: 80ch;
+    --lines-in-viewport: round(100vh / 1lh);
+  }
+
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  html {
+    height: var(--lines-in-viewport);
+  }
+}
+
+/* Typography */
+@layer components {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--foreground0);
+  }
+
+  a[is-='button'] {
+    color: var(--link);
+    text-decoration-color: #75badf60;
+  }
+
+  a:not([is-~='button']),
+  p a:not([is-~='button']),
+  li a:not([is-~='button']),
+  [is-~='typography-block'] a:not([is-~='button']) {
+    color: var(--link);
+    background-color: #75badf20;
+    display: inline-flex;
+    text-decoration-color: #75badf60;
+    text-decoration-skip-ink: none;
+
+    &::before {
+      content: '[';
+      white-space: pre;
+    }
+    &::after {
+      content: ']';
+      white-space: pre;
+    }
+
+    &[target='_blank']::after {
+      content: ' ↗]';
+    }
+
+    &:hover {
+      color: var(--link-hover);
+    }
+
+    &:focus {
+      color: var(--link-hover);
+      &::before {
+        content: '>';
+      }
+      &::after {
+        content: '<';
+      }
+      &[target='_blank']::after {
+        content: ' ↗<';
+        white-space: pre;
+      }
+    }
+  }
+
+  ul li::before {
+    color: var(--foreground2);
+  }
+
+  hr {
+    border: none;
+    border-top: solid 1px var(--background2);
+  }
+}
+
+@layer components {
+  [is-='badge'] {
+    &[variant-='accent'] {
+      --badge-color: var(--accent);
+      --badge-text: var(--root);
+    }
+
+    &[variant-='yellow'] {
+      --badge-color: var(--yellow);
+      --badge-text: var(--root);
+    }
+
+    &[variant-='red'] {
+      --badge-color: var(--red);
+      --badge-text: var(--root);
+    }
+
+    &[variant-='blue'] {
+      --badge-color: var(--blue);
+      --badge-text: var(--root);
+    }
+
+    &[variant-='green'] {
+      --badge-color: var(--green);
+      --badge-text: var(--root);
+    }
+
+    &[variant-='root'] {
+      --badge-color: var(--root);
+      --badge-text: var(--foreground0);
+    }
+  }
+}
+
+body,
+html {
+  font-family: 'JetBrains Mono', Monaco, monospace, 'Symbols Nerd Font';
+  background-color: var(--root);
+  color: var(--foreground0);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+main {
+  scroll-snap-type: y mandatory;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: scroll;
+  scrollbar-color: var(--accent-dim) transparent;
+  scrollbar-width: thin;
+
+  section {
+    min-height: 100vh;
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start end;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --font-size: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  :root {
+    --font-size: 14px;
+  }
+}
+
+.cursor-blink {
+  --spinner-chars: '  ';
+  --spinner-steps: 2;
+  --spinner-duration: 1s;
+  width: 1ch;
+  height: 1lh;
+  vertical-align: top;
+  display: inline-block;
+
+  &::before {
+    width: 2ch;
+    height: 1lh;
+    line-height: 1lh;
+    background-image: linear-gradient(
+      to right,
+      var(--foreground0),
+      var(--foreground0) 1ch,
+      transparent 1ch,
+      transparent
+    );
+    white-space: pre;
+    white-space-collapse: preserve;
+  }
+}

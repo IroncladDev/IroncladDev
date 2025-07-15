@@ -1,0 +1,244 @@
+---
+import { markdownToHtml } from '@/utils/markdown'
+
+interface Props {
+  title: string
+  url?: string
+  source?: string
+  slides: Record<string, string[]>
+}
+
+const { title, url, source, slides: rawSlides } = Astro.props as Props
+
+const slides: Array<{ imageUrl: string; paragraphs: string }> = []
+
+for (const [imageUrl, paragraphs] of Object.entries(rawSlides)) {
+  slides.push({
+    imageUrl,
+    paragraphs: (await Promise.all(paragraphs.map(markdownToHtml))).join(''),
+  })
+}
+---
+
+<showcase-project data-slides={JSON.stringify(slides)}>
+  <column class="content" gap-="1">
+    <row align-="between" gap-="1">
+      {
+        url ? (
+          <a href={url} target="_blank" class="project-title">
+            <strong>{title}</strong>
+          </a>
+        ) : (
+          <h2 class="project-title">{title}</h2>
+        )
+      }
+      {
+        source && (
+          <>
+            <column
+              self-="grow"
+              is-="separator"
+              direction-="x"
+              style="--separator-color: var(--background2)"
+            />
+            <a href={source} target="_blank" class="project-source">
+              Source Code
+            </a>
+          </>
+        )
+      }
+    </row>
+
+    <img src={slides[0].imageUrl} class="image" alt={title} />
+
+    <column
+      is-="separator"
+      direction-="x"
+      style="--separator-color: var(--background2); min-height: 1lh;"></column>
+
+    <column class="info" align-="center" gap-="1">
+      <column class="description" gap-="1" set:html={slides[0].paragraphs} />
+      {
+        slides.length > 1 && (
+          <div class="pagination">
+            <button class="pag-btn prev-btn" variant-="background2">
+              &lt;
+            </button>
+            {slides.map((_, i) => (
+              <button
+                class="pag-btn num-btn"
+                data-slide={i}
+                variant-="background2">
+                {i + 1}
+              </button>
+            ))}
+            <button class="pag-btn next-btn" variant-="background2">
+              &gt;
+            </button>
+          </div>
+        )
+      }
+    </column>
+  </column>
+</showcase-project>
+
+<style>
+  showcase-project {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: none;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start end;
+
+    .content {
+      width: round(calc(100vw - 4ch), 1ch);
+      height: round(100vh, 1lh);
+      max-width: var(--max-reading-width);
+      max-height: 36lh;
+      flex-grow: 1;
+
+      .head-span {
+        background: var(--background0);
+        padding: 0 1ch;
+      }
+
+      .image {
+        aspect-ratio: 16 / 9;
+        object-fit: contain;
+        background-color: var(--root);
+      }
+
+      .preview {
+        --box-border-color: var(--background2);
+      }
+
+      .info {
+        --box-border-color: var(--background2);
+
+        .description {
+          width: 100%;
+        }
+      }
+
+      .pagination {
+        display: flex;
+        gap: 1ch;
+        height: 2lh;
+        overflow: visible;
+        padding: 0 1ch;
+        background: var(--background0);
+      }
+    }
+  }
+</style>
+
+<script>
+  window.customElements.define(
+    'showcase-project',
+    class extends HTMLElement {
+      public currentSlide: number = 0
+      public slides: Array<{ imageUrl: string; paragraphs: string }> = []
+
+      static get observedAttributes() {
+        return ['data-active']
+      }
+
+      constructor() {
+        super()
+
+        const slides = this.getAttribute('data-slides')
+        this.slides = slides ? JSON.parse(slides) : []
+
+        const nextBtn = this.querySelector(
+          '.next-btn',
+        ) as HTMLButtonElement | null
+        nextBtn?.addEventListener('click', () => {
+          this.updateSlide(
+            Math.min(this.currentSlide + 1, this.slides.length - 1),
+          )
+        })
+
+        const prevBtn = this.querySelector(
+          '.prev-btn',
+        ) as HTMLButtonElement | null
+        prevBtn?.addEventListener('click', () => {
+          this.updateSlide(Math.max(this.currentSlide - 1, 0))
+        })
+
+        const numBtns = this.querySelectorAll(
+          '.num-btn',
+        ) as NodeListOf<HTMLButtonElement>
+        numBtns.forEach((btn, i) => {
+          btn.addEventListener('click', () => {
+            this.updateSlide(i)
+          })
+        })
+      }
+
+      updateSlide(slide: number) {
+        this.currentSlide = slide
+
+        const image = this.querySelector('.image') as HTMLImageElement
+        image.src = this.slides[slide].imageUrl
+
+        const description = this.querySelector('.description') as HTMLDivElement
+        description.innerHTML = this.slides[slide].paragraphs
+
+        const numberedBtns = this.querySelectorAll(
+          '.num-btn',
+        ) as NodeListOf<HTMLButtonElement>
+        numberedBtns.forEach((btn, i) => {
+          btn.setAttribute('variant-', 'background2')
+
+          if (i === slide) {
+            btn.setAttribute('variant-', 'background3')
+          }
+        })
+      }
+
+      private onKeyDownListener = (e: KeyboardEvent) => {
+        if (e.key === 'ArrowRight' || e.key === 'l') {
+          const nextBtn = this.querySelector('.next-btn') as HTMLButtonElement
+          nextBtn.setAttribute('variant-', 'background3')
+          nextBtn.click()
+        } else if (e.key === 'ArrowLeft' || e.key === 'h') {
+          const prevBtn = this.querySelector('.prev-btn') as HTMLButtonElement
+          prevBtn.setAttribute('variant-', 'background3')
+          prevBtn.click()
+        } else if (!isNaN(Number(e.key))) {
+          const numberKey = Number(e.key)
+          const numberedBtn = this.querySelector(
+            `.num-btn[data-slide="${numberKey - 1}"]`,
+          )
+          if (numberedBtn) {
+            numberedBtn.setAttribute('variant-', 'background3')
+            this.updateSlide(numberKey - 1)
+          }
+        }
+      }
+      private onKeyUpListener = (e: KeyboardEvent) => {
+        if (e.key === 'ArrowRight' || e.key === 'l') {
+          const nextBtn = this.querySelector('.next-btn') as HTMLButtonElement
+          nextBtn.setAttribute('variant-', 'background2')
+        } else if (e.key === 'ArrowLeft' || e.key === 'h') {
+          const prevBtn = this.querySelector('.prev-btn') as HTMLButtonElement
+          prevBtn.setAttribute('variant-', 'background2')
+        }
+      }
+
+      attributeChangedCallback(name: string, _: string, newValue: string) {
+        if (name === 'data-active') {
+          if (newValue === 'true') {
+            window.addEventListener('keydown', this.onKeyDownListener)
+            window.addEventListener('keyup', this.onKeyUpListener)
+          } else {
+            window.removeEventListener('keydown', this.onKeyDownListener)
+            window.removeEventListener('keyup', this.onKeyUpListener)
+          }
+        }
+      }
+    },
+  )
+</script>

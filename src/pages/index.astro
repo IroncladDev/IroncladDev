@@ -1,0 +1,357 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Terminal from '@/components/Terminal.astro'
+import '@webtui/css/components/spinner.css'
+
+const title = ` █▀▄ █▀▀ █▀▄ █▀█ █▀▀ █▀▀ █ █
+ █▀▄ █▀▀ █ █ █ █ █▀▀ █   █▀▄
+ ▀ ▀ ▀▀▀ ▀▀  ▀ ▀ ▀▀▀ ▀▀▀ ▀ ▀`
+
+const subtitle = ` █▀▀ █ █ █   █   █▀▀ ▀█▀ █▀█ █▀▀ █ █
+ █▀▀ █ █ █   █   ▀▀█  █  █▀█ █   █▀▄
+ ▀   ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀  ▀  ▀ ▀ ▀▀▀ ▀ ▀`
+---
+
+<Layout>
+  <head slot="head-meta">
+    <link rel="preload" as="image" href="/img/helmet-off.svg" />
+    <link rel="preload" as="image" href="/img/neck.svg" />
+    <link rel="preload" as="image" href="/img/brand/svg/transparent.svg" />
+  </head>
+
+  <header>
+    <div id="helmet-container">
+      <img id="helmet-neck" src="/img/neck.svg" alt="Profile Neck" />
+      <div id="helmet-head-wrapper">
+        <img id="helmet-head" src="/img/helmet-off.svg" alt="Profile Head" />
+      </div>
+    </div>
+
+    <div id="header-container">
+      <column self-="grow !basis"></column>
+      <column self-="grow !basis" align-="center">
+        <column pad-="2 1" gap-="1">
+          <Terminal>
+            <div slot="processes">
+              <span>nvim</span>
+            </div>
+            <column pad-="2 1">
+              <span
+                >root@Macbook-Pro ~# <span id="command-type">whatami</span
+                ></span
+              >
+              <column gap-="1">
+                <row id="headers">
+                  <div is-="separator" direction-="y" cap-="default edge"></div>
+                  <column id="title-container">
+                    <pre id="title">{title}</pre>
+                    <pre>{subtitle}</pre>
+                    <h1 class="sr-only">Redneck Fullstack</h1>
+                    <row id="headline">
+                      <div is-="separator" direction-="x" cap-="bisect default">
+                      </div>
+                      <span is-="badge" variant-="background2"
+                        >Web Developer</span
+                      >
+                    </row>
+                  </column>
+                </row>
+                <column>
+                  <p id="intro">
+                    I&apos;m <strong>IroncladDev</strong>, a Texan software
+                    engineer who aims to build and share great software with the
+                    world
+                  </p>
+                  <row gap-="1" id="nav-buttons">
+                    <a is-="button" variant-="background2" href="/about"
+                      >About →</a
+                    >
+                    <a is-="button" variant-="background2" href="/showcase"
+                      >Showcase →</a
+                    >
+                  </row>
+                </column>
+              </column>
+              <span id="command-after"
+                >root@Macbook-Pro ~# <span class="cursor-blink" is-="spinner"
+                ></span></span
+              >
+            </column>
+          </Terminal>
+          <column>
+            <ul>
+              <li>
+                <a href="https://x.com/IroncladDev" target="_blank"
+                  >X / Twitter</a
+                >
+              </li>
+              <li>
+                <a href="https://github.com/IroncladDev" target="_blank"
+                  >GitHub</a
+                >
+              </li>
+              <li>
+                <a href="https://shop.ironclad.sh" target="_blank">Merch</a>
+              </li>
+              <li><a href="/discord">Discord</a></li>
+            </ul>
+          </column>
+        </column>
+      </column>
+    </div>
+
+    <column id="statusline">
+      <row align-="between">
+        <row>
+          <span is-="badge" variant-="accent">NORMAL</span>
+          <span is-="badge" variant-="background2"> master</span>
+          <span is-="badge" variant-="background1">index.astro</span>
+        </row>
+        <row>
+          <span is-="badge" variant-="background1">utf-8</span>
+          <span is-="badge" variant-="background2">Top</span>
+          <span is-="badge" variant-="accent">1:1</span>
+        </row>
+      </row>
+    </column>
+  </header>
+</Layout>
+
+<style>
+  #statusline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2lh;
+    background: var(--background0);
+  }
+
+  header {
+    height: 100vh;
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    position: relative;
+  }
+
+  #title {
+    color: var(--accent);
+  }
+
+  #headline {
+    div {
+      width: 1ch;
+    }
+    color: var(--foreground1);
+  }
+
+  #header-container {
+    width: 100%;
+    flex-grow: 1;
+    max-width: 100ch;
+    display: flex;
+  }
+
+  #helmet-container {
+    position: absolute;
+    bottom: 2lh;
+    left: 0;
+    width: calc(50% - 16px);
+    aspect-ratio: 1/1;
+    transform-origin: 50% 100%;
+
+    #helmet-head-wrapper {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      aspect-ratio: 1/1;
+      transform-origin: 29% 59%;
+    }
+
+    #helmet-head {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0.5;
+      transform-origin: 29% 59%;
+      rotate: 25deg;
+      translate: 5% 5%;
+    }
+
+    #helmet-neck {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0.25;
+      transition: opacity 2s ease-in-out;
+    }
+  }
+
+  @media (scripting: none) {
+    #helmet-head {
+      animation: activate 2s ease-in-out forwards;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #helmet-container {
+      width: 100%;
+      max-height: calc(50% - 16px);
+    }
+
+    #helmet-head-wrapper,
+    #helmet-head,
+    #helmet-neck {
+      width: 100%;
+      max-height: 100%;
+    }
+
+    #header-container {
+      flex-direction: column-reverse;
+      align-items: center;
+      z-index: 5;
+      padding: 1lh 2ch;
+    }
+  }
+
+  [is-='separator'] {
+    --separator-color: var(--foreground2);
+  }
+
+  #command-type {
+    animation: type 1s forwards steps(7);
+    clip-path: inset(0 0 100% 0);
+    width: 7ch;
+  }
+
+  #headers {
+    animation: stream 0.5s forwards steps(7);
+    animation-delay: 1.5s;
+    clip-path: inset(0 100% 0 0);
+    height: 7lh;
+  }
+
+  #nav-buttons {
+    flex-wrap: wrap;
+    row-gap: 0;
+  }
+
+  #intro,
+  #nav-buttons,
+  #command-after {
+    animation: show 0s forwards;
+    animation-delay: 2s;
+    opacity: 0;
+  }
+
+  @keyframes show {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes stream {
+    from {
+      clip-path: inset(0 0 100% 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes type {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes activate {
+    0% {
+      opacity: 0.5;
+      rotate: 25deg;
+      translate: 5% 5%;
+    }
+
+    70% {
+      opacity: 1;
+      rotate: -5deg;
+      translate: 0% 0%;
+    }
+
+    80% {
+      translate: -2% 0%;
+    }
+
+    100% {
+      opacity: 1;
+      rotate: 0deg;
+      translate: 0% 0%;
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      rotate: 0deg;
+      translate: 0% 0%;
+    }
+
+    100% {
+      rotate: -30deg;
+      translate: 50% -50%;
+    }
+  }
+
+  @keyframes lookup {
+    0% {
+      rotate: 0deg;
+      translate: 0% 0%;
+    }
+
+    100% {
+      rotate: -60deg;
+      translate: 10% 10%;
+    }
+  }
+</style>
+
+<script>
+  // Whenever you add an id to an element, it gets declared as a global variable on the window object
+  const helmet = document.querySelector('#helmet-head') as HTMLImageElement
+  const neck = document.querySelector('#helmet-neck') as HTMLImageElement
+
+  const helmetOn = '/img/brand/svg/transparent.svg'
+  const helmetOff = '/img/helmet-off.svg'
+
+  // Animate the helmet startup on page startup
+  setTimeout(() => {
+    helmet.src = helmetOn
+  }, 500)
+  setTimeout(() => {
+    helmet.src = helmetOff
+  }, 1000)
+  setTimeout(() => {
+    helmet.src = helmetOn
+  }, 1200)
+  setTimeout(() => {
+    helmet.src = helmetOff
+
+    helmet.style.animation = 'activate 2s ease-in-out forwards'
+    neck.style.opacity = '1'
+  }, 1300)
+  setTimeout(() => {
+    helmet.src = helmetOn
+  }, 1400)
+</script>

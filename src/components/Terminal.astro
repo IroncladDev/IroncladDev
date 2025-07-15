@@ -1,0 +1,52 @@
+---
+interface Props {
+  processName?: string
+}
+
+const { processName } = Astro.props as Props
+---
+
+<column class="terminal">
+  <row class="terminal-header" gap-="1" pad-="1 0">
+    <row gap-="1">
+      <span class="dot-red">●</span>
+      <span class="dot-yellow">●</span>
+      <span class="dot-green">●</span>
+    </row>
+    <span is-="badge" cap-="slant-bottom" variant-="background1">
+      <span pad-="1 0">{processName ?? '~/'}</span>
+    </span>
+    <row gap-="1" class="process-list">
+      <slot name="processes" />
+    </row>
+  </row>
+  <column class="terminal-content">
+    <slot />
+  </column>
+</column>
+
+<style>
+  .terminal {
+    flex-grow: 1;
+    background-color: var(--background0);
+
+    .terminal-content {
+      background-color: var(--background1);
+      flex-grow: 1;
+    }
+
+    .process-list > * {
+      color: var(--foreground1);
+    }
+
+    .dot-red {
+      color: var(--red);
+    }
+    .dot-yellow {
+      color: var(--yellow);
+    }
+    .dot-green {
+      color: var(--accent);
+    }
+  }
+</style>
