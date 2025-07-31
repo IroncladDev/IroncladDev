@@ -1,0 +1,36 @@
+<nav>
+  <row gap-="1" align-="between">
+    <a href="/" class="home-link">Home</a>
+    <row gap-="1">
+      <a href="/about">About</a>
+      <a href="/showcase">Showcase</a>
+    </row>
+  </row>
+</nav>
+
+<style>
+  nav {
+    display: flex;
+    justify-content: center;
+    background: var(--background1);
+    height: 3lh;
+    align-items: center;
+    justify-content: center;
+
+    & > row {
+      width: calc(100vw - 28ch);
+      max-width: var(--max-reading-width);
+    }
+
+    .home-link {
+      color: var(--foreground2);
+      background-color: transparent;
+    }
+  }
+
+  @media (max-width: 64ch) {
+    nav > row {
+      width: calc(100vw - 8ch);
+    }
+  }
+</style>

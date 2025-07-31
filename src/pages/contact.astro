@@ -1,0 +1,27 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Navbar from '@/components/Navbar.astro'
+---
+
+<Layout>
+  <header>
+    <Navbar />
+    <column self-="grow" align-="center">
+      <h1 is-="badge" variant-="background1">Contact Me</h1>
+      <ul>
+        <li>
+          <a href="https://x.com/IroncladDev" target="_blank">X / Twitter</a>
+        </li>
+      </ul>
+    </column>
+  </header>
+</Layout>
+
+<style>
+  header {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+</style>

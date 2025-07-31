@@ -1,0 +1,61 @@
+---
+import '@/styles/global.css'
+
+const title = 'IroncladDev'
+const description =
+  "I'm IroncladDev, a Texas-based software engineer who aims to produce and share great software with the world"
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>IroncladDev</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400..800;1,100..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/img/brand/svg/icon.svg" />
+    <link rel="icon" type="image/png" href="/img/brand/png/icon@20.png" />
+
+    <!-- Other meta tags to insert in the head tag -->
+    <slot name="head-meta" />
+
+    <!-- Meta Title -->
+    <meta property="og:title" content={title} />
+    <meta name="twitter:title" content={title} />
+    <!-- Meta Description -->
+    <meta name="description" content={description} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:description" content={description} />
+    <!-- Meta Image -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://ironclad.sh/img/cover.png" />
+    <meta property="og:image" content="https://ironclad.sh/img/cover.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="2560" />
+    <meta property="og:image:height" content="1600" />
+    <!-- Misc Metadata -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ironclad.sh" />
+    <meta name="twitter:site" content="@IroncladDev" />
+    <meta name="twitter:creator" content="@IroncladDev" />
+    <meta name="twitter:url" content="https://ironclad.sh" />
+    <meta
+      name="keywords"
+      content="website, developer, neovim, ironclad, ironcladdev"
+    />
+    <meta name="theme-color" content="#1f1d2d" />
+  </head>
+
+  <body>
+    <slot />
+  </body>
+</html>
