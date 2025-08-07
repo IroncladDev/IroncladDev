@@ -10,6 +10,14 @@ const title = ` █▀▄ █▀▀ █▀▄ █▀█ █▀▀ █▀▀ █ 
 const subtitle = ` █▀▀ █ █ █   █   █▀▀ ▀█▀ █▀█ █▀▀ █ █
  █▀▀ █ █ █   █   ▀▀█  █  █▀█ █   █▀▄
  ▀   ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀  ▀  ▀ ▀ ▀▀▀ ▀ ▀`
+
+const titleSmall = `┬─┐┌─┐┌┬┐┌┐┌┌─┐┌─┐┬┌─
+├┬┘├┤  │││││├┤ │  ├┴┐
+┴└─└─┘─┴┘┘└┘└─┘└─┘┴ ┴`
+
+const subtitleSmall = `┌─┐┬ ┬┬  ┬  ┌─┐┌┬┐┌─┐┌─┐┬┌─
+├┤ │ ││  │  └─┐ │ ├─┤│  ├┴┐
+└  └─┘┴─┘┴─┘└─┘ ┴ ┴ ┴└─┘┴ ┴`
 ---
 
 <Layout>
@@ -30,7 +38,7 @@ const subtitle = ` █▀▀ █ █ █   █   █▀▀ ▀█▀ █▀█ �
     <div id="header-container">
       <column self-="grow !basis"></column>
       <column self-="grow !basis" align-="center">
-        <column pad-="2 1" gap-="1">
+        <column pad-="2 1" gap-="1" id="terminal-container">
           <Terminal>
             <div slot="processes">
               <span>nvim</span>
@@ -42,10 +50,16 @@ const subtitle = ` █▀▀ █ █ █   █   █▀▀ ▀█▀ █▀█ �
               >
               <column gap-="1">
                 <row id="headers">
-                  <div is-="separator" direction-="y" cap-="default edge"></div>
+                  <column
+                    is-="separator"
+                    direction-="y"
+                    cap-="default edge"
+                    self-="!shrink"></column>
                   <column id="title-container">
                     <pre id="title">{title}</pre>
-                    <pre>{subtitle}</pre>
+                    <pre id="subtitle">{subtitle}</pre>
+                    <pre id="title-small">{titleSmall}</pre>
+                    <pre id="subtitle-small">{subtitleSmall}</pre>
                     <h1 class="sr-only">Redneck Fullstack</h1>
                     <row id="headline">
                       <div is-="separator" direction-="x" cap-="bisect default">
@@ -138,8 +152,14 @@ const subtitle = ` █▀▀ █ █ █   █   █▀▀ ▀█▀ █▀█ �
     position: relative;
   }
 
-  #title {
+  #title,
+  #title-small {
     color: var(--accent);
+  }
+
+  #title-small,
+  #subtitle-small {
+    display: none;
   }
 
   #headline {
@@ -154,6 +174,10 @@ const subtitle = ` █▀▀ █ █ █   █   █▀▀ ▀█▀ █▀█ �
     flex-grow: 1;
     max-width: 100ch;
     display: flex;
+  }
+
+  #terminal-container {
+    max-width: 100vw;
   }
 
   #helmet-container {
@@ -203,7 +227,7 @@ const subtitle = ` █▀▀ █ █ █   █   █▀▀ ▀█▀ █▀█ �
   @media (max-width: 768px) {
     #helmet-container {
       width: 100%;
-      max-height: calc(50% - 16px);
+      max-height: calc(100vh - 24lh);
     }
 
     #helmet-head-wrapper,
@@ -215,9 +239,21 @@ const subtitle = ` █▀▀ █ █ █   █   █▀▀ ▀█▀ █▀█ �
 
     #header-container {
       flex-direction: column-reverse;
-      align-items: center;
+      align-items: fle;
       z-index: 5;
       padding: 1lh 2ch;
+    }
+  }
+
+  @media (max-width: 500px) {
+    #title,
+    #subtitle {
+      display: none;
+    }
+
+    #title-small,
+    #subtitle-small {
+      display: block;
     }
   }
 
