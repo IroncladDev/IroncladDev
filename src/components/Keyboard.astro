@@ -229,8 +229,9 @@ const keyboardFrame = `  ╭───────╮                      ╭─
         --box-border-color: var(--foreground2);
 
         &.pressed {
-            --box-border-color: var(--yellow-fg);
-            color: var(--yellow-fg);
+            background-color: var(--yellow-fg);
+            --box-border-color: var(--root);
+            color: var(--root);
             z-index: 1;
         }
     }

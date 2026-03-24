@@ -1,0 +1,52 @@
+.layout {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 1;
+    animation-name: place;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    gap: 1lh 2ch;
+}
+
+.tile {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 1;
+    border: solid 2px var(--green-fg-dim);
+    display: none;
+    animation-name: remove;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes place {
+    0% {
+        display: flex;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    100% {
+        display: flex;
+        opacity: 1;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@keyframes remove {
+    from {
+        display: flex;
+        opacity: 1;
+        width: 100%;
+        height: 100%;
+    }
+    to {
+        display: none;
+        opacity: 0;
+        height: 0;
+        width: 0;
+        margin: 0;
+    }
+}

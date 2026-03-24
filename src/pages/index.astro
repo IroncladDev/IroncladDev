@@ -1,16 +1,37 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import Keyboard from '@/components/Keyboard.astro'
+import Waybar from '@/components/Waybar.astro'
+import { ScreenName } from '@/types/state'
 import '@/styles/tiling.css'
 ---
 
 <Layout>
+    <app-state screen-={ScreenName.Splash} focus-={ScreenName.Splash}
+    ></app-state>
     <div id="wallpaper">
         <Keyboard />
     </div>
-    <div id="tiles" class="layout">
-        <div class="tile">tile</div>
-    </div>
+    <column id="screen">
+        <Waybar />
+        <row id="tiles" class="layout" pad-="2 1">
+            <div screen-={ScreenName.Splash} class="tile" id="tile-splash">
+                splash
+            </div>
+            <div screen-={ScreenName.About} class="tile" id="tile-about">
+                about
+            </div>
+            <div screen-={ScreenName.Projects} class="tile" id="tile-projects">
+                projects
+            </div>
+            <div screen-={ScreenName.Contact} class="tile" id="tile-contact">
+                contact
+            </div>
+            <div screen-={ScreenName.Blog} class="tile" id="tile-blog">
+                blog
+            </div>
+        </row>
+    </column>
 </Layout>
 
 <style>
@@ -20,27 +41,35 @@ import '@/styles/tiling.css'
         display: flex;
         align-items: center;
         justify-content: center;
+        #keyboard {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     }
 
-    #tiles {
+    #screen {
         position: absolute;
         inset: 0;
-        padding: 1lh 2ch;
+    }
+
+    .tile[screen-] {
+        opacity: 0.5 !important;
+        background-color: var(--surface1-75);
+
+        &[screen-='#'] {
+            animation-name: place;
+            display: flex;
+        }
+
+        html:has(app-state[focus-='#']) &[screen-='#'],
+        html:has(app-state[focus-='#about']) &[screen-='#about'],
+        html:has(app-state[focus-='#projects']) &[screen-='#projects'],
+        html:has(app-state[focus-='#contact']) &[screen-='#contact'],
+        html:has(app-state[focus-='#blog']) &[screen-='#blog'] {
+            opacity: 1 !important;
+        }
     }
 </style>
 
-<script>
-setTimeout(() => {
-    const tileWrapper = document.createElement('column')
-    tileWrapper.classList.add('layout')
-    tileWrapper.id = 'tiles2'
-    document.querySelector('#tiles').appendChild(tileWrapper)
-    setInterval(() => {
-        if(document.querySelector('#tiles2').childElementCount >= 3) return
-        const newTile = document.createElement('div')
-        newTile.classList.add('tile')
-        newTile.innerHTML = 'tile'
-        document.querySelector('#tiles2').appendChild(newTile)
-    }, 1000)
-}, 1000)
-</script>
+<script></script>

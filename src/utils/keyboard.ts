@@ -23,7 +23,7 @@ async function playSound(soundId: string) {
     }, duration)
 }
 
-export async function tapKey(key: string) {
+async function tapKey(key: string) {
     const keyButton = document.querySelector(`#key-${key}`)
 
     await playSound(Math.floor(Math.random() * 20).toString())
@@ -36,7 +36,7 @@ export async function tapKey(key: string) {
     }
 }
 
-export async function holdKeyFor(key: string, duration: number) {
+async function holdKeyFor(key: string, duration: number) {
     const keyButton = document.querySelector(`#key-${key}`)
 
     await playSound('2')
@@ -47,5 +47,22 @@ export async function holdKeyFor(key: string, duration: number) {
             keyButton.classList.remove('pressed')
             playSound('3')
         }, duration)
+    }
+}
+
+export async function tapSequence(
+    sequence: Array<['tap', string] | ['hold', string, number]>,
+    duration: number,
+) {
+    for (let i = 0; i < sequence.length; i++) {
+        const [type, key, dur] = sequence[i]
+
+        setTimeout(() => {
+            if (type === 'hold') {
+                holdKeyFor(key, dur)
+            } else {
+                tapKey(key)
+            }
+        }, i * duration)
     }
 }

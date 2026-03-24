@@ -1,0 +1,161 @@
+---
+import { ScreenName } from '@/types/state'
+---
+
+<row id="waybar" gap-="1">
+    <div id="icon"></div>
+    <a
+        class="workspace"
+        is-="badge"
+        variant-="background2"
+        cap-="round"
+        href={ScreenName.About}>[1] About</a
+    >
+    <a
+        class="workspace"
+        is-="badge"
+        variant-="background2"
+        cap-="round"
+        href={ScreenName.Projects}>[2] Projects</a
+    >
+    <a
+        class="workspace"
+        is-="badge"
+        variant-="background2"
+        cap-="round"
+        href={ScreenName.Contact}>[3] Contact</a
+    >
+    <a
+        class="workspace"
+        is-="badge"
+        variant-="background2"
+        cap-="round"
+        href={ScreenName.Blog}>[4] Blog</a
+    >
+</row>
+
+<style>
+    #icon {
+        height: 1lh;
+        width: 2ch;
+        background-image: url('/img/brand/svg/icon.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    #waybar {
+        background-color: var(--surface1);
+        padding: 0.5lh 2ch;
+    }
+
+    .workspace {
+        text-decoration: none;
+
+        html:has(app-state[screen-='#about']) &[href='#about'],
+        html:has(app-state[screen-='#projects']) &[href='#projects'],
+        html:has(app-state[screen-='#contact']) &[href='#contact'],
+        html:has(app-state[screen-='#blog']) &[href='#blog'] {
+            color: var(--green-fg);
+            --badge-color: var(--green-bg);
+        }
+    }
+</style>
+
+<script>
+    import { ScreenName } from '@/types/state'
+    import { tapSequence } from '@/utils/keyboard'
+
+    const tapSequenceMap: Record<
+        ScreenName,
+        Array<['tap', string] | ['hold', string, number]>
+    > = {
+        [ScreenName.Splash]: [
+            ['hold', 'ctl', 500],
+            ['tap', 'c'],
+        ],
+        [ScreenName.About]: [
+            ['hold', 'sup', 750],
+            ['hold', 'ctl', 500],
+            ['tap', 'a'],
+        ],
+        [ScreenName.Projects]: [
+            ['hold', 'sup', 500],
+            ['tap', 'p'],
+        ],
+        [ScreenName.Contact]: [
+            ['hold', 'sup', 750],
+            ['hold', 'ctl', 500],
+            ['tap', 'c'],
+        ],
+        [ScreenName.Blog]: [
+            ['hold', 'sup', 750],
+            ['tap', 'b'],
+        ],
+    }
+
+    let reorderTimeout: NodeJS.Timeout | undefined
+    let keyTimeout: NodeJS.Timeout | undefined
+    let hideOthersTimeout: NodeJS.Timeout | undefined
+
+    const showScreen = (screen: ScreenName) => {
+        const appState = document.querySelector('app-state') as HTMLElement
+        const tiles = document.getElementById('tiles') as HTMLDivElement
+        const screenTiles = document.querySelectorAll(
+            '.tile[screen-]',
+        ) as NodeListOf<HTMLDivElement>
+        const targetScreen = document.querySelector(
+            `.tile[screen-='${screen}']`,
+        ) as HTMLDivElement
+
+        clearTimeout(reorderTimeout)
+        clearTimeout(keyTimeout)
+        clearTimeout(hideOthersTimeout)
+
+        tapSequence(tapSequenceMap[screen], 250)
+        reorderTimeout = setTimeout(() => {
+            tiles.style.flexDirection = Math.random() > 0.5 ? 'row' : 'column'
+            targetScreen.style.animationName = 'place'
+            targetScreen.style.display = 'flex'
+            tiles.insertAdjacentElement('beforeend', targetScreen)
+        }, 1000)
+        keyTimeout = setTimeout(() => {
+            tapSequence(
+                [
+                    ['hold', 'sup', 500],
+                    ['tap', 'w'],
+                ],
+                250,
+            )
+        }, 1500)
+        hideOthersTimeout = setTimeout(() => {
+            appState.setAttribute('focus-', screen)
+            screenTiles.forEach((tile) => {
+                if (tile.getAttribute('screen-') === screen) return
+                tile.style.animationName = 'remove'
+            })
+        }, 2000)
+    }
+
+    const onHashChange = () => {
+        const hash = window.location.hash
+
+        const appState = document.querySelector('app-state') as HTMLElement
+
+        const derivedScreen =
+            Object.values(ScreenName).find((name) => name === hash) ??
+            ScreenName.Splash
+        appState.setAttribute('screen-', derivedScreen)
+        showScreen(derivedScreen)
+    }
+
+    window.addEventListener('hashchange', onHashChange)
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'c' && e.ctrlKey) window.location.hash = ScreenName.Splash
+        else if (e.key === '1') window.location.hash = ScreenName.About
+        else if (e.key === '2') window.location.hash = ScreenName.Projects
+        else if (e.key === '3') window.location.hash = ScreenName.Contact
+        else if (e.key === '4') window.location.hash = ScreenName.Blog
+    })
+</script>
