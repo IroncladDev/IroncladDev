@@ -18,6 +18,19 @@
     animation-name: remove;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
+    overflow: hidden;
+
+    &[screen-] {
+        opacity: 0.5 !important;
+
+        html:has(app-state[focus-='#']) &[screen-='#'],
+        html:has(app-state[focus-='#about']) &[screen-='#about'],
+        html:has(app-state[focus-='#projects']) &[screen-='#projects'],
+        html:has(app-state[focus-='#contact']) &[screen-='#contact'],
+        html:has(app-state[focus-='#blog']) &[screen-='#blog'] {
+            opacity: 1 !important;
+        }
+    }
 }
 
 @keyframes place {

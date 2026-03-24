@@ -26,7 +26,7 @@ async function playSound(soundId: string) {
 async function tapKey(key: string) {
     const keyButton = document.querySelector(`#key-${key}`)
 
-    await playSound(Math.floor(Math.random() * 20).toString())
+    await playSound(Math.floor(Math.random() * 40).toString())
 
     if (keyButton) {
         keyButton.classList.add('pressed')

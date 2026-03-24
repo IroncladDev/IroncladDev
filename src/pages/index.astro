@@ -4,6 +4,12 @@ import Keyboard from '@/components/Keyboard.astro'
 import Waybar from '@/components/Waybar.astro'
 import { ScreenName } from '@/types/state'
 import '@/styles/tiling.css'
+
+import Splash from '@/tiles/Splash.astro'
+import About from '@/tiles/About.astro'
+import Projects from '@/tiles/Projects.astro'
+import Contact from '@/tiles/Contact.astro'
+import Blog from '@/tiles/Blog.astro'
 ---
 
 <Layout>
@@ -14,23 +20,13 @@ import '@/styles/tiling.css'
     </div>
     <column id="screen">
         <Waybar />
-        <row id="tiles" class="layout" pad-="2 1">
-            <div screen-={ScreenName.Splash} class="tile" id="tile-splash">
-                splash
-            </div>
-            <div screen-={ScreenName.About} class="tile" id="tile-about">
-                about
-            </div>
-            <div screen-={ScreenName.Projects} class="tile" id="tile-projects">
-                projects
-            </div>
-            <div screen-={ScreenName.Contact} class="tile" id="tile-contact">
-                contact
-            </div>
-            <div screen-={ScreenName.Blog} class="tile" id="tile-blog">
-                blog
-            </div>
-        </row>
+        <div id="tiles" class="layout" pad-="2 1">
+            <Splash />
+            <About />
+            <Projects />
+            <Contact />
+            <Blog />
+        </div>
     </column>
 </Layout>
 
@@ -48,27 +44,24 @@ import '@/styles/tiling.css'
         }
     }
 
+    #tiles {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        animation-name: none;
+    }
+
+    @media (max-width: 720px) {
+        #tiles {
+            flex-direction: column;
+        }
+    }
+
     #screen {
         position: absolute;
         inset: 0;
-    }
-
-    .tile[screen-] {
-        opacity: 0.5 !important;
-        background-color: var(--surface1-75);
-
-        &[screen-='#'] {
-            animation-name: place;
-            display: flex;
-        }
-
-        html:has(app-state[focus-='#']) &[screen-='#'],
-        html:has(app-state[focus-='#about']) &[screen-='#about'],
-        html:has(app-state[focus-='#projects']) &[screen-='#projects'],
-        html:has(app-state[focus-='#contact']) &[screen-='#contact'],
-        html:has(app-state[focus-='#blog']) &[screen-='#blog'] {
-            opacity: 1 !important;
-        }
     }
 </style>
 

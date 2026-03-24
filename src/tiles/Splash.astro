@@ -1,0 +1,31 @@
+---
+import { ScreenName } from '@/types/state'
+---
+
+<div screen-={ScreenName.Splash} class="tile" id="tile-splash">
+    <button id="button" autofocus>&gt; Enter ironclad.sh &lt;</button>
+    <p>Click or press ENTER to continue</p>
+</div>
+
+<style>
+    #tile-splash {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        gap: 1lh;
+        align-items: center;
+        justify-content: center;
+        animation-name: none;
+        background-color: var(--surface1-75);
+    }
+</style>
+
+<script>
+    const button = document.querySelector('#button') as HTMLButtonElement
+
+    button.addEventListener('click', () => {
+        window.dispatchEvent(new Event('hashchange'))
+    })
+</script>
