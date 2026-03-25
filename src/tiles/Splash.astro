@@ -3,11 +3,32 @@ import { ScreenName } from '@/types/state'
 ---
 
 <div screen-={ScreenName.Splash} class="tile" id="tile-splash">
-    <button id="button" autofocus>&gt; Enter ironclad.sh &lt;</button>
-    <p>Click or press ENTER to continue</p>
+    <column id="content" gap-="1">
+        <column>
+            <button id="button" autofocus>&gt; Enter ironclad.sh &lt;</button>
+            <p>Click or press a key to continue</p>
+        </column>
+        <span id="prompt">
+            <span id="host">~/</span>
+            <span id="cmd"></span>
+            <span is-="spinner" variant-="block"></span>
+        </span>
+    </column>
 </div>
 
 <style>
+    #content {
+        text-align: left;
+        justify-content: center;
+        max-width: var(--max-reading-width);
+    }
+    #prompt {
+        display: inline-flex;
+        #host {
+            color: var(--blue-fg);
+            padding-right: 1ch;
+        }
+    }
     #tile-splash {
         display: flex;
         flex-direction: column;
@@ -18,14 +39,55 @@ import { ScreenName } from '@/types/state'
         align-items: center;
         justify-content: center;
         animation-name: none;
-        background-color: var(--surface1-75);
+        background-color: var(--surface0-75);
     }
 </style>
 
 <script>
+    import { tapSequence } from '@/utils/keyboard'
+
     const button = document.querySelector('#button') as HTMLButtonElement
 
-    button.addEventListener('click', () => {
-        window.dispatchEvent(new Event('hashchange'))
-    })
+    const str = 'ssh ironclad.sh'
+    let isProceeding = false
+
+    function proceed() {
+        if (isProceeding) return
+
+        isProceeding = true
+        tapSequence(
+            [
+                ['tap', 's'],
+                ['tap', 's'],
+                ['tap', 'h'],
+                ['tap', 'spc'],
+                ['tap', 'i'],
+                ['tap', 'r'],
+                ['tap', 'o'],
+                ['tap', 'n'],
+                ['tap', 'c'],
+                ['tap', 'l'],
+                ['tap', 'a'],
+                ['tap', 'd'],
+                ['tap', 'dot'],
+                ['tap', 's'],
+                ['tap', 'h'],
+                ['tap', 'ret'],
+            ],
+            100,
+            (_, index) => {
+                const cmdText = document.querySelector(
+                    '#cmd',
+                ) as HTMLSpanElement
+
+                cmdText.innerText = str.slice(0, index + 1)
+            },
+        )
+        setTimeout(() => {
+            window.dispatchEvent(new Event('hashchange'))
+        }, 2000)
+    }
+
+    button.addEventListener('click', proceed)
+    button.addEventListener('keyup', proceed)
 </script>

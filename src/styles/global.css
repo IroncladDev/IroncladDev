@@ -6,6 +6,7 @@
 @import '@webtui/css/components/typography.css';
 @import '@webtui/css/components/badge.css';
 @import '@webtui/css/components/separator.css';
+@import '@webtui/css/components/spinner.css';
 
 @import '@/styles/flexbox.css';
 @import '@/styles/padding.css';
@@ -80,5 +81,15 @@
         position: relative;
         display: flex;
         flex-direction: column;
+    }
+}
+
+@layer components {
+    [is-="spinner"] {
+        &[variant-="block"] {
+            --spinner-chars: '█ █';
+            --spinner-steps: 3;
+            --spinner-duration: 1s;
+        }
     }
 }

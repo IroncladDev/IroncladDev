@@ -6,10 +6,10 @@ import { ScreenName } from '@/types/state'
 import '@/styles/tiling.css'
 
 import Splash from '@/tiles/Splash.astro'
-import About from '@/tiles/About.astro'
+import Info from '@/tiles/Info.astro'
 import Projects from '@/tiles/Projects.astro'
-import Contact from '@/tiles/Contact.astro'
-import Blog from '@/tiles/Blog.astro'
+import Links from '@/tiles/Links.astro'
+import Opinions from '@/tiles/Opinions.astro'
 ---
 
 <Layout>
@@ -22,10 +22,10 @@ import Blog from '@/tiles/Blog.astro'
         <Waybar />
         <div id="tiles" class="layout" pad-="2 1">
             <Splash />
-            <About />
+            <Info />
             <Projects />
-            <Contact />
-            <Blog />
+            <Links />
+            <Opinions />
         </div>
     </column>
 </Layout>
@@ -64,5 +64,3 @@ import Blog from '@/tiles/Blog.astro'
         inset: 0;
     }
 </style>
-
-<script></script>

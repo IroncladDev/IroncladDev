@@ -29,40 +29,53 @@ async function tapKey(key: string) {
     await playSound(Math.floor(Math.random() * 40).toString())
 
     if (keyButton) {
-        keyButton.classList.add('pressed')
+        keyButton.classList.add('tapped')
         setTimeout(() => {
-            keyButton.classList.remove('pressed')
+            keyButton.classList.remove('tapped')
         }, 250)
     }
 }
 
-async function holdKeyFor(key: string, duration: number) {
-    const keyButton = document.querySelector(`#key-${key}`)
+async function holdKeyFor(
+    key: string,
+    duration: number,
+    modifierName?: string,
+) {
+    const keyButton = document.querySelector(`#key-${key}`) as HTMLElement
 
     await playSound('2')
 
     if (keyButton) {
-        keyButton.classList.add('pressed')
+        const oldText = keyButton.innerText
+        keyButton.classList.add('held')
+        if (modifierName) keyButton.innerText = modifierName
         setTimeout(() => {
-            keyButton.classList.remove('pressed')
+            keyButton.classList.remove('held')
+            keyButton.innerText = oldText
             playSound('3')
         }, duration)
     }
 }
 
 export async function tapSequence(
-    sequence: Array<['tap', string] | ['hold', string, number]>,
+    sequence: Array<
+        | ['tap', string]
+        | ['hold', string, number]
+        | ['hold', string, number, string]
+    >,
     duration: number,
+    onKeyPress?: (key: string, index: number) => void,
 ) {
     for (let i = 0; i < sequence.length; i++) {
-        const [type, key, dur] = sequence[i]
+        const [type, key, ...rest] = sequence[i]
 
         setTimeout(() => {
             if (type === 'hold') {
-                holdKeyFor(key, dur)
+                holdKeyFor(key, ...(rest as [number, string?]))
             } else {
                 tapKey(key)
             }
+            onKeyPress?.(key, i)
         }, i * duration)
     }
 }

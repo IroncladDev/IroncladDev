@@ -5,7 +5,7 @@ import { ScreenName } from '@/types/state'
 <row id="waybar" gap-="1">
     <div id="icon"></div>
     <row id="workspaces">
-        <a class="workspace" href={ScreenName.About}>
+        <a class="workspace" href={ScreenName.Info}>
             <span is-="badge">1</span>
             <span is-="badge" variant-="background2" cap-="square round"
                 >Info</span
@@ -17,13 +17,13 @@ import { ScreenName } from '@/types/state'
                 >Projects</span
             >
         </a>
-        <a class="workspace" href={ScreenName.Contact}>
+        <a class="workspace" href={ScreenName.Links}>
             <span is-="badge">3</span>
             <span is-="badge" variant-="background2" cap-="square round"
                 >Links</span
             >
         </a>
-        <a class="workspace" href={ScreenName.Blog}>
+        <a class="workspace" href={ScreenName.Opinions}>
             <span is-="badge">4</span>
             <span is-="badge" variant-="background2" cap-="square round"
                 >Opinions</span
@@ -60,10 +60,10 @@ import { ScreenName } from '@/types/state'
             color: var(--foreground0);
         }
 
-        html:has(app-state[screen-='#about']) &[href='#about'],
+        html:has(app-state[screen-='#info']) &[href='#info'],
         html:has(app-state[screen-='#projects']) &[href='#projects'],
-        html:has(app-state[screen-='#contact']) &[href='#contact'],
-        html:has(app-state[screen-='#blog']) &[href='#blog'] {
+        html:has(app-state[screen-='#links']) &[href='#links'],
+        html:has(app-state[screen-='#opinions']) &[href='#opinions'] {
             & > span:first-child {
                 --badge-color: var(--green-fg);
                 color: var(--root);
@@ -80,7 +80,7 @@ import { ScreenName } from '@/types/state'
         const derivedScreen =
             Object.values(ScreenName).find(
                 (name) => name === window.location.hash,
-            ) ?? ScreenName.About
+            ) ?? ScreenName.Info
         document
             .querySelector('app-state')
             ?.setAttribute('screen-', derivedScreen)
@@ -89,9 +89,9 @@ import { ScreenName } from '@/types/state'
 
     window.addEventListener('hashchange', onHashChange)
     window.addEventListener('keydown', (e) => {
-        if (e.key === '1') window.location.hash = ScreenName.About
+        if (e.key === '1') window.location.hash = ScreenName.Info
         else if (e.key === '2') window.location.hash = ScreenName.Projects
-        else if (e.key === '3') window.location.hash = ScreenName.Contact
-        else if (e.key === '4') window.location.hash = ScreenName.Blog
+        else if (e.key === '3') window.location.hash = ScreenName.Links
+        else if (e.key === '4') window.location.hash = ScreenName.Opinions
     })
 </script>

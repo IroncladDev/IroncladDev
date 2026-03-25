@@ -5,28 +5,29 @@ const keyRate = 100
 
 const tapSequenceMap: Record<
     ScreenName,
-    Array<['tap', string] | ['hold', string, number]>
+    Array<
+        | ['tap', string]
+        | ['hold', string, number]
+        | ['hold', string, number, string]
+    >
 > = {
-    [ScreenName.Splash]: [
-        ['hold', 'ctl', keyRate * 2],
-        ['tap', 'c'],
-    ],
-    [ScreenName.About]: [
-        ['hold', 'sup', keyRate * 3],
+    [ScreenName.Splash]: [],
+    [ScreenName.Info]: [
+        ['hold', 'ret', keyRate * 3, 'SUP'],
         ['hold', 'ctl', keyRate * 2],
         ['tap', 'a'],
     ],
     [ScreenName.Projects]: [
-        ['hold', 'sup', keyRate * 2],
+        ['hold', 'ret', keyRate * 2, 'SUP'],
         ['tap', 'p'],
     ],
-    [ScreenName.Contact]: [
-        ['hold', 'sup', keyRate * 3],
+    [ScreenName.Links]: [
+        ['hold', 'ret', keyRate * 3, 'SUP'],
         ['hold', 'ctl', keyRate * 2],
         ['tap', 'c'],
     ],
-    [ScreenName.Blog]: [
-        ['hold', 'sup', keyRate * 3],
+    [ScreenName.Opinions]: [
+        ['hold', 'ret', keyRate * 3, 'SUP'],
         ['tap', 'b'],
     ],
 }
@@ -58,7 +59,7 @@ export const openScreen = (screen: ScreenName) => {
     keyTimeout = setTimeout(() => {
         tapSequence(
             [
-                ['hold', 'sup', keyRate * 2],
+                ['hold', 'ret', keyRate * 2, 'SUP'],
                 ['tap', 'w'],
             ],
             keyRate,

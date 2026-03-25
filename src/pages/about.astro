@@ -3,7 +3,6 @@ import Layout from '@/layouts/Layout.astro'
 import Navbar from '@/components/Navbar.astro'
 import VimNavigator from '@/components/VimNavigator.astro'
 import Terminal from '@/components/Terminal.astro'
-import { markdownToHtml } from '@/utils/markdown'
 import '@webtui/css/components/spinner.css'
 
 // start, end, items
@@ -301,10 +300,6 @@ const formatStartEnd = (start: Date, end: Date) => {
                                             {formatStartEnd(start, end)}
                                         </h3>
                                     </row>
-                                    <column
-                                        set:html={markdownToHtml(markdown)}
-                                        gap-="1"
-                                    />
                                 </column>
                             ))
                         }
@@ -426,75 +421,3 @@ const formatStartEnd = (start: Date, end: Date) => {
     }
 </style>
 
-<script>
-    import { attachScrollSnapListener } from '@/utils/scroll'
-
-    // Update my age automatically
-    const targetDate = new Date('2005-11-15')
-    const currentDate = new Date()
-
-    const yearDiff = Math.floor(
-        (currentDate.getTime() - targetDate.getTime()) / 31536000000,
-    )
-
-    const ages = document.querySelectorAll(
-        '.age',
-    ) as NodeListOf<HTMLSpanElement>
-
-    ages.forEach((age) => {
-        age.innerText = yearDiff.toString()
-    })
-
-    attachScrollSnapListener(
-        '.timeline-snap',
-        (target) => {
-            const targetIndex = Number(target?.dataset.index)
-
-            if (!isNaN(targetIndex)) {
-                const timelineCounter = document.querySelector(
-                    '#tl-counter',
-                ) as HTMLSpanElement
-                timelineCounter.innerText = String(targetIndex + 1)
-
-                const timelineItems = document.querySelectorAll(
-                    '.timeline-item',
-                ) as NodeListOf<HTMLElement>
-
-                timelineItems.forEach((item) => {
-                    item.style.display = 'none'
-                })
-
-                const targetItem = document.querySelector(
-                    `.timeline-item[data-index="${targetIndex}"]`,
-                ) as HTMLElement
-
-                targetItem.style.display = 'flex'
-
-                const targetItemStart = new Date(
-                    Number(targetItem.dataset.start),
-                )
-                const targetItemEnd = new Date(Number(targetItem.dataset.end))
-
-                const yearMarkers = document.querySelectorAll(
-                    '.year',
-                ) as NodeListOf<HTMLSpanElement>
-
-                console.log(targetItemStart, targetItemEnd)
-
-                yearMarkers.forEach((yearMarker) => {
-                    const year = Number(yearMarker.dataset.year)
-                    const startYear = targetItemStart.getUTCFullYear()
-                    const endYear = targetItemEnd.getUTCFullYear()
-                    const isInRange = startYear <= year && endYear >= year
-
-                    if (isInRange) {
-                        yearMarker.classList.add('active')
-                    } else {
-                        yearMarker.classList.remove('active')
-                    }
-                })
-            }
-        },
-        '#timeline',
-    )
-</script>

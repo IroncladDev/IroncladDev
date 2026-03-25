@@ -24,10 +24,10 @@
         opacity: 0.5 !important;
 
         html:has(app-state[focus-='#']) &[screen-='#'],
-        html:has(app-state[focus-='#about']) &[screen-='#about'],
+        html:has(app-state[focus-='#info']) &[screen-='#info'],
         html:has(app-state[focus-='#projects']) &[screen-='#projects'],
-        html:has(app-state[focus-='#contact']) &[screen-='#contact'],
-        html:has(app-state[focus-='#blog']) &[screen-='#blog'] {
+        html:has(app-state[focus-='#links']) &[screen-='#links'],
+        html:has(app-state[focus-='#opinions']) &[screen-='#opinions'] {
             opacity: 1 !important;
         }
     }
