@@ -76,7 +76,7 @@ import { ScreenName } from '@/types/state'
     import { ScreenName } from '@/types/state'
     import { openScreen } from '@/utils/navigation'
 
-    const onHashChange = () => {
+    window.addEventListener('hashchange', () => {
         const derivedScreen =
             Object.values(ScreenName).find(
                 (name) => name === window.location.hash,
@@ -85,9 +85,7 @@ import { ScreenName } from '@/types/state'
             .querySelector('app-state')
             ?.setAttribute('screen-', derivedScreen)
         openScreen(derivedScreen)
-    }
-
-    window.addEventListener('hashchange', onHashChange)
+    })
     window.addEventListener('keydown', (e) => {
         if (e.key === '1') window.location.hash = ScreenName.Info
         else if (e.key === '2') window.location.hash = ScreenName.Projects

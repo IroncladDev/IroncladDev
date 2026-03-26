@@ -32,9 +32,9 @@ const tapSequenceMap: Record<
     ],
 }
 
-let reorderTimeout: NodeJS.Timeout | undefined
-let keyTimeout: NodeJS.Timeout | undefined
-let hideOthersTimeout: NodeJS.Timeout | undefined
+let reorderTimeout: ReturnType<typeof setTimeout> | undefined
+let keyTimeout: ReturnType<typeof setTimeout> | undefined
+let hideOthersTimeout: ReturnType<typeof setTimeout> | undefined
 
 export const openScreen = (screen: ScreenName) => {
     const appState = document.querySelector('app-state') as HTMLElement
@@ -71,5 +71,16 @@ export const openScreen = (screen: ScreenName) => {
             if (tile.getAttribute('screen-') === screen) return
             tile.style.animationName = 'remove'
         })
+        window.dispatchEvent(
+            new CustomEvent('site:navigate', {
+                detail: { screen },
+            }),
+        )
     }, keyRate * 8)
+}
+
+declare global {
+    interface WindowEventMap {
+        'site:navigate': CustomEvent<{ screen: ScreenName }>
+    }
 }
