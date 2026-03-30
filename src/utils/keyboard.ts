@@ -1,3 +1,7 @@
+import { makeTypedKeySequence, tapDuration, type KeyInteraction } from './keys'
+import { keyRate } from './keys'
+import { waitFor } from './time'
+
 const audio = new Audio('/eg-crystal-purple/purple.ogg')
 
 interface SoundConfig {
@@ -17,10 +21,9 @@ async function playSound(soundId: string) {
     const clone = audio.cloneNode() as HTMLAudioElement
     clone.currentTime = start / 1000
     clone.play()
-    setTimeout(() => {
-        clone.pause()
-        clone.remove()
-    }, duration)
+    await waitFor(duration)
+    clone.pause()
+    clone.remove()
 }
 
 async function tapKey(key: string) {
@@ -30,9 +33,8 @@ async function tapKey(key: string) {
 
     if (keyButton) {
         keyButton.classList.add('tapped')
-        setTimeout(() => {
-            keyButton.classList.remove('tapped')
-        }, 250)
+        await waitFor(tapDuration)
+        keyButton.classList.remove('tapped')
     }
 }
 
@@ -43,39 +45,41 @@ async function holdKeyFor(
 ) {
     const keyButton = document.querySelector(`#key-${key}`) as HTMLElement
 
+    if (!keyButton) return
+
     await playSound('2')
 
-    if (keyButton) {
-        const oldText = keyButton.innerText
-        keyButton.classList.add('held')
-        if (modifierName) keyButton.innerText = modifierName
-        setTimeout(() => {
-            keyButton.classList.remove('held')
-            keyButton.innerText = oldText
-            playSound('3')
-        }, duration)
-    }
+    const oldText = keyButton.innerText
+    keyButton.classList.add('held')
+    if (modifierName) keyButton.innerText = modifierName
+    await waitFor(duration)
+    keyButton.classList.remove('held')
+    keyButton.innerText = oldText
 }
 
-export async function tapSequence(
-    sequence: Array<
-        | ['tap', string]
-        | ['hold', string, number]
-        | ['hold', string, number, string]
-    >,
-    duration: number,
-    onKeyPress?: (key: string, index: number) => void,
+export function tapSequence(
+    raw: string,
+    onKeyPress?: (interaction: KeyInteraction, index: number) => void,
 ) {
-    for (let i = 0; i < sequence.length; i++) {
-        const [type, key, ...rest] = sequence[i]
+    return new Promise<void>((resolve) => {
+        const sequence = makeTypedKeySequence(raw)
 
-        setTimeout(() => {
-            if (type === 'hold') {
-                holdKeyFor(key, ...(rest as [number, string?]))
-            } else {
-                tapKey(key)
-            }
-            onKeyPress?.(key, i)
-        }, i * duration)
-    }
+        for (let i = 0; i < sequence.length; i++) {
+            const seq = sequence[i]
+
+            setTimeout(() => {
+                if (seq.type === 'hold') {
+                    holdKeyFor(
+                        seq.key,
+                        keyRate * seq.holdMultiplier + keyRate,
+                        seq.modifierName,
+                    )
+                } else {
+                    tapKey(seq.key)
+                }
+                onKeyPress?.(seq, i)
+                if (i === sequence.length - 1) resolve()
+            }, i * keyRate)
+        }
+    })
 }

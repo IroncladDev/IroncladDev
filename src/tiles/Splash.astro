@@ -45,47 +45,25 @@ import { ScreenName } from '@/types/state'
 
 <script>
     import { tapSequence } from '@/utils/keyboard'
+    import { waitFor } from '@/utils/time'
 
     const button = document.querySelector('#button') as HTMLButtonElement
 
-    const str = 'ssh ironclad.sh'
     let isProceeding = false
+    let typedText = ''
 
-    function proceed() {
+    async function proceed() {
         if (isProceeding) return
 
         isProceeding = true
-        tapSequence(
-            [
-                ['tap', 's'],
-                ['tap', 's'],
-                ['tap', 'h'],
-                ['tap', 'spc'],
-                ['tap', 'i'],
-                ['tap', 'r'],
-                ['tap', 'o'],
-                ['tap', 'n'],
-                ['tap', 'c'],
-                ['tap', 'l'],
-                ['tap', 'a'],
-                ['tap', 'd'],
-                ['tap', 'dot'],
-                ['tap', 's'],
-                ['tap', 'h'],
-                ['tap', 'ret'],
-            ],
-            100,
-            (_, index) => {
-                const cmdText = document.querySelector(
-                    '#cmd',
-                ) as HTMLSpanElement
+        await tapSequence('ssh ironclad.sh<CR>', (seq) => {
+            const cmdText = document.querySelector('#cmd') as HTMLSpanElement
 
-                cmdText.innerText = str.slice(0, index + 1)
-            },
-        )
-        setTimeout(() => {
-            window.dispatchEvent(new Event('hashchange'))
-        }, 2000)
+            typedText += seq.originalKey
+            cmdText.innerText = typedText
+        })
+        await waitFor(500)
+        window.dispatchEvent(new Event('hashchange'))
     }
 
     button.addEventListener('click', proceed)

@@ -85,8 +85,8 @@
 }
 
 @layer components {
-    [is-="spinner"] {
-        &[variant-="block"] {
+    [is-='spinner'] {
+        &[variant-='block']:last-of-type {
             --spinner-chars: '█ █';
             --spinner-steps: 3;
             --spinner-duration: 1s;

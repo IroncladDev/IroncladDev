@@ -1,7 +1,5 @@
 ---
 import { ScreenName } from '@/types/state'
-
-const e = null
 ---
 
 <div screen-={ScreenName.Info} class="tile" id="tile-info">
@@ -29,33 +27,17 @@ const e = null
 <script>
     import { ScreenName } from '@/types/state'
     import { tapSequence } from '@/utils/keyboard'
+    import { waitFor } from '@/utils/time'
 
-    const str = 'fastfetch'
+    window.addEventListener('site:navigate', async (e) => {
+        if (e.detail.screen !== ScreenName.Info) return
+        await waitFor(500)
+        tapSequence('fastfetch', (seq) => {
+            const cmdText = document.querySelector(
+                '#fastfetch-cmd',
+            ) as HTMLSpanElement
 
-    window.addEventListener('site:navigate', (e) => {
-        if (e.detail.screen === ScreenName.Info) {
-            tapSequence(
-                [
-                    ['tap', 'f'],
-                    ['tap', 'a'],
-                    ['tap', 's'],
-                    ['tap', 't'],
-                    ['tap', 'f'],
-                    ['tap', 'e'],
-                    ['tap', 't'],
-                    ['tap', 'c'],
-                    ['tap', 'h'],
-                    ['tap', 'ret'],
-                ],
-                100,
-                (_, index) => {
-                    const cmdText = document.querySelector(
-                        '#fastfetch-cmd',
-                    ) as HTMLSpanElement
-
-                    cmdText.innerText = str.slice(0, index + 1)
-                },
-            )
-        }
+            cmdText.innerText += seq.originalKey
+        })
     })
 </script>
