@@ -1,43 +1,146 @@
 ---
 import { ScreenName } from '@/types/state'
+import FastfetchAbout from '@/components/Info/FastfetchAbout.astro'
+import Timeline from '@/components/Info/Timeline.astro'
 ---
 
 <div screen-={ScreenName.Info} class="tile" id="tile-info">
-    <span id="prompt">
-        <span id="host">user@ironclad.sh:~$</span>
-        <span id="fastfetch-cmd"></span>
-        <span is-="spinner" variant-="block"></span>
-    </span>
+    <column id="content">
+        <span class="cmd-prompt" id="initial-prompt">
+            <span class="host">user@ironclad.sh:~$</span>
+            <span></span>
+            <span id="prompt-cursor" is-="spinner" variant-="block"></span>
+        </span>
+        <FastfetchAbout />
+        <Timeline />
+    </column>
 </div>
+
+<style is:global>
+    #fastfetch-output,
+    #timeline-output {
+        display: none;
+    }
+</style>
 
 <style>
     #tile-info {
         background-color: var(--surface0-75);
+        display: flex;
+        flex-direction: column;
     }
-
-    #prompt {
-        display: inline-flex;
-        #host {
-            color: var(--green-fg);
-            padding-right: 1ch;
-        }
+    #content {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: 1lh 2ch;
     }
 </style>
 
 <script>
-    import { ScreenName } from '@/types/state'
     import { tapSequence } from '@/utils/keyboard'
     import { waitFor } from '@/utils/time'
+    import { ScreenName } from '@/types/state'
+
+    const promptCursor: HTMLSpanElement =
+        document.querySelector('#prompt-cursor')!
+    const fastfetchOutput: HTMLElement =
+        document.querySelector('#fastfetch-output')!
+    const fastFetchPrompt: HTMLSpanElement =
+        fastfetchOutput.querySelector('.cmd-prompt')!
+    const timelineOutput: HTMLElement =
+        document.querySelector('#timeline-output')!
+    const timelinePrompt: HTMLSpanElement =
+        timelineOutput.querySelector('.cmd-prompt')!
+    const initialPrompt: HTMLSpanElement =
+        document.querySelector('#initial-prompt')!
+    const readMoreButton: HTMLButtonElement =
+        document.querySelector('#read-more')!
+    const backButton: HTMLButtonElement =
+        document.querySelector('#back-button')!
+
+    const getCursorCommand = () => {
+        return promptCursor.previousElementSibling as HTMLSpanElement
+    }
+
+    let isTransitioning = true
 
     window.addEventListener('site:navigate', async (e) => {
         if (e.detail.screen !== ScreenName.Info) return
+        fastfetchOutput.style.display = 'none'
+        timelineOutput.style.display = 'none'
+        initialPrompt.insertAdjacentElement('beforeend', promptCursor)
+        getCursorCommand().innerText = ''
         await waitFor(500)
-        tapSequence('fastfetch', (seq) => {
-            const cmdText = document.querySelector(
-                '#fastfetch-cmd',
-            ) as HTMLSpanElement
-
-            cmdText.innerText += seq.originalKey
+        await tapSequence('fastfetch<CR>', (seq) => {
+            ;(
+                promptCursor.previousElementSibling as HTMLSpanElement
+            ).innerText += seq.originalKey
         })
+        await waitFor(250)
+        fastfetchOutput.style.display = 'flex'
+        fastFetchPrompt.insertAdjacentElement('beforeend', promptCursor)
+        readMoreButton.focus()
+        isTransitioning = false
+    })
+
+    readMoreButton.onclick = async () => {
+        if (isTransitioning) return
+
+        isTransitioning = true
+        readMoreButton.disabled = true
+        getCursorCommand().innerText = ''
+        await waitFor(500)
+        await tapSequence('clear<CR>', (seq) => {
+            getCursorCommand().innerText += seq.originalKey
+        })
+        initialPrompt.insertAdjacentElement('beforeend', promptCursor)
+        fastfetchOutput.style.display = 'none'
+        getCursorCommand().innerText = ''
+        await tapSequence('timeline<CR>', (seq) => {
+            getCursorCommand().innerText += seq.originalKey
+        })
+        await waitFor(250)
+        timelineOutput.style.display = 'flex'
+        timelinePrompt.insertAdjacentElement('beforeend', promptCursor)
+        isTransitioning = false
+        readMoreButton.disabled = false
+        // TODO: clear out the "clear" command lingering at the bottom
+    }
+
+    async function handleBackButton() {
+        if (isTransitioning) return
+
+        isTransitioning = true
+        backButton.disabled = true
+        ;(promptCursor.previousElementSibling as HTMLSpanElement).innerText = ''
+        await waitFor(500)
+        await tapSequence('clear<CR>', (seq) => {
+            getCursorCommand().innerText += seq.originalKey
+        })
+        initialPrompt.insertAdjacentElement('beforeend', promptCursor)
+        timelineOutput.style.display = 'none'
+        getCursorCommand().innerText = ''
+        await tapSequence('fastfetch<CR>', (seq) => {
+            getCursorCommand().innerText += seq.originalKey
+        })
+        await waitFor(250)
+        fastfetchOutput.style.display = 'flex'
+        fastFetchPrompt.insertAdjacentElement('beforeend', promptCursor)
+        isTransitioning = false
+        backButton.disabled = false
+        readMoreButton.focus()
+    }
+
+    backButton.onclick = handleBackButton
+    window.addEventListener('keydown', (e) => {
+        if (isTransitioning) return
+
+        if (e.key === 'Escape') {
+            handleBackButton()
+        }
     })
 </script>

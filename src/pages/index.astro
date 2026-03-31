@@ -20,7 +20,7 @@ import Opinions from '@/tiles/Opinions.astro'
     </div>
     <column id="screen">
         <Waybar />
-        <div id="tiles" class="layout" pad-="2 1">
+        <div id="tiles" class="layout">
             <Splash />
             <Info />
             <Projects />
@@ -61,6 +61,16 @@ import Opinions from '@/tiles/Opinions.astro'
 
     #screen {
         position: absolute;
+        padding: 1lh 2ch;
         inset: 0;
+        overflow: hidden;
+        display: flex;
+        flex-grow: 1;
+        flex-shrink: 0;
+        flex-basis: 0;
+        animation-name: place;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+        gap: 1lh 2ch;
     }
 </style>

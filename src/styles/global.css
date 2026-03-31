@@ -11,6 +11,7 @@
 @import '@/styles/flexbox.css';
 @import '@/styles/padding.css';
 @import '@/styles/colors.css';
+@import '@/styles/terminal.css';
 @import '@webtui/plugin-nf';
 
 @font-face {
@@ -91,5 +92,31 @@
             --spinner-steps: 3;
             --spinner-duration: 1s;
         }
+    }
+
+    a[is-='link'] {
+        color: var(--blue-fg);
+        text-decoration: underline;
+        display: inline-flex;
+        &::before {
+            content: '<';
+            color: var(--blue-fg);
+        }
+        &[target='_blank']::after {
+            content: '↗>';
+            color: var(--blue-fg);
+        }
+    }
+
+    [is-='badge'] {
+        &[variant-='green-fg'] {
+            --badge-color: var(--green-fg);
+            --badge-text: var(--root);
+        }
+    }
+
+    button:disabled {
+        --button-primary: var(--background2);
+        --button-secondary: var(--foreground2);
     }
 }

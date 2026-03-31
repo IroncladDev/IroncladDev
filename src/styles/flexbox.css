@@ -28,6 +28,15 @@
         &[self-~='!basis'] {
             flex-basis: 0;
         }
+        &[self-~="end"] {
+            align-self: flex-end;
+        }
+        &[self-~="start"] {
+            align-self: flex-start;
+        }
+        &[self-~="full-width"] {
+            width: 100%;
+        }
 
         &[align-^='start'] {
             align-items: flex-start;

@@ -2,15 +2,15 @@
 import { ScreenName } from '@/types/state'
 ---
 
-<div screen-={ScreenName.Splash} class="tile" id="tile-splash">
+<div screen-={ScreenName.Splash} class="tile initial" id="tile-splash">
     <column id="content" gap-="1">
         <column>
             <button id="button" autofocus>&gt; Enter ironclad.sh &lt;</button>
             <p>Click or press a key to continue</p>
         </column>
-        <span id="prompt">
-            <span id="host">~/</span>
-            <span id="cmd"></span>
+        <span class="cmd-prompt">
+            <span class="host">~/</span>
+            <span id="ssh-cmd"></span>
             <span is-="spinner" variant-="block"></span>
         </span>
     </column>
@@ -30,15 +30,10 @@ import { ScreenName } from '@/types/state'
         }
     }
     #tile-splash {
-        display: flex;
         flex-direction: column;
-        width: 100%;
-        height: 100%;
-        opacity: 1;
         gap: 1lh;
         align-items: center;
         justify-content: center;
-        animation-name: none;
         background-color: var(--surface0-75);
     }
 </style>
@@ -56,14 +51,19 @@ import { ScreenName } from '@/types/state'
         if (isProceeding) return
 
         isProceeding = true
+        button.disabled = true
         await tapSequence('ssh ironclad.sh<CR>', (seq) => {
-            const cmdText = document.querySelector('#cmd') as HTMLSpanElement
+            const cmdText = document.querySelector(
+                '#ssh-cmd',
+            ) as HTMLSpanElement
 
             typedText += seq.originalKey
             cmdText.innerText = typedText
         })
         await waitFor(500)
         window.dispatchEvent(new Event('hashchange'))
+        await waitFor(3000)
+        button.disabled = false
     }
 
     button.addEventListener('click', proceed)
