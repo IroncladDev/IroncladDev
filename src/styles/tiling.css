@@ -11,14 +11,16 @@
     min-height: 0;
     position: relative;
 
-    &[screen-] {
+    &[data-screen] {
         opacity: 0.5 !important;
 
-        html:has(app-state[focus-='#']) &[screen-='#'],
-        html:has(app-state[focus-='#info']) &[screen-='#info'],
-        html:has(app-state[focus-='#projects']) &[screen-='#projects'],
-        html:has(app-state[focus-='#links']) &[screen-='#links'],
-        html:has(app-state[focus-='#opinions']) &[screen-='#opinions'] {
+        html:has(navigation-state[data-focus='#']) &[data-screen='#'],
+        html:has(navigation-state[data-focus='#info']) &[data-screen='#info'],
+        html:has(navigation-state[data-focus='#projects'])
+            &[data-screen='#projects'],
+        html:has(navigation-state[data-focus='#links']) &[data-screen='#links'],
+        html:has(navigation-state[data-focus='#opinions'])
+            &[data-screen='#opinions'] {
             opacity: 1 !important;
         }
     }

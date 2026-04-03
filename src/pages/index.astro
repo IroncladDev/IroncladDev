@@ -13,14 +13,24 @@ import Opinions from '@/tiles/Opinions.astro'
 ---
 
 <Layout>
-    <app-state screen-={ScreenName.Splash} focus-={ScreenName.Splash}
-    ></app-state>
+    <app-state>
+        <navigation-state
+            data-screen={ScreenName.Splash}
+            data-focus={ScreenName.Splash}></navigation-state>
+        <info-state
+            data-page="initial"
+            data-focus="initial"
+            data-timeline-slide="0"
+            data-is-transitioning="false"></info-state>
+        <projects-state data-project="0"></projects-state>
+        <opinions-state data-page="0"></opinions-state>
+    </app-state>
     <div id="wallpaper">
         <Keyboard />
     </div>
     <column id="screen">
         <Waybar />
-        <div id="tiles" class="layout">
+        <div id="tiles">
             <Splash />
             <Info />
             <Projects />
@@ -51,6 +61,7 @@ import Opinions from '@/tiles/Opinions.astro'
         height: 100%;
         opacity: 1;
         animation-name: none;
+        gap: 1lh 2ch;
     }
 
     @media (max-width: 720px) {

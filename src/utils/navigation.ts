@@ -15,13 +15,15 @@ let keyTimeout: ReturnType<typeof setTimeout> | undefined
 let hideOthersTimeout: ReturnType<typeof setTimeout> | undefined
 
 export const openScreen = async (screen: ScreenName) => {
-    const appState = document.querySelector('app-state') as HTMLElement
+    const navigationState = document.querySelector(
+        'navigation-state',
+    ) as HTMLElement
     const tiles = document.getElementById('tiles') as HTMLDivElement
     const screenTiles = document.querySelectorAll(
-        '.tile[screen-]',
+        '.tile[data-screen]',
     ) as NodeListOf<HTMLDivElement>
     const targetScreen = document.querySelector(
-        `.tile[screen-='${screen}']`,
+        `.tile[data-screen='${screen}']`,
     ) as HTMLDivElement
 
     clearTimeout(keyTimeout)
@@ -36,9 +38,9 @@ export const openScreen = async (screen: ScreenName) => {
         tapSequence('<M-w>')
     }, keyRate * 2)
     hideOthersTimeout = setTimeout(() => {
-        appState.setAttribute('focus-', screen)
+        navigationState.setAttribute('data-focus', screen)
         screenTiles.forEach((tile) => {
-            if (tile.getAttribute('screen-') === screen) return
+            if (tile.getAttribute('data-screen') === screen) return
             tile.style.animationName = 'remove'
         })
         window.dispatchEvent(

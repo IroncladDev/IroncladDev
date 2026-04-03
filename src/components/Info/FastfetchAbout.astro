@@ -4,6 +4,10 @@ const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
 ---
 
 <column id="fastfetch-output">
+    <span class="cmd-prompt" id="pre-fastfetch-prompt">
+        <span class="host">user@ironclad.sh:~$</span>
+        <span>fastfetch</span>
+    </span>
     <column align-="center">
         <column id="fastfetch-content">
             <row gap-="2">
@@ -107,6 +111,14 @@ const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
         max-width: var(--max-reading-width);
     }
 
+    #fastfetch-output {
+        display: none;
+    }
+
+    html:has(info-state[data-focus='fastfetch']) #fastfetch-output {
+        display: flex;
+    }
+
     #read-more:disabled {
         --button-primary: var(--background2);
         --button-secondary: var(--foreground2);
@@ -119,3 +131,13 @@ const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
         }
     }
 </style>
+
+<script>
+    const readMoreButton: HTMLButtonElement =
+        document.querySelector('#read-more')!
+    const infoState: HTMLElement = document.querySelector('info-state')!
+
+    readMoreButton.onclick = () => {
+        infoState.setAttribute('data-page', 'timeline')
+    }
+</script>

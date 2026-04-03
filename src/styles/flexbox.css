@@ -28,13 +28,13 @@
         &[self-~='!basis'] {
             flex-basis: 0;
         }
-        &[self-~="end"] {
+        &[self-~='end'] {
             align-self: flex-end;
         }
-        &[self-~="start"] {
+        &[self-~='start'] {
             align-self: flex-start;
         }
-        &[self-~="full-width"] {
+        &[self-~='full-width'] {
             width: 100%;
         }
 

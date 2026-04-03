@@ -60,10 +60,11 @@ import { ScreenName } from '@/types/state'
             color: var(--foreground0);
         }
 
-        html:has(app-state[screen-='#info']) &[href='#info'],
-        html:has(app-state[screen-='#projects']) &[href='#projects'],
-        html:has(app-state[screen-='#links']) &[href='#links'],
-        html:has(app-state[screen-='#opinions']) &[href='#opinions'] {
+        html:has(navigation-state[data-screen='#info']) &[href='#info'],
+        html:has(navigation-state[data-screen='#projects']) &[href='#projects'],
+        html:has(navigation-state[data-screen='#links']) &[href='#links'],
+        html:has(navigation-state[data-screen='#opinions'])
+            &[href='#opinions'] {
             & > span:first-child {
                 --badge-color: var(--green-fg);
                 color: var(--root);
@@ -82,8 +83,8 @@ import { ScreenName } from '@/types/state'
                 (name) => name === window.location.hash,
             ) ?? ScreenName.Info
         document
-            .querySelector('app-state')
-            ?.setAttribute('screen-', derivedScreen)
+            .querySelector('navigation-state')
+            ?.setAttribute('data-screen', derivedScreen)
         openScreen(derivedScreen)
     })
     window.addEventListener('keydown', (e) => {
