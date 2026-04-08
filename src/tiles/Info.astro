@@ -4,8 +4,8 @@ import FastfetchAbout from '@/components/Info/FastfetchAbout.astro'
 import Timeline from '@/components/Info/Timeline.astro'
 ---
 
-<div data-screen={ScreenName.Info} class="tile" id="tile-info">
-    <column id="content">
+<div data-screen={ScreenName.Info} class="tile">
+    <column class="content">
         <span class="cmd-prompt" id="initial-prompt">
             <span class="host">user@ironclad.sh:~$</span>
             <span></span>
@@ -26,33 +26,19 @@ import Timeline from '@/components/Info/Timeline.astro'
     }
 </style>
 
-<style>
-    #tile-info {
-        background-color: var(--surface0-75);
-        display: flex;
-        flex-direction: column;
-    }
-    #content {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        overflow-x: hidden;
-        overflow-y: auto;
-        padding: 1lh 2ch;
-    }
-</style>
-
 <script>
     import { tapSequence } from '@/utils/keyboard'
     import { waitFor } from '@/utils/time'
     import { ScreenName } from '@/types/state'
     import AppStateListener from '@/utils/state'
+    import type { KeyInteraction } from '@/utils/keys'
+
+    let isTransitioning = false
 
     new AppStateListener('info-state')
-        .on('data-page', async ({ value, target }) => {
-            if (target.getAttribute('data-is-transitioning') === 'true') return
-            target.setAttribute('data-is-transitioning', 'true')
+        .on('data-page', async ({ value }) => {
+            if (isTransitioning) return
+            isTransitioning = true
 
             if (value === 'fastfetch') {
                 await clearPrompt()
@@ -62,7 +48,7 @@ import Timeline from '@/components/Info/Timeline.astro'
                 await handleDisplayTimeline()
             }
 
-            target.setAttribute('data-is-transitioning', 'false')
+            isTransitioning = false
         })
         .on('data-is-transitioning', ({ value }) => {
             if (value === 'true') {
@@ -74,14 +60,18 @@ import Timeline from '@/components/Info/Timeline.astro'
             }
         })
 
-    new AppStateListener('navigation-state').on(
-        'data-focus',
-        async ({ value }) => {
+    new AppStateListener('navigation-state')
+        .on('data-focus', async ({ value }) => {
+            if (value !== ScreenName.Info) return
+            handleDisplayFastFetch()
+        })
+        .on('data-screen', async ({ value }) => {
             if (value !== ScreenName.Info) return
 
-            handleDisplayFastFetch()
-        },
-    )
+            infoState.setAttribute('data-focus', 'initial')
+            initialPrompt.insertAdjacentElement('beforeend', promptCursor)
+            getCommandText().innerText = ''
+        })
 
     const backButton: HTMLButtonElement =
         document.querySelector('#back-button')!
@@ -104,14 +94,17 @@ import Timeline from '@/components/Info/Timeline.astro'
         return promptCursor.previousElementSibling as HTMLSpanElement
     }
 
+    const typedInteractionSequence = (seq: KeyInteraction[]) => {
+        getCommandText().innerText = seq.map((s) => s.originalKey).join('')
+    }
+
     async function clearPrompt() {
         // Type command
-        await waitFor(500)
-        await tapSequence(
-            'clear<CR>',
-            (seq) => (getCommandText().innerText += seq.originalKey),
-        )
-        await waitFor(250)
+        await tapSequence('clear<CR>', {
+            onType: typedInteractionSequence,
+            signal: window.navController.signal,
+        })
+        await waitFor(250, window.navController)
 
         // Focus the initial prompt
         infoState.setAttribute('data-focus', 'initial')
@@ -124,16 +117,16 @@ import Timeline from '@/components/Info/Timeline.astro'
 
         // Clear the initial prompt
         getCommandText().innerText = ''
+        await waitFor(250, window.navController)
     }
 
     async function handleDisplayTimeline() {
         // Type command
-        await waitFor(500)
-        await tapSequence(
-            'timeline<CR>',
-            (seq) => (getCommandText().innerText += seq.originalKey),
-        )
-        await waitFor(250)
+        await tapSequence('timeline<CR>', {
+            onType: typedInteractionSequence,
+            signal: window.navController.signal,
+        })
+        await waitFor(250, window.navController)
 
         // Focus and show timeline
         infoState.setAttribute('data-focus', 'timeline')
@@ -144,12 +137,11 @@ import Timeline from '@/components/Info/Timeline.astro'
 
     async function handleDisplayFastFetch() {
         // Type command
-        await waitFor(500)
-        await tapSequence(
-            'fastfetch<CR>',
-            (seq) => (getCommandText().innerText += seq.originalKey),
-        )
-        await waitFor(250)
+        await tapSequence('fastfetch<CR>', {
+            onType: typedInteractionSequence,
+            signal: window.navController.signal,
+        })
+        await waitFor(250, window.navController)
 
         // Focus and show fastfetch
         infoState.setAttribute('data-focus', 'fastfetch')

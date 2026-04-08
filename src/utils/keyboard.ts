@@ -59,27 +59,42 @@ async function holdKeyFor(
 
 export function tapSequence(
     raw: string,
-    onKeyPress?: (interaction: KeyInteraction, index: number) => void,
+    options?: {
+        onType?: (interactions: KeyInteraction[]) => void
+        signal?: AbortSignal
+    },
 ) {
-    return new Promise<void>((resolve) => {
+    return new Promise<void>((resolve, reject) => {
         const sequence = makeTypedKeySequence(raw)
+        const timeouts: ReturnType<typeof setTimeout>[] = []
 
         for (let i = 0; i < sequence.length; i++) {
             const seq = sequence[i]
 
-            setTimeout(() => {
-                if (seq.type === 'hold') {
-                    holdKeyFor(
-                        seq.key,
-                        keyRate * seq.holdMultiplier + keyRate,
-                        seq.modifierName,
-                    )
-                } else {
-                    tapKey(seq.key)
-                }
-                onKeyPress?.(seq, i)
-                if (i === sequence.length - 1) resolve()
-            }, i * keyRate)
+            timeouts.push(
+                setTimeout(() => {
+                    if (seq.type === 'hold') {
+                        holdKeyFor(
+                            seq.key,
+                            keyRate * seq.holdMultiplier + keyRate,
+                            seq.modifierName,
+                        )
+                    } else {
+                        tapKey(seq.key)
+                    }
+                    options?.onType?.(sequence.slice(0, i + 1))
+                    if (i === sequence.length - 1) resolve()
+                }, i * keyRate),
+            )
         }
+
+        options?.signal?.addEventListener(
+            'abort',
+            () => {
+                timeouts.forEach((timeout) => clearTimeout(timeout))
+                reject(options.signal?.reason)
+            },
+            { once: true },
+        )
     })
 }

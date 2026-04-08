@@ -11,10 +11,18 @@ const tapSequenceMap: Record<ScreenName, string> = {
     [ScreenName.Opinions]: '<M-b>',
 }
 
-let keyTimeout: ReturnType<typeof setTimeout> | undefined
-let hideOthersTimeout: ReturnType<typeof setTimeout> | undefined
+window.navController = new AbortController()
+
+declare global {
+    interface Window {
+        navController: AbortController
+    }
+}
 
 export const openScreen = async (screen: ScreenName) => {
+    window.navController.abort('navigating')
+    window.navController = new AbortController()
+
     const navigationState = document.querySelector(
         'navigation-state',
     ) as HTMLElement
@@ -26,33 +34,21 @@ export const openScreen = async (screen: ScreenName) => {
         `.tile[data-screen='${screen}']`,
     ) as HTMLDivElement
 
-    clearTimeout(keyTimeout)
-    clearTimeout(hideOthersTimeout)
-
-    await tapSequence(tapSequenceMap[screen])
-    await waitFor(500)
+    await tapSequence(tapSequenceMap[screen], window.navController)
+    await waitFor(500, window.navController)
     targetScreen.style.animationName = 'place'
     targetScreen.style.display = 'flex'
     tiles.insertAdjacentElement('beforeend', targetScreen)
-    keyTimeout = setTimeout(() => {
-        tapSequence('<M-w>')
-    }, keyRate * 2)
-    hideOthersTimeout = setTimeout(() => {
-        navigationState.setAttribute('data-focus', screen)
-        screenTiles.forEach((tile) => {
-            if (tile.getAttribute('data-screen') === screen) return
-            tile.style.animationName = 'remove'
-        })
-        window.dispatchEvent(
-            new CustomEvent('site:navigate', {
-                detail: { screen },
-            }),
-        )
-    }, keyRate * 6)
-}
+    await waitFor(keyRate * 2, window.navController)
+    await tapSequence('<M-w>', window.navController)
+    await waitFor(keyRate * 4, window.navController)
 
-declare global {
-    interface WindowEventMap {
-        'site:navigate': CustomEvent<{ screen: ScreenName }>
-    }
+    navigationState.setAttribute('data-focus', screen)
+    screenTiles.forEach((tile) => {
+        if (tile.getAttribute('data-screen') === screen) {
+            tile.style.animationName = 'place'
+            return
+        }
+        tile.style.animationName = 'remove'
+    })
 }

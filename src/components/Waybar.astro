@@ -76,6 +76,7 @@ import { ScreenName } from '@/types/state'
 <script>
     import { ScreenName } from '@/types/state'
     import { openScreen } from '@/utils/navigation'
+    import AppStateListener from '@/utils/state'
 
     window.addEventListener('hashchange', () => {
         const derivedScreen =
@@ -85,8 +86,12 @@ import { ScreenName } from '@/types/state'
         document
             .querySelector('navigation-state')
             ?.setAttribute('data-screen', derivedScreen)
-        openScreen(derivedScreen)
     })
+
+    new AppStateListener('navigation-state').on('data-screen', ({ value }) =>
+        openScreen(value as ScreenName),
+    )
+
     window.addEventListener('keydown', (e) => {
         if (e.key === '1') window.location.hash = ScreenName.Info
         else if (e.key === '2') window.location.hash = ScreenName.Projects

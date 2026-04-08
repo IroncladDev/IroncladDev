@@ -1,4 +1,4 @@
-export function waitFor(ms: number, signal?: AbortSignal) {
+export function waitFor(ms: number, { signal }: { signal?: AbortSignal } = {}) {
     return new Promise<void>((resolve, reject) => {
         if (signal?.aborted) return reject(signal.reason)
 

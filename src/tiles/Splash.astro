@@ -43,24 +43,21 @@ import { ScreenName } from '@/types/state'
     import { waitFor } from '@/utils/time'
 
     const button = document.querySelector('#button') as HTMLButtonElement
+    const cmdText = document.querySelector('#ssh-cmd') as HTMLSpanElement
 
     let isProceeding = false
-    let typedText = ''
 
     async function proceed() {
         if (isProceeding) return
 
         isProceeding = true
         button.disabled = true
-        await tapSequence('ssh ironclad.sh<CR>', (seq) => {
-            const cmdText = document.querySelector(
-                '#ssh-cmd',
-            ) as HTMLSpanElement
-
-            typedText += seq.originalKey
-            cmdText.innerText = typedText
+        await tapSequence('ssh ironclad.sh<CR>', {
+            onType(seq) {
+                cmdText.innerText = seq.map((s) => s.originalKey).join('')
+            },
         })
-        await waitFor(500)
+        await waitFor(250)
         window.dispatchEvent(new Event('hashchange'))
         await waitFor(3000)
         button.disabled = false
