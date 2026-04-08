@@ -11,10 +11,10 @@ import { ScreenName } from '@/types/state'
                 >Info</span
             >
         </a>
-        <a class="workspace" href={ScreenName.Projects}>
+        <a class="workspace" href={ScreenName.Showcase}>
             <span is-="badge">2</span>
             <span is-="badge" variant-="background2" cap-="square round"
-                >Projects</span
+                >Showcase</span
             >
         </a>
         <a class="workspace" href={ScreenName.Links}>
@@ -61,7 +61,7 @@ import { ScreenName } from '@/types/state'
         }
 
         html:has(navigation-state[data-screen='#info']) &[href='#info'],
-        html:has(navigation-state[data-screen='#projects']) &[href='#projects'],
+        html:has(navigation-state[data-screen='#showcase']) &[href='#showcase'],
         html:has(navigation-state[data-screen='#links']) &[href='#links'],
         html:has(navigation-state[data-screen='#opinions'])
             &[href='#opinions'] {
@@ -94,7 +94,7 @@ import { ScreenName } from '@/types/state'
 
     window.addEventListener('keydown', (e) => {
         if (e.key === '1') window.location.hash = ScreenName.Info
-        else if (e.key === '2') window.location.hash = ScreenName.Projects
+        else if (e.key === '2') window.location.hash = ScreenName.Showcase
         else if (e.key === '3') window.location.hash = ScreenName.Links
         else if (e.key === '4') window.location.hash = ScreenName.Opinions
     })

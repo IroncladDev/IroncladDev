@@ -1,7 +1,7 @@
 export enum ScreenName {
     Splash = '#',
     Info = '#info',
-    Projects = '#projects',
+    Showcase = '#showcase',
     Links = '#links',
     Opinions = '#opinions',
 }

@@ -7,7 +7,7 @@ import '@/styles/tiling.css'
 
 import Splash from '@/tiles/Splash.astro'
 import Info from '@/tiles/Info.astro'
-import Projects from '@/tiles/Projects.astro'
+import Showcase from '@/tiles/Showcase.astro'
 import Links from '@/tiles/Links.astro'
 import Opinions from '@/tiles/Opinions.astro'
 ---
@@ -21,7 +21,6 @@ import Opinions from '@/tiles/Opinions.astro'
             data-page="initial"
             data-focus="initial"
             data-timeline-slide="0"></info-state>
-        <projects-state data-project="0"></projects-state>
         <opinions-state data-page="0"></opinions-state>
     </app-state>
     <div id="wallpaper">
@@ -32,7 +31,7 @@ import Opinions from '@/tiles/Opinions.astro'
         <div id="tiles">
             <Splash />
             <Info />
-            <Projects />
+            <Showcase />
             <Links />
             <Opinions />
         </div>

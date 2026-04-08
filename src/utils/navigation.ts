@@ -6,7 +6,7 @@ import { waitFor } from './time'
 const tapSequenceMap: Record<ScreenName, string> = {
     [ScreenName.Splash]: '',
     [ScreenName.Info]: '<M-C-a>',
-    [ScreenName.Projects]: '<M-p>',
+    [ScreenName.Showcase]: '<M-s>',
     [ScreenName.Links]: '<M-C-c>',
     [ScreenName.Opinions]: '<M-b>',
 }

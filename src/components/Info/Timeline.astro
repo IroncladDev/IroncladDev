@@ -117,57 +117,48 @@ const formatStartEnd = (start: Date, end: Date) => {
         <span class="host">user@ironclad.sh:~$</span>
         <span>timeline</span>
     </span>
-    <column align-="center">
-        <column id="timeline-content">
-            <row gap-="1" pad-="2 0">
-                <h3 is-="badge" variant-="green-fg">Timeline</h3>
-                <span>
-                    <span id="tl-counter" data-tl="0"></span>
-                    /
-                    <span id="tl-length" data-tl={timeline.length}></span>
-                </span>
-            </row>
-            <row gap-="1" pad-="2 0">
-                <column self-="!shrink">
-                    {
-                        years.map((year) => (
-                            <span class="year" data-year={year}>
-                                {year} <span class="year-marker">┃</span>
-                            </span>
-                        ))
-                    }
-                </column>
+    <column id="timeline-content">
+        <row gap-="1">
+            <h3 is-="badge" variant-="green-fg">Timeline</h3>
+            <span>
+                <span id="tl-counter" data-tl="0"></span>
+                /
+                <span id="tl-length" data-tl={timeline.length}></span>
+            </span>
+        </row>
+        <row gap-="1">
+            <column self-="!shrink">
                 {
-                    timeline.map(([start, end, markdown], i) => (
-                        <column
-                            is-="typography-block"
-                            class="timeline-item"
-                            data-start={start.getTime()}
-                            data-end={end.getTime()}
-                            id={`timeline-item-${i}`}>
-                            <row>
-                                <h3 is-="badge" variant-="background1">
-                                    {formatStartEnd(start, end)}
-                                </h3>
-                            </row>
-                            <column
-                                set:html={markdownToHtml(markdown)}
-                                gap-="1"
-                            />
-                        </column>
+                    years.map((year) => (
+                        <span class="year" data-year={year}>
+                            {year} <span class="year-marker">┃</span>
+                        </span>
                     ))
                 }
-            </row>
-            <row self-="end" align-="end" gap-="1">
-                <button id="back-button" variant-="background2"
-                    >[Esc] Back</button
-                >
-                <button id="prev-button" variant-="background3">[K] Prev</button
-                >
-                <button id="next-button" variant-="background3">[J] Next</button
-                >
-            </row>
-        </column>
+            </column>
+            {
+                timeline.map(([start, end, markdown], i) => (
+                    <column
+                        is-="typography-block"
+                        class="timeline-item"
+                        data-start={start.getTime()}
+                        data-end={end.getTime()}
+                        id={`timeline-item-${i}`}>
+                        <row>
+                            <h3 is-="badge" variant-="background1">
+                                {formatStartEnd(start, end)}
+                            </h3>
+                        </row>
+                        <column set:html={markdownToHtml(markdown)} gap-="1" />
+                    </column>
+                ))
+            }
+        </row>
+        <row self-="end" align-="end" gap-="1">
+            <button id="back-button" variant-="background2">[Esc] Back</button>
+            <button id="prev-button" variant-="background3">[K] Prev</button>
+            <button id="next-button" variant-="background3">[J] Next</button>
+        </row>
     </column>
     <span class="cmd-prompt" id="post-timeline-prompt">
         <span class="host">user@ironclad.sh:~$</span>
