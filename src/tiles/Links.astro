@@ -2,4 +2,311 @@
 import { ScreenName } from '@/types/state'
 ---
 
-<div data-screen={ScreenName.Links} class="tile">links</div>
+<div data-screen={ScreenName.Links} class="tile">
+    <column class="content">
+        <span class="cmd-prompt" id="links-prompt">
+            <span class="host">user@ironclad.sh:~$</span>
+            <span></span>
+            <span id="links-cursor" is-="spinner" variant-="block"></span>
+        </span>
+        <column id="links-content" gap-="1">
+            <span class="cmd-prompt">
+                <span class="host">user@ironclad.sh:~$</span>
+                <span>links</span>
+            </span>
+            <ul>
+                <li>
+                    <column>
+                        <row gap-="1">
+                            <strong>X/Twitter</strong>
+                            <span>{'•'}</span>
+                            <a
+                                href="https://x.com/IroncladDev"
+                                target="_blank"
+                                rel="noreferrer">
+                                x.com/IroncladDev
+                            </a>
+                        </row>
+                        <ul pad-="1 0" marker-="open tree">
+                            <li>
+                                <row gap-="1">
+                                    <span
+                                        is-="badge"
+                                        variant-="green-bg"
+                                        cap-="triangle">
+                                        󰔛 Response Time
+                                    </span>
+                                    <span style="color: var(--green-fg-dim)"
+                                        >Fast</span
+                                    >
+                                </row>
+                            </li>
+                            <li>
+                                <row gap-="1">
+                                    <span
+                                        is-="badge"
+                                        variant-="purple-bg"
+                                        cap-="triangle">
+                                        󰄨 Usage
+                                    </span>
+                                    <span style="color: var(--green-fg-dim)"
+                                        >Frequent</span
+                                    >
+                                </row>
+                            </li>
+                            <li>
+                                My uncensored thoughts, opinions, takes, and
+                                memes when I'm at my absolute wildest and
+                                silliest
+                            </li>
+                        </ul>
+                    </column>
+                </li>
+                <li>
+                    <column>
+                        <row gap-="1">
+                            <strong>Github</strong>
+                            <span>{'•'}</span>
+                            <a
+                                href="https://github.com/IroncladDev"
+                                target="_blank"
+                                rel="noreferrer">
+                                github.com/IroncladDev
+                            </a>
+                        </row>
+                        <ul pad-="1 0" marker-="open tree">
+                            <li>
+                                <row gap-="1">
+                                    <span
+                                        is-="badge"
+                                        variant-="green-bg"
+                                        cap-="triangle">
+                                        󰔛 Response Time
+                                    </span>
+                                    <span style="color: var(--yellow-fg)"
+                                        >Mid</span
+                                    >
+                                </row>
+                            </li>
+                            <li>
+                                <row gap-="1">
+                                    <span
+                                        is-="badge"
+                                        variant-="purple-bg"
+                                        cap-="triangle">
+                                        󰄨 Usage
+                                    </span>
+                                    <span style="color: var(--green-fg-dim)"
+                                        >Frequent</span
+                                    >
+                                </row>
+                            </li>
+                            <li>
+                                The home of my open source projects. I usually
+                                respond to Issues, PRs, and Comments within a
+                                day
+                            </li>
+                        </ul>
+                    </column>
+                </li>
+                <li>
+                    <column>
+                        <row gap-="1">
+                            <strong>Signal</strong>
+                            <span>{'•'}</span>
+                            <a
+                                href="https://signal.me/#eu/36E3b48gh-bGeLWnxgNERMFW4315Pdtjmu3-vcqKZ8Bs0WSY-HpEGZ-qmGgAa5gV"
+                                target="_blank"
+                                rel="noreferrer">
+                                IroncladDev.62
+                            </a>
+                        </row>
+                        <ul pad-="1 0" marker-="open tree">
+                            <li>
+                                <row gap-="1">
+                                    <span
+                                        is-="badge"
+                                        variant-="green-bg"
+                                        cap-="triangle">
+                                        󰔛 Response Time
+                                    </span>
+                                    <strong style="color: var(--green-fg)"
+                                        >Very Fast</strong
+                                    >
+                                </row>
+                            </li>
+                            <li>
+                                <row gap-="1">
+                                    <span
+                                        is-="badge"
+                                        variant-="purple-bg"
+                                        cap-="triangle">
+                                        󰄨 Usage
+                                    </span>
+                                    <strong style="color: var(--green-fg)"
+                                        >Constant</strong
+                                    >
+                                </row>
+                            </li>
+                            <li>
+                                Signal is the best way to contact me for direct
+                                communication
+                            </li>
+                        </ul>
+                    </column>
+                </li>
+                <li>
+                    <column>
+                        <row gap-="1">
+                            <strong>Email</strong>
+                            <span>{'•'}</span>
+                            <a
+                                href="mailto:conner@ironclad.sh"
+                                target="_blank"
+                                rel="noreferrer">
+                                conner@ironclad.sh
+                            </a>
+                        </row>
+                        <ul pad-="1 0" marker-="open tree">
+                            <li>
+                                <row gap-="1">
+                                    <span
+                                        is-="badge"
+                                        variant-="green-bg"
+                                        cap-="triangle">
+                                        󰔛 Response Time
+                                    </span>
+                                    <span style="color: var(--orange-fg-dim)"
+                                        >Slow</span
+                                    >
+                                </row>
+                            </li>
+                            <li>
+                                <row gap-="1">
+                                    <span
+                                        is-="badge"
+                                        variant-="purple-bg"
+                                        cap-="triangle">
+                                        󰄨 Usage
+                                    </span>
+                                    <span style="color: var(--orange-fg-dim)"
+                                        >Daily</span
+                                    >
+                                </row>
+                            </li>
+                            <li>
+                                Legacy software that i am forced to use that is
+                                somehow is still alive (i hate it)
+                            </li>
+                        </ul>
+                    </column>
+                </li>
+            </ul>
+            <column
+                box-="round"
+                shear-="top"
+                style="--box-border-color: var(--blue-bg)">
+                <row align-="center">
+                    <strong is-="badge" variant-="blue-bg" cap-="triangle"
+                        >Join my Signal Group Chat</strong
+                    >
+                </row>
+                <column pad-="2 1">
+                    <p>
+                        For those who enjoy discussing technology, weapons, and
+                        heavy machinery (not recommended for females/communists)
+                    </p>
+                    <div
+                        is-="separator"
+                        style="--separator-color: var(--blue-bg)"></div>
+                    <a
+                        href="https://signal.group/#CjQKIFso0Z5zIUiTAcueMbLgezhczQ19cO-STQK6LZfDbKzqEhAR2_vENgBwvx1qdTHpDnR-"
+                        target="_blank"
+                        rel="noreferrer">
+                        signal.group/#CjQKIFso0Z5zIUiTAcueMbLgezhczQ19cO-STQK6LZfDbKzqEhAR2_vENgBwvx1qdTHpDnR-
+                    </a>
+                </column>
+            </column>
+            <span class="cmd-prompt" id="post-links-prompt">
+                <span class="host">user@ironclad.sh:~$</span>
+                <span></span>
+            </span>
+        </column>
+    </column>
+</div>
+
+<style>
+    #links-prompt {
+        display: none;
+
+        html:has(links-state[data-focus='initial']) & {
+            display: flex;
+        }
+    }
+
+    #links-content {
+        display: none;
+
+        html:has(links-state[data-focus='links']) & {
+            display: flex;
+        }
+
+        max-width: 60ch;
+    }
+
+    li {
+        display: flex;
+        gap: 1ch;
+    }
+
+    blockquote::before {
+        background-color: var(--blue-fg);
+    }
+</style>
+
+<script>
+    import { tapSequence } from '@/utils/keyboard'
+    import { waitFor } from '@/utils/time'
+    import { ScreenName } from '@/types/state'
+    import AppStateListener from '@/utils/state'
+
+    const linksCursor: HTMLSpanElement =
+        document.querySelector('#links-cursor')!
+    const linksPrompt: HTMLSpanElement =
+        document.querySelector('#links-prompt')!
+    const postLinksPrompt: HTMLSpanElement =
+        document.querySelector('#post-links-prompt')!
+    const linksState: HTMLElement = document.querySelector('links-state')!
+
+    const getPromptText = () => {
+        return linksCursor.previousElementSibling as HTMLSpanElement
+    }
+
+    new AppStateListener('navigation-state')
+        .on('data-focus', ({ value }) => {
+            if (value !== ScreenName.Links) return
+
+            handleShowLinks()
+        })
+        .on('data-screen', ({ value }) => {
+            if (value !== ScreenName.Links) return
+
+            linksState.setAttribute('data-focus', 'initial')
+            linksPrompt.insertAdjacentElement('beforeend', linksCursor)
+            getPromptText().innerText = ''
+        })
+
+    async function handleShowLinks() {
+        await waitFor(250, window.navController)
+        await tapSequence('links<CR>', {
+            onType(seq) {
+                getPromptText().innerText = seq
+                    .map((s) => s.originalKey)
+                    .join('')
+            },
+            signal: window.navController.signal,
+        })
+        linksState.setAttribute('data-focus', 'links')
+        postLinksPrompt.insertAdjacentElement('beforeend', linksCursor)
+    }
+</script>

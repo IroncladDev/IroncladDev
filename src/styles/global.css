@@ -83,6 +83,19 @@
         display: flex;
         flex-direction: column;
     }
+
+    a:not(.workspace) {
+        text-decoration: underline;
+        color: var(--foreground2);
+        word-break: break-all;
+
+        &::after {
+            content: '↗';
+        }
+        &:focus {
+            color: var(--blue-fg);
+        }
+    }
 }
 
 @layer components {
@@ -112,6 +125,21 @@
         &[variant-='green-fg'] {
             --badge-color: var(--green-fg);
             --badge-text: var(--root);
+        }
+
+        &[variant-='blue-bg'] {
+            --badge-color: var(--blue-bg);
+            --badge-text: var(--blue-fg);
+        }
+
+        &[variant-='green-bg'] {
+            --badge-color: var(--green-bg);
+            --badge-text: var(--green-fg);
+        }
+
+        &[variant-='purple-bg'] {
+            --badge-color: var(--purple-bg);
+            --badge-text: var(--purple-fg);
         }
     }
 
