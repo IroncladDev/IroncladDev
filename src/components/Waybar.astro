@@ -55,6 +55,11 @@ import { ScreenName } from '@/types/state'
         text-decoration: none;
         display: inline-flex;
 
+        &:focus {
+            text-decoration: underline;
+            text-decoration-color: var(--foreground0);
+        }
+
         & > span:first-child {
             --badge-color: var(--background3);
             color: var(--foreground0);

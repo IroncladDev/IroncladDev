@@ -92,8 +92,9 @@
         &::after {
             content: '↗';
         }
-        &:focus {
-            color: var(--blue-fg);
+        &:focus,
+        &:active {
+            color: var(--blue-fg) !important;
         }
     }
 }
