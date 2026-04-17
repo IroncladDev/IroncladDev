@@ -1,0 +1,244 @@
+---
+const keyboardFrame = `  ╭───────╮    ╔════════════╗    ╭───────╮
+      ╭───╯       ╰────╨────╮  ╭────╨────╯       ╰───╮
+╭─────╯                     │  │                     ╰─────╮
+│                           │  │                           │
+│                           │  │                           │
+│                           │  │                           │
+│                           │  │                           │
+│                           │  │                           │
+│                           │  │                           │
+│                           │  │                           │
+╰──────────╮                │  │                 ╭─────────╯
+           ╰────╮           │  │            ╭────╯
+                ╰───────────╯  ╰────────────╯`
+---
+
+<div id="keyboard">
+    <pre id="base">
+        {keyboardFrame}
+    </pre>
+    <!-- left hand -->
+    <div box-="square" id="key-q">q</div>
+    <div box-="square" id="key-w">w</div>
+    <div box-="square" id="key-f">f</div>
+    <div box-="square" id="key-p">p</div>
+    <div box-="square" id="key-b">b</div>
+    <div box-="square" id="key-a">a</div>
+    <div box-="square" id="key-r">r</div>
+    <div box-="square" id="key-s">s</div>
+    <div box-="square" id="key-t">t</div>
+    <div box-="square" id="key-g">g</div>
+    <div box-="square" id="key-z">z</div>
+    <div box-="square" id="key-x">x</div>
+    <div box-="square" id="key-c">c</div>
+    <div box-="square" id="key-d">d</div>
+    <div box-="square" id="key-v">v</div>
+    <div box-="square" id="key-mod">MOD</div>
+    <div box-="square" id="key-ctl">CTL</div>
+    <div box-="square" id="key-bsp">BSP</div>
+    <!-- right hand -->
+    <div box-="square" id="key-j">j</div>
+    <div box-="square" id="key-l">l</div>
+    <div box-="square" id="key-u">u</div>
+    <div box-="square" id="key-y">y</div>
+    <div box-="square" id="key-semi">;</div>
+    <div box-="square" id="key-m">m</div>
+    <div box-="square" id="key-n">n</div>
+    <div box-="square" id="key-e">e</div>
+    <div box-="square" id="key-i">i</div>
+    <div box-="square" id="key-o">o</div>
+    <div box-="square" id="key-k">k</div>
+    <div box-="square" id="key-h">h</div>
+    <div box-="square" id="key-comma">,</div>
+    <div box-="square" id="key-dot">.</div>
+    <div box-="square" id="key-slash">/</div>
+    <div box-="square" id="key-ret">RET</div>
+    <div box-="square" id="key-spc">SPC</div>
+    <div box-="square" id="key-alt">ALT</div>
+</div>
+
+<style>
+    #key-j {
+        top: 2lh;
+        left: 33ch;
+    }
+    #key-l {
+        top: 2lh;
+        left: 38ch;
+    }
+    #key-u {
+        top: 1lh;
+        left: 43ch;
+    }
+    #key-y {
+        top: 2lh;
+        left: 48ch;
+    }
+    #key-i {
+        top: 4lh;
+        left: 48ch;
+    }
+    #key-m {
+        top: 4lh;
+        left: 33ch;
+    }
+    #key-n {
+        top: 4lh;
+        left: 38ch;
+    }
+    #key-e {
+        top: 3lh;
+        left: 43ch;
+    }
+    #key-semi {
+        top: 3lh;
+        left: 53ch;
+    }
+    #key-o {
+        top: 5lh;
+        left: 53ch;
+    }
+    #key-k {
+        top: 6lh;
+        left: 33ch;
+    }
+    #key-h {
+        top: 6lh;
+        left: 38ch;
+    }
+    #key-comma {
+        top: 5lh;
+        left: 43ch;
+    }
+    #key-dot {
+        top: 6lh;
+        left: 48ch;
+    }
+    #key-slash {
+        top: 7lh;
+        left: 53ch;
+    }
+    #key-ret {
+        top: 9lh;
+        left: 33ch;
+    }
+    #key-spc {
+        top: 9lh;
+        left: 38ch;
+    }
+    #key-alt {
+        top: 8lh;
+        left: 43ch;
+    }
+    #key-q {
+        top: 3lh;
+        left: 2ch;
+    }
+    #key-w {
+        top: 2lh;
+        left: 7ch;
+    }
+    #key-f {
+        top: 1lh;
+        left: 12ch;
+    }
+    #key-p {
+        top: 2lh;
+        left: 17ch;
+    }
+    #key-b {
+        top: 2lh;
+        left: 22ch;
+    }
+    #key-a {
+        top: 5lh;
+        left: 2ch;
+    }
+    #key-r {
+        top: 4lh;
+        left: 7ch;
+    }
+    #key-s {
+        top: 3lh;
+        left: 12ch;
+    }
+    #key-t {
+        top: 4lh;
+        left: 17ch;
+    }
+    #key-g {
+        top: 4lh;
+        left: 22ch;
+    }
+    #key-z {
+        top: 7lh;
+        left: 2ch;
+    }
+    #key-x {
+        top: 6lh;
+        left: 7ch;
+    }
+    #key-c {
+        top: 5lh;
+        left: 12ch;
+    }
+    #key-d {
+        top: 6lh;
+        left: 17ch;
+    }
+    #key-v {
+        top: 6lh;
+        left: 22ch;
+    }
+    #key-mod {
+        top: 8lh;
+        left: 12ch;
+    }
+    #key-ctl {
+        top: 9lh;
+        left: 17ch;
+    }
+    #key-bsp {
+        top: 9lh;
+        left: 22ch;
+    }
+</style>
+
+<style>
+    #keyboard {
+        position: relative;
+        width: 60ch;
+        height: 13lh;
+        color: var(--background3);
+        font-size: var(--font-size);
+        line-height: var(--line-height);
+
+        #base {
+            position: absolute;
+            inset: 0;
+        }
+    }
+
+    [id^='key-'] {
+        margin: 0;
+        width: 5ch;
+        text-align: center;
+        position: absolute;
+        color: var(--foreground0);
+        --box-border-color: var(--foreground2);
+
+        &.tapped {
+            background-color: var(--foreground2);
+            --box-border-color: var(--root);
+            color: var(--root);
+            z-index: 1;
+        }
+        &.held {
+            background-color: var(--blue-fg);
+            --box-border-color: var(--root);
+            color: var(--root);
+            z-index: 1;
+        }
+    }
+</style>

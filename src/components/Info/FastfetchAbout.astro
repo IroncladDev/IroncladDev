@@ -1,0 +1,137 @@
+---
+const ms = new Date().getTime() - new Date('Nov 15, 2005').getTime()
+const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
+---
+
+<column id="fastfetch-output">
+    <span class="cmd-prompt" id="pre-fastfetch-prompt">
+        <span class="host">user@ironclad.sh:~$</span>
+        <span>fastfetch</span>
+    </span>
+    <column id="fastfetch-content">
+        <row gap-="2">
+            <img src="/img/brand/svg/profile-transparent.svg" id="profile" />
+            <column>
+                <span>
+                    <span class="label">OS</span>
+                    <span>Omarchy</span>
+                </span>
+                <span>
+                    <span class="label">Hardware</span>
+                    <span>Chinese (Anti-Communist Series) [Male]</span>
+                </span>
+                <span>
+                    <span class="label">Nationality</span>
+                    <span>American</span>
+                </span>
+                <span>
+                    <span class="label">Uptime</span>
+                    <span>better than github</span>
+                </span>
+                <span>
+                    <span class="label">Age</span>
+                    <span>{age}</span>
+                </span>
+                <span>
+                    <span class="label">Height</span>
+                    <span>taller than you</span>
+                </span>
+                <span>
+                    <span class="label">Religion</span>
+                    <span>Christian (Reformed Baptist)</span>
+                </span>
+                <span>
+                    <span class="label">Theme</span>
+                    <span
+                        ><a
+                            is-="link"
+                            href="https://github.com/IroncladDev/osmium"
+                            target="_blank">osmium</a
+                        ></span
+                    >
+                </span>
+                <span>
+                    <span class="label">Status</span>
+                    <span>Employed</span>
+                </span>
+                <span>
+                    <span class="label">Hobbies</span>
+                    <span>Jiujitsu, Firearms, Airsoft</span>
+                </span>
+            </column>
+        </row>
+        <column box-="round" id="description">
+            <column gap-="1" pad-="1 0">
+                <p
+                    >I'm <strong>Conner</strong>, a Texan Software Engineer who
+                    strives to build and share great software with the world</p
+                >
+                <p
+                    >I usually go by "<strong>IroncladDev</strong>" on the
+                    internet</p
+                >
+            </column>
+        </column>
+        <row align-="end">
+            <button id="read-more" autofocus>Read More</button>
+        </row>
+    </column>
+    <span class="cmd-prompt" id="post-fastfetch-prompt">
+        <span class="host">user@ironclad.sh:~$</span>
+        <span></span>
+    </span>
+</column>
+
+<style>
+    .label {
+        color: var(--green-fg);
+        &::after {
+            content: ':';
+            color: var(--foreground1);
+        }
+    }
+    #description {
+        --box-border-color: var(--background3);
+    }
+
+    #profile {
+        width: 20ch;
+        height: 10lh;
+        flex-shrink: 0;
+    }
+
+    #fastfetch-content {
+        width: 100%;
+        max-width: var(--max-reading-width);
+    }
+
+    #fastfetch-output {
+        display: none;
+    }
+
+    html:has(info-state[data-focus='fastfetch']) #fastfetch-output {
+        display: flex;
+    }
+
+    #read-more:disabled {
+        --button-primary: var(--background2);
+        --button-secondary: var(--foreground2);
+    }
+
+    @media (max-width: 600px) {
+        #fastfetch-content row {
+            flex-direction: column;
+            gap: 1lh;
+        }
+    }
+</style>
+
+<script>
+    const readMoreButton: HTMLButtonElement =
+        document.querySelector('#read-more')!
+    const infoState: HTMLElement = document.querySelector('info-state')!
+
+    readMoreButton.onclick = () => {
+        infoState.setAttribute('data-page', 'timeline')
+    }
+</script>

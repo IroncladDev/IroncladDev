@@ -1,0 +1,188 @@
+---
+import '@webtui/css/components/separator.css'
+
+interface Props {
+    title: string
+    url?: string
+    user: string
+    repo: string
+}
+
+const { title, url, user, repo } = Astro.props
+
+const urlHostname = url ? new URL(url).hostname : ''
+
+const apiUrl = `https://api.github.com/repos/${user}/${repo}`
+const languagesUrl = `${apiUrl}/languages`
+const colorSequence = ['blue', 'green', 'yellow', 'orange']
+
+const repoData = await fetch(apiUrl).then((res) => res.json())
+const repoLanguagesData: Record<string, number> = await fetch(
+    languagesUrl,
+).then((res) => res.json())
+const totalLanguagesBytes = Object.values(repoLanguagesData).reduce(
+    (acc, bytes) => acc + bytes,
+    0,
+)
+
+let repoDescription: string = 'Placeholder description'
+let repoStars: number = 0
+
+if (!repoData.message) {
+    repoDescription = repoData.description || 'Placeholder description'
+    repoStars = repoData.stargazers_count || 0
+}
+
+let repoLanguages: Array<[string, number]> = [
+    ['html', 34],
+    ['css', 33],
+    ['javascript', 33],
+]
+
+if (!repoLanguagesData.message) {
+    repoLanguages = []
+    for (const [language, bytes] of Object.entries(repoLanguagesData)) {
+        repoLanguages.push([
+            language,
+            Number(((bytes / totalLanguagesBytes) * 100).toFixed(1)),
+        ])
+    }
+
+    repoLanguages = repoLanguages.sort((a, b) => b[1] - a[1]).slice(0, 4)
+}
+---
+
+<column class="project" gap-="1" box-="round" shear-="top" tabindex="0">
+    <row pad-="1 0">
+        <row
+            class="project-header"
+            is-="badge"
+            cap-="round"
+            variant-="background1">
+            <row gap-="1">
+                <h3>{title}</h3>
+                {url && <span>{'•'}</span>}
+                {
+                    url && urlHostname && (
+                        <a
+                            href={url}
+                            class="url"
+                            target="_blank"
+                            rel="noreferrer">
+                            {urlHostname}
+                        </a>
+                    )
+                }
+            </row>
+        </row>
+    </row>
+    <column>
+        <p pad-="1 0">{repoDescription}</p>
+    </column>
+    <column>
+        <row>
+            <div is-="separator" cap-="bisect default" style="width: 1ch"></div>
+            <row gap-="1" pad-="1 0">
+                <span>{''}</span>
+                <a
+                    href={`https://github.com/${user}/${repo}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    id="repo-url">
+                    {`${user}/${repo}`}
+                </a>
+                <span>{'•'}</span>
+                <span>{` ${repoStars}`}</span>
+            </row>
+            <div is-="separator" cap-="default bisect" style="flex-grow: 1"
+            ></div>
+        </row>
+        <row class="languages-container" pad-="1 0">
+            {
+                repoLanguages.map(([, percentage], i) => (
+                    <span
+                        is-="separator"
+                        class="language-bar"
+                        style={{
+                            '--separator-color': `var(--${colorSequence[i % colorSequence.length]}-fg)`,
+                            '--width': percentage,
+                        }}
+                    />
+                ))
+            }
+        </row>
+        <row class="languages-list" pad-="1 0">
+            {
+                repoLanguages.map(([language, percentage], i) => (
+                    <span
+                        class="language-marker"
+                        is-="badge"
+                        variant-="background1"
+                        cap-="round"
+                        style={{
+                            '--badge-color': `var(--${colorSequence[i % colorSequence.length]}-bg)`,
+                        }}>
+                        <row gap-="1">
+                            <span
+                                class="language-color"
+                                is-="separator"
+                                style={{
+                                    '--separator-color': `var(--${colorSequence[i % colorSequence.length]}-fg)`,
+                                    width: '1ch',
+                                }}
+                            />
+                            <span class="language-label">{language}</span>
+                            <span class="percentage-label">{percentage}%</span>
+                        </row>
+                    </span>
+                ))
+            }
+        </row>
+    </column>
+</column>
+
+<style>
+    .project {
+        --box-border-color: var(--background2);
+
+        &:focus-within {
+            --box-border-color: var(--blue-fg);
+        }
+
+        .project-header {
+            h3 {
+                font-weight: bold;
+            }
+        }
+
+        #repo-url {
+            flex-shrink: 0;
+        }
+
+        [is-='separator'] {
+            --separator-color: var(--background2);
+        }
+
+        .languages-container {
+            width: 100%;
+            height: 1lh;
+
+            .language-bar {
+                width: round(nearest, calc(var(--width) * 1%), 1ch);
+                position: relative;
+
+                &::after {
+                    content: '█';
+                    position: absolute;
+                    right: 0;
+                    color: var(--separator-color);
+                }
+            }
+        }
+    }
+
+    .languages-list {
+        flex-wrap: wrap;
+        gap: 0 1ch;
+    }
+</style>

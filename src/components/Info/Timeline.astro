@@ -1,0 +1,313 @@
+---
+import { markdownToHtml } from '@/utils/markdown'
+
+// start, end, items
+const timeline: Array<[Date, Date, string]> = [
+    [
+        new Date('2016-01-01'),
+        new Date('2018-01-01'),
+        `- Discovered Programming on [Khan Academy](https://khanacademy.org)
+- Built numerous small browser-based games with [Processing.js](https://gotoloop.github.io/processing-js.github.io/)
+- Learned the basics of HTML, CSS, and DOM manipulation with JQuery`,
+    ],
+    [
+        new Date('2018-01-01'),
+        new Date('2020-01-01'),
+        `- Learned the fundamentals of HTML/CSS from [Freecodecamp](https://freecodecamp.org)
+- Learned how to make Fullstack applications with Flask and Node from [Codecademy](https://codecademy.com)
+- Built some HTML/CSS/JS + Flask/Node fullstack projects that didn't get much traction
+- Rolled my own auth various times`,
+    ],
+    [
+        new Date('2020-01-01'),
+        new Date('2022-01-01'),
+        `- Found [Replit](https://replit.com) and used it to share and host my projects
+- Continued to build various small web projects and browser-based games with HTML/CSS/JS
+- Participated in Replit's first official game jam
+- Applied for an internship at [Replit](https://replit.com) (I flunked the interview)`,
+    ],
+    [
+        new Date('2022-01-01'),
+        new Date('2022-08-01'),
+        `- Got an internship at [Saasbox](https://saasbox.net)
+- Learned Next.js and React
+- Built various small web projects with Next.js
+- Joined [Replit](https://replit.com)'s Community Moderation team
+- Did some contract work on Anti-Abuse tools for [Replit](https://replit.com)'s Trust and Safety team
+- Learned Typescript
+- Built some Next.js + Typescript projects`,
+    ],
+    [
+        new Date('2022-08-01'),
+        new Date('2023-08-01'),
+        `- Joined [Replit](https://replit.com) as a Support Engineer
+  - Scaffolded, prototyped, built, and improved anti-abuse tools
+  - Built multiple internal support tools
+  - Redesigned and wrote large portions of the Replit Docs
+  - Actively maintained the open source [Extensions API Client ↗](https://github.com/replit/extensions)
+  - Eventually got fired for multiple HR violations (got too political on twitter)
+- Attended the [Bitcoin++](https://btcpp.dev) conference for the first time
+- Built some viral AI/Langchain projects around the release of OpenAI's text-davinci-003`,
+    ],
+    [
+        new Date('2023-11-01'),
+        new Date('2023-12-31'),
+        `- Joined [Fedi](https://fedi.xyz) as a Frontend Software Engineer
+  - Prototyped multiple small websites that interact with the Fedi API
+  - Wrote a large portion of the Fedi Documentation
+  - Performed extinsive work on the Fedi App and PWA
+  - Indepentently built major features in the Fedi App
+  - Traveled the world to attend large bitcoin-related conferences with the Fedi team
+- Switched from VSC*de to Neovim`,
+    ],
+    [
+        new Date('2024-01-01'),
+        new Date('2024-12-31'),
+        `- Attended multiple tech conferences around the world
+- Went from being an introvert to a more outgoing person
+- Grew a large audience on [X / Twitter](https://x.com/IroncladDev)
+- Built various web projects with Next.js, Tailwind, and Framer Motion
+- Started contributing to various open source projects`,
+    ],
+    [
+        new Date('2025-01-01'),
+        new Date(),
+        `- Started streaming on X and Twitch
+- Redesigned my website and rebranded
+- Migrated from Next/Tailwind to Astro/CSS/JS
+- Launched [WebTUI](https://webtui.ironclad.sh)`,
+    ],
+]
+
+const timelineStart = timeline[0][0]
+const timelineEnd = timeline[timeline.length - 1][1]
+
+const yearStart = timelineStart.getUTCFullYear()
+const yearEnd = timelineEnd.getUTCFullYear()
+
+const years: Array<number> = []
+
+for (let year = yearStart; year <= yearEnd; year++) {
+    years.push(year)
+}
+
+const formatStartEnd = (start: Date, end: Date) => {
+    const s = start.toLocaleDateString('en-US', {
+        month: 'short',
+        year: 'numeric',
+        timeZone: 'UTC',
+    })
+
+    const e = end.toLocaleDateString('en-US', {
+        month: 'short',
+        year: 'numeric',
+        timeZone: 'UTC',
+    })
+
+    if (start.getUTCMonth() === 0 && end.getUTCMonth() === 0) {
+        return `${start.getUTCFullYear()} - ${end.getUTCFullYear()}`
+    }
+
+    return `${s} - ${e}`
+}
+---
+
+<column id="timeline-output">
+    <span class="cmd-prompt" id="pre-timeline-prompt">
+        <span class="host">user@ironclad.sh:~$</span>
+        <span>timeline</span>
+    </span>
+    <column id="timeline-content">
+        <row gap-="1">
+            <h3 is-="badge" variant-="green-fg">Timeline</h3>
+            <span>
+                <span id="tl-counter" data-tl="0"></span>
+                /
+                <span id="tl-length" data-tl={timeline.length}></span>
+            </span>
+        </row>
+        <row gap-="1">
+            <column self-="!shrink">
+                {
+                    years.map((year) => (
+                        <span class="year" data-year={year}>
+                            {year} <span class="year-marker">┃</span>
+                        </span>
+                    ))
+                }
+            </column>
+            {
+                timeline.map(([start, end, markdown], i) => (
+                    <column
+                        is-="typography-block"
+                        class="timeline-item"
+                        data-start={start.getTime()}
+                        data-end={end.getTime()}
+                        id={`timeline-item-${i}`}>
+                        <row>
+                            <h3 is-="badge" variant-="background1">
+                                {formatStartEnd(start, end)}
+                            </h3>
+                        </row>
+                        <column set:html={markdownToHtml(markdown)} gap-="1" />
+                    </column>
+                ))
+            }
+        </row>
+        <row self-="end" align-="end" gap-="1">
+            <button id="back-button" variant-="background2">[Esc] Back</button>
+            <button id="prev-button" variant-="background3">[K] Prev</button>
+            <button id="next-button" variant-="background3">[J] Next</button>
+        </row>
+    </column>
+    <span class="cmd-prompt" id="post-timeline-prompt">
+        <span class="host">user@ironclad.sh:~$</span>
+        <span></span>
+    </span>
+</column>
+
+<style>
+    #timeline-content {
+        width: 100%;
+        max-width: var(--max-reading-width);
+    }
+
+    #timeline-output {
+        display: none;
+    }
+
+    html:has(info-state[data-focus='timeline']) #timeline-output {
+        display: flex;
+    }
+
+    #tl-counter,
+    #tl-length {
+        &::before {
+            content: attr(data-tl);
+        }
+    }
+
+    .year {
+        background-color: var(--background0);
+        color: var(--foreground2);
+        padding-left: 1ch;
+
+        .year-marker {
+            background-color: transparent;
+            color: var(--background2);
+        }
+
+        &.active {
+            color: var(--foreground0);
+
+            .year-marker {
+                color: var(--green-fg);
+            }
+        }
+    }
+</style>
+
+<script>
+    import { ScreenName } from '@/types/state'
+    import AppStateListener from '@/utils/state'
+
+    const prevButton: HTMLButtonElement =
+        document.querySelector('#prev-button')!
+    const nextButton: HTMLButtonElement =
+        document.querySelector('#next-button')!
+    const tlCounter: HTMLSpanElement = document.querySelector('#tl-counter')!
+    const tlLength = Number(
+        (document.querySelector('#tl-length') as HTMLSpanElement).dataset.tl,
+    )
+    const backButton: HTMLButtonElement =
+        document.querySelector('#back-button')!
+    const infoState: HTMLElement = document.querySelector('info-state')!
+
+    let currentSlide = 0
+
+    new AppStateListener('info-state').on(
+        'data-timeline-slide',
+        ({ value }) => {
+            currentSlide = Number(value)
+
+            updateTimelineDisplay(currentSlide)
+        },
+    )
+
+    new AppStateListener('navigation-state').on(
+        'data-focus',
+        async ({ value }) => {
+            if (value === ScreenName.Info) {
+                updateTimelineDisplay(0)
+                window.addEventListener('keydown', handleKeyPagination)
+            } else {
+                window.removeEventListener('keydown', handleKeyPagination)
+            }
+        },
+    )
+
+    function updateTimelineDisplay(slide: number) {
+        const tlItem = document.querySelector(
+            `#timeline-item-${slide}`,
+        ) as HTMLElement
+        const timelineItems = document.querySelectorAll(
+            '.timeline-item',
+        ) as NodeListOf<HTMLElement>
+
+        timelineItems.forEach((item) => {
+            item.style.display = 'none'
+        })
+        tlItem.style.display = 'flex'
+        tlCounter.dataset.tl = String(slide + 1)
+
+        const yearMarkers = document.querySelectorAll(
+            '.year',
+        ) as NodeListOf<HTMLElement>
+        const targetItemStart = new Date(Number(tlItem.dataset.start))
+        const targetItemEnd = new Date(Number(tlItem.dataset.end))
+
+        yearMarkers.forEach((yearMarker) => {
+            const year = Number(yearMarker.dataset.year)
+            const startYear = targetItemStart.getUTCFullYear()
+            const endYear = targetItemEnd.getUTCFullYear()
+            const isInRange = startYear <= year && endYear >= year
+
+            if (isInRange) {
+                yearMarker.classList.add('active')
+            } else {
+                yearMarker.classList.remove('active')
+            }
+        })
+    }
+
+    function handleKeyPagination(e: KeyboardEvent) {
+        if (e.key === 'ArrowUp' || e.key === 'k') {
+            prevButton.focus()
+            prevButton.click()
+        }
+
+        if (e.key === 'ArrowDown' || e.key === 'j') {
+            nextButton.focus()
+            nextButton.click()
+        }
+
+        if (e.key === 'Escape') {
+            backButton.focus()
+            backButton.click()
+        }
+    }
+
+    prevButton.onclick = () => {
+        if (currentSlide === 0) return
+
+        infoState.setAttribute('data-timeline-slide', String(currentSlide - 1))
+    }
+    nextButton.onclick = () => {
+        if (currentSlide === tlLength - 1) return
+
+        infoState.setAttribute('data-timeline-slide', String(currentSlide + 1))
+    }
+    backButton.onclick = () => {
+        infoState.setAttribute('data-page', 'fastfetch')
+    }
+</script>

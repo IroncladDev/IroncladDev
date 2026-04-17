@@ -1,0 +1,75 @@
+.tile {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 1;
+    border: solid 2px var(--green-fg-dim);
+    display: none;
+    animation-name: remove;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    overflow: hidden;
+    min-height: 0;
+    position: relative;
+    background-color: var(--surface0-70);
+    pointer-events: none;
+    transition: 0.25s linear;
+    opacity: 0.5;
+
+    html:has(navigation-state[data-screen='#']) &[data-screen='#'],
+    html:has(navigation-state[data-screen='#info']) &[data-screen='#info'],
+    html:has(navigation-state[data-screen='#showcase'])
+        &[data-screen='#showcase'],
+    html:has(navigation-state[data-screen='#links']) &[data-screen='#links'],
+    html:has(navigation-state[data-screen='#opinions'])
+        &[data-screen='#opinions'] {
+        background-color: var(--surface0-85);
+    }
+
+    html:has(navigation-state[data-focus='#']) &[data-screen='#'],
+    html:has(navigation-state[data-focus='#info']) &[data-screen='#info'],
+    html:has(navigation-state[data-focus='#showcase'])
+        &[data-screen='#showcase'],
+    html:has(navigation-state[data-focus='#links']) &[data-screen='#links'],
+    html:has(navigation-state[data-focus='#opinions'])
+        &[data-screen='#opinions'] {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .content {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: 1lh 2ch;
+    }
+}
+
+@keyframes place {
+    0% {
+        display: flex;
+        width: 0;
+        height: 0;
+    }
+    100% {
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@keyframes remove {
+    from {
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
+    to {
+        display: none;
+        height: 0;
+        width: 0;
+        margin: 0;
+    }
+}

@@ -1,7 +1,5 @@
-![](/public/img/cover.png)
+# Hi
 
-I'm IroncladDev, a Texas-based software engineer who aims to produce and share [great software](https://neovim.io) with the world
+I'm IroncladDev, a Texan Software Engineer who strives to build and share great software with the world.
 
-Check out my [website](https://ironclad.sh) for more information
-
-
+Check out https://ironclad.sh for more info

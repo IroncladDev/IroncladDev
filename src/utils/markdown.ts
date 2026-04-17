@@ -4,11 +4,11 @@ import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 
 export const markdownToHtml = async (markdown: string) => {
-  const file = await unified()
-    .use(remarkParse)
-    .use(remarkRehype)
-    .use(rehypeStringify)
-    .process(markdown)
+    const file = await unified()
+        .use(remarkParse)
+        .use(remarkRehype)
+        .use(rehypeStringify)
+        .process(markdown)
 
-  return String(file)
+    return String(file)
 }

@@ -1,0 +1,155 @@
+---
+import { ScreenName } from '@/types/state'
+import FastfetchAbout from '@/components/Info/FastfetchAbout.astro'
+import Timeline from '@/components/Info/Timeline.astro'
+---
+
+<div data-screen={ScreenName.Info} class="tile">
+    <column class="content">
+        <span class="cmd-prompt" id="initial-prompt">
+            <span class="host">user@ironclad.sh:~$</span>
+            <span></span>
+            <span id="prompt-cursor" is-="spinner" variant-="block"></span>
+        </span>
+        <FastfetchAbout />
+        <Timeline />
+    </column>
+</div>
+
+<style is:global>
+    #initial-prompt {
+        display: none;
+    }
+
+    html:has(info-state[data-focus='initial']) #initial-prompt {
+        display: inline-flex;
+    }
+</style>
+
+<script>
+    import { tapSequence } from '@/utils/keyboard'
+    import { waitFor } from '@/utils/time'
+    import { ScreenName } from '@/types/state'
+    import AppStateListener from '@/utils/state'
+    import type { KeyInteraction } from '@/utils/keys'
+
+    let isTransitioning = false
+
+    new AppStateListener('info-state')
+        .on('data-page', async ({ value }) => {
+            if (isTransitioning) return
+            isTransitioning = true
+
+            if (value === 'fastfetch') {
+                await clearPrompt()
+                await handleDisplayFastFetch()
+            } else if (value === 'timeline') {
+                await clearPrompt()
+                await handleDisplayTimeline()
+            }
+
+            isTransitioning = false
+        })
+        .on('data-is-transitioning', ({ value }) => {
+            if (value === 'true') {
+                backButton.disabled = true
+                readMoreButton.disabled = true
+            } else {
+                backButton.disabled = false
+                readMoreButton.disabled = false
+            }
+        })
+
+    new AppStateListener('navigation-state')
+        .on('data-focus', async ({ value }) => {
+            if (value !== ScreenName.Info) return
+            handleDisplayFastFetch()
+        })
+        .on('data-screen', async ({ value }) => {
+            if (value !== ScreenName.Info) return
+
+            infoState.setAttribute('data-focus', 'initial')
+            initialPrompt.insertAdjacentElement('beforeend', promptCursor)
+            getCommandText().innerText = ''
+        })
+
+    const backButton: HTMLButtonElement =
+        document.querySelector('#back-button')!
+    const readMoreButton: HTMLButtonElement =
+        document.querySelector('#read-more')!
+    const promptCursor: HTMLSpanElement =
+        document.querySelector('#prompt-cursor')!
+    const initialPrompt: HTMLSpanElement =
+        document.querySelector('#initial-prompt')!
+    const postFastfetchPrompt: HTMLSpanElement = document.querySelector(
+        '#post-fastfetch-prompt',
+    )!
+    const postTimelinePrompt: HTMLSpanElement = document.querySelector(
+        '#post-timeline-prompt',
+    )!
+
+    const infoState: HTMLElement = document.querySelector('info-state')!
+
+    const getCommandText = () => {
+        return promptCursor.previousElementSibling as HTMLSpanElement
+    }
+
+    const typedInteractionSequence = (seq: KeyInteraction[]) => {
+        getCommandText().innerText = seq.map((s) => s.originalKey).join('')
+    }
+
+    async function clearPrompt() {
+        // Type command
+        await tapSequence('clear<CR>', {
+            onType: typedInteractionSequence,
+            signal: window.navController.signal,
+        })
+        await waitFor(250, window.navController)
+
+        // Focus the initial prompt
+        infoState.setAttribute('data-focus', 'initial')
+
+        // Clear current prompt
+        getCommandText().innerText = ''
+
+        // Insert cursor in initial prompt
+        initialPrompt.insertAdjacentElement('beforeend', promptCursor)
+
+        // Clear the initial prompt
+        getCommandText().innerText = ''
+        await waitFor(250, window.navController)
+    }
+
+    async function handleDisplayTimeline() {
+        // Type command
+        await tapSequence('timeline<CR>', {
+            onType: typedInteractionSequence,
+            signal: window.navController.signal,
+        })
+        await waitFor(250, window.navController)
+
+        // Focus and show timeline
+        infoState.setAttribute('data-focus', 'timeline')
+
+        // Insert cursor
+        postTimelinePrompt.insertAdjacentElement('beforeend', promptCursor)
+    }
+
+    async function handleDisplayFastFetch() {
+        // Type command
+        await tapSequence('fastfetch<CR>', {
+            onType: typedInteractionSequence,
+            signal: window.navController.signal,
+        })
+        await waitFor(250, window.navController)
+
+        // Focus and show fastfetch
+        infoState.setAttribute('data-focus', 'fastfetch')
+
+        // Show fastfetch
+        postFastfetchPrompt.insertAdjacentElement('beforeend', promptCursor)
+
+        // Focus Back button
+        readMoreButton.focus()
+    }
+</script>

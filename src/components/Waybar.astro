@@ -1,0 +1,106 @@
+---
+import { ScreenName } from '@/types/state'
+---
+
+<row id="waybar" gap-="1">
+    <div id="icon"></div>
+    <row id="workspaces">
+        <a class="workspace" href={ScreenName.Info}>
+            <span is-="badge">1</span>
+            <span is-="badge" variant-="background2" cap-="square round"
+                >Info</span
+            >
+        </a>
+        <a class="workspace" href={ScreenName.Showcase}>
+            <span is-="badge">2</span>
+            <span is-="badge" variant-="background2" cap-="square round"
+                >Showcase</span
+            >
+        </a>
+        <a class="workspace" href={ScreenName.Links}>
+            <span is-="badge">3</span>
+            <span is-="badge" variant-="background2" cap-="square round"
+                >Links</span
+            >
+        </a>
+        <!-- <a class="workspace" href={ScreenName.Opinions}> -->
+        <!--     <span is-="badge">4</span> -->
+        <!--     <span is-="badge" variant-="background2" cap-="square round" -->
+        <!--         >Opinions</span -->
+        <!--     > -->
+        <!-- </a> -->
+    </row>
+</row>
+
+<style>
+    #icon {
+        height: 1lh;
+        width: 2ch;
+        background-image: url('/img/brand/svg/icon.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    #waybar {
+        background-color: var(--surface1);
+        padding: 0.5lh 2ch;
+        #workspaces {
+            flex-wrap: wrap;
+            gap: 0 1ch;
+        }
+    }
+
+    .workspace {
+        text-decoration: none;
+        display: inline-flex;
+
+        &:focus {
+            text-decoration: underline;
+            text-decoration-color: var(--foreground0);
+        }
+
+        & > span:first-child {
+            --badge-color: var(--background3);
+            color: var(--foreground0);
+        }
+
+        html:has(navigation-state[data-screen='#info']) &[href='#info'],
+        html:has(navigation-state[data-screen='#showcase']) &[href='#showcase'],
+        html:has(navigation-state[data-screen='#links']) &[href='#links'],
+        html:has(navigation-state[data-screen='#opinions'])
+            &[href='#opinions'] {
+            & > span:first-child {
+                --badge-color: var(--green-fg);
+                color: var(--root);
+            }
+        }
+    }
+</style>
+
+<script>
+    import { ScreenName } from '@/types/state'
+    import { openScreen } from '@/utils/navigation'
+    import AppStateListener from '@/utils/state'
+
+    window.addEventListener('hashchange', () => {
+        const derivedScreen =
+            Object.values(ScreenName).find(
+                (name) => name === window.location.hash,
+            ) ?? ScreenName.Info
+        document
+            .querySelector('navigation-state')
+            ?.setAttribute('data-screen', derivedScreen)
+    })
+
+    new AppStateListener('navigation-state').on('data-screen', ({ value }) =>
+        openScreen(value as ScreenName),
+    )
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === '1') window.location.hash = ScreenName.Info
+        else if (e.key === '2') window.location.hash = ScreenName.Showcase
+        else if (e.key === '3') window.location.hash = ScreenName.Links
+        else if (e.key === '4') window.location.hash = ScreenName.Opinions
+    })
+</script>

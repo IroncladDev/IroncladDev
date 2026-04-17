@@ -1,0 +1,7 @@
+.cmd-prompt {
+    display: inline-flex;
+    .host {
+        color: var(--blue-fg);
+        padding-right: 1ch;
+    }
+}
