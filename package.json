@@ -15,7 +15,7 @@
   "dependencies": {
     "@webtui/css": "^0.1.3",
     "@webtui/plugin-nf": "^0.1.1",
-    "astro": "^5.11.1"
+    "astro": "6.1.7"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

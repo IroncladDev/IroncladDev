@@ -10,8 +10,12 @@
     [is-~='column'] {
         display: flex;
 
-        column-gap: attr(gap- ch);
-        row-gap: attr(gap- lh);
+        &[gap-^='1'] {
+            gap: 1ch;
+        }
+        &[gap-^='2'] {
+            gap: 2ch;
+        }
 
         &[self-~='grow'] {
             flex-grow: 1;
