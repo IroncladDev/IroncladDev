@@ -1,0 +1,2 @@
+- maybe it's best to just remove the splash screen entirely
+- or only start interactions on the other screens after an initial interaction (try-catch a sound effect?)

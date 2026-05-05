@@ -1,164 +1,120 @@
----
-import { markdownToHtml } from '@/utils/markdown'
-
-// start, end, items
-const timeline: Array<[Date, Date, string]> = [
-    [
-        new Date('2016-01-01'),
-        new Date('2018-01-01'),
-        `- Discovered Programming on [Khan Academy](https://khanacademy.org)
-- Built numerous small browser-based games with [Processing.js](https://gotoloop.github.io/processing-js.github.io/)
-- Learned the basics of HTML, CSS, and DOM manipulation with JQuery`,
-    ],
-    [
-        new Date('2018-01-01'),
-        new Date('2020-01-01'),
-        `- Learned the fundamentals of HTML/CSS from [Freecodecamp](https://freecodecamp.org)
-- Learned how to make Fullstack applications with Flask and Node from [Codecademy](https://codecademy.com)
-- Built some HTML/CSS/JS + Flask/Node fullstack projects that didn't get much traction
-- Rolled my own auth various times`,
-    ],
-    [
-        new Date('2020-01-01'),
-        new Date('2022-01-01'),
-        `- Found [Replit](https://replit.com) and used it to share and host my projects
-- Continued to build various small web projects and browser-based games with HTML/CSS/JS
-- Participated in Replit's first official game jam
-- Applied for an internship at [Replit](https://replit.com) (I flunked the interview)`,
-    ],
-    [
-        new Date('2022-01-01'),
-        new Date('2022-08-01'),
-        `- Got an internship at [Saasbox](https://saasbox.net)
-- Learned Next.js and React
-- Built various small web projects with Next.js
-- Joined [Replit](https://replit.com)'s Community Moderation team
-- Did some contract work on Anti-Abuse tools for [Replit](https://replit.com)'s Trust and Safety team
-- Learned Typescript
-- Built some Next.js + Typescript projects`,
-    ],
-    [
-        new Date('2022-08-01'),
-        new Date('2023-08-01'),
-        `- Joined [Replit](https://replit.com) as a Support Engineer
-  - Scaffolded, prototyped, built, and improved anti-abuse tools
-  - Built multiple internal support tools
-  - Redesigned and wrote large portions of the Replit Docs
-  - Actively maintained the open source [Extensions API Client ↗](https://github.com/replit/extensions)
-  - Eventually got fired for multiple HR violations (got too political on twitter)
-- Attended the [Bitcoin++](https://btcpp.dev) conference for the first time
-- Built some viral AI/Langchain projects around the release of OpenAI's text-davinci-003`,
-    ],
-    [
-        new Date('2023-11-01'),
-        new Date('2023-12-31'),
-        `- Joined [Fedi](https://fedi.xyz) as a Frontend Software Engineer
-  - Prototyped multiple small websites that interact with the Fedi API
-  - Wrote a large portion of the Fedi Documentation
-  - Performed extinsive work on the Fedi App and PWA
-  - Indepentently built major features in the Fedi App
-  - Traveled the world to attend large bitcoin-related conferences with the Fedi team
-- Switched from VSC*de to Neovim`,
-    ],
-    [
-        new Date('2024-01-01'),
-        new Date('2024-12-31'),
-        `- Attended multiple tech conferences around the world
-- Went from being an introvert to a more outgoing person
-- Grew a large audience on [X / Twitter](https://x.com/IroncladDev)
-- Built various web projects with Next.js, Tailwind, and Framer Motion
-- Started contributing to various open source projects`,
-    ],
-    [
-        new Date('2025-01-01'),
-        new Date(),
-        `- Started streaming on X and Twitch
-- Redesigned my website and rebranded
-- Migrated from Next/Tailwind to Astro/CSS/JS
-- Launched [WebTUI](https://webtui.ironclad.sh)`,
-    ],
-]
-
-const timelineStart = timeline[0][0]
-const timelineEnd = timeline[timeline.length - 1][1]
-
-const yearStart = timelineStart.getUTCFullYear()
-const yearEnd = timelineEnd.getUTCFullYear()
-
-const years: Array<number> = []
-
-for (let year = yearStart; year <= yearEnd; year++) {
-    years.push(year)
-}
-
-const formatStartEnd = (start: Date, end: Date) => {
-    const s = start.toLocaleDateString('en-US', {
-        month: 'short',
-        year: 'numeric',
-        timeZone: 'UTC',
-    })
-
-    const e = end.toLocaleDateString('en-US', {
-        month: 'short',
-        year: 'numeric',
-        timeZone: 'UTC',
-    })
-
-    if (start.getUTCMonth() === 0 && end.getUTCMonth() === 0) {
-        return `${start.getUTCFullYear()} - ${end.getUTCFullYear()}`
-    }
-
-    return `${s} - ${e}`
-}
----
-
-<column id="timeline-output">
+<column id="timeline-output" self-="grow">
     <span class="cmd-prompt" id="pre-timeline-prompt">
         <span class="host">user@ironclad.sh:~$</span>
         <span>timeline</span>
     </span>
-    <column id="timeline-content">
-        <row gap-="1">
-            <h3 is-="badge" variant-="green-fg">Timeline</h3>
-            <span>
-                <span id="tl-counter" data-tl="0"></span>
-                /
-                <span id="tl-length" data-tl={timeline.length}></span>
-            </span>
-        </row>
-        <row gap-="1">
-            <column self-="!shrink">
-                {
-                    years.map((year) => (
-                        <span class="year" data-year={year}>
-                            {year} <span class="year-marker">┃</span>
-                        </span>
-                    ))
-                }
+    <column id="timeline-content" self-="grow">
+        <column id="timeline-stuff" self-="grow !basis" gap-="1">
+            <column>
+                <h2>
+                    <strong>Support Engineer</strong>
+                    <span>|</span>
+                    <a href="https://replit.com">Replit</a>
+                </h2>
+                <span class="date-marker">[Aug 2022 - August 2023]</span>
+                <ul marker-="open tree">
+                    <li>Built multiple internal support tools</li>
+                    <li>Prototyped, built, and improved anti-abuse tools</li>
+                    <li>Redesigned the Documentation</li>
+                    <li>Documented various areas of the product</li>
+                    <li
+                        >Maintained the open source <a
+                            target="_blank"
+                            href="https://github.com/replit/extensions"
+                            >Extensions API Client ↗</a
+                        ></li
+                    >
+                    <li
+                        >Attended the <a
+                            target="_blank"
+                            href="https://btcpp.dev">Bitcoin++</a
+                        > conference for the first time</li
+                    >
+                    <li
+                        >Built some viral AI/Langchain projects around the
+                        release of OpenAI's text-davinci-003</li
+                    >
+                </ul>
+                <strong>Outside work</strong>
+                <ul marker-="open tree">
+                    <li
+                        >Attended <a href="https://btcpp.dev" target="_blank"
+                            >Bitcoin++</a
+                        > (Austin, TX) for the first time</li
+                    >
+                    <li
+                        >Built some viral Langchain projects shortly after
+                        text-davinci-003 was released</li
+                    >
+                </ul>
             </column>
-            {
-                timeline.map(([start, end, markdown], i) => (
-                    <column
-                        is-="typography-block"
-                        class="timeline-item"
-                        data-start={start.getTime()}
-                        data-end={end.getTime()}
-                        id={`timeline-item-${i}`}>
-                        <row>
-                            <h3 is-="badge" variant-="background1">
-                                {formatStartEnd(start, end)}
-                            </h3>
-                        </row>
-                        <column set:html={markdownToHtml(markdown)} gap-="1" />
-                    </column>
-                ))
-            }
-        </row>
-        <row self-="end" align-="end" gap-="1">
-            <button id="back-button" variant-="background2">[Esc] Back</button>
-            <button id="prev-button" variant-="background3">[K] Prev</button>
-            <button id="next-button" variant-="background3">[J] Next</button>
-        </row>
+
+            <column>
+                <h2>
+                    <strong>Frontend & Mobile Engineer</strong>
+                    <span>|</span>
+                    <a href="https://fedi.xyz" target="_blank">Fedi</a>
+                </h2>
+                <span class="date-marker">[Nov 2023 - Jun 2026]</span>
+                <ul marker-="open tree">
+                    <li>
+                        <span
+                            >Owned and helped build many core features including</span
+                        >
+                        <a
+                            href="https://support.fedi.xyz/hc/en-us/articles/20019791912466-What-is-Multispend"
+                            >Multispend</a
+                        >,
+                        <a href="https://catalog.fedi.xyz">Mini Apps Catalog</a
+                        >,
+                        <a
+                            href="https://fedi.xyz/blog/create-your-community-in-minutes-introducing-the-community-generator"
+                            >Spaces Generator</a
+                        >,
+                        <a href="https://lngpt.vercel.app"
+                            >(Lightning) AI Assistant</a
+                        >, developer APIs, the in-app wallet, secure e2e
+                        encrypted chat, payments, and more
+                    </li>
+                    <li
+                        >Assisted with comprehensive automated testing coverage</li
+                    >
+                    <li>
+                        Maintained and improved the Mobile App and web version
+                    </li>
+                    <li
+                        >Traveled the world to attend bitcoin-related
+                        conferences and offsites with the Fedi team</li
+                    >
+                    <li
+                        >Talked to, onboarded, and assisted new users in-person</li
+                    >
+                </ul>
+                <li>
+                    <strong>Outside work </strong>
+                    <ul marker-="open tree">
+                        <li>Switched from VSC*de to Neovim</li>
+                        <li
+                            >Attended lots of tech conferences around the
+                            country</li
+                        >
+                        <li>Contributed to various open source projects</li>
+                        <li
+                            >Launched <a
+                                target="_blank"
+                                href="https://webtui.ironclad.sh">WebTUI</a
+                            >, which reached the front page of Hacker News and
+                            got 2K+ github stars</li
+                        >
+                    </ul>
+                </li>
+            </column>
+        </column>
+        <span id="end-indicator"
+            >:<span id="end-scroll">█</span><span id="end-end">(END)</span
+            ></span
+        >
+        <button id="back-button" variant-="background2">[Esc] Back</button>
     </column>
     <span class="cmd-prompt" id="post-timeline-prompt">
         <span class="host">user@ironclad.sh:~$</span>
@@ -167,147 +123,122 @@ const formatStartEnd = (start: Date, end: Date) => {
 </column>
 
 <style>
+    #timeline-stuff {
+        overflow-y: auto;
+        align-items: flex-start;
+
+        h2 {
+            color: var(--green-fg);
+            font-weight: bold;
+            &::before {
+                content: '## ';
+            }
+        }
+
+        .date-marker {
+            color: var(--blue-fg);
+            margin-left: 1ch;
+        }
+
+        ul {
+            padding-left: 1ch;
+            li {
+                color: var(--foreground0);
+                &::before {
+                    color: var(--blue-fg);
+                }
+            }
+        }
+    }
+
     #timeline-content {
         width: 100%;
         max-width: var(--max-reading-width);
+    }
+
+    #post-timeline-prompt {
+        display: none;
     }
 
     #timeline-output {
         display: none;
     }
 
+    #end-end {
+        display: none;
+        color: var(--root);
+        background-color: var(--foreground0);
+    }
+    #end-scroll {
+        display: inline-flex;
+    }
+
     html:has(info-state[data-focus='timeline']) #timeline-output {
         display: flex;
-    }
-
-    #tl-counter,
-    #tl-length {
-        &::before {
-            content: attr(data-tl);
-        }
-    }
-
-    .year {
-        background-color: var(--background0);
-        color: var(--foreground2);
-        padding-left: 1ch;
-
-        .year-marker {
-            background-color: transparent;
-            color: var(--background2);
-        }
-
-        &.active {
-            color: var(--foreground0);
-
-            .year-marker {
-                color: var(--green-fg);
-            }
-        }
     }
 </style>
 
 <script>
-    import { ScreenName } from '@/types/state'
     import AppStateListener from '@/utils/state'
+    import { waitFor } from '@/utils/time'
 
-    const prevButton: HTMLButtonElement =
-        document.querySelector('#prev-button')!
-    const nextButton: HTMLButtonElement =
-        document.querySelector('#next-button')!
-    const tlCounter: HTMLSpanElement = document.querySelector('#tl-counter')!
-    const tlLength = Number(
-        (document.querySelector('#tl-length') as HTMLSpanElement).dataset.tl,
-    )
     const backButton: HTMLButtonElement =
         document.querySelector('#back-button')!
     const infoState: HTMLElement = document.querySelector('info-state')!
+    const timelineStuff: HTMLDivElement =
+        document.querySelector('#timeline-stuff')!
+    const endEnd: HTMLSpanElement = document.querySelector('#end-end')!
+    const endScroll: HTMLSpanElement = document.querySelector('#end-scroll')!
+    const postTimelinePrompt: HTMLSpanElement = document.querySelector(
+        '#post-timeline-prompt',
+    )!
+    const endIndicator: HTMLSpanElement =
+        document.querySelector('#end-indicator')!
 
-    let currentSlide = 0
-
-    new AppStateListener('info-state').on(
-        'data-timeline-slide',
-        ({ value }) => {
-            currentSlide = Number(value)
-
-            updateTimelineDisplay(currentSlide)
-        },
-    )
-
-    new AppStateListener('navigation-state').on(
-        'data-focus',
-        async ({ value }) => {
-            if (value === ScreenName.Info) {
-                updateTimelineDisplay(0)
-                window.addEventListener('keydown', handleKeyPagination)
-            } else {
-                window.removeEventListener('keydown', handleKeyPagination)
-            }
-        },
-    )
-
-    function updateTimelineDisplay(slide: number) {
-        const tlItem = document.querySelector(
-            `#timeline-item-${slide}`,
-        ) as HTMLElement
-        const timelineItems = document.querySelectorAll(
-            '.timeline-item',
-        ) as NodeListOf<HTMLElement>
-
-        timelineItems.forEach((item) => {
-            item.style.display = 'none'
-        })
-        tlItem.style.display = 'flex'
-        tlCounter.dataset.tl = String(slide + 1)
-
-        const yearMarkers = document.querySelectorAll(
-            '.year',
-        ) as NodeListOf<HTMLElement>
-        const targetItemStart = new Date(Number(tlItem.dataset.start))
-        const targetItemEnd = new Date(Number(tlItem.dataset.end))
-
-        yearMarkers.forEach((yearMarker) => {
-            const year = Number(yearMarker.dataset.year)
-            const startYear = targetItemStart.getUTCFullYear()
-            const endYear = targetItemEnd.getUTCFullYear()
-            const isInRange = startYear <= year && endYear >= year
-
-            if (isInRange) {
-                yearMarker.classList.add('active')
-            } else {
-                yearMarker.classList.remove('active')
-            }
-        })
+    function reset() {
+        postTimelinePrompt.style.display = 'none'
+        endIndicator.style.display = 'inline-flex'
+        backButton.style.display = 'inline-flex'
+        timelineStuff.style.overflowY = 'auto'
     }
 
-    function handleKeyPagination(e: KeyboardEvent) {
-        if (e.key === 'ArrowUp' || e.key === 'k') {
-            prevButton.focus()
-            prevButton.click()
-        }
+    timelineStuff.addEventListener('scroll', () => {
+        const isScrolledToBottom =
+            Math.abs(
+                timelineStuff.scrollTop +
+                    timelineStuff.clientHeight -
+                    timelineStuff.scrollHeight,
+            ) <= 2 || timelineStuff.scrollHeight < timelineStuff.clientHeight
 
-        if (e.key === 'ArrowDown' || e.key === 'j') {
-            nextButton.focus()
-            nextButton.click()
+        if (isScrolledToBottom) {
+            endEnd.style.display = 'inline-flex'
+            endScroll.style.display = 'none'
+        } else {
+            endEnd.style.display = 'none'
+            endScroll.style.display = 'inline-flex'
         }
+    })
 
-        if (e.key === 'Escape') {
+    backButton.onclick = async () => {
+        postTimelinePrompt.style.display = 'flex'
+        endIndicator.style.display = 'none'
+        backButton.style.display = 'none'
+        timelineStuff.style.overflowY = 'hidden'
+        await waitFor(500)
+        infoState.setAttribute('data-page', 'fastfetch')
+    }
+
+    function attachKeyListeners(e: KeyboardEvent) {
+        if (e.key === 'q' || e.key === 'Escape') {
             backButton.focus()
             backButton.click()
         }
     }
 
-    prevButton.onclick = () => {
-        if (currentSlide === 0) return
-
-        infoState.setAttribute('data-timeline-slide', String(currentSlide - 1))
-    }
-    nextButton.onclick = () => {
-        if (currentSlide === tlLength - 1) return
-
-        infoState.setAttribute('data-timeline-slide', String(currentSlide + 1))
-    }
-    backButton.onclick = () => {
-        infoState.setAttribute('data-page', 'fastfetch')
-    }
+    new AppStateListener('info-state').on('data-page', ({ value }) => {
+        if (value === 'timeline') {
+            reset()
+            window.addEventListener('keydown', attachKeyListeners)
+        } else window.removeEventListener('keydown', attachKeyListeners)
+    })
 </script>

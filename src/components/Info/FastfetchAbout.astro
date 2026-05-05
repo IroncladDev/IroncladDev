@@ -4,7 +4,7 @@ const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
 ---
 
 <column id="fastfetch-output">
-    <span class="cmd-prompt" id="pre-fastfetch-prompt">
+    <span class="cmd-prompt">
         <span class="host">user@ironclad.sh:~$</span>
         <span>fastfetch</span>
     </span>
@@ -52,7 +52,7 @@ const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
                 </span>
                 <span>
                     <span class="label">Status</span>
-                    <span>Employed</span>
+                    <span>Open to Work</span>
                 </span>
                 <span>
                     <span class="label">Hobbies</span>
@@ -72,66 +72,61 @@ const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
                 >
             </column>
         </column>
-        <row align-="end">
-            <button id="read-more" autofocus>Read More</button>
+        <row align-="end" gap-="1">
+            <a href="/resume.html" id="resume-button" is-="button"
+                >View Resume</a
+            >
+            <a href="/showcase.html" is-="button" variant-="background2"
+                >See Showcase</a
+            >
         </row>
+        <span class="cmd-prompt" id="post-fastfetch-prompt">
+            <span class="host">user@ironclad.sh:~$</span>
+            <span></span>
+        </span>
     </column>
-    <span class="cmd-prompt" id="post-fastfetch-prompt">
-        <span class="host">user@ironclad.sh:~$</span>
-        <span></span>
-    </span>
+
+    <style>
+        .label {
+            color: var(--green-fg);
+            &::after {
+                content: ':';
+                color: var(--foreground1);
+            }
+        }
+        #description {
+            --box-border-color: var(--background3);
+        }
+
+        #profile {
+            width: 20ch;
+            height: 10lh;
+            flex-shrink: 0;
+        }
+
+        #fastfetch-content {
+            width: 100%;
+            max-width: var(--max-reading-width);
+        }
+
+        #fastfetch-output {
+            display: none;
+        }
+
+        html:has(info-state[data-focus='fastfetch']) #fastfetch-output {
+            display: flex;
+        }
+
+        #read-more:disabled {
+            --button-primary: var(--background2);
+            --button-secondary: var(--foreground2);
+        }
+
+        @media (max-width: 600px) {
+            #fastfetch-content row {
+                flex-direction: column;
+                gap: 1lh;
+            }
+        }
+    </style>
 </column>
-
-<style>
-    .label {
-        color: var(--green-fg);
-        &::after {
-            content: ':';
-            color: var(--foreground1);
-        }
-    }
-    #description {
-        --box-border-color: var(--background3);
-    }
-
-    #profile {
-        width: 20ch;
-        height: 10lh;
-        flex-shrink: 0;
-    }
-
-    #fastfetch-content {
-        width: 100%;
-        max-width: var(--max-reading-width);
-    }
-
-    #fastfetch-output {
-        display: none;
-    }
-
-    html:has(info-state[data-focus='fastfetch']) #fastfetch-output {
-        display: flex;
-    }
-
-    #read-more:disabled {
-        --button-primary: var(--background2);
-        --button-secondary: var(--foreground2);
-    }
-
-    @media (max-width: 600px) {
-        #fastfetch-content row {
-            flex-direction: column;
-            gap: 1lh;
-        }
-    }
-</style>
-
-<script>
-    const readMoreButton: HTMLButtonElement =
-        document.querySelector('#read-more')!
-    const infoState: HTMLElement = document.querySelector('info-state')!
-
-    readMoreButton.onclick = () => {
-        infoState.setAttribute('data-page', 'timeline')
-    }
-</script>

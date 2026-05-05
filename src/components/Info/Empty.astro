@@ -1,0 +1,17 @@
+<column id="empty">
+    <span class="cmd-prompt" id="empty-prompt">
+        <span class="host">user@ironclad.sh:~$</span>
+        <span></span>
+        <span id="prompt-cursor" is-="spinner" variant-="block"></span>
+    </span>
+</column>
+
+<style>
+    #empty {
+        display: none;
+    }
+
+    html:has(info-state[data-focus='empty']) #empty {
+        display: flex;
+    }
+</style>

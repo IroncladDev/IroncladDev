@@ -84,7 +84,7 @@
         flex-direction: column;
     }
 
-    a:not(.workspace) {
+    a:not(.workspace):not([is-='button']) {
         text-decoration: underline;
         color: var(--foreground2);
         word-break: break-all;
@@ -96,6 +96,10 @@
         &:active {
             color: var(--blue-fg) !important;
         }
+    }
+
+    a[is-='button'] {
+        text-decoration: none;
     }
 }
 

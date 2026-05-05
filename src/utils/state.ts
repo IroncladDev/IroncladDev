@@ -13,8 +13,7 @@ export default class AppStateListener {
             target: HTMLElement
         }) => void,
     ) {
-        const appState = document.querySelector('app-state') as HTMLElement
-        const element = appState.querySelector(this.namespace) as HTMLElement
+        const element = document.querySelector(this.namespace) as HTMLElement
 
         const observer = new MutationObserver((records) => {
             const changedAttribute = records.find(

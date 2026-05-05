@@ -12,7 +12,12 @@ const configPromise: Promise<SoundConfig> = fetch(
     '/eg-crystal-purple/config.json',
 ).then((r) => r.json())
 
-async function playSound(soundId: string) {
+export function canPlaySound() {
+    const ctx = new AudioContext()
+    return ctx.state === 'running'
+}
+
+export async function playSound(soundId: string) {
     const config = await configPromise
     const timing = config.defines[soundId]
     if (!timing) return
@@ -20,7 +25,7 @@ async function playSound(soundId: string) {
     const [start, duration] = timing
     const clone = audio.cloneNode() as HTMLAudioElement
     clone.currentTime = start / 1000
-    clone.play()
+    await clone.play()
     await waitFor(duration)
     clone.pause()
     clone.remove()

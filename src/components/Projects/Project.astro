@@ -16,10 +16,12 @@ const apiUrl = `https://api.github.com/repos/${user}/${repo}`
 const languagesUrl = `${apiUrl}/languages`
 const colorSequence = ['blue', 'green', 'yellow', 'orange']
 
-const repoData = await fetch(apiUrl).then((res) => res.json())
-const repoLanguagesData: Record<string, number> = await fetch(
-    languagesUrl,
-).then((res) => res.json())
+const repoData = await fetch(apiUrl)
+    .then((res) => res.json())
+    .catch(() => ({}))
+const repoLanguagesData: Record<string, number> = await fetch(languagesUrl)
+    .then((res) => res.json())
+    .catch(() => ({}))
 const totalLanguagesBytes = Object.values(repoLanguagesData).reduce(
     (acc, bytes) => acc + bytes,
     0,

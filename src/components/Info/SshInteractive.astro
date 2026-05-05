@@ -1,0 +1,70 @@
+<column id="ssh">
+    <span class="cmd-prompt">
+        <span class="host">user@ironclad.sh:~$</span>
+        <span>ssh ironclad.sh</span>
+    </span>
+    <column id="ssh-content">
+        <span
+            >The authenticity of host <strong id="host-string"
+                >'ironclad.sh'</strong
+            > is <em id="almost-em">almost</em> established.</span
+        >
+        <span
+            >Are you sure you want to continue connecting (yes/<strike
+                >no</strike
+            >/[fingerprint])?</span
+        >
+        <row gap-="1">
+            <button id="yes-button" autofocus>yes</button>
+            <button variant-="background2" disabled>no</button>
+            <button id="fingerprint-button" variant-="background2"
+                >[fingerprint]</button
+            >
+        </row>
+    </column>
+    <span class="cmd-prompt" id="post-ssh-prompt">
+        <span class="host">user@ironclad.sh:~$</span>
+        <span></span>
+    </span>
+</column>
+
+<style>
+    #ssh {
+        display: none;
+    }
+
+    html:has(info-state[data-focus='ssh']) #ssh {
+        display: flex;
+    }
+
+    #host-string {
+        color: var(--green-fg-dim);
+    }
+    #almost-em {
+        color: var(--blue-fg-dim);
+    }
+    #post-ssh-prompt {
+        display: none;
+    }
+</style>
+
+<script>
+    import { waitFor } from '@/utils/time'
+
+    const infoState: HTMLElement = document.querySelector('info-state')!
+    const yesButton: HTMLButtonElement = document.querySelector('#yes-button')!
+    const fingerprintButton: HTMLButtonElement = document.querySelector(
+        '#fingerprint-button',
+    )!
+    const postSshPrompt: HTMLElement =
+        document.querySelector('#post-ssh-prompt')!
+
+    async function continueInitial() {
+        postSshPrompt.style.display = 'flex'
+        await waitFor(500)
+        infoState.setAttribute('data-page', 'fastfetch')
+    }
+
+    yesButton.addEventListener('click', continueInitial)
+    fingerprintButton.addEventListener('click', continueInitial)
+</script>
