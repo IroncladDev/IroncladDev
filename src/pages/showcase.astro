@@ -1,8 +1,123 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import Showcase from '@/tiles/Links.astro'
+import Project from '@/components/Projects/Project.astro'
 ---
 
 <Layout>
-    <Showcase />
+    <div class="tile initial">
+        <column class="content">
+            <column gap-="1" id="projects-list">
+                <Project
+                    title="WebTUI"
+                    url="https://webtui.ironclad.sh"
+                    repo="webtui"
+                    user="webtui"
+                />
+                <Project
+                    title="ironclad.sh"
+                    url="https://ironclad.sh"
+                    user="IroncladDev"
+                    repo="IroncladDev"
+                />
+                <Project title="Dotfiles" user="IroncladDev" repo="dotfiles" />
+                <Project
+                    title="TehcCringe"
+                    user="TehcCringe"
+                    repo="TehcCringe"
+                    url="https://tehccringe.com"
+                />
+                <Project title="Osmium" user="IroncladDev" repo="osmium" />
+                <Project title="htmx-cli" user="IroncladDev" repo="htmx-cli" />
+                <Project
+                    title="Agape Chiropractic TX"
+                    user="IroncladDev"
+                    repo="AgapeChiroTx"
+                />
+                <Project
+                    title="kuhnhong.com"
+                    user="IroncladDev"
+                    repo="KuhnHong"
+                />
+            </column>
+        </column>
+        <column id="end-block">
+            <row gap-="2" id="end-keys">
+                <span>j/↓ next</span>
+                <span>k/↑ prev</span>
+                <span>⏎ open</span>
+            </row>
+            <row>
+                <span>:█</span>
+            </row>
+        </column>
+    </div>
 </Layout>
+
+<style>
+    #projects-list {
+        max-width: var(--max-reading-width);
+    }
+
+    .content {
+        inset: 0 0 3lh 0;
+    }
+
+    #end-block {
+        position: absolute;
+        bottom: 1lh;
+        left: 2ch;
+
+        #end-keys {
+            color: var(--blue-fg-dim);
+        }
+    }
+
+    @media (max-width: 720px) {
+        .content {
+            inset: 0 0 2lh 0;
+        }
+
+        #end-keys {
+            display: none;
+        }
+    }
+</style>
+
+<script>
+    const firstProject = document.querySelector('.project') as HTMLElement
+    const projects = document.querySelectorAll(
+        '.project',
+    ) as NodeListOf<HTMLElement>
+
+    window.addEventListener('load', () => {
+        firstProject.focus()
+    })
+
+    projects.forEach((project, i) => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'j' || event.key === 'ArrowDown') {
+                projects[i + 1]?.focus()
+            }
+
+            if (event.key === 'k' || event.key === 'ArrowUp') {
+                projects[i - 1]?.focus()
+            }
+
+            if (event.key === 'Enter' || event.key === ' ') {
+                window.open(
+                    project.querySelector('a')!.getAttribute('href')!,
+                    '_blank',
+                )
+            }
+        }
+
+        project.addEventListener('focus', () => {
+            project.addEventListener('keydown', handleKeyDown)
+        })
+        project.addEventListener('blur', () => {
+            project.removeEventListener('keydown', handleKeyDown)
+        })
+    })
+
+    firstProject.focus()
+</script>
