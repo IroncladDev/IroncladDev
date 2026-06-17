@@ -11,30 +11,9 @@
     min-height: 0;
     position: relative;
     background-color: var(--surface0-70);
-    pointer-events: none;
     transition: 0.25s linear;
     opacity: 0.5;
-
-    html:has(navigation-state[data-screen='#']) &[data-screen='#'],
-    html:has(navigation-state[data-screen='#info']) &[data-screen='#info'],
-    html:has(navigation-state[data-screen='#showcase'])
-        &[data-screen='#showcase'],
-    html:has(navigation-state[data-screen='#links']) &[data-screen='#links'],
-    html:has(navigation-state[data-screen='#opinions'])
-        &[data-screen='#opinions'] {
-        background-color: var(--surface0-85);
-    }
-
-    html:has(navigation-state[data-focus='#']) &[data-screen='#'],
-    html:has(navigation-state[data-focus='#info']) &[data-screen='#info'],
-    html:has(navigation-state[data-focus='#showcase'])
-        &[data-screen='#showcase'],
-    html:has(navigation-state[data-focus='#links']) &[data-screen='#links'],
-    html:has(navigation-state[data-focus='#opinions'])
-        &[data-screen='#opinions'] {
-        opacity: 1;
-        pointer-events: all;
-    }
+    padding: 1lh 2ch;
 
     .content {
         position: absolute;
@@ -45,6 +24,29 @@
         overflow-y: auto;
         padding: 1lh 2ch;
     }
+
+    &.initial {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        animation-name: none;
+        opacity: 1;
+    }
+}
+
+#tiles {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    gap: 1lh 2ch;
+}
+
+@media (max-width: 720px) {
+    #tiles {
+        flex-direction: column;
+    }
 }
 
 @keyframes place {
@@ -52,11 +54,13 @@
         display: flex;
         width: 0;
         height: 0;
+        opacity: 0;
     }
     100% {
         display: flex;
         width: 100%;
         height: 100%;
+        opacity: 1;
     }
 }
 

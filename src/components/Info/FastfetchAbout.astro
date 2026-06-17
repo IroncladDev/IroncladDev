@@ -1,16 +1,19 @@
 ---
+import ShellPrompt from '@/components/ShellPrompt.astro'
+
 const ms = new Date().getTime() - new Date('Nov 15, 2005').getTime()
 const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
 ---
 
-<column id="fastfetch-output">
-    <span class="cmd-prompt" id="pre-fastfetch-prompt">
-        <span class="host">user@ironclad.sh:~$</span>
-        <span>fastfetch</span>
-    </span>
+<column id="fastfetch-process">
+    <ShellPrompt id="pre-fastfetch-prompt" />
     <column id="fastfetch-content">
         <row gap-="2">
-            <img src="/img/brand/svg/profile-transparent.svg" id="profile" />
+            <column id="profile">
+                <img src="/img//neck.svg" id="neck" />
+                <img src="/img/brand/svg/transparent.svg" id="helmet" />
+                <img src="/img/helmet-off.svg" id="helmet-off" />
+            </column>
             <column>
                 <span>
                     <span class="label">OS</span>
@@ -51,38 +54,82 @@ const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
                     >
                 </span>
                 <span>
-                    <span class="label">Status</span>
-                    <span>Employed</span>
+                    <span class="label">Hobbies</span>
+                    <span>Jiujitsu, Guns</span>
                 </span>
                 <span>
-                    <span class="label">Hobbies</span>
-                    <span>Jiujitsu, Firearms, Airsoft</span>
+                    <span class="label">Status</span>
+                    <span>Open to Work</span>
                 </span>
             </column>
         </row>
-        <column box-="round" id="description">
-            <column gap-="1" pad-="1 0">
+        <column pad-="0 1/2">
+            <column gap-="1" pad-="1 1/2" id="description">
                 <p
-                    >I'm <strong>Conner</strong>, a Texan Software Engineer who
-                    strives to build and share great software with the world</p
+                    >I'm <strong>Conner</strong>, a <mark
+                        fg-="blue-fg"
+                        bg-="blue-bg">T</mark
+                    ><mark fg-="red-fg" bg-="red-bg">ex</mark><mark
+                        fg-="foreground0"
+                        bg-="background2">an</mark
+                    > Software Engineer who strives to build and share great software
+                    with the world</p
                 >
                 <p
-                    >I usually go by "<strong>IroncladDev</strong>" on the
-                    internet</p
+                    >I usually go by <strong
+                        ><mark fg-="green-fg"
+                            >"<mark bg-="green-bg">IroncladDev</mark>"</mark
+                        ></strong
+                    > on the internet</p
                 >
             </column>
         </column>
-        <row align-="end">
-            <button id="read-more" autofocus>Read More</button>
+        <row align-="end" gap-="1">
+            <!-- <a href="/resume.html" id="resume-button" is-="button" -->
+            <!--     >View Resume</a -->
+            <!-- > -->
+            <a href="/showcase.html" is-="button" variant-="background2"
+                >See Showcase</a
+            >
         </row>
     </column>
-    <span class="cmd-prompt" id="post-fastfetch-prompt">
-        <span class="host">user@ironclad.sh:~$</span>
-        <span></span>
-    </span>
+    <ShellPrompt id="post-fastfetch-prompt" />
 </column>
 
-<style>
+<style is:global>
+    #post-fastfetch-prompt,
+    #fastfetch-process,
+    #fastfetch-content {
+        display: none;
+        max-width: var(--max-reading-width);
+    }
+
+    html:has(info-state[data-page='fastfetch']) #fastfetch-process {
+        display: flex;
+    }
+
+    html:has(info-state[data-cmd-status='complete']) {
+        #fastfetch-content {
+            display: flex;
+        }
+
+        #helmet {
+            animation: lookup 1s ease-out;
+            animation-fill-mode: forwards;
+            animation-delay: 2s;
+            transform-origin: 29% 59%;
+            transform: rotate(10deg) translateX(10px) translateY(10px);
+        }
+
+        #helmet-off {
+            animation: flicker 0.5s ease-out;
+            animation-fill-mode: forwards;
+            animation-delay: 1s;
+            transform-origin: 29% 59%;
+            transform: rotate(10deg) translateX(10px) translateY(10px);
+        }
+    }
+
     .label {
         color: var(--green-fg);
         &::after {
@@ -91,26 +138,59 @@ const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
         }
     }
     #description {
-        --box-border-color: var(--background3);
+        background-color: var(--background1);
     }
 
     #profile {
         width: 20ch;
         height: 10lh;
-        flex-shrink: 0;
+        position: relative;
     }
 
-    #fastfetch-content {
+    @keyframes lookup {
+        0% {
+            transform: rotate(10deg) translateX(10px) translateY(10px);
+        }
+        30% {
+            transform: rotate(-5deg) translateX(10px) translateY(10px);
+        }
+        60% {
+            transform: rotate(-5deg) translateX(-5px) translateY(0px);
+        }
+        100% {
+            transform: rotate(0deg) translateX(0px) translateY(0px);
+        }
+    }
+
+    @keyframes flicker {
+        0% {
+            opacity: 0;
+        }
+        25% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+        75% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    #neck {
+        position: absolute;
+        bottom: 0;
         width: 100%;
-        max-width: var(--max-reading-width);
     }
 
-    #fastfetch-output {
-        display: none;
-    }
-
-    html:has(info-state[data-focus='fastfetch']) #fastfetch-output {
-        display: flex;
+    #helmet,
+    #helmet-off {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
     }
 
     #read-more:disabled {
@@ -125,13 +205,3 @@ const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
         }
     }
 </style>
-
-<script>
-    const readMoreButton: HTMLButtonElement =
-        document.querySelector('#read-more')!
-    const infoState: HTMLElement = document.querySelector('info-state')!
-
-    readMoreButton.onclick = () => {
-        infoState.setAttribute('data-page', 'timeline')
-    }
-</script>

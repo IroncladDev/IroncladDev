@@ -1,5 +1,9 @@
 ---
+import Keyboard from '@/components/Keyboard.astro'
+import Waybar from '@/components/Waybar.astro'
+
 import '@/styles/global.css'
+import '@/styles/tiling.css'
 
 const title = 'IroncladDev'
 const description =
@@ -51,9 +55,43 @@ const description =
             content="website, developer, neovim, ironclad, ironcladdev"
         />
         <meta name="theme-color" content="#1f1d2d" />
-    </head>
+        <style>
+            #wallpaper {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                #keyboard {
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+
+            #screen {
+                position: absolute;
+                padding: 1lh 2ch;
+                inset: 0;
+                overflow: hidden;
+                display: flex;
+                flex-grow: 1;
+                flex-shrink: 0;
+                flex-basis: 0;
+                gap: 1lh 2ch;
+            }
+        </style></head
+    >
 
     <body>
-        <slot />
+        <div id="wallpaper">
+            <Keyboard />
+        </div>
+        <column id="screen">
+            <Waybar />
+            <div id="tiles">
+                <slot />
+            </div>
+        </column>
     </body>
 </html>

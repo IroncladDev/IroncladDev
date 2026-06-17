@@ -1,0 +1,66 @@
+---
+import ShellPrompt from '@/components/ShellPrompt.astro'
+---
+
+<column id="ssh-process">
+    <ShellPrompt id="pre-ssh-prompt">
+        <span id="prompt-cursor" is-="spinner" variant-="block"></span>
+    </ShellPrompt>
+    <column id="ssh-content">
+        <span
+            >The authenticity of host <mark fg-="green-fg"
+                ><strong>'ironclad.sh'</strong></mark
+            > is <em><mark fg-="blue-bg">almost</mark></em> established.</span
+        >
+        <span
+            >Are you sure you want to continue connecting (yes/<strike
+                >no</strike
+            >/[fingerprint])?</span
+        >
+        <row gap-="1">
+            <button id="yes-button">yes</button>
+            <button variant-="background2" disabled>no</button>
+            <button id="fingerprint-button" variant-="background2"
+                >[fingerprint]</button
+            >
+        </row>
+    </column>
+    <ShellPrompt id="post-ssh-prompt" />
+</column>
+
+<style is:global>
+    #post-ssh-prompt,
+    #ssh-content,
+    #ssh-process {
+        display: none;
+    }
+
+    html:has(info-state[data-page='ssh']) {
+        #ssh-process {
+            display: flex;
+        }
+    }
+
+    html:has(info-state[data-cmd-status='running']) {
+        #ssh-content {
+            display: flex;
+        }
+    }
+
+    html:has(info-state[data-cmd-status='complete']) {
+        #ssh-content {
+            display: flex;
+        }
+
+        #post-ssh-prompt {
+            display: flex;
+        }
+    }
+
+    #host-string {
+        color: var(--green-fg-dim);
+    }
+    #almost-em {
+        color: var(--blue-fg-dim);
+    }
+</style>
