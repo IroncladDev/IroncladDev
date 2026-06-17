@@ -11,7 +11,7 @@
 @import '@/styles/flexbox.css';
 @import '@/styles/padding.css';
 @import '@/styles/colors.css';
-@import '@/styles/terminal.css';
+@import '@/styles/mark.css';
 @import '@webtui/plugin-nf';
 
 @font-face {
@@ -146,6 +146,10 @@
             --badge-color: var(--purple-bg);
             --badge-text: var(--purple-fg);
         }
+    }
+
+    p {
+        word-break: break-word;
     }
 
     button:disabled {

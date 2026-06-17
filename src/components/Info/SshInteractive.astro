@@ -1,13 +1,16 @@
-<column id="ssh">
-    <span class="cmd-prompt">
-        <span class="host">user@ironclad.sh:~$</span>
-        <span>ssh ironclad.sh</span>
-    </span>
+---
+import ShellPrompt from '@/components/ShellPrompt.astro'
+---
+
+<column id="ssh-process">
+    <ShellPrompt id="pre-ssh-prompt">
+        <span id="prompt-cursor" is-="spinner" variant-="block"></span>
+    </ShellPrompt>
     <column id="ssh-content">
         <span
-            >The authenticity of host <strong id="host-string"
-                >'ironclad.sh'</strong
-            > is <em id="almost-em">almost</em> established.</span
+            >The authenticity of host <mark fg-="green-fg"
+                ><strong>'ironclad.sh'</strong></mark
+            > is <em><mark fg-="blue-bg">almost</mark></em> established.</span
         >
         <span
             >Are you sure you want to continue connecting (yes/<strike
@@ -15,26 +18,43 @@
             >/[fingerprint])?</span
         >
         <row gap-="1">
-            <button id="yes-button" autofocus>yes</button>
+            <button id="yes-button">yes</button>
             <button variant-="background2" disabled>no</button>
             <button id="fingerprint-button" variant-="background2"
                 >[fingerprint]</button
             >
         </row>
     </column>
-    <span class="cmd-prompt" id="post-ssh-prompt">
-        <span class="host">user@ironclad.sh:~$</span>
-        <span></span>
-    </span>
+    <ShellPrompt id="post-ssh-prompt" />
 </column>
 
-<style>
-    #ssh {
+<style is:global>
+    #post-ssh-prompt,
+    #ssh-content,
+    #ssh-process {
         display: none;
     }
 
-    html:has(info-state[data-focus='ssh']) #ssh {
-        display: flex;
+    html:has(info-state[data-page='ssh']) {
+        #ssh-process {
+            display: flex;
+        }
+    }
+
+    html:has(info-state[data-cmd-status='running']) {
+        #ssh-content {
+            display: flex;
+        }
+    }
+
+    html:has(info-state[data-cmd-status='complete']) {
+        #ssh-content {
+            display: flex;
+        }
+
+        #post-ssh-prompt {
+            display: flex;
+        }
     }
 
     #host-string {
@@ -43,28 +63,4 @@
     #almost-em {
         color: var(--blue-fg-dim);
     }
-    #post-ssh-prompt {
-        display: none;
-    }
 </style>
-
-<script>
-    import { waitFor } from '@/utils/time'
-
-    const infoState: HTMLElement = document.querySelector('info-state')!
-    const yesButton: HTMLButtonElement = document.querySelector('#yes-button')!
-    const fingerprintButton: HTMLButtonElement = document.querySelector(
-        '#fingerprint-button',
-    )!
-    const postSshPrompt: HTMLElement =
-        document.querySelector('#post-ssh-prompt')!
-
-    async function continueInitial() {
-        postSshPrompt.style.display = 'flex'
-        await waitFor(500)
-        infoState.setAttribute('data-page', 'fastfetch')
-    }
-
-    yesButton.addEventListener('click', continueInitial)
-    fingerprintButton.addEventListener('click', continueInitial)
-</script>
