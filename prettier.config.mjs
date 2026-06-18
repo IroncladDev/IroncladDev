@@ -1,8 +1,8 @@
 const config = {
-    printWidth: 80,
+    printWidth: 120,
     tabWidth: 4,
     semi: false,
-    plugins: ["prettier-plugin-organize-imports"],
+    plugins: ['prettier-plugin-organize-imports'],
 }
 
 export default config

@@ -1,5 +1,6 @@
 @layer components {
-    mark {
+    mark,
+    [is-='mark'] {
         background-color: inherit;
         color: inherit;
 
@@ -61,6 +62,18 @@
         }
 
         &[fg-] {
+            &[fg-='background0'] {
+                color: var(--background0);
+            }
+            &[fg-='background1'] {
+                color: var(--background1);
+            }
+            &[fg-='background2'] {
+                color: var(--background2);
+            }
+            &[fg-='background3'] {
+                color: var(--background3);
+            }
             &[fg-='foreground0'] {
                 color: var(--foreground0);
             }
@@ -111,6 +124,9 @@
             }
             &[fg-='yellow-fg'] {
                 color: var(--yellow-fg);
+            }
+            &[fg-='yellow-fg-dim'] {
+                color: var(--yellow-fg-dim);
             }
         }
     }

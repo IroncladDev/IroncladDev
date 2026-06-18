@@ -15,7 +15,7 @@
     opacity: 0.5;
     padding: 1lh 2ch;
 
-    .content {
+    .tile-content {
         position: absolute;
         inset: 0;
         display: flex;

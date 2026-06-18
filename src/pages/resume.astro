@@ -1,0 +1,345 @@
+---
+import '@/styles/global.css'
+import '@/styles/resume.css'
+---
+
+<!doctype html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Conner Ow - Senior Software Engineer</title>
+    </head>
+
+    <!--
+        things to include
+        - approach
+        - experience
+        - skills
+        - education
+        - contacts
+
+        TUIs can be very information-dense while taking up little space. Skills can use icons, and just be colored and separated by commas
+    -->
+
+    <body>
+        <row id="print-header" gap-="1" pad-="2 0" align-="center between">
+            <span>Conner Ow - Senior Software Engineer.pdf</span>
+            <row gap-="1">
+                <a
+                    is-="button"
+                    variant-="background2"
+                    id="view-pdf-button"
+                    href="/Conner Ow - Senior Software Engineer.pdf"
+                    target="_blank">[v]iew pdf ↗</a
+                >
+                <button id="print-button">[p]rint &#xf02f;</button>
+            </row>
+        </row>
+        <column id="resume-body" self-="grow">
+            <header is-="column" gap-="1">
+                <row gap-="2">
+                    <h1>Conner Ow</h1>
+                    <row is-="separator" self-="grow"></row>
+                    <span is-="mark" fg-="blue-fg-dim"
+                        >Senior Software Engineer</span
+                    >
+                    <row is-="separator" self-="grow"></row>
+                    <a href="https://ironclad.sh">ironclad.sh</a>
+                </row>
+                <column gap-="1" pad-="2 0">
+                    <p
+                        >I&apos;m <strong is-="mark" fg-="green-fg"
+                            >Conner</strong
+                        >, a <mark fg-="blue-fg" bg-="blue-bg">T</mark><mark
+                            fg-="red-fg"
+                            bg-="red-bg">ex</mark
+                        ><mark fg-="foreground0" bg-="background2">as</mark
+                        >-based <mark fg-="blue-fg-dim">Software Engineer</mark>
+                        who strives to <mark fg-="blue-fg-dim">build</mark> and <mark
+                            fg-="blue-fg-dim">share</mark
+                        >
+                        <mark fg-="pink-fg">great software</mark> with the world.
+                    </p>
+                    <p
+                        >I specialize in <mark fg-="blue-fg">Frontend</mark> but
+                        can double as <mark fg-="blue-fg">Fullstack</mark>
+                        or a <mark fg-="purple-fg"> Technical Designer</mark>.
+                    </p>
+                    <p
+                        >My philosophy for building software is <mark
+                            fg-="pink-fg">beauty in simplicity</mark
+                        >
+                        whilst keeping <mark fg-="red-fg">chaos</mark> and <mark
+                            fg-="red-fg">complexity</mark
+                        > to a minimum.
+                    </p>
+                    <p
+                        >I want <mark fg-="yellow-fg"
+                            >your product or service</mark
+                        >
+                        to be <mark fg-="pink-fg">renowned</mark> for its <mark
+                            fg-="pink-fg">speed</mark
+                        >, <mark fg-="pink-fg">simplicity</mark>, and <mark
+                            fg-="pink-fg">ease of use</mark
+                        >.</p
+                    >
+                </column>
+            </header>
+            <main is-="column">
+                <section>
+                    <row align-="between" gap-="2">
+                        <h2>Experience</h2>
+                        <row is-="separator" self-="grow"></row>
+                        <span>
+                            <mark fg-="purple-fg">Aug 2022</mark>
+                            -
+                            <mark fg-="purple-fg">Jun 2026</mark>
+                        </span>
+                        <row is-="separator" self-="grow"></row>
+                        <mark fg-="purple-fg">3.5 years</mark>
+                    </row>
+                    <column pad-="1 1">
+                        <section box-="round" is-="column">
+                            <row gap-="1" align-="between" pad-="1 0">
+                                <row gap-="1">
+                                    <h3>
+                                        <mark fg-="yellow-fg"
+                                            >Support Engineer</mark
+                                        >
+                                    </h3>
+                                    <mark fg-="foreground2">•</mark>
+                                    <a
+                                        href="https://replit.com"
+                                        target="_blank"
+                                        style="color: #FF764D">
+                                        Replit</a
+                                    >
+                                </row>
+                                <span>
+                                    <mark fg-="purple-fg">Aug 2022</mark>
+                                    -
+                                    <mark fg-="purple-fg">Aug 2023</mark>
+                                </span>
+                            </row>
+                            <row is-="separator" cap-="bisect"></row>
+                            <ul marker-="open round-tree" pad-="1 0">
+                                <li
+                                    >Built and improved internal support and
+                                    anti-abuse tools</li
+                                >
+                                <li
+                                    >Maintained and designed the documentation</li
+                                >
+                                <li>Documented various product features</li>
+                                <li
+                                    >Maintained the open source <a
+                                        href="https://github.com/replit/extensions"
+                                        target="_blank">Extensions API Client</a
+                                    ></li
+                                >
+                            </ul>
+                        </section>
+                        <row pad-="2 0" align-="center">
+                            <row is-="separator" self-="grow"></row>
+                            <mark fg-="foreground2"
+                                >&lt; gap in resume (<mark fg-="purple-fg"
+                                    >3 months</mark
+                                >) &gt;</mark
+                            >
+                            <row is-="separator" self-="grow"></row>
+                        </row>
+                        <section box-="round" is-="column">
+                            <row gap-="1" align-="between" pad-="1 0">
+                                <row gap-="1">
+                                    <h3>
+                                        <mark fg-="yellow-fg"
+                                            >Mobile & Web Engineer</mark
+                                        >
+                                    </h3>
+                                    <mark fg-="foreground2">•</mark>
+                                    <a
+                                        href="https://fedi.xyz"
+                                        target="_blank"
+                                        style="color: var(--foreground0)">
+                                        Fedi</a
+                                    >
+                                </row>
+                                <span>
+                                    <mark fg-="purple-fg">Nov 2023</mark>
+                                    -
+                                    <mark fg-="purple-fg">Jun 2026</mark>
+                                </span>
+                            </row>
+                            <row is-="separator" cap-="bisect"></row>
+                            <ul marker-="open round-tree" pad-="1 0">
+                                <li>
+                                    <span>
+                                        Owned and assisted building core
+                                        features including
+                                    </span>
+                                    <a
+                                        href="https://support.fedi.xyz/hc/en-us/articles/20019791912466-What-is-Multispend"
+                                        target="_blank">Multispend</a
+                                    >,
+                                    <a
+                                        href="https://catalog.fedi.xyz"
+                                        target="_blank">Mini Apps Catalog</a
+                                    >,
+                                    <a
+                                        href="https://fedi.xyz/blog/create-your-community-in-minutes-introducing-the-community-generator"
+                                        target="_blank">Spaces Generator</a
+                                    >,
+                                    <a
+                                        href="https://lngpt.vercel.app"
+                                        target="_blank"
+                                        >(Lightning) AI Assistant</a
+                                    >, developer APIs, the in-app wallet, secure
+                                    e2e encrypted chat, payments, and more
+                                </li>
+                                <li
+                                    >Assisted with comprehensive automated
+                                    testing coverage</li
+                                >
+                                <li
+                                    >Maintained and improved the Mobile App and
+                                    <a
+                                        href="https://app.fedi.xyz"
+                                        target="_blank">Web App</a
+                                    ></li
+                                >
+                                <li
+                                    >Traveled the world to attend
+                                    bitcoin-related conferences and offsites
+                                    with the Fedi team</li
+                                >
+                                <li
+                                    >Talked to, onboarded, and assisted new
+                                    users in-person</li
+                                >
+                            </ul>
+                        </section>
+                    </column>
+                </section>
+                <section>
+                    <row gap-="1">
+                        <h2>Skills</h2>
+                        <row is-="separator" self-="grow"></row>
+                        <mark fg-="foreground2"
+                            >(real skills, not just markdown files)</mark
+                        >
+                    </row>
+                    <column pad-="2 1" gap-="1">
+                        <p>
+                            <mark fg-="blue-fg" bg-="blue-bg">&#xe749; CSS</mark
+                            >,
+                            <mark fg-="blue-fg" bg-="blue-bg"
+                                >&#xe8ca; TypeScript</mark
+                            >,
+                            <mark fg-="yellow-fg" bg-="yellow-bg"
+                                >&#xe781; JavaScript</mark
+                            >,
+                            <mark fg-="blue-fg" bg-="blue-bg"
+                                >&#xe7ba; React</mark
+                            >,
+                            <mark fg-="purple-fg" bg-="purple-bg"
+                                >&#xe7ba; React Native</mark
+                            >,
+                            <mark fg-="foreground0" bg-="background2"
+                                >&#xe702; Git</mark
+                            >,
+                            <mark fg-="blue-fg" bg-="blue-bg"
+                                >󱗆 Jujutsu (jj)</mark
+                            >,
+                            <mark fg-="foreground0" bg-="background2"
+                                >&#xe83e; Next.js</mark
+                            >,
+                            <mark fg-="orange-fg" bg-="orange-bg"
+                                >&#xe83e; Astro</mark
+                            >,
+                            <mark fg-="foreground0" bg-="blue-bg"
+                                >&#xe83e; HTMX</mark
+                            >,
+                            <mark fg-="purple-fg" bg-="purple-bg"
+                                >&#xe620; Lua</mark
+                            >,
+                            <mark fg-="green-fg-dim" bg-="green-bg"
+                                >&#xe8b6; Supabase</mark
+                            >,
+                            <mark fg-="green-fg-dim" bg-="green-bg"
+                                >&#xe7a4; PostgreSQL</mark
+                            >,
+                            <mark fg-="pink-fg" bg-="pink-bg"
+                                >&#xe7f4; GraphQL</mark
+                            >,
+                            <mark fg-="blue-fg" bg-="blue-bg"
+                                >&#xe7a4; SQLite</mark
+                            >,
+                            <mark fg-="green-fg-dim" bg-="green-bg"
+                                >&#xe7a4; MongoDB</mark
+                            >,
+                            <mark fg-="orange-fg" bg-="orange-bg"
+                                >&#xe7a8; Rust</mark
+                            >
+                        </p>
+                        <p
+                            >*Rated from <mark fg-="blue-fg">most</mark> to <mark
+                                fg-="foreground2">least</mark
+                            >
+                            experienced
+                        </p>
+                    </column>
+                </section>
+                <footer is-="column">
+                    <row gap-="1">
+                        <h2>Reach Out</h2>
+                        <row is-="separator" self-="grow"></row>
+                    </row>
+                    <column pad-="1 1">
+                        <row gap-="2" align-="between" pad-="1 0">
+                            <span>Email</span>
+                            <row is-="separator" self-="grow"></row>
+                            <a href="mailto:conner@ironclad.sh"
+                                >conner@ironclad.sh</a
+                            >
+                        </row>
+                        <row gap-="2" align-="between" pad-="1 0">
+                            <span>Signal</span>
+                            <row is-="separator" self-="grow"></row>
+                            <a
+                                href="https://signal.me/#eu/36E3b48gh-bGeLWnxgNERMFW4315Pdtjmu3-vcqKZ8Bs0WSY-HpEGZ-qmGgAa5gV"
+                                >IroncladDev.62</a
+                            >
+                        </row>
+                        <row gap-="2" align-="between" pad-="1 0">
+                            <span>Phone (text)</span>
+                            <row is-="separator" self-="grow"></row>
+                            <a href="tel:+19036406634">+1(903)-640-6634</a>
+                        </row>
+                    </column>
+                </footer>
+            </main>
+        </column>
+        <script>
+            const printButton: HTMLAnchorElement =
+                document.querySelector('#print-button')!
+            const viewPdfButton: HTMLAnchorElement =
+                document.querySelector('#view-pdf-button')!
+            printButton.addEventListener('click', () => {
+                window.print()
+            })
+
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'p') {
+                    printButton.focus()
+                    printButton.click()
+                }
+
+                if (e.key === 'v') {
+                    viewPdfButton.focus()
+                    viewPdfButton.click()
+                }
+            })
+        </script>
+    </body>
+</html>

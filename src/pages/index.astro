@@ -5,12 +5,23 @@ import SshInteractive from '@/components/Info/SshInteractive.astro'
 ---
 
 <Layout>
-    <info-state data-page="fastfetch" data-cmd-status="idle"></info-state>
+    <info-state
+        data-page="fastfetch"
+        data-cmd-status="idle"
+        style="display: none;"></info-state>
     <column class="tile initial" id="info-tile">
-        <SshInteractive />
-        <FastfetchAbout />
+        <column class="tile-content">
+            <SshInteractive />
+            <FastfetchAbout />
+        </column>
     </column>
 </Layout>
+
+<style>
+    #info-tile {
+        overflow-y: auto;
+    }
+</style>
 
 <script>
     import { canPlaySound, tapSequence } from '@/utils/keyboard'
