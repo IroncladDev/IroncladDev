@@ -3,9 +3,7 @@ import ShellPrompt from '@/components/ShellPrompt.astro'
 ---
 
 <column id="ssh-process">
-    <ShellPrompt id="pre-ssh-prompt">
-        <span id="prompt-cursor" is-="spinner" variant-="block"></span>
-    </ShellPrompt>
+    <ShellPrompt id="pre-ssh-prompt" />
     <column id="ssh-content">
         <span
             >The authenticity of host <mark fg-="green-fg"
@@ -25,12 +23,13 @@ import ShellPrompt from '@/components/ShellPrompt.astro'
             >
         </row>
     </column>
-    <ShellPrompt id="post-ssh-prompt" />
+    <ShellPrompt id="post-ssh-prompt">
+        <span id="prompt-cursor" is-="spinner" variant-="block"></span>
+    </ShellPrompt>
 </column>
 
 <style is:global>
     #post-ssh-prompt,
-    #ssh-content,
     #ssh-process {
         display: none;
     }
@@ -41,17 +40,7 @@ import ShellPrompt from '@/components/ShellPrompt.astro'
         }
     }
 
-    html:has(info-state[data-cmd-status='running']) {
-        #ssh-content {
-            display: flex;
-        }
-    }
-
     html:has(info-state[data-cmd-status='complete']) {
-        #ssh-content {
-            display: flex;
-        }
-
         #post-ssh-prompt {
             display: flex;
         }

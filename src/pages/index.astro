@@ -124,14 +124,6 @@ import SshInteractive from '@/components/Info/SshInteractive.astro'
     }
 
     async function handleDisplaySsh() {
-        infoState.setAttribute('data-cmd-status', 'idle')
-        insertCursor('pre-ssh-prompt')
-
-        await tapSequence('ssh ironclad.sh<CR>', {
-            onType: typedInteractionSequence,
-        })
-        await waitFor(250)
-
         infoState.setAttribute('data-cmd-status', 'running')
         insertCursor('post-ssh-prompt')
         yesButton.focus()
