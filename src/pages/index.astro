@@ -5,10 +5,8 @@ import SshInteractive from '@/components/Info/SshInteractive.astro'
 ---
 
 <Layout>
-    <info-state
-        data-page="fastfetch"
-        data-cmd-status="idle"
-        style="display: none;"></info-state>
+    <info-state data-page="ssh" data-cmd-status="idle" style="display: none;"
+    ></info-state>
     <column class="tile initial" id="info-tile">
         <column class="tile-content">
             <SshInteractive />
@@ -74,7 +72,8 @@ import SshInteractive from '@/components/Info/SshInteractive.astro'
     }
 
     async function continueInitial() {
-        await waitFor(500)
+        yesButton.disabled = true
+        await waitFor(250)
         infoState.setAttribute('data-cmd-status', 'complete')
 
         await tapSequence('clear<CR>', {
