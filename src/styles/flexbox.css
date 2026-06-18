@@ -11,10 +11,10 @@
         display: flex;
 
         &[gap-^='1'] {
-            gap: 1ch;
+            gap: 1lh 1ch;
         }
         &[gap-^='2'] {
-            gap: 2ch;
+            gap: 2lh 2ch;
         }
 
         &[self-~='grow'] {
