@@ -15,7 +15,7 @@
   "dependencies": {
     "@webtui/css": "^0.1.8",
     "@webtui/plugin-nf": "^0.1.1",
-    "astro": "6.1.7"
+    "astro": "^6.4.8"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -33,8 +33,8 @@
     "typescript-eslint": "^8.37.0"
   },
   "engines": {
-    "node": ">=18",
-    "bun": ">=1.2.16"
+    "node": ">=26",
+    "bun": ">=1.3.0"
   },
   "packageManager": "bun@1.2",
   "trustedDependencies": [
