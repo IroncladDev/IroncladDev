@@ -16,8 +16,8 @@ import SshInteractive from '@/components/Info/SshInteractive.astro'
 </Layout>
 
 <style>
-    #info-tile {
-        overflow-y: auto;
+    html:has(info-state[data-page='fastfetch']) #info-tile {
+        background-color: var(--surface0-85);
     }
 </style>
 

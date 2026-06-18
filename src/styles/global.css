@@ -56,9 +56,15 @@
         }
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 480px) {
         :root {
             --font-size: 14px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        :root {
+            --font-size: 12px;
         }
     }
 
@@ -87,7 +93,7 @@
 
     a:not(.workspace):not([is-='button']) {
         text-decoration: underline;
-        color: var(--foreground2);
+        color: var(--blue-fg);
         word-break: break-all;
 
         &[target='_blank']::after {
@@ -110,20 +116,6 @@
             --spinner-chars: '█ █';
             --spinner-steps: 3;
             --spinner-duration: 1.5s;
-        }
-    }
-
-    a[is-='link'] {
-        color: var(--blue-fg);
-        text-decoration: underline;
-        display: inline-flex;
-        &::before {
-            content: '<';
-            color: var(--blue-fg);
-        }
-        &[target='_blank']::after {
-            content: '↗>';
-            color: var(--blue-fg);
         }
     }
 

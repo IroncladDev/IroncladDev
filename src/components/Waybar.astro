@@ -1,5 +1,5 @@
 <row id="waybar" gap-="1">
-    <waybar-state data-route="/"></waybar-state>
+    <waybar-state data-route="/" style="display: none;"></waybar-state>
     <row id="workspaces" self-="grow">
         <a class="workspace" href="/">
             <span is-="badge">1</span>
@@ -13,20 +13,17 @@
                 >Showcase</span
             >
         </a>
-        <a class="workspace" href="/links">
-            <span is-="badge">3</span>
-            <span is-="badge" variant-="background2" cap-="square round"
-                >Links</span
-            >
-        </a>
     </row>
-    <a href="/resume" style="color: var(--surface1)">View Resume</a>
+    <row self-="!shrink">
+        <a href="/resume" style="color: var(--foreground1)">View Resume</a>
+    </row>
 </row>
 
 <style>
     #waybar {
         background-color: var(--surface1);
-        padding: 0.5lh 2ch;
+        padding: 0.5lh 1ch;
+        align-items: center;
         #workspaces {
             flex-wrap: wrap;
             gap: 0 1ch;
@@ -54,6 +51,24 @@
                 --badge-color: var(--green-fg);
                 color: var(--root);
             }
+        }
+    }
+
+    @media (max-width: 480px) {
+        .workspace span,
+        .workspace span::before,
+        .workspace span::after {
+            height: 2lh;
+            align-items: center;
+        }
+
+        .workspace span:first-child {
+            border-top-left-radius: 4px;
+            overflow: hidden;
+        }
+
+        .workspace span:last-child::after {
+            border-bottom-right-radius: 0;
         }
     }
 </style>
