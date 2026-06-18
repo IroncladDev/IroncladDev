@@ -7,13 +7,13 @@
                 >Info</span
             >
         </a>
-        <a class="workspace" href="/showcase.html">
+        <a class="workspace" href="/showcase">
             <span is-="badge">2</span>
             <span is-="badge" variant-="background2" cap-="square round"
                 >Showcase</span
             >
         </a>
-        <a class="workspace" href="/links.html">
+        <a class="workspace" href="/links">
             <span is-="badge">3</span>
             <span is-="badge" variant-="background2" cap-="square round"
                 >Links</span
@@ -47,9 +47,8 @@
         }
 
         html:has(waybar-state[data-route='/']) &[href='/'],
-        html:has(waybar-state[data-route='/links.html']) &[href='/links.html'],
-        html:has(waybar-state[data-route='/showcase.html'])
-            &[href='/showcase.html'] {
+        html:has(waybar-state[data-route='/links']) &[href='/links'],
+        html:has(waybar-state[data-route='/showcase']) &[href='/showcase'] {
             & > span:first-child {
                 --badge-color: var(--green-fg);
                 color: var(--root);
