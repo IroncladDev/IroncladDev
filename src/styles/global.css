@@ -7,6 +7,7 @@
 @import '@webtui/css/components/badge.css';
 @import '@webtui/css/components/separator.css';
 @import '@webtui/css/components/spinner.css';
+@import '@webtui/css/components/mark.css';
 
 @import '@/styles/flexbox.css';
 @import '@/styles/padding.css';
