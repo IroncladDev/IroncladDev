@@ -15,7 +15,14 @@
         </a>
     </row>
     <row self-="!shrink">
-        <a href="/resume" style="color: var(--foreground1)">View Resume</a>
+        <a href="/resume" id="resume-desktop" style="color: var(--foreground1)"
+            >View Resume</a
+        >
+        <a
+            href="/Conner Ow - Senior Frontend_Mobile Engineer.pdf"
+            id="resume-mobile"
+            style="color: var(--foreground1)">View Resume</a
+        >
     </row>
 </row>
 
@@ -27,6 +34,23 @@
         #workspaces {
             flex-wrap: wrap;
             gap: 0 1ch;
+        }
+    }
+
+    #resume-desktop {
+        display: inline-flex;
+    }
+
+    #resume-mobile {
+        display: none;
+    }
+
+    @media (max-width: 720px) {
+        #resume-desktop {
+            display: none;
+        }
+        #resume-mobile {
+            display: inline-flex;
         }
     }
 
