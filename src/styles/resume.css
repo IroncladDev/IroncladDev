@@ -3,6 +3,12 @@
     margin: 0;
 }
 
+@layer base {
+    :root {
+        --font-size: 15px !important;
+    }
+}
+
 #print-header {
     background-color: var(--background1);
 }
@@ -36,7 +42,6 @@
 * {
     print-color-adjust: exact;
     word-break: break-word;
-    font-size: 15px;
 }
 
 header {

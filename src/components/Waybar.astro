@@ -45,8 +45,8 @@
         }
 
         html:has(waybar-state[data-route='/']) &[href='/'],
-        html:has(waybar-state[data-route='/links']) &[href='/links'],
-        html:has(waybar-state[data-route='/showcase']) &[href='/showcase'] {
+        html:has(waybar-state[data-route^='/links']) &[href='/links'],
+        html:has(waybar-state[data-route^='/showcase']) &[href='/showcase'] {
             & > span:first-child {
                 --badge-color: var(--green-fg);
                 color: var(--root);
