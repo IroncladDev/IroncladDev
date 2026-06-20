@@ -98,6 +98,16 @@
         &[target='_blank']::after {
             content: '↗';
         }
+
+        &:focus {
+            color: var(--green-fg);
+            &::before {
+                content: '>';
+            }
+            &::after {
+                content: '<';
+            }
+        }
     }
 
     a[is-='button'] {
@@ -138,6 +148,7 @@
 
     p {
         word-break: break-word;
+        color: var(--foreground0);
     }
 
     button:disabled {

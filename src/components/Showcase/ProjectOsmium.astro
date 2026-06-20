@@ -3,5 +3,40 @@ import ShowcaseProject from '@/components/ShowcaseProject/index.astro'
 ---
 
 <ShowcaseProject projectId="3" projectName="osmium">
-    <column>osmium</column>
+    <column pad-="2 1" gap-="1">
+        <column gap-="1">
+            <p>Custom metallic color scheme used for Neovim and this website</p>
+            <ul>
+                <li>
+                    <strong>GitHub</strong>: <a
+                        href="https://github.com/IroncladDev/osmium"
+                        target="_blank">github.com/IroncladDev/osmium</a
+                    >
+                </li>
+            </ul>
+        </column>
+
+        <strong><mark fg-="green-fg-dim">History</mark></strong>
+
+        <column pad-="2 0" gap-="1">
+            <p
+                ><mark fg-="purple-fg">Feb 2025</mark> - I come up with a basic color
+                palette for my personal brand</p
+            >
+            <p
+                ><mark fg-="purple-fg">Nov 2025</mark> - Out of curiosity, I port
+                the color palette to use with Neovim and release the osmium theme.
+                I don't actively maintain the theme very often, but I'll add a small
+                improvement here and there.</p
+            >
+        </column>
+
+        <strong><mark fg-="green-fg-dim">Technologies Used</mark></strong>
+
+        <column pad-="2 0" gap-="1">
+            <p>
+                <mark fg-="purple-fg" bg-="purple-bg">&#xe620; Lua</mark>
+            </p>
+        </column>
+    </column>
 </ShowcaseProject>

@@ -1,4 +1,3 @@
-import { $ } from '@/utils/dom'
 import type {
     ShellCommandElement,
     ShellCommandStatus,

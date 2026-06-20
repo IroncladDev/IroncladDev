@@ -4,8 +4,8 @@ import ProjectWebTUI from '@/components/Showcase/ProjectWebTUI.astro'
 import ProjectIroncladSh from '@/components/Showcase/ProjectIroncladSh.astro'
 import ProjectDotfiles from '@/components/Showcase/ProjectDotfiles.astro'
 import ProjectOsmium from '@/components/Showcase/ProjectOsmium.astro'
-import ProjectTehcCringe from '@/components/Showcase/ProjectTehcCringe.astro'
-import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro'
+// import ProjectTehcCringe from '@/components/Showcase/ProjectTehcCringe.astro'
+// import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro'
 ---
 
 <Layout>
@@ -15,8 +15,8 @@ import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro
     <ProjectIroncladSh />
     <ProjectDotfiles />
     <ProjectOsmium />
-    <ProjectTehcCringe />
-    <ProjectAgapeChiroTx />
+    <!-- <ProjectTehcCringe /> -->
+    <!-- <ProjectAgapeChiroTx /> -->
     <column align-="center" id="pagination" slot="footer" pad-="1 0">
         <row style="width: 100%;" gap-="2" id="pagination-indicator">
             <row is-="separator" variant-="background2" self-="grow"></row>
@@ -36,6 +36,9 @@ import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro
 </Layout>
 
 <style>
+    .tile {
+        background-color: var(--surface0-85);
+    }
     #first::after {
         content: '[f]irst';
     }
