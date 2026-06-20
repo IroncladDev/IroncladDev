@@ -1,0 +1,42 @@
+---
+export interface Props {
+    id: string
+    status?: 'idle' | 'running' | 'complete'
+}
+
+const { id, status } = Astro.props
+---
+
+<shell-command {id} data-status={status} is-="column" self-="grow">
+    <span class="cmd-prompt" id={`pre-${id}-prompt`}>
+        <span class="host">user@ironclad.sh:~$</span>
+        <span><slot name="initial-pre-command" /></span>
+    </span>
+    <column id={`command-${id}-content`} self-="grow !basis">
+        <slot />
+    </column>
+    <span class="cmd-prompt" id={`post-${id}-prompt`}>
+        <span class="host">user@ironclad.sh:~$</span>
+        <span><slot name="initial-post-command" /></span>
+    </span>
+</shell-command>
+
+<style>
+    shell-command {
+        overflow-y: hidden;
+    }
+
+    .cmd-prompt {
+        display: inline-flex;
+        white-space: nowrap;
+        .host {
+            color: var(--blue-fg);
+            padding-right: 1ch;
+        }
+    }
+</style>
+
+<script>
+    import { ShellCommandElement } from './ShellCommandElement'
+    customElements.define('shell-command', ShellCommandElement)
+</script>

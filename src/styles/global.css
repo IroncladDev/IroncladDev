@@ -86,6 +86,8 @@
         position: relative;
         display: flex;
         flex-direction: column;
+        scrollbar-width: thin;
+        scrollbar-color: var(--foreground2) var(--background2);
     }
 
     a:not(.workspace):not([is-='button']) {

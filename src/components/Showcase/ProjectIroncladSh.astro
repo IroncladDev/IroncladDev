@@ -1,67 +1,10 @@
 ---
-import ShellPrompt from '@/components/ShellPrompt.astro'
+import ShowcaseProject from '@/components/ShowcaseProject/index.astro'
 ---
 
-<column class="tile" data-project-id="2" data-project-name="ironcladsh">
-    <ShellPrompt id="pre-ironcladsh-prompt" />
-    <column id="ironcladsh-man-content">
-        <column> ironcladsh manual ig idk </column>
-        <row id="running-controls" gap-="1">
-            <button id="ironcladsh-prev" variant-="background2">Prev</button>
-            <button id="ironcladsh-next" autofocus>Next</button>
-        </row>
-    </column>
-    <ShellPrompt id="post-ironcladsh-prompt" />
-</column>
-
-<style is:global>
-    [data-project-id='2'] {
-        :has(showcase-state[data-focus='2']) & {
-            #ironcladsh-man-content,
-            #running-controls,
-            #post-ironcladsh-prompt {
-                display: none;
-            }
-
-            :has(showcase-state[data-cmd-status='running']) & {
-                #ironcladsh-man-content {
-                    display: flex;
-                }
-                #running-controls {
-                    display: flex;
-                }
-            }
-
-            :has(showcase-state[data-cmd-status='complete']) & {
-                #ironcladsh-man-content {
-                    display: flex;
-                }
-                #post-ironcladsh-prompt {
-                    display: flex;
-                }
-            }
-        }
-    }
-</style>
-
-<script>
-    import { $ } from '@/utils/dom'
-    import { waitFor } from '@/utils/time'
-    import { insertCursorBeforeEnd } from '@/utils/cursor'
-
-    const showcaseState = $('showcase-state')
-
-    $('#ironcladsh-next')?.addEventListener('click', async () => {
-        showcaseState?.setAttribute('data-cmd-status', 'complete')
-        insertCursorBeforeEnd($('#post-ironcladsh-prompt'))
-        await waitFor(250)
-        showcaseState?.setAttribute('data-open', '3')
-    })
-
-    $('#ironcladsh-prev')?.addEventListener('click', async () => {
-        showcaseState?.setAttribute('data-cmd-status', 'complete')
-        insertCursorBeforeEnd($('#post-ironcladsh-prompt'))
-        await waitFor(250)
-        showcaseState?.setAttribute('data-open', '1')
-    })
-</script>
+<ShowcaseProject
+    projectId="1"
+    projectName="ironcladsh"
+    projectCommand="ironclad.sh">
+    <column>ironclad dot sh</column>
+</ShowcaseProject>

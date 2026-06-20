@@ -1,17 +1,25 @@
 import { $ } from './dom'
 import type { KeyInteraction } from './keys'
 
-export const promptCursor = $<'span'>('#prompt-cursor')
+const getOrCreatePromptCursor = () => {
+    const promptCursor = $<'span'>('#prompt-cursor')
+    if (promptCursor) return promptCursor
+
+    const newCursor = document.createElement('span')
+    newCursor.setAttribute('is-', 'spinner')
+    newCursor.setAttribute('variant-', 'block')
+    newCursor.setAttribute('id', 'prompt-cursor')
+
+    return newCursor
+}
 
 export const getPromptTextNode = () =>
-    promptCursor?.previousElementSibling as HTMLSpanElement
+    getOrCreatePromptCursor().previousElementSibling as HTMLSpanElement
 
 export const setPromptTextNode = (seq: KeyInteraction[]) => {
     getPromptTextNode().innerText = seq.map((s) => s.originalKey).join('')
 }
 
 export const insertCursorBeforeEnd = (node?: HTMLElement | null) => {
-    if (!promptCursor) return
-
-    node?.insertAdjacentElement('beforeend', promptCursor)
+    node?.insertAdjacentElement('beforeend', getOrCreatePromptCursor())
 }

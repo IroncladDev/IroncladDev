@@ -1,22 +1,19 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import ProjectWebTUI from '@/components/Showcase/ProjectWebTUI.astro'
-import ProjectDotfiles from '@/components/Showcase/ProjectDotfiles.astro'
 import ProjectIroncladSh from '@/components/Showcase/ProjectIroncladSh.astro'
+import ProjectDotfiles from '@/components/Showcase/ProjectDotfiles.astro'
 import ProjectOsmium from '@/components/Showcase/ProjectOsmium.astro'
 import ProjectTehcCringe from '@/components/Showcase/ProjectTehcCringe.astro'
 import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro'
 ---
 
 <Layout>
-    <showcase-state
-        data-open="0"
-        data-focus=""
-        data-cmd-status="idle"
-        style="display: none;"></showcase-state>
+    <showcase-state data-open="0" data-focus="" style="display: none;"
+    ></showcase-state>
     <ProjectWebTUI />
-    <ProjectDotfiles />
     <ProjectIroncladSh />
+    <ProjectDotfiles />
     <ProjectOsmium />
     <ProjectTehcCringe />
     <ProjectAgapeChiroTx />
@@ -24,10 +21,11 @@ import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro
 
 <script>
     import { waitFor } from '@/utils/time'
-    import { $, $$ } from '@/utils/dom'
+    import { $ } from '@/utils/dom'
     import { tapSequence } from '@/utils/keyboard'
     import AppStateListener from '@/utils/state'
     import { setPromptTextNode, insertCursorBeforeEnd } from '@/utils/cursor'
+    import type { ShowcaseProjectElement } from '@/components/ShowcaseProject/ShowcaseProjectElement'
 
     const showcaseState = $('showcase-state')
 
@@ -36,7 +34,9 @@ import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro
         .on('data-open', async ({ value }) => {
             if (!value) return
 
-            const tiles = $$<'div'>('.tile')
+            const tiles = document.querySelectorAll(
+                '.tile',
+            ) as NodeListOf<ShowcaseProjectElement>
             const tileToOpen = Array.from(tiles).find(
                 (t) => t.getAttribute('data-project-id') === value,
             )
@@ -52,7 +52,7 @@ import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro
             for (const tile of tiles) {
                 if (tile.getAttribute('data-project-id') === value) {
                     continue
-                } else {
+                } else if (tile.classList.contains('initial')) {
                     await waitFor(250)
                     await tapSequence('<M-w>')
                     tile.style.animationName = 'remove'
@@ -60,7 +60,8 @@ import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro
                 }
             }
 
-            showcaseState?.setAttribute('data-cmd-status', 'idle')
+            tileToOpen.setCommandStatus('idle')
+
             showcaseState?.setAttribute('data-focus', value)
 
             await runProjectCommand(tileToOpen)
@@ -69,14 +70,16 @@ import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro
         .on('data-focus', async ({ value }) => {
             if (!value) return
 
-            const tileToShow = $(`[data-project-id='${value}']`)
+            const tileToShow = $(
+                `[data-project-id='${value}']`,
+            ) as ShowcaseProjectElement
 
             if (!tileToShow) return
 
             await runProjectCommand(tileToShow)
         })
 
-    async function runProjectCommand(projectTileNode: HTMLElement) {
+    async function runProjectCommand(projectTileNode: ShowcaseProjectElement) {
         const tilePrompts = projectTileNode.querySelectorAll(
             '.cmd-prompt',
         ) as NodeListOf<HTMLSpanElement>
@@ -84,20 +87,25 @@ import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro
         insertCursorBeforeEnd(tilePrompts[0])
 
         await tapSequence(
-            `man ${projectTileNode.getAttribute('data-project-name')}<CR>`,
+            `man ${projectTileNode.getAttribute('data-project-command') ?? projectTileNode.getAttribute('data-project-name')}<CR>`,
             {
                 onType: setPromptTextNode,
             },
         )
 
-        showcaseState?.setAttribute('data-cmd-status', 'running')
+        projectTileNode.setCommandStatus('running')
 
-        const elementToFocus = projectTileNode.querySelector(
-            '[autofocus]',
-        ) as HTMLElement
+        const nextButton = projectTileNode.querySelector(
+            '#next',
+        ) as HTMLButtonElement
+        const prevButton = projectTileNode.querySelector(
+            '#prev',
+        ) as HTMLButtonElement
 
-        if (elementToFocus) {
-            elementToFocus.focus()
+        if (!nextButton.disabled) {
+            nextButton.focus()
+        } else {
+            prevButton.focus()
         }
     }
 

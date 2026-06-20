@@ -1,33 +1,33 @@
 ---
-import ShellPrompt from '@/components/ShellPrompt.astro'
+import ShellCommand from '@/components/ShellCommand/index.astro'
 ---
 
 <column id="ssh-process">
-    <ShellPrompt id="pre-ssh-prompt" initial="ssh ironclad.sh" />
-    <column id="ssh-content">
-        <span
-            >The authenticity of host <mark fg-="green-fg"
-                ><strong>'ironclad.sh'</strong></mark
-            > is <em><mark fg-="blue-fg-dim">almost</mark></em> established.</span
-        >
-        <span
-            >Are you sure you want to continue connecting (yes/<strike
-                >no</strike
-            >/[fingerprint])?</span
-        >
-        <row gap-="1">
-            <button id="yes-button">yes</button>
-            <button variant-="background2" disabled>no</button>
-            <button id="fingerprint-button" variant-="background2"
-                >[fingerprint]</button
+    <ShellCommand id="ssh">
+        <span slot="initial-pre-command">ssh ironclad.sh</span>
+        <column id="ssh-content">
+            <span
+                >The authenticity of host <mark fg-="green-fg"
+                    ><strong>'ironclad.sh'</strong></mark
+                > is <em><mark fg-="blue-fg-dim">almost</mark></em> established.</span
             >
-        </row>
-    </column>
-    <ShellPrompt id="post-ssh-prompt" hasCursor />
+            <span
+                >Are you sure you want to continue connecting (yes/<strike
+                    >no</strike
+                >/[fingerprint])?</span
+            >
+            <row gap-="1">
+                <button id="yes-button">yes</button>
+                <button variant-="background2" disabled>no</button>
+                <button id="fingerprint-button" variant-="background2"
+                    >[fingerprint]</button
+                >
+            </row>
+        </column>
+    </ShellCommand>
 </column>
 
 <style is:global>
-    #post-ssh-prompt,
     #ssh-process {
         display: none;
     }
@@ -36,18 +36,5 @@ import ShellPrompt from '@/components/ShellPrompt.astro'
         #ssh-process {
             display: flex;
         }
-    }
-
-    :has(info-state[data-cmd-status='complete']) {
-        #post-ssh-prompt {
-            display: flex;
-        }
-    }
-
-    #host-string {
-        color: var(--green-fg-dim);
-    }
-    #almost-em {
-        color: var(--blue-fg-dim);
     }
 </style>
