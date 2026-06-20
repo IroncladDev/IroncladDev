@@ -21,5 +21,7 @@ export const setPromptTextNode = (seq: KeyInteraction[]) => {
 }
 
 export const insertCursorBeforeEnd = (node?: HTMLElement | null) => {
-    node?.insertAdjacentElement('beforeend', getOrCreatePromptCursor())
+    const promptCursor = getOrCreatePromptCursor()
+    node?.insertAdjacentElement('beforeend', promptCursor)
+    promptCursor.scrollIntoView()
 }

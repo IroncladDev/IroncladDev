@@ -95,9 +95,12 @@ const description =
         </div>
         <column id="screen">
             <Waybar />
-            <div id="tiles">
-                <slot />
-            </div>
+            <column id="tiles-container">
+                <div id="tiles">
+                    <slot />
+                </div>
+                <slot name="footer" />
+            </column>
         </column>
     </body>
 </html>

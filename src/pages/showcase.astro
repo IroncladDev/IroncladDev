@@ -17,17 +17,103 @@ import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro
     <ProjectOsmium />
     <ProjectTehcCringe />
     <ProjectAgapeChiroTx />
+    <column align-="center" id="pagination" slot="footer" pad-="1 0">
+        <row style="width: 100%;" gap-="2" id="pagination-indicator">
+            <row is-="separator" variant-="background2" self-="grow"></row>
+            <mark fg-="foreground1"
+                >(<span id="current-index">1</span>/<span id="total-index"
+                ></span>)</mark
+            >
+            <row is-="separator" variant-="background2" self-="grow"></row>
+        </row>
+        <row gap-="1" id="pagination-buttons">
+            <button id="first" variant-="green-bg"></button>
+            <button id="prev" variant-="green-bg"></button>
+            <button id="next" variant-="green-bg"></button>
+            <button id="last" variant-="green-bg"></button>
+        </row>
+    </column>
 </Layout>
+
+<style>
+    #first::after {
+        content: '[f]irst';
+    }
+    #prev::after {
+        content: '[p]rev';
+    }
+    #next::after {
+        content: '[n]ext';
+    }
+    #last::after {
+        content: '[l]ast';
+    }
+
+    #pagination-buttons button::before {
+        display: none;
+    }
+    #pagination-buttons button::after {
+        display: inline;
+    }
+
+    #pagination {
+        width: 100%;
+        background-color: var(--background1);
+
+        td {
+            color: var(--foreground1);
+        }
+    }
+
+    @media (max-width: 480px) {
+        table,
+        td button {
+            width: 100%;
+        }
+        #pagination-indicator {
+            display: none;
+        }
+        #pagination-buttons {
+            width: 100%;
+        }
+        #pagination-buttons button {
+            flex: 1;
+            white-space: nowrap;
+        }
+        #first::after {
+            content: '<<';
+        }
+        #prev::after {
+            content: '<';
+        }
+        #next::after {
+            content: '>';
+        }
+        #last::after {
+            content: '>>';
+        }
+    }
+</style>
 
 <script>
     import { waitFor } from '@/utils/time'
-    import { $ } from '@/utils/dom'
+    import { $, $$ } from '@/utils/dom'
     import { tapSequence } from '@/utils/keyboard'
     import AppStateListener from '@/utils/state'
     import { setPromptTextNode, insertCursorBeforeEnd } from '@/utils/cursor'
     import type { ShowcaseProjectElement } from '@/components/ShowcaseProject/ShowcaseProjectElement'
+    import type { ShellCommandElement } from '@/components/ShellCommand/ShellCommandElement'
 
-    const showcaseState = $('showcase-state')
+    const showcaseState = $('showcase-state')!
+    const prevButton = $<'button'>('#prev')!
+    const nextButton = $<'button'>('#next')!
+    const firstButton = $<'button'>('#first')!
+    const lastButton = $<'button'>('#last')!
+    const projects = $$<'showcase-project'>('showcase-project')
+
+    $('#total-index')!.innerText = projects.length.toString()
+
+    let navigationController = new AbortController()
 
     new AppStateListener('showcase-state')
         // data-open controls the tile that is being opened
@@ -41,11 +127,16 @@ import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro
                 (t) => t.getAttribute('data-project-id') === value,
             )
 
+            $(`#current-index`)!.innerText = String(Number(value) + 1)
+
             if (!tileToOpen) return
 
-            await waitFor(250)
-            await tapSequence('<M-t>')
-            await waitFor(250)
+            navigationController.abort()
+            navigationController = new AbortController()
+
+            await waitFor(250, navigationController)
+            await tapSequence('<M-t>', navigationController)
+            await waitFor(250, navigationController)
             tileToOpen.style.animationName = 'place'
             tileToOpen.classList.add('initial')
 
@@ -53,18 +144,15 @@ import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro
                 if (tile.getAttribute('data-project-id') === value) {
                     continue
                 } else if (tile.classList.contains('initial')) {
-                    await waitFor(250)
-                    await tapSequence('<M-w>')
+                    await waitFor(250, navigationController)
+                    await tapSequence('<M-w>', navigationController)
                     tile.style.animationName = 'remove'
                     tile.classList.remove('initial')
                 }
             }
 
             tileToOpen.setCommandStatus('idle')
-
             showcaseState?.setAttribute('data-focus', value)
-
-            await runProjectCommand(tileToOpen)
         })
         // data-focus controls when a tile comes into focus (after others are closed)
         .on('data-focus', async ({ value }) => {
@@ -87,29 +175,101 @@ import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro
         insertCursorBeforeEnd(tilePrompts[0])
 
         await tapSequence(
-            `man ${projectTileNode.getAttribute('data-project-command') ?? projectTileNode.getAttribute('data-project-name')}<CR>`,
+            `tldr ${projectTileNode.getAttribute('data-project-command') ?? projectTileNode.getAttribute('data-project-name')}<CR>`,
             {
                 onType: setPromptTextNode,
+                signal: navigationController.signal,
             },
         )
 
         projectTileNode.setCommandStatus('running')
-
-        const nextButton = projectTileNode.querySelector(
-            '#next',
-        ) as HTMLButtonElement
-        const prevButton = projectTileNode.querySelector(
-            '#prev',
-        ) as HTMLButtonElement
-
-        if (!nextButton.disabled) {
-            nextButton.focus()
-        } else {
-            prevButton.focus()
-        }
     }
 
     window.addEventListener('load', () => {
         showcaseState?.setAttribute('data-focus', '0')
     })
+
+    function updatePaginationStatuses() {
+        const currentProject = projects.find(
+            (p) =>
+                p.getAttribute('data-project-id') ===
+                showcaseState.getAttribute('data-open'),
+        )
+        const projectCommand = currentProject?.querySelector(
+            'shell-command',
+        ) as ShellCommandElement
+        const projectId = currentProject?.getAttribute('data-project-id')
+
+        prevButton.disabled = false
+        nextButton.disabled = false
+        firstButton.disabled = false
+        lastButton.disabled = false
+
+        prevButton.setAttribute('variant-', 'green-bg')
+        nextButton.setAttribute('variant-', 'green-bg')
+        firstButton.setAttribute('variant-', 'green-bg')
+        lastButton.setAttribute('variant-', 'green-bg')
+
+        if (projectId === '0') {
+            prevButton.disabled = true
+            firstButton.disabled = true
+            prevButton.setAttribute('variant-', 'background2')
+            firstButton.setAttribute('variant-', 'background2')
+        }
+
+        if (projectId === projects.at(-1)?.getAttribute('data-project-id')) {
+            nextButton.disabled = true
+            lastButton.disabled = true
+            nextButton.setAttribute('variant-', 'background2')
+            lastButton.setAttribute('variant-', 'background2')
+        }
+
+        prevButton.onclick = () => {
+            projectCommand.setStatus('complete').focusPostCursor()
+            showcaseState?.setAttribute('data-open', `${Number(projectId) - 1}`)
+            updatePaginationStatuses()
+        }
+
+        nextButton.onclick = () => {
+            projectCommand.setStatus('complete').focusPostCursor()
+            showcaseState?.setAttribute('data-open', `${Number(projectId) + 1}`)
+            updatePaginationStatuses()
+        }
+
+        firstButton.onclick = () => {
+            projectCommand.setStatus('complete').focusPostCursor()
+            showcaseState?.setAttribute('data-open', '0')
+            updatePaginationStatuses()
+        }
+
+        lastButton.onclick = () => {
+            projectCommand.setStatus('complete').focusPostCursor()
+            showcaseState?.setAttribute(
+                'data-open',
+                projects.at(-1)?.getAttribute('data-project-id') ?? '0',
+            )
+            updatePaginationStatuses()
+        }
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'p') {
+            prevButton.focus()
+            prevButton.click()
+        }
+        if (e.key === 'ArrowRight' || e.key === 'n') {
+            nextButton.focus()
+            nextButton.click()
+        }
+        if (e.key === 'f') {
+            firstButton.focus()
+            firstButton.click()
+        }
+        if (e.key === 'l') {
+            lastButton.focus()
+            lastButton.click()
+        }
+    })
+
+    updatePaginationStatuses()
 </script>

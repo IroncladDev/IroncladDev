@@ -1,5 +1,11 @@
 import { insertCursorBeforeEnd } from '@/utils/cursor'
 
+declare global {
+    interface HTMLElementTagNameMap {
+        'shell-command': ShellCommandElement
+    }
+}
+
 export type ShellCommandStatus = 'idle' | 'running' | 'complete'
 export class ShellCommandElement extends HTMLElement {
     connectedCallback() {

@@ -18,45 +18,12 @@ const { projectId, projectName, projectCommand, isInitial } = Astro.props
     data-project-command={projectCommand}
     class={isInitial ? 'tile initial' : 'tile'}
     is-="column">
-    <ShellCommand id={projectName}>
-        <column self-="grow !basis" class="showcase-content">
+    <column class="tile-content">
+        <ShellCommand id={projectName}>
             <slot />
-        </column>
-        <div is-="separator" variant-="background2"></div>
-        <row align-="center">
-            <table id={`button-controls-${projectName}`} divide-="none">
-                <tr>
-                    <td>first</td>
-                    <td>prev</td>
-                    <td style="text-align: right;">next</td>
-                    <td style="text-align: right;">last</td>
-                </tr>
-                <tr>
-                    <td
-                        ><button id="first" variant-="green-bg">&lt;&lt;</button
-                        ></td
-                    >
-                    <td><button id="prev" variant-="green-bg">&lt;</button></td>
-                    <td><button id="next" variant-="green-bg">&gt;</button></td>
-                    <td
-                        ><button id="last" variant-="green-bg">&gt;&gt;</button
-                        ></td
-                    >
-                </tr>
-            </table>
-        </row>
-    </ShellCommand>
+        </ShellCommand>
+    </column>
 </showcase-project>
-
-<style>
-    .showcase-content {
-        overflow-y: auto;
-    }
-
-    td {
-        color: var(--foreground1);
-    }
-</style>
 
 <script>
     import { ShowcaseProjectElement } from './ShowcaseProjectElement'
