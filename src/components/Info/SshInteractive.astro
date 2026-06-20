@@ -23,9 +23,7 @@ import ShellPrompt from '@/components/ShellPrompt.astro'
             >
         </row>
     </column>
-    <ShellPrompt id="post-ssh-prompt">
-        <span id="prompt-cursor" is-="spinner" variant-="block"></span>
-    </ShellPrompt>
+    <ShellPrompt id="post-ssh-prompt" hasCursor />
 </column>
 
 <style is:global>
@@ -34,13 +32,13 @@ import ShellPrompt from '@/components/ShellPrompt.astro'
         display: none;
     }
 
-    html:has(info-state[data-page='ssh']) {
+    :has(info-state[data-page='ssh']) {
         #ssh-process {
             display: flex;
         }
     }
 
-    html:has(info-state[data-cmd-status='complete']) {
+    :has(info-state[data-cmd-status='complete']) {
         #post-ssh-prompt {
             display: flex;
         }

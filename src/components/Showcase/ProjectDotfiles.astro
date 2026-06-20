@@ -1,0 +1,67 @@
+---
+import ShellPrompt from '@/components/ShellPrompt.astro'
+---
+
+<column class="tile" data-project-id="1" data-project-name="dotfiles">
+    <ShellPrompt id="pre-dotfiles-prompt" />
+    <column id="dotfiles-man-content">
+        <column> dotfiles manual ig idk </column>
+        <row id="running-controls" gap-="1">
+            <button id="dotfiles-prev" variant-="background2">Prev</button>
+            <button id="dotfiles-next" autofocus>Next</button>
+        </row>
+    </column>
+    <ShellPrompt id="post-dotfiles-prompt" />
+</column>
+
+<style is:global>
+    [data-project-id='1'] {
+        :has(showcase-state[data-focus='1']) & {
+            #dotfiles-man-content,
+            #running-controls,
+            #post-dotfiles-prompt {
+                display: none;
+            }
+
+            :has(showcase-state[data-cmd-status='running']) & {
+                #dotfiles-man-content {
+                    display: flex;
+                }
+                #running-controls {
+                    display: flex;
+                }
+            }
+
+            :has(showcase-state[data-cmd-status='complete']) & {
+                #dotfiles-man-content {
+                    display: flex;
+                }
+                #post-dotfiles-prompt {
+                    display: flex;
+                }
+            }
+        }
+    }
+</style>
+
+<script>
+    import { $ } from '@/utils/dom'
+    import { waitFor } from '@/utils/time'
+    import { insertCursorBeforeEnd } from '@/utils/cursor'
+
+    const showcaseState = $('showcase-state')
+
+    $('#dotfiles-next')?.addEventListener('click', async () => {
+        showcaseState?.setAttribute('data-cmd-status', 'complete')
+        insertCursorBeforeEnd($('#post-dotfiles-prompt'))
+        await waitFor(250)
+        showcaseState?.setAttribute('data-open', '2')
+    })
+
+    $('#dotfiles-prev')?.addEventListener('click', async () => {
+        showcaseState?.setAttribute('data-cmd-status', 'complete')
+        insertCursorBeforeEnd($('#post-dotfiles-prompt'))
+        await waitFor(250)
+        showcaseState?.setAttribute('data-open', '0')
+    })
+</script>

@@ -26,7 +26,7 @@
     </row>
 </row>
 
-<style>
+<style is:global>
     #waybar {
         background-color: var(--surface1);
         padding: 0.5lh 1ch;
@@ -68,9 +68,9 @@
             color: var(--foreground0);
         }
 
-        html:has(waybar-state[data-route='/']) &[href='/'],
-        html:has(waybar-state[data-route^='/links']) &[href='/links'],
-        html:has(waybar-state[data-route^='/showcase']) &[href='/showcase'] {
+        :has(waybar-state[data-route='/']) &[href='/'],
+        :has(waybar-state[data-route^='/links']) &[href='/links'],
+        :has(waybar-state[data-route^='/showcase']) &[href='/showcase'] {
             & > span:first-child {
                 --badge-color: var(--green-fg);
                 color: var(--root);

@@ -1,123 +1,107 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import Project from '@/components/Projects/Project.astro'
+import ProjectWebTUI from '@/components/Showcase/ProjectWebTUI.astro'
+import ProjectDotfiles from '@/components/Showcase/ProjectDotfiles.astro'
+import ProjectIroncladSh from '@/components/Showcase/ProjectIroncladSh.astro'
+import ProjectOsmium from '@/components/Showcase/ProjectOsmium.astro'
+import ProjectTehcCringe from '@/components/Showcase/ProjectTehcCringe.astro'
+import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro'
 ---
 
 <Layout>
-    <div class="tile initial">
-        <column class="tile-content">
-            <column gap-="1" id="projects-list">
-                <Project
-                    title="WebTUI"
-                    url="https://webtui.ironclad.sh"
-                    repo="webtui"
-                    user="webtui"
-                />
-                <Project
-                    title="ironclad.sh"
-                    url="https://ironclad.sh"
-                    user="IroncladDev"
-                    repo="IroncladDev"
-                />
-                <Project title="Dotfiles" user="IroncladDev" repo="dotfiles" />
-                <Project
-                    title="TehcCringe"
-                    user="TehcCringe"
-                    repo="TehcCringe"
-                    url="https://tehccringe.com"
-                />
-                <Project title="Osmium" user="IroncladDev" repo="osmium" />
-                <Project title="htmx-cli" user="IroncladDev" repo="htmx-cli" />
-                <Project
-                    title="Agape Chiropractic TX"
-                    user="IroncladDev"
-                    repo="AgapeChiroTx"
-                />
-                <Project
-                    title="kuhnhong.com"
-                    user="IroncladDev"
-                    repo="KuhnHong"
-                />
-            </column>
-        </column>
-        <column id="end-block">
-            <row gap-="2" id="end-keys">
-                <span>j/↓ next</span>
-                <span>k/↑ prev</span>
-                <span>⏎ open</span>
-            </row>
-            <row>
-                <span>:█</span>
-            </row>
-        </column>
-    </div>
+    <showcase-state
+        data-open="0"
+        data-focus=""
+        data-cmd-status="idle"
+        style="display: none;"></showcase-state>
+    <ProjectWebTUI />
+    <ProjectDotfiles />
+    <ProjectIroncladSh />
+    <ProjectOsmium />
+    <ProjectTehcCringe />
+    <ProjectAgapeChiroTx />
 </Layout>
 
-<style>
-    #projects-list {
-        max-width: var(--max-reading-width);
-    }
-
-    .content {
-        inset: 0 0 3lh 0;
-    }
-
-    #end-block {
-        position: absolute;
-        bottom: 1lh;
-        left: 2ch;
-
-        #end-keys {
-            color: var(--blue-fg-dim);
-        }
-    }
-
-    @media (max-width: 720px) {
-        .content {
-            inset: 0 0 2lh 0;
-        }
-
-        #end-keys {
-            display: none;
-        }
-    }
-</style>
-
 <script>
-    const firstProject = document.querySelector('.project') as HTMLElement
-    const projects = document.querySelectorAll(
-        '.project',
-    ) as NodeListOf<HTMLElement>
+    import { waitFor } from '@/utils/time'
+    import { $, $$ } from '@/utils/dom'
+    import { tapSequence } from '@/utils/keyboard'
+    import AppStateListener from '@/utils/state'
+    import { setPromptTextNode, insertCursorBeforeEnd } from '@/utils/cursor'
+
+    const showcaseState = $('showcase-state')
+
+    new AppStateListener('showcase-state')
+        // data-open controls the tile that is being opened
+        .on('data-open', async ({ value }) => {
+            if (!value) return
+
+            const tiles = $$<'div'>('.tile')
+            const tileToOpen = Array.from(tiles).find(
+                (t) => t.getAttribute('data-project-id') === value,
+            )
+
+            if (!tileToOpen) return
+
+            await waitFor(250)
+            await tapSequence('<M-t>')
+            await waitFor(250)
+            tileToOpen.style.animationName = 'place'
+            tileToOpen.classList.add('initial')
+
+            for (const tile of tiles) {
+                if (tile.getAttribute('data-project-id') === value) {
+                    continue
+                } else {
+                    await waitFor(250)
+                    await tapSequence('<M-w>')
+                    tile.style.animationName = 'remove'
+                    tile.classList.remove('initial')
+                }
+            }
+
+            showcaseState?.setAttribute('data-cmd-status', 'idle')
+            showcaseState?.setAttribute('data-focus', value)
+
+            await runProjectCommand(tileToOpen)
+        })
+        // data-focus controls when a tile comes into focus (after others are closed)
+        .on('data-focus', async ({ value }) => {
+            if (!value) return
+
+            const tileToShow = $(`[data-project-id='${value}']`)
+
+            if (!tileToShow) return
+
+            await runProjectCommand(tileToShow)
+        })
+
+    async function runProjectCommand(projectTileNode: HTMLElement) {
+        const tilePrompts = projectTileNode.querySelectorAll(
+            '.cmd-prompt',
+        ) as NodeListOf<HTMLSpanElement>
+
+        insertCursorBeforeEnd(tilePrompts[0])
+
+        await tapSequence(
+            `man ${projectTileNode.getAttribute('data-project-name')}<CR>`,
+            {
+                onType: setPromptTextNode,
+            },
+        )
+
+        showcaseState?.setAttribute('data-cmd-status', 'running')
+
+        const elementToFocus = projectTileNode.querySelector(
+            '[autofocus]',
+        ) as HTMLElement
+
+        if (elementToFocus) {
+            elementToFocus.focus()
+        }
+    }
 
     window.addEventListener('load', () => {
-        firstProject.focus()
+        showcaseState?.setAttribute('data-focus', '0')
     })
-
-    projects.forEach((project, i) => {
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === 'j' || event.key === 'ArrowDown') {
-                projects[i + 1]?.focus()
-            }
-
-            if (event.key === 'k' || event.key === 'ArrowUp') {
-                projects[i - 1]?.focus()
-            }
-
-            if (event.key === 'Enter' || event.key === ' ') {
-                window.open(
-                    project.querySelector('a')!.getAttribute('href')!,
-                    '_blank',
-                )
-            }
-        }
-
-        project.addEventListener('focus', () => {
-            project.addEventListener('keydown', handleKeyDown)
-        })
-        project.addEventListener('blur', () => {
-            project.removeEventListener('keydown', handleKeyDown)
-        })
-    })
-
-    firstProject.focus()
 </script>

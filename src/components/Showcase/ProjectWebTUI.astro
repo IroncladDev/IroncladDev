@@ -1,0 +1,67 @@
+---
+import ShellPrompt from '@/components/ShellPrompt.astro'
+---
+
+<column class="tile initial" data-project-id="0" data-project-name="webtui">
+    <ShellPrompt id="pre-webtui-prompt" hasCursor />
+    <column id="webtui-man-content">
+        <column> webtui manual ig idk </column>
+        <row id="running-controls" gap-="1">
+            <button id="webtui-prev" variant-="background2">Prev</button>
+            <button id="webtui-next" autofocus>Next</button>
+        </row>
+    </column>
+    <ShellPrompt id="post-webtui-prompt" />
+</column>
+
+<style is:global>
+    [data-project-id='0'] {
+        :has(showcase-state[data-focus='0']) & {
+            #webtui-man-content,
+            #running-controls,
+            #post-webtui-prompt {
+                display: none;
+            }
+
+            :has(showcase-state[data-cmd-status='running']) & {
+                #webtui-man-content {
+                    display: flex;
+                }
+                #running-controls {
+                    display: flex;
+                }
+            }
+
+            :has(showcase-state[data-cmd-status='complete']) & {
+                #webtui-man-content {
+                    display: flex;
+                }
+                #post-webtui-prompt {
+                    display: flex;
+                }
+            }
+        }
+    }
+</style>
+
+<script>
+    import { $ } from '@/utils/dom'
+    import { waitFor } from '@/utils/time'
+    import { insertCursorBeforeEnd } from '@/utils/cursor'
+
+    const showcaseState = $('showcase-state')
+
+    $('#webtui-next')?.addEventListener('click', async () => {
+        showcaseState?.setAttribute('data-cmd-status', 'complete')
+        insertCursorBeforeEnd($('#post-webtui-prompt'))
+        await waitFor(250)
+        showcaseState?.setAttribute('data-open', '1')
+    })
+
+    $('#webtui-prev')?.addEventListener('click', async () => {
+        showcaseState?.setAttribute('data-cmd-status', 'complete')
+        insertCursorBeforeEnd($('#post-webtui-prompt'))
+        await waitFor(250)
+        showcaseState?.setAttribute('data-open', '5')
+    })
+</script>

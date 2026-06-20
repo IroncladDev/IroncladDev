@@ -2,15 +2,16 @@
 export interface Props {
     initial?: string
     id: string
+    hasCursor?: boolean
 }
 
-const { initial, id } = Astro.props
+const { initial, id, hasCursor } = Astro.props
 ---
 
 <span class="cmd-prompt" {id}>
     <span class="host">user@ironclad.sh:~$</span>
     <span>{initial}</span>
-    <slot />
+    {hasCursor && <span id="prompt-cursor" is-="spinner" variant-="block" />}
 </span>
 
 <style is:global>

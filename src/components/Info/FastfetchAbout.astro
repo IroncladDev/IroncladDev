@@ -122,12 +122,6 @@ const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
                 </p>
             </column>
         </column>
-        <row align-="end" gap-="1" id="link-buttons">
-            <a href="/resume" id="resume-button" is-="button">View Resume</a>
-            <a href="/showcase" is-="button" variant-="background2"
-                >See Showcase</a
-            >
-        </row>
     </column>
     <ShellPrompt id="post-fastfetch-prompt" />
 </column>
@@ -144,12 +138,16 @@ const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
         max-width: var(--max-reading-width);
     }
 
-    html:has(info-state[data-page='fastfetch']) #fastfetch-process {
+    :has(info-state[data-page='fastfetch']) #fastfetch-process {
         display: flex;
     }
 
-    html:has(info-state[data-cmd-status='complete']) {
+    :has(info-state[data-cmd-status='complete']) {
         #fastfetch-content {
+            display: flex;
+        }
+
+        #post-fastfetch-prompt {
             display: flex;
         }
 
@@ -242,12 +240,6 @@ const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
         #fastfetch-row {
             flex-direction: column;
             gap: 1lh;
-        }
-    }
-
-    @media (max-width: 480px) {
-        #link-buttons {
-            display: none;
         }
     }
 </style>
