@@ -4,19 +4,60 @@ import ProjectWebTUI from '@/components/Showcase/ProjectWebTUI.astro'
 import ProjectIroncladSh from '@/components/Showcase/ProjectIroncladSh.astro'
 import ProjectDotfiles from '@/components/Showcase/ProjectDotfiles.astro'
 import ProjectOsmium from '@/components/Showcase/ProjectOsmium.astro'
-// import ProjectTehcCringe from '@/components/Showcase/ProjectTehcCringe.astro'
-// import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro'
+import ProjectTehcCringe from '@/components/Showcase/ProjectTehcCringe.astro'
+import ProjectAmjadGpt from '@/components/Showcase/ProjectAmjadGpt.astro'
+import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro'
+import ProjectHyprdome from '@/components/Showcase/ProjectHyprdome.astro'
+import ProjectIntercepter from '@/components/Showcase/ProjectIntercepter.astro'
+import ProjectOrbitron3 from '@/components/Showcase/ProjectOrbitron3.astro'
+import ProjectFaceTheDarkness from '@/components/Showcase/ProjectFaceTheDarkness.astro'
+import ProjectLLMArena from '@/components/Showcase/ProjectLLMArena.astro'
+import ProjectSalvadoranReclamation from '@/components/Showcase/ProjectSalvadoranReclamation.astro'
+import ShowcaseProject from '@/components/ShowcaseProject/index.astro'
 ---
 
 <Layout>
     <showcase-state data-open="0" data-focus="" style="display: none;"
     ></showcase-state>
-    <ProjectWebTUI />
-    <ProjectIroncladSh />
-    <ProjectDotfiles />
-    <ProjectOsmium />
-    <!-- <ProjectTehcCringe /> -->
-    <!-- <ProjectAgapeChiroTx /> -->
+    <ShowcaseProject projectName="webtui" isInitial>
+        <ProjectWebTUI />
+    </ShowcaseProject>
+    <ShowcaseProject projectName="ironclad-sh">
+        <ProjectIroncladSh />
+    </ShowcaseProject>
+    <ShowcaseProject projectName="dotfiles">
+        <ProjectDotfiles />
+    </ShowcaseProject>
+    <ShowcaseProject projectName="osmium">
+        <ProjectOsmium />
+    </ShowcaseProject>
+    <ShowcaseProject projectName="tehccringe">
+        <ProjectTehcCringe />
+    </ShowcaseProject>
+    <ShowcaseProject projectName="llm-arena">
+        <ProjectLLMArena />
+    </ShowcaseProject>
+    <ShowcaseProject projectName="amjadgpt">
+        <ProjectAmjadGpt />
+    </ShowcaseProject>
+    <ShowcaseProject projectName="hyprdome">
+        <ProjectHyprdome />
+    </ShowcaseProject>
+    <ShowcaseProject projectName="agapechiro-tx">
+        <ProjectAgapeChiroTx />
+    </ShowcaseProject>
+    <ShowcaseProject projectName="interceptor">
+        <ProjectIntercepter />
+    </ShowcaseProject>
+    <ShowcaseProject projectName="salvadoran-reclamation">
+        <ProjectSalvadoranReclamation />
+    </ShowcaseProject>
+    <ShowcaseProject projectName="orbitron3">
+        <ProjectOrbitron3 />
+    </ShowcaseProject>
+    <ShowcaseProject projectName="face-the-darkness">
+        <ProjectFaceTheDarkness />
+    </ShowcaseProject>
     <column align-="center" id="pagination" slot="footer" pad-="1 0">
         <row style="width: 100%;" gap-="2" id="pagination-indicator">
             <row is-="separator" variant-="background2" self-="grow"></row>
@@ -126,9 +167,7 @@ import ProjectOsmium from '@/components/Showcase/ProjectOsmium.astro'
             const tiles = document.querySelectorAll(
                 '.tile',
             ) as NodeListOf<ShowcaseProjectElement>
-            const tileToOpen = Array.from(tiles).find(
-                (t) => t.getAttribute('data-project-id') === value,
-            )
+            const tileToOpen = tiles[Number(value)]
 
             $(`#current-index`)!.innerText = String(Number(value) + 1)
 
@@ -143,8 +182,9 @@ import ProjectOsmium from '@/components/Showcase/ProjectOsmium.astro'
             tileToOpen.style.animationName = 'place'
             tileToOpen.classList.add('initial')
 
-            for (const tile of tiles) {
-                if (tile.getAttribute('data-project-id') === value) {
+            for (let i = 0; i < tiles.length; i++) {
+                const tile = tiles[i]
+                if (i === Number(value)) {
                     continue
                 } else if (tile.classList.contains('initial')) {
                     await waitFor(250, navigationController)
@@ -161,9 +201,9 @@ import ProjectOsmium from '@/components/Showcase/ProjectOsmium.astro'
         .on('data-focus', async ({ value }) => {
             if (!value) return
 
-            const tileToShow = $(
-                `[data-project-id='${value}']`,
-            ) as ShowcaseProjectElement
+            const tileToShow = $$(`showcase-project`)[
+                Number(value)
+            ] as ShowcaseProjectElement
 
             if (!tileToShow) return
 
@@ -178,7 +218,7 @@ import ProjectOsmium from '@/components/Showcase/ProjectOsmium.astro'
         insertCursorBeforeEnd(tilePrompts[0])
 
         await tapSequence(
-            `tldr ${projectTileNode.getAttribute('data-project-command') ?? projectTileNode.getAttribute('data-project-name')}<CR>`,
+            `tldr ${projectTileNode.getAttribute('data-project-name')}<CR>`,
             {
                 onType: setPromptTextNode,
                 signal: navigationController.signal,
@@ -195,13 +235,13 @@ import ProjectOsmium from '@/components/Showcase/ProjectOsmium.astro'
     function updatePaginationStatuses() {
         const currentProject = projects.find(
             (p) =>
-                p.getAttribute('data-project-id') ===
-                showcaseState.getAttribute('data-open'),
+                p.projectId === Number(showcaseState.getAttribute('data-open')),
         )
         const projectCommand = currentProject?.querySelector(
             'shell-command',
         ) as ShellCommandElement
-        const projectId = currentProject?.getAttribute('data-project-id')
+
+        if (!currentProject) return
 
         prevButton.disabled = false
         nextButton.disabled = false
@@ -213,14 +253,14 @@ import ProjectOsmium from '@/components/Showcase/ProjectOsmium.astro'
         firstButton.setAttribute('variant-', 'green-bg')
         lastButton.setAttribute('variant-', 'green-bg')
 
-        if (projectId === '0') {
+        if (currentProject.projectId === 0) {
             prevButton.disabled = true
             firstButton.disabled = true
             prevButton.setAttribute('variant-', 'background2')
             firstButton.setAttribute('variant-', 'background2')
         }
 
-        if (projectId === projects.at(-1)?.getAttribute('data-project-id')) {
+        if (currentProject.projectId === projects.at(-1)?.projectId) {
             nextButton.disabled = true
             lastButton.disabled = true
             nextButton.setAttribute('variant-', 'background2')
@@ -229,13 +269,19 @@ import ProjectOsmium from '@/components/Showcase/ProjectOsmium.astro'
 
         prevButton.onclick = () => {
             projectCommand.setStatus('complete').focusPostCursor()
-            showcaseState?.setAttribute('data-open', `${Number(projectId) - 1}`)
+            showcaseState?.setAttribute(
+                'data-open',
+                `${currentProject.projectId - 1}`,
+            )
             updatePaginationStatuses()
         }
 
         nextButton.onclick = () => {
             projectCommand.setStatus('complete').focusPostCursor()
-            showcaseState?.setAttribute('data-open', `${Number(projectId) + 1}`)
+            showcaseState?.setAttribute(
+                'data-open',
+                `${currentProject.projectId + 1}`,
+            )
             updatePaginationStatuses()
         }
 
@@ -249,7 +295,7 @@ import ProjectOsmium from '@/components/Showcase/ProjectOsmium.astro'
             projectCommand.setStatus('complete').focusPostCursor()
             showcaseState?.setAttribute(
                 'data-open',
-                projects.at(-1)?.getAttribute('data-project-id') ?? '0',
+                String(projects.indexOf(projects.at(-1)!)),
             )
             updatePaginationStatuses()
         }

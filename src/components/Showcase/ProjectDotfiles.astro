@@ -1,55 +1,46 @@
----
-import ShowcaseProject from '@/components/ShowcaseProject/index.astro'
----
-
-<ShowcaseProject projectId="2" projectName="dotfiles">
-    <column pad-="2 1" gap-="1">
-        <column gap-="1">
-            <p
-                >My personal dotfiles for neovim, hyprland, and a few other
-                things</p
-            >
-            <ul>
-                <li>
-                    <strong>GitHub</strong>: <a
-                        href="https://github.com/IroncladDev/dotfiles"
-                        target="_blank">github.com/IroncladDev/dotfiles</a
-                    >
-                </li>
-            </ul>
-        </column>
-
-        <strong><mark fg-="green-fg-dim">History</mark></strong>
-
-        <column pad-="2 0" gap-="1">
-            <p></p>
-            <p
-                ><mark fg-="purple-fg">Nov 2023</mark> - I try Neovim for the first
-                time and switch to using it full-time. I back up only my neovim configuration
-                to github.</p
-            >
-            <p
-                ><mark fg-="purple-fg">Oct 2025</mark> - I switch from MacOS to Omarchy,
-                and this time upload all my important dotfiles to github.</p
-            >
-            <p
-                ><mark fg-="purple-fg">Feg 2026</mark> - I try to run NixOS on my
-                old Mac M2 via Asahi. I create a new branch to upload my nix-specific
-                config to. I never had the time to fully switch to NixOS full-time.</p
-            >
-            <p
-                ><mark fg-="purple-fg">Jun 2026</mark> - I add my config for <code
-                    >jj</code
-                ></p
-            >
-        </column>
-
-        <strong><mark fg-="green-fg-dim">Technologies Used</mark></strong>
-
-        <column pad-="2 0" gap-="1">
-            <p>
-                <mark fg-="purple-fg" bg-="purple-bg">&#xe620; Lua</mark>
-            </p>
-        </column>
+<column pad-="2 1" gap-="1">
+    <column gap-="1">
+        <p>My personal dotfiles for neovim, hyprland, and a few other things</p>
+        <ul>
+            <li>
+                <strong>GitHub</strong>: <a
+                    href="https://github.com/IroncladDev/dotfiles"
+                    target="_blank">github.com/IroncladDev/dotfiles</a
+                >
+            </li>
+        </ul>
     </column>
-</ShowcaseProject>
+
+    <strong><mark fg-="green-fg-dim">History</mark></strong>
+
+    <column pad-="2 0" gap-="1">
+        <p></p>
+        <p
+            ><mark fg-="purple-fg">Nov 2023</mark> - I try Neovim for the first time
+            and switch to using it full-time. I back up only my neovim configuration
+            to github.</p
+        >
+        <p
+            ><mark fg-="purple-fg">Oct 2025</mark> - I switch from MacOS to Omarchy,
+            and this time upload all my important dotfiles to github.</p
+        >
+        <p
+            ><mark fg-="purple-fg">Feg 2026</mark> - I try to run NixOS on my old
+            Mac M2 via Asahi. I create a new branch to upload my nix-specific config
+            to. I never had the time to fully switch to NixOS full-time.</p
+        >
+        <p
+            ><mark fg-="purple-fg">Jun 2026</mark> - I add my config for <code
+                >jj</code
+            ></p
+        >
+    </column>
+
+    <strong><mark fg-="green-fg-dim">Technologies Used</mark></strong>
+
+    <column pad-="2 0" gap-="1">
+        <p>
+            <mark fg-="purple-fg" bg-="purple-bg">&#xe620; Lua</mark>
+        </p>
+    </column>
+</column>

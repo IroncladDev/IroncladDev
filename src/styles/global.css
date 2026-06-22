@@ -93,7 +93,6 @@
     a:not(.workspace):not([is-='button']) {
         text-decoration: underline;
         color: var(--blue-fg);
-        word-break: break-all;
 
         &[target='_blank']::after {
             content: '↗';

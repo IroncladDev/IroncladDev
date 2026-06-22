@@ -1,3 +1,4 @@
+import { $$ } from '@/utils/dom'
 import type {
     ShellCommandElement,
     ShellCommandStatus,
@@ -10,11 +11,13 @@ declare global {
 }
 
 export class ShowcaseProjectElement extends HTMLElement {
+    get projectId() {
+        return $$('showcase-project').indexOf(this)
+    }
+
     connectedCallback() {
-        const projectId = this.dataset.projectId
         const projectName = this.dataset.projectName
 
-        if (!projectId) throw new Error(`Missing data-project-id`)
         if (!projectName) throw new Error(`Missing data-project-name`)
 
         const style = document.createElement('style')
@@ -29,7 +32,6 @@ export class ShowcaseProjectElement extends HTMLElement {
     }
 
     makeDynamicStatusStyle() {
-        const projectId = this.dataset.projectId
         const projectName = this.dataset.projectName
 
         return `#command-${projectName}-content,
@@ -37,7 +39,7 @@ export class ShowcaseProjectElement extends HTMLElement {
     display: none;
 }
 
-:has(showcase-state[data-focus='${projectId}']) showcase-project[data-project-id='${projectId}'] {
+:has(showcase-state[data-focus='${this.projectId}']) showcase-project[data-project-id='${this.projectId}'] {
     &:has(shell-command[data-status='running']) {
         #command-${projectName}-content,
         #separator-${projectName},
