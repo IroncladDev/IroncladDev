@@ -15,8 +15,8 @@ import SshInteractive from '@/components/Info/SshInteractive.astro'
     </column>
 </Layout>
 
-<style>
-    html:has(info-state[data-page='fastfetch']) #info-tile {
+<style is:global>
+    :has(info-state[data-page='fastfetch']) #info-tile {
         background-color: var(--surface0-85);
     }
 </style>
@@ -24,18 +24,27 @@ import SshInteractive from '@/components/Info/SshInteractive.astro'
 <script>
     import { canPlaySound, tapSequence } from '@/utils/keyboard'
     import { waitFor } from '@/utils/time'
+    import { $ } from '@/utils/dom'
     import AppStateListener from '@/utils/state'
-    import type { KeyInteraction } from '@/utils/keys'
+    import { setPromptTextNode } from '@/utils/cursor'
+    import { ShellCommandElement } from '@/components/ShellCommand/ShellCommandElement'
 
-    const yesButton: HTMLButtonElement = document.querySelector('#yes-button')!
-    const fingerprintButton: HTMLButtonElement = document.querySelector(
-        '#fingerprint-button',
-    )!
-    const resumeButton: HTMLButtonElement =
-        document.querySelector('#resume-button')!
-    const promptCursor: HTMLSpanElement =
-        document.querySelector('#prompt-cursor')!
-    const infoState: HTMLElement = document.querySelector('info-state')!
+    const yesButton = $<'button'>('#yes-button')
+    const fingerprintButton = $<'button'>('#fingerprint-button')
+
+    const infoState = $('info-state')
+    const fastfetchCommand = $('#fastfetch') as ShellCommandElement
+    const sshCommand = $('#ssh') as ShellCommandElement
+
+    window.addEventListener('load', async () => {
+        if (canPlaySound()) {
+            infoState?.setAttribute('data-page', 'fastfetch')
+            fastfetchCommand.focusPreCursor()
+        } else {
+            infoState?.setAttribute('data-page', 'ssh')
+            sshCommand.focusPreCursor()
+        }
+    })
 
     new AppStateListener('info-state').on('data-page', async ({ value }) => {
         if (!value) return
@@ -47,84 +56,37 @@ import SshInteractive from '@/components/Info/SshInteractive.astro'
         }
     })
 
-    window.addEventListener('load', async () => {
-        if (canPlaySound()) {
-            infoState.setAttribute('data-page', 'fastfetch')
-            insertCursor('pre-fastfetch-prompt')
-        } else {
-            infoState.setAttribute('data-page', 'ssh')
-            insertCursor('pre-ssh-prompt')
-        }
-    })
-
-    const getCommandText = () => {
-        return promptCursor.previousElementSibling as HTMLSpanElement
-    }
-
-    const typedInteractionSequence = (seq: KeyInteraction[]) => {
-        getCommandText().innerText = seq.map((s) => s.originalKey).join('')
-    }
-
-    const insertCursor = (id: string) => {
-        const cursorElement = document.getElementById(id)!
-
-        cursorElement.insertAdjacentElement('beforeend', promptCursor)
-    }
-
-    async function continueInitial() {
-        yesButton.disabled = true
-        await waitFor(250)
-        infoState.setAttribute('data-cmd-status', 'complete')
-
-        await tapSequence('clear<CR>', {
-            onType: typedInteractionSequence,
-        })
-
-        await waitFor(250)
-
-        getCommandText().innerText = ''
-
-        infoState.setAttribute('data-cmd-status', 'idle')
-        infoState.setAttribute('data-page', 'fastfetch')
-    }
-
-    yesButton.addEventListener('click', continueInitial)
-    fingerprintButton.addEventListener('click', continueInitial)
-
-    async function clearPrompt() {
-        await tapSequence('clear<CR>', {
-            onType: typedInteractionSequence,
-        })
-
-        await waitFor(250)
-
-        getCommandText().innerText = ''
-        infoState.setAttribute('data-cmd-status', 'idle')
-    }
-
     async function handleDisplayFastFetch() {
-        insertCursor('pre-fastfetch-prompt')
-
-        if (infoState.getAttribute('data-cmd-status') === 'complete') {
-            await clearPrompt()
-        }
-
-        infoState.setAttribute('data-cmd-status', 'idle')
+        fastfetchCommand.setStatus('idle').focusPreCursor()
 
         await tapSequence('fastfetch<CR>', {
-            onType: typedInteractionSequence,
+            onType: setPromptTextNode,
         })
         await waitFor(250)
 
-        infoState.setAttribute('data-cmd-status', 'complete')
-        insertCursor('post-fastfetch-prompt')
-
-        resumeButton.focus()
+        fastfetchCommand.setStatus('complete').focusPostCursor()
     }
 
     async function handleDisplaySsh() {
-        infoState.setAttribute('data-cmd-status', 'running')
-        insertCursor('post-ssh-prompt')
-        yesButton.focus()
+        sshCommand.focusPreCursor().setStatus('running')
+        yesButton?.focus()
     }
+
+    async function continueInitial() {
+        yesButton?.setAttribute('disabled', 'true')
+        sshCommand.setStatus('complete').focusPostCursor()
+
+        await tapSequence('clear<CR>', {
+            onType: setPromptTextNode,
+        })
+
+        await waitFor(250)
+
+        setPromptTextNode([])
+
+        infoState?.setAttribute('data-page', 'fastfetch')
+    }
+
+    yesButton?.addEventListener('click', continueInitial)
+    fingerprintButton?.addEventListener('click', continueInitial)
 </script>

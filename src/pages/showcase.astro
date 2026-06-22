@@ -1,123 +1,278 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import Project from '@/components/Projects/Project.astro'
+import ProjectWebTUI from '@/components/Showcase/ProjectWebTUI.astro'
+import ProjectIroncladSh from '@/components/Showcase/ProjectIroncladSh.astro'
+import ProjectDotfiles from '@/components/Showcase/ProjectDotfiles.astro'
+import ProjectOsmium from '@/components/Showcase/ProjectOsmium.astro'
+// import ProjectTehcCringe from '@/components/Showcase/ProjectTehcCringe.astro'
+// import ProjectAgapeChiroTx from '@/components/Showcase/ProjectAgapeChiroTx.astro'
 ---
 
 <Layout>
-    <div class="tile initial">
-        <column class="tile-content">
-            <column gap-="1" id="projects-list">
-                <Project
-                    title="WebTUI"
-                    url="https://webtui.ironclad.sh"
-                    repo="webtui"
-                    user="webtui"
-                />
-                <Project
-                    title="ironclad.sh"
-                    url="https://ironclad.sh"
-                    user="IroncladDev"
-                    repo="IroncladDev"
-                />
-                <Project title="Dotfiles" user="IroncladDev" repo="dotfiles" />
-                <Project
-                    title="TehcCringe"
-                    user="TehcCringe"
-                    repo="TehcCringe"
-                    url="https://tehccringe.com"
-                />
-                <Project title="Osmium" user="IroncladDev" repo="osmium" />
-                <Project title="htmx-cli" user="IroncladDev" repo="htmx-cli" />
-                <Project
-                    title="Agape Chiropractic TX"
-                    user="IroncladDev"
-                    repo="AgapeChiroTx"
-                />
-                <Project
-                    title="kuhnhong.com"
-                    user="IroncladDev"
-                    repo="KuhnHong"
-                />
-            </column>
-        </column>
-        <column id="end-block">
-            <row gap-="2" id="end-keys">
-                <span>j/↓ next</span>
-                <span>k/↑ prev</span>
-                <span>⏎ open</span>
-            </row>
-            <row>
-                <span>:█</span>
-            </row>
-        </column>
-    </div>
+    <showcase-state data-open="0" data-focus="" style="display: none;"
+    ></showcase-state>
+    <ProjectWebTUI />
+    <ProjectIroncladSh />
+    <ProjectDotfiles />
+    <ProjectOsmium />
+    <!-- <ProjectTehcCringe /> -->
+    <!-- <ProjectAgapeChiroTx /> -->
+    <column align-="center" id="pagination" slot="footer" pad-="1 0">
+        <row style="width: 100%;" gap-="2" id="pagination-indicator">
+            <row is-="separator" variant-="background2" self-="grow"></row>
+            <mark fg-="foreground1"
+                >(<span id="current-index">1</span>/<span id="total-index"
+                ></span>)</mark
+            >
+            <row is-="separator" variant-="background2" self-="grow"></row>
+        </row>
+        <row gap-="1" id="pagination-buttons">
+            <button id="first" variant-="green-bg"></button>
+            <button id="prev" variant-="green-bg"></button>
+            <button id="next" variant-="green-bg"></button>
+            <button id="last" variant-="green-bg"></button>
+        </row>
+    </column>
 </Layout>
 
 <style>
-    #projects-list {
-        max-width: var(--max-reading-width);
+    .tile {
+        background-color: var(--surface0-85);
+    }
+    #first::after {
+        content: '[f]irst';
+    }
+    #prev::after {
+        content: '[p]rev';
+    }
+    #next::after {
+        content: '[n]ext';
+    }
+    #last::after {
+        content: '[l]ast';
     }
 
-    .content {
-        inset: 0 0 3lh 0;
+    #pagination-buttons button::before {
+        display: none;
+    }
+    #pagination-buttons button::after {
+        display: inline;
     }
 
-    #end-block {
-        position: absolute;
-        bottom: 1lh;
-        left: 2ch;
+    #pagination {
+        width: 100%;
+        background-color: var(--background1);
 
-        #end-keys {
-            color: var(--blue-fg-dim);
+        td {
+            color: var(--foreground1);
         }
     }
 
-    @media (max-width: 720px) {
-        .content {
-            inset: 0 0 2lh 0;
+    @media (max-width: 480px) {
+        table,
+        td button {
+            width: 100%;
         }
-
-        #end-keys {
+        #pagination-indicator {
             display: none;
+        }
+        #pagination-buttons {
+            width: 100%;
+        }
+        #pagination-buttons button {
+            flex: 1;
+            white-space: nowrap;
+        }
+        #first::after {
+            content: '<<';
+        }
+        #prev::after {
+            content: '<';
+        }
+        #next::after {
+            content: '>';
+        }
+        #last::after {
+            content: '>>';
         }
     }
 </style>
 
 <script>
-    const firstProject = document.querySelector('.project') as HTMLElement
-    const projects = document.querySelectorAll(
-        '.project',
-    ) as NodeListOf<HTMLElement>
+    import { waitFor } from '@/utils/time'
+    import { $, $$ } from '@/utils/dom'
+    import { tapSequence } from '@/utils/keyboard'
+    import AppStateListener from '@/utils/state'
+    import { setPromptTextNode, insertCursorBeforeEnd } from '@/utils/cursor'
+    import type { ShowcaseProjectElement } from '@/components/ShowcaseProject/ShowcaseProjectElement'
+    import type { ShellCommandElement } from '@/components/ShellCommand/ShellCommandElement'
+
+    const showcaseState = $('showcase-state')!
+    const prevButton = $<'button'>('#prev')!
+    const nextButton = $<'button'>('#next')!
+    const firstButton = $<'button'>('#first')!
+    const lastButton = $<'button'>('#last')!
+    const projects = $$<'showcase-project'>('showcase-project')
+
+    $('#total-index')!.innerText = projects.length.toString()
+
+    let navigationController = new AbortController()
+
+    new AppStateListener('showcase-state')
+        // data-open controls the tile that is being opened
+        .on('data-open', async ({ value }) => {
+            if (!value) return
+
+            const tiles = document.querySelectorAll(
+                '.tile',
+            ) as NodeListOf<ShowcaseProjectElement>
+            const tileToOpen = Array.from(tiles).find(
+                (t) => t.getAttribute('data-project-id') === value,
+            )
+
+            $(`#current-index`)!.innerText = String(Number(value) + 1)
+
+            if (!tileToOpen) return
+
+            navigationController.abort()
+            navigationController = new AbortController()
+
+            await waitFor(250, navigationController)
+            await tapSequence('<M-t>', navigationController)
+            await waitFor(250, navigationController)
+            tileToOpen.style.animationName = 'place'
+            tileToOpen.classList.add('initial')
+
+            for (const tile of tiles) {
+                if (tile.getAttribute('data-project-id') === value) {
+                    continue
+                } else if (tile.classList.contains('initial')) {
+                    await waitFor(250, navigationController)
+                    await tapSequence('<M-w>', navigationController)
+                    tile.style.animationName = 'remove'
+                    tile.classList.remove('initial')
+                }
+            }
+
+            tileToOpen.setCommandStatus('idle')
+            showcaseState?.setAttribute('data-focus', value)
+        })
+        // data-focus controls when a tile comes into focus (after others are closed)
+        .on('data-focus', async ({ value }) => {
+            if (!value) return
+
+            const tileToShow = $(
+                `[data-project-id='${value}']`,
+            ) as ShowcaseProjectElement
+
+            if (!tileToShow) return
+
+            await runProjectCommand(tileToShow)
+        })
+
+    async function runProjectCommand(projectTileNode: ShowcaseProjectElement) {
+        const tilePrompts = projectTileNode.querySelectorAll(
+            '.cmd-prompt',
+        ) as NodeListOf<HTMLSpanElement>
+
+        insertCursorBeforeEnd(tilePrompts[0])
+
+        await tapSequence(
+            `tldr ${projectTileNode.getAttribute('data-project-command') ?? projectTileNode.getAttribute('data-project-name')}<CR>`,
+            {
+                onType: setPromptTextNode,
+                signal: navigationController.signal,
+            },
+        )
+
+        projectTileNode.setCommandStatus('running')
+    }
 
     window.addEventListener('load', () => {
-        firstProject.focus()
+        showcaseState?.setAttribute('data-focus', '0')
     })
 
-    projects.forEach((project, i) => {
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === 'j' || event.key === 'ArrowDown') {
-                projects[i + 1]?.focus()
-            }
+    function updatePaginationStatuses() {
+        const currentProject = projects.find(
+            (p) =>
+                p.getAttribute('data-project-id') ===
+                showcaseState.getAttribute('data-open'),
+        )
+        const projectCommand = currentProject?.querySelector(
+            'shell-command',
+        ) as ShellCommandElement
+        const projectId = currentProject?.getAttribute('data-project-id')
 
-            if (event.key === 'k' || event.key === 'ArrowUp') {
-                projects[i - 1]?.focus()
-            }
+        prevButton.disabled = false
+        nextButton.disabled = false
+        firstButton.disabled = false
+        lastButton.disabled = false
 
-            if (event.key === 'Enter' || event.key === ' ') {
-                window.open(
-                    project.querySelector('a')!.getAttribute('href')!,
-                    '_blank',
-                )
-            }
+        prevButton.setAttribute('variant-', 'green-bg')
+        nextButton.setAttribute('variant-', 'green-bg')
+        firstButton.setAttribute('variant-', 'green-bg')
+        lastButton.setAttribute('variant-', 'green-bg')
+
+        if (projectId === '0') {
+            prevButton.disabled = true
+            firstButton.disabled = true
+            prevButton.setAttribute('variant-', 'background2')
+            firstButton.setAttribute('variant-', 'background2')
         }
 
-        project.addEventListener('focus', () => {
-            project.addEventListener('keydown', handleKeyDown)
-        })
-        project.addEventListener('blur', () => {
-            project.removeEventListener('keydown', handleKeyDown)
-        })
+        if (projectId === projects.at(-1)?.getAttribute('data-project-id')) {
+            nextButton.disabled = true
+            lastButton.disabled = true
+            nextButton.setAttribute('variant-', 'background2')
+            lastButton.setAttribute('variant-', 'background2')
+        }
+
+        prevButton.onclick = () => {
+            projectCommand.setStatus('complete').focusPostCursor()
+            showcaseState?.setAttribute('data-open', `${Number(projectId) - 1}`)
+            updatePaginationStatuses()
+        }
+
+        nextButton.onclick = () => {
+            projectCommand.setStatus('complete').focusPostCursor()
+            showcaseState?.setAttribute('data-open', `${Number(projectId) + 1}`)
+            updatePaginationStatuses()
+        }
+
+        firstButton.onclick = () => {
+            projectCommand.setStatus('complete').focusPostCursor()
+            showcaseState?.setAttribute('data-open', '0')
+            updatePaginationStatuses()
+        }
+
+        lastButton.onclick = () => {
+            projectCommand.setStatus('complete').focusPostCursor()
+            showcaseState?.setAttribute(
+                'data-open',
+                projects.at(-1)?.getAttribute('data-project-id') ?? '0',
+            )
+            updatePaginationStatuses()
+        }
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'p') {
+            prevButton.focus()
+            prevButton.click()
+        }
+        if (e.key === 'ArrowRight' || e.key === 'n') {
+            nextButton.focus()
+            nextButton.click()
+        }
+        if (e.key === 'f') {
+            firstButton.focus()
+            firstButton.click()
+        }
+        if (e.key === 'l') {
+            lastButton.focus()
+            lastButton.click()
+        }
     })
 
-    firstProject.focus()
+    updatePaginationStatuses()
 </script>

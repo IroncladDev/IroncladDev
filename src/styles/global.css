@@ -9,11 +9,11 @@
 @import '@webtui/css/components/spinner.css';
 @import '@webtui/css/components/mark.css';
 
+@import '@webtui/theme-osmium';
+@import '@webtui/plugin-nf';
+
 @import '@/styles/flexbox.css';
 @import '@/styles/padding.css';
-@import '@/styles/colors.css';
-@import '@/styles/mark.css';
-@import '@webtui/plugin-nf';
 
 @font-face {
     font-family: 'JetBrainsMonoNFM';
@@ -37,11 +37,8 @@
 
 @layer base {
     :root {
-        /* Colors */
-        --background0: var(--surface0);
-        --background1: var(--surface1);
-        --background2: var(--surface2);
-        --background3: var(--surface3);
+        --surface0-70: #1f1d2dbb;
+        --surface0-85: #1f1d2dee;
 
         --font-size: 18px;
         --line-height: 1.4;
@@ -89,6 +86,8 @@
         position: relative;
         display: flex;
         flex-direction: column;
+        scrollbar-width: thin;
+        scrollbar-color: var(--foreground2) var(--background2);
     }
 
     a:not(.workspace):not([is-='button']) {
@@ -99,9 +98,15 @@
         &[target='_blank']::after {
             content: '↗';
         }
-        &:focus,
-        &:active {
-            color: var(--blue-fg) !important;
+
+        &:focus {
+            color: var(--green-fg);
+            &::before {
+                content: '>';
+            }
+            &::after {
+                content: '<';
+            }
         }
     }
 
@@ -143,6 +148,7 @@
 
     p {
         word-break: break-word;
+        color: var(--foreground0);
     }
 
     button:disabled {

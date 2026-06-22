@@ -18,17 +18,21 @@ export function canPlaySound() {
 }
 
 export async function playSound(soundId: string) {
-    const config = await configPromise
-    const timing = config.defines[soundId]
-    if (!timing) return
+    try {
+        const config = await configPromise
+        const timing = config.defines[soundId]
+        if (!timing) return
 
-    const [start, duration] = timing
-    const clone = audio.cloneNode() as HTMLAudioElement
-    clone.currentTime = start / 1000
-    await clone.play()
-    await waitFor(duration)
-    clone.pause()
-    clone.remove()
+        const [start, duration] = timing
+        const clone = audio.cloneNode() as HTMLAudioElement
+        clone.currentTime = start / 1000
+        await clone.play()
+        await waitFor(duration)
+        clone.pause()
+        clone.remove()
+    } catch {
+        /* no-op */
+    }
 }
 
 async function tapKey(key: string) {

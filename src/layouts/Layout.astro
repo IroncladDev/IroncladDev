@@ -11,7 +11,7 @@ const description =
 ---
 
 <!doctype html>
-<html lang="en-us">
+<html lang="en-us" data-webtui-theme="osmium">
     <head>
         <title>IroncladDev</title>
         <meta charset="UTF-8" />
@@ -95,9 +95,12 @@ const description =
         </div>
         <column id="screen">
             <Waybar />
-            <div id="tiles">
-                <slot />
-            </div>
+            <column id="tiles-container">
+                <div id="tiles">
+                    <slot />
+                </div>
+                <slot name="footer" />
+            </column>
         </column>
     </body>
 </html>

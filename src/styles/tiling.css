@@ -34,26 +34,23 @@
     }
 }
 
+#tiles-container {
+    flex: 1;
+    gap: 1lh;
+}
+
 #tiles {
     display: flex;
     flex-direction: row;
-    width: 100%;
-    height: 100%;
-    opacity: 1;
+    flex: 1;
     gap: 1lh 2ch;
-}
-
-@media (max-width: 720px) {
-    #tiles {
-        flex-direction: column;
-    }
 }
 
 @keyframes place {
     0% {
         display: flex;
         width: 0;
-        height: 0;
+        height: 100%;
         opacity: 0;
     }
     100% {
@@ -69,11 +66,15 @@
         display: flex;
         width: 100%;
         height: 100%;
+        overflow: hidden;
+        opacity: 1;
     }
     to {
         display: none;
-        height: 0;
+        height: 100%;
         width: 0;
         margin: 0;
+        overflow: hidden;
+        opacity: 0;
     }
 }

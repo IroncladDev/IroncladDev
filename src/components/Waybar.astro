@@ -3,30 +3,23 @@
     <row id="workspaces" self-="grow">
         <a class="workspace" href="/">
             <span is-="badge">1</span>
-            <span is-="badge" variant-="background2" cap-="square round"
-                >Info</span
-            >
+            <span is-="badge" variant-="background2">Info</span>
         </a>
         <a class="workspace" href="/showcase">
             <span is-="badge">2</span>
-            <span is-="badge" variant-="background2" cap-="square round"
-                >Showcase</span
-            >
+            <span is-="badge" variant-="background2">Showcase</span>
         </a>
     </row>
     <row self-="!shrink">
-        <a href="/resume" id="resume-desktop" style="color: var(--foreground1)"
-            >View Resume</a
-        >
+        <a href="/resume" id="resume-desktop">View Resume</a>
         <a
             href="/Conner Ow - Senior Frontend_Mobile Engineer.pdf"
-            id="resume-mobile"
-            style="color: var(--foreground1)">View Resume</a
+            id="resume-mobile">View Resume</a
         >
     </row>
 </row>
 
-<style>
+<style is:global>
     #waybar {
         background-color: var(--surface1);
         padding: 0.5lh 1ch;
@@ -68,9 +61,9 @@
             color: var(--foreground0);
         }
 
-        html:has(waybar-state[data-route='/']) &[href='/'],
-        html:has(waybar-state[data-route^='/links']) &[href='/links'],
-        html:has(waybar-state[data-route^='/showcase']) &[href='/showcase'] {
+        :has(waybar-state[data-route='/']) &[href='/'],
+        :has(waybar-state[data-route^='/links']) &[href='/links'],
+        :has(waybar-state[data-route^='/showcase']) &[href='/showcase'] {
             & > span:first-child {
                 --badge-color: var(--green-fg);
                 color: var(--root);
@@ -84,15 +77,6 @@
         .workspace span::after {
             height: 2lh;
             align-items: center;
-        }
-
-        .workspace span:first-child {
-            border-top-left-radius: 4px;
-            overflow: hidden;
-        }
-
-        .workspace span:last-child::after {
-            border-bottom-right-radius: 0;
         }
     }
 </style>

@@ -4,7 +4,7 @@ import '@/styles/resume.css'
 ---
 
 <!doctype html>
-<html lang="en-us">
+<html lang="en-us" data-webtui-theme="osmium">
     <head>
         <meta charset="UTF-8" />
         <meta
@@ -341,23 +341,24 @@ import '@/styles/resume.css'
             </main>
         </column>
         <script>
-            const printButton: HTMLAnchorElement =
-                document.querySelector('#print-button')!
-            const viewPdfButton: HTMLAnchorElement =
-                document.querySelector('#view-pdf-button')!
-            printButton.addEventListener('click', () => {
+            import { $ } from '@/utils/dom'
+
+            const printButton = $<'button'>('print-button')
+            const viewPdfButton = $<'a'>('view-pdf-button')
+
+            printButton?.addEventListener('click', () => {
                 window.print()
             })
 
             window.addEventListener('keydown', (e) => {
                 if (e.key === 'p') {
-                    printButton.focus()
-                    printButton.click()
+                    printButton?.focus()
+                    printButton?.click()
                 }
 
                 if (e.key === 'v') {
-                    viewPdfButton.focus()
-                    viewPdfButton.click()
+                    viewPdfButton?.focus()
+                    viewPdfButton?.click()
                 }
             })
         </script>

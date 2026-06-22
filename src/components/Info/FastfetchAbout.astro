@@ -1,135 +1,132 @@
 ---
-import ShellPrompt from '@/components/ShellPrompt.astro'
+import ShellCommand from '@/components/ShellCommand/index.astro'
 
 const ms = new Date().getTime() - new Date('Nov 15, 2005').getTime()
 const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
 ---
 
 <column id="fastfetch-process">
-    <ShellPrompt id="pre-fastfetch-prompt" />
-    <column id="fastfetch-content" gap-="1">
-        <row gap-="2" id="fastfetch-row">
-            <column id="profile">
-                <img src="/img//neck.svg" id="neck" />
-                <img src="/img/brand/svg/transparent.svg" id="helmet" />
-                <img src="/img/helmet-off.svg" id="helmet-off" />
+    <ShellCommand id="fastfetch" status="idle">
+        <column gap-="1">
+            <row gap-="2" id="fastfetch-row">
+                <column id="profile">
+                    <img src="/img//neck.svg" id="neck" />
+                    <img src="/img/brand/svg/transparent.svg" id="helmet" />
+                    <img src="/img/helmet-off.svg" id="helmet-off" />
+                </column>
+                <column>
+                    <span>
+                        <span class="label">OS</span>
+                        <span>Omarchy</span>
+                    </span>
+                    <span>
+                        <span class="label">Age</span>
+                        <span>{age}</span>
+                    </span>
+                    <span>
+                        <span class="label">Uptime</span>
+                        <span>better than github</span>
+                    </span>
+                    <span>
+                        <span class="label">Height</span>
+                        <span>taller than you</span>
+                    </span>
+                    <span>
+                        <span class="label">Nationality</span>
+                        <span>American</span>
+                    </span>
+                    <span>
+                        <span class="label">Religion</span>
+                        <span>Christian (Reformed Baptist)</span>
+                    </span>
+                    <span>
+                        <span class="label">Theme</span>
+                        <span
+                            ><a
+                                href="https://github.com/IroncladDev/osmium"
+                                target="_blank">osmium</a
+                            ></span
+                        >
+                    </span>
+                    <span>
+                        <span class="label">Hobbies</span>
+                        <span>Jiujitsu, Guns</span>
+                    </span>
+                    <span>
+                        <span class="label">Status</span>
+                        <span>Open to Work</span>
+                    </span>
+                </column>
+            </row>
+            <row gap-="2">
+                <row is-="separator" variant-="background3" self-="grow"></row>
+                <h2>About Me</h2>
+                <row is-="separator" variant-="background3" self-="grow"></row>
+            </row>
+            <column gap-="1" id="description" pad-="1 0">
+                <p
+                    >I'm <strong>Conner</strong>
+                    <mark fg-="foreground1"
+                        >(<mark fg-="green-fg">IroncladDev</mark>)</mark
+                    >, a Texan Software Engineer who strives to build and share
+                    great software with the world</p
+                >
             </column>
+            <row gap-="2">
+                <row is-="separator" variant-="background3" self-="grow"></row>
+                <h2>Say Hi</h2>
+                <row is-="separator" variant-="background3" self-="grow"></row>
+            </row>
             <column>
-                <span>
-                    <span class="label">OS</span>
-                    <span>Omarchy</span>
-                </span>
-                <span>
-                    <span class="label">Age</span>
-                    <span>{age}</span>
-                </span>
-                <span>
-                    <span class="label">Uptime</span>
-                    <span>better than github</span>
-                </span>
-                <span>
-                    <span class="label">Height</span>
-                    <span>taller than you</span>
-                </span>
-                <span>
-                    <span class="label">Nationality</span>
-                    <span>American</span>
-                </span>
-                <span>
-                    <span class="label">Religion</span>
-                    <span>Christian (Reformed Baptist)</span>
-                </span>
-                <span>
-                    <span class="label">Theme</span>
-                    <span
-                        ><a
-                            href="https://github.com/IroncladDev/osmium"
-                            target="_blank">osmium</a
-                        ></span
+                <row gap-="2" align-="between" pad-="1 0">
+                    <span>Email</span>
+                    <row is-="separator" self-="grow" variant-="background2"
+                    ></row>
+                    <a
+                        href="mailto:conner@ironclad.sh"
+                        target="_blank"
+                        rel="noreferrer">conner@ironclad.sh</a
                     >
-                </span>
-                <span>
-                    <span class="label">Hobbies</span>
-                    <span>Jiujitsu, Guns</span>
-                </span>
-                <span>
-                    <span class="label">Status</span>
-                    <span>Open to Work</span>
-                </span>
-            </column>
-        </row>
-        <row gap-="2">
-            <row is-="separator" variant-="background3" self-="grow"></row>
-            <h2>About Me</h2>
-            <row is-="separator" variant-="background3" self-="grow"></row>
-        </row>
-        <column gap-="1" id="description" pad-="1 0">
-            <p
-                >I'm <strong>Conner</strong>
-                <mark fg-="foreground1"
-                    >(<mark fg-="green-fg">IroncladDev</mark>)</mark
-                >, a Texan Software Engineer who strives to build and share
-                great software with the world</p
-            >
-        </column>
-        <row gap-="2">
-            <row is-="separator" variant-="background3" self-="grow"></row>
-            <h2>Say Hi</h2>
-            <row is-="separator" variant-="background3" self-="grow"></row>
-        </row>
-        <column>
-            <row gap-="2" align-="between" pad-="1 0">
-                <span>Email</span>
-                <row is-="separator" self-="grow" variant-="background2"></row>
-                <a
-                    href="mailto:conner@ironclad.sh"
-                    target="_blank"
-                    rel="noreferrer">conner@ironclad.sh</a
-                >
-            </row>
-            <row gap-="2" align-="between" pad-="1 0">
-                <span>Signal</span>
-                <row is-="separator" self-="grow" variant-="background2"></row>
-                <a
-                    target="_blank"
-                    rel="noreferrer"
-                    href="https://signal.me/#eu/36E3b48gh-bGeLWnxgNERMFW4315Pdtjmu3-vcqKZ8Bs0WSY-HpEGZ-qmGgAa5gV"
-                    >IroncladDev.62</a
-                >
-            </row>
-            <row gap-="2" align-="between" pad-="1 0">
-                <span>GitHub</span>
-                <row is-="separator" self-="grow" variant-="background2"></row>
-                <a
-                    href="https://github.com/IroncladDev"
-                    target="_blank"
-                    rel="noreferrer">github.com/IroncladDev</a
-                >
-            </row>
-            <column
-                pad-="2 1"
-                box-="round"
-                style="--box-border-color: var(--background2)">
-                <a
-                    href="https://signal.group/#CjQKIFso0Z5zIUiTAcueMbLgezhczQ19cO-STQK6LZfDbKzqEhAR2_vENgBwvx1qdTHpDnR-"
-                    target="_blank"
-                    rel="noreferrer">
-                    Signal Group Chat
-                </a>
-                <p>
-                    Technology, weapons, food, outdoors (not recommended for
-                    females or communists)
-                </p>
+                </row>
+                <row gap-="2" align-="between" pad-="1 0">
+                    <span>Signal</span>
+                    <row is-="separator" self-="grow" variant-="background2"
+                    ></row>
+                    <a
+                        target="_blank"
+                        rel="noreferrer"
+                        href="https://signal.me/#eu/36E3b48gh-bGeLWnxgNERMFW4315Pdtjmu3-vcqKZ8Bs0WSY-HpEGZ-qmGgAa5gV"
+                        >IroncladDev.62</a
+                    >
+                </row>
+                <row gap-="2" align-="between" pad-="1 0">
+                    <span>GitHub</span>
+                    <row is-="separator" self-="grow" variant-="background2"
+                    ></row>
+                    <a
+                        href="https://github.com/IroncladDev"
+                        target="_blank"
+                        rel="noreferrer">github.com/IroncladDev</a
+                    >
+                </row>
+                <column
+                    pad-="2 1"
+                    box-="round"
+                    style="--box-border-color: var(--background2)">
+                    <a
+                        href="https://signal.group/#CjQKIFso0Z5zIUiTAcueMbLgezhczQ19cO-STQK6LZfDbKzqEhAR2_vENgBwvx1qdTHpDnR-"
+                        target="_blank"
+                        rel="noreferrer">
+                        Signal Group Chat
+                    </a>
+                    <p>
+                        Technology, weapons, food, outdoors (not recommended for
+                        females or communists)
+                    </p>
+                </column>
             </column>
         </column>
-        <row align-="end" gap-="1" id="link-buttons">
-            <a href="/resume" id="resume-button" is-="button">View Resume</a>
-            <a href="/showcase" is-="button" variant-="background2"
-                >See Showcase</a
-            >
-        </row>
-    </column>
-    <ShellPrompt id="post-fastfetch-prompt" />
+    </ShellCommand>
 </column>
 
 <style is:global>
@@ -137,22 +134,16 @@ const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
     h2 {
         color: var(--green-fg);
     }
-    #post-fastfetch-prompt,
-    #fastfetch-process,
-    #fastfetch-content {
+
+    #fastfetch-process {
         display: none;
-        max-width: var(--max-reading-width);
     }
 
-    html:has(info-state[data-page='fastfetch']) #fastfetch-process {
+    :has(info-state[data-page='fastfetch']) #fastfetch-process {
         display: flex;
     }
 
-    html:has(info-state[data-cmd-status='complete']) {
-        #fastfetch-content {
-            display: flex;
-        }
-
+    :has(shell-command[data-status='complete']) {
         #helmet {
             animation: lookup 1s ease-out;
             animation-fill-mode: forwards;
@@ -242,12 +233,6 @@ const age = new Date(ms).getUTCFullYear() - new Date(0).getUTCFullYear()
         #fastfetch-row {
             flex-direction: column;
             gap: 1lh;
-        }
-    }
-
-    @media (max-width: 480px) {
-        #link-buttons {
-            display: none;
         }
     }
 </style>

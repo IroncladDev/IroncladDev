@@ -1,0 +1,32 @@
+---
+import ShellCommand from '@/components/ShellCommand/index.astro'
+import '@webtui/css/components/table.css'
+
+export interface Props {
+    projectId: string
+    projectName: string
+    projectCommand?: string
+    isInitial?: boolean
+}
+
+const { projectId, projectName, projectCommand, isInitial } = Astro.props
+---
+
+<showcase-project
+    data-project-id={projectId}
+    data-project-name={projectName}
+    data-project-command={projectCommand}
+    class={isInitial ? 'tile initial' : 'tile'}
+    is-="column">
+    <column class="tile-content">
+        <ShellCommand id={projectName}>
+            <slot />
+        </ShellCommand>
+    </column>
+</showcase-project>
+
+<script>
+    import { ShowcaseProjectElement } from './ShowcaseProjectElement'
+
+    customElements.define('showcase-project', ShowcaseProjectElement)
+</script>
