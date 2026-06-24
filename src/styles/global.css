@@ -11,9 +11,7 @@
 
 @import '@webtui/theme-osmium';
 @import '@webtui/plugin-nf';
-
-@import '@/styles/flexbox.css';
-@import '@/styles/padding.css';
+@import '@webtui/plugin-declarative-layout';
 
 @font-face {
     font-family: 'JetBrainsMonoNFM';
