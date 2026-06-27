@@ -10,7 +10,6 @@
 @import '@webtui/css/components/mark.css';
 
 @import '@webtui/theme-osmium';
-@import '@webtui/plugin-nf';
 @import '@webtui/plugin-declarative-layout';
 
 @font-face {

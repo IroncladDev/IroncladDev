@@ -15,7 +15,6 @@
   "dependencies": {
     "@webtui/css": "^0.1.9",
     "@webtui/plugin-declarative-layout": "^0.0.1",
-    "@webtui/plugin-nf": "^0.1.1",
     "@webtui/theme-osmium": "^0.0.1",
     "astro": "^6.4.8"
   },
