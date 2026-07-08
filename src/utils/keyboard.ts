@@ -18,6 +18,8 @@ export function canPlaySound() {
 }
 
 export async function playSound(soundId: string) {
+    // Disable playing sounds on mobile
+    if (window.innerWidth < 480) return
     try {
         const config = await configPromise
         const timing = config.defines[soundId]

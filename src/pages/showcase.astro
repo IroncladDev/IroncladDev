@@ -144,7 +144,7 @@ import ShowcaseProject from '@/components/ShowcaseProject/index.astro'
     import { $, $$ } from '@/utils/dom'
     import { tapSequence } from '@/utils/keyboard'
     import AppStateListener from '@/utils/state'
-    import { setPromptTextNode, insertCursorBeforeEnd } from '@/utils/cursor'
+    import { insertCursorBeforeEnd, getPromptTextNode } from '@/utils/cursor'
     import type { ShowcaseProjectElement } from '@/components/ShowcaseProject/ShowcaseProjectElement'
     import type { ShellCommandElement } from '@/components/ShellCommand/ShellCommandElement'
 
@@ -217,13 +217,7 @@ import ShowcaseProject from '@/components/ShowcaseProject/index.astro'
 
         insertCursorBeforeEnd(tilePrompts[0])
 
-        await tapSequence(
-            `tldr ${projectTileNode.getAttribute('data-project-name')}<CR>`,
-            {
-                onType: setPromptTextNode,
-                signal: navigationController.signal,
-            },
-        )
+        getPromptTextNode().innerText = `tldr ${projectTileNode.getAttribute('data-project-name')}`
 
         projectTileNode.setCommandStatus('running')
     }
